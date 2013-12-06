@@ -1,11 +1,12 @@
-package game.gui.menus;
+package dryrun.game.gui.menus;
 
 import static org.lwjgl.opengl.GL11.glColor4f;
 import dryrun.game.engine.DrawObject;
-import game.gui.menus.misc.frames.BasicFrame;
-import game.gui.misc.buttons.*;
+import dryrun.game.gui.menus.misc.frames.BasicFrame;
+import dryrun.game.gui.misc.buttons.*;
 
 import java.util.ArrayList;
+
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.newdawn.slick.opengl.Texture;

@@ -1,4 +1,4 @@
-package game.gui.menus.misc.frames;
+package dryrun.game.gui.menus.misc.frames;
 
 import java.io.File;
 import java.io.FileInputStream;

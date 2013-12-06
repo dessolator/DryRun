@@ -1,4 +1,4 @@
-package game.gui.menus.misc.text;
+package dryrun.game.gui.menus.misc.text;
 
 import java.awt.Font;
 

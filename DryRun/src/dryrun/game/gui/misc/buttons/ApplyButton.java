@@ -1,12 +1,14 @@
-package game.gui.misc.buttons;
+package dryrun.game.gui.misc.buttons;
 
 import game.GameState;
 import game.RaceGame;
-import game.gui.menus.misc.checkboxes.ColorsBox;
-import game.gui.menus.misc.dropdown.ResEntry;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import dryrun.game.gui.menus.misc.checkboxes.ColorsBox;
+import dryrun.game.gui.menus.misc.dropdown.ResEntry;
 
 
 public class ApplyButton extends Button {
