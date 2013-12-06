@@ -1,7 +1,7 @@
 package dryrun.game.gui.menus.misc.dropdown;
 
-import game.common.engine.Drawable;
-import game.common.engine.Updateable;
+import dryrun.game.engine.Drawable;
+import dryrun.game.engine.Updateable;
 
 import java.util.ArrayList;
 
@@ -63,8 +63,7 @@ public abstract class DropDown implements Drawable, Updateable{
 		return null;
 	}
 
-	@Override
-	public float getCoordX() {
+	public float getX() {
 		return coordX;
 	}
 
@@ -73,8 +72,7 @@ public abstract class DropDown implements Drawable, Updateable{
 		return dimX;
 	}
 
-	@Override
-	public float getCoordY() {
+	public float getY() {
 		return coordY;
 	}
 

@@ -32,7 +32,7 @@ public abstract class Menu implements Drawable, Updateable{
 		return background;
 	}
 	@Override
-	public float getCoordX() {
+	public float getX() {
 		return (float)Display.getWidth()/2;
 	}
 	@Override
@@ -40,7 +40,7 @@ public abstract class Menu implements Drawable, Updateable{
 		return (float)Display.getWidth();
 	}
 	@Override
-	public float getCoordY() {
+	public float getY() {
 		return (float)Display.getHeight()/2;
 	}
 	@Override

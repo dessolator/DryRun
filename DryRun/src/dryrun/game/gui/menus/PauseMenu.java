@@ -39,7 +39,7 @@ public class PauseMenu extends Menu {
 	public void render() {
 		//RaceGame.getMyLevel().render();//TODO FIX ME!!!!!!
 		glColor4f(0f, 0f, 0f,0.5f);
-		DrawObject.drawColoredRect(getCoordX(), getCoordY(), getDimX(), getDimY());
+		DrawObject.drawColoredRect(getX(), getY(), getDimX(), getDimY());
 		if(Mouse.isGrabbed())Mouse.setGrabbed(false);
 		myFrame.render();
 		for (Button b:myButtons)

@@ -75,7 +75,7 @@ public abstract class Button implements Drawable, Updateable{
 		return myTexture;
 	}
 	@Override
-	public float getCoordX() {
+	public float getX() {
 		return coordX;
 	}
 	@Override
@@ -83,7 +83,7 @@ public abstract class Button implements Drawable, Updateable{
 		return dimX;
 	}
 	@Override
-	public float getCoordY() {
+	public float getY() {
 		return coordY;
 	}
 	@Override
