@@ -1,4 +1,11 @@
 *.class
+*.jar
+*.war
+*.ear
+!lwjgl.jar
+!lwjgl_util.jar
+!slick-util.jar
+*.ini
 
 # Package Files #
 *.jar
