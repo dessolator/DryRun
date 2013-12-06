@@ -1,5 +1,7 @@
 package dryrun.game.engine;
 
+import org.newdawn.slick.opengl.Texture;
+
 public interface Drawable {
 	
 	public Texture getTexture();
