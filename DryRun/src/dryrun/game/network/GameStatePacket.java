@@ -2,16 +2,22 @@ package dryrun.game.network;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.util.ArrayList;
 
 import dryrun.game.common.GameObjectValues;
 
 public class GameStatePacket extends Packet {
-	private int length=0;
-	ArrayList<GameObjectValues> myObjects=
+	private ArrayList<GameObjectValues> myObjects=new ArrayList<GameObjectValues>();
 	
 	GameStatePacket(){}
 	
+	public void put(GameObjectValues gov){
+		myObjects.add(gov);
+	}
 	
+	public GameObjectValues[] get(){
+		return (GameObjectValues[]) myObjects.toArray();
+	}
 	
 	
 	
