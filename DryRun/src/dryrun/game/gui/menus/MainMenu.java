@@ -1,7 +1,4 @@
-package game.gui.menus;
-
-import game.gui.menus.misc.frames.BasicFrame;
-import game.gui.misc.buttons.*;
+package dryrun.game.gui.menus;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,6 +8,9 @@ import java.util.ArrayList;
 
 import org.lwjgl.opengl.Display;
 import org.newdawn.slick.opengl.TextureLoader;
+
+import dryrun.game.gui.menus.misc.frames.BasicFrame;
+import dryrun.game.gui.misc.buttons.*;
 
 
 public class MainMenu extends Menu {

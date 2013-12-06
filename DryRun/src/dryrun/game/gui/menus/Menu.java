@@ -1,10 +1,10 @@
-package game.gui.menus;
+package dryrun.game.gui.menus;
 
 import dryrun.game.engine.DrawObject;
 import dryrun.game.engine.Drawable;
 import dryrun.game.engine.Updateable;
-import game.gui.menus.misc.frames.Frame;
-import game.gui.misc.buttons.Button;
+import dryrun.game.gui.menus.misc.frames.Frame;
+import dryrun.game.gui.misc.buttons.Button;
 
 import java.util.ArrayList;
 

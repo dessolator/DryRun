@@ -1,4 +1,4 @@
-package game.gui.misc.buttons;
+package dryrun.game.gui.misc.buttons;
 
 
 import java.io.File;
@@ -9,8 +9,9 @@ import java.io.IOException;
 import dryrun.game.engine.DrawObject;
 import dryrun.game.engine.Drawable;
 import dryrun.game.engine.Updateable;
-import game.gui.menus.misc.text.Text;
-import game.gui.menus.misc.text.TimesNewRomanText;
+import dryrun.game.gui.menus.misc.text.Text;
+import dryrun.game.gui.menus.misc.text.TimesNewRomanText;
+
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;

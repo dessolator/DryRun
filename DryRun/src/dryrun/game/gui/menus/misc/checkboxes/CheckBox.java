@@ -1,6 +1,4 @@
-package game.gui.menus.misc.checkboxes;
-
-import game.gui.misc.buttons.Button;
+package dryrun.game.gui.menus.misc.checkboxes;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -9,6 +7,8 @@ import java.io.IOException;
 
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
+
+import dryrun.game.gui.misc.buttons.Button;
 
 
 public abstract class CheckBox extends Button{
