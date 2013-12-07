@@ -22,7 +22,7 @@ public abstract class Menu implements Drawable, Updateable{
 	@Override
 	public void render() {
 		Mouse.setGrabbed(false);//show the mouse
-		//DrawObject.draw(this);//draw the background
+		DrawObject.draw(this);//draw the background
 		myFrame.render();//draw the frame
 		for (Button b:myButtons)
 			b.render();//draw the buttons
@@ -71,6 +71,26 @@ public abstract class Menu implements Drawable, Updateable{
 	 */
 	public static void setMenuCalled(long menuCalled) {
 		Menu.menuCalled = menuCalled;
+	}
+	@Override
+	public float getTexX1() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public float getTexX2() {
+		// TODO Auto-generated method stub
+		return 1;
+	}
+	@Override
+	public float getTexY1() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public float getTexY2() {
+		// TODO Auto-generated method stub
+		return 1;
 	}
 
 }
