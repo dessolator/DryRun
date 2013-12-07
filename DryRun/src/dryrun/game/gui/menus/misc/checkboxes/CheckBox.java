@@ -8,7 +8,9 @@ import java.io.IOException;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 
+import dryrun.game.engine.Tex;
 import dryrun.game.gui.misc.buttons.Button;
+import dryrun.game.objects.TextureHolder;
 
 
 public abstract class CheckBox extends Button{
@@ -16,12 +18,12 @@ public abstract class CheckBox extends Button{
 
 
 	boolean isChecked=false;
-	Texture checked;
+	TextureHolder checked;
 	public CheckBox(float coordX, float coordY, float dimX, float dimY) {
 		super(coordX, coordY, dimX, dimY,"");
 		try {
-			myTexture=TextureLoader.getTexture("PNG", new FileInputStream(new File("res/checkBox.png")));
-			checked=TextureLoader.getTexture("PNG", new FileInputStream(new File("res/checkBoxChecked.png")));
+			myTexture=new TextureHolder(TextureLoader.getTexture("PNG", new FileInputStream(new File("res/button-sprite.png"))),new Tex(1f,1f,1f,1f));
+			checked=new TextureHolder(TextureLoader.getTexture("PNG", new FileInputStream(new File("res/button-sprite.png"))),new Tex(1f,1f,1f,1f));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -34,8 +36,8 @@ public abstract class CheckBox extends Button{
 	@Override
 	public Texture getTexture() {
 		if(isChecked)
-			return checked;
-		return myTexture;
+			return checked.getMyTexture();
+		return myTexture.getMyTexture();
 	}
 
 
