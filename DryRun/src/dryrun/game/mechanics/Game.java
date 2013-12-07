@@ -1,9 +1,11 @@
 package dryrun.game.mechanics;
 
 import org.lwjgl.opengl.Display;
+
 import static org.lwjgl.opengl.GL11.*;
 import dryrun.game.common.GameObjectValues;
 import dryrun.game.common.GameState;
+import dryrun.game.common.Player;
 import dryrun.game.common.PlayerValues;
 import dryrun.game.engine.Drawable;
 import dryrun.game.engine.Updateable;
