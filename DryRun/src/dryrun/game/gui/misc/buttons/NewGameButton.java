@@ -10,12 +10,12 @@ public class NewGameButton extends Button {
 
 	
 	public NewGameButton(float coordX, float coordY) {
-		super(coordX, coordY, "New Game");
+		super(coordX, coordY, "Game");
 	}
 
 	@Override
 	public void pressed() {
-		Game.setCurrentGameState(GameState.JoinGame);//TODO temporary
+		Game.setCurrentGameState(GameState.PlayMenu);//TODO temporary
 	}
 
 
