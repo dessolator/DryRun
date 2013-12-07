@@ -10,7 +10,6 @@ import org.newdawn.slick.opengl.TextureLoader;
 
 import dryrun.game.objects.*;
 import dryrun.game.common.*;
-import dryrun.game.engine.DrawObject;
 import dryrun.game.engine.Drawable;
 import dryrun.game.engine.Movable;
 import dryrun.game.engine.Tex;

@@ -13,7 +13,7 @@ public class RefreshReplyThread extends Thread {
 	public RefreshReplyThread(DatagramSocket UdpSocket){myUdpSocket=UdpSocket;}
 	
 	
-	void run(){
+	public void run(){
 		byte x[] = new byte [100];
 		while(!interrupted()){
 			DatagramPacket receive = new DatagramPacket(x, 100);
@@ -31,6 +31,12 @@ public class RefreshReplyThread extends Thread {
 			}
 		}
 		
+	}
+	
+	
+	public void obavesti(){
+		myUdpSocket.close();
+		interrupt();
 	}
 	
 	

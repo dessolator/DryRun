@@ -25,6 +25,7 @@ public class Client implements NetFramework {
 	private Player player;
 	
 	
+	
  	public Client() {
 		try {
 			udpSocket = new DatagramSocket();
@@ -50,7 +51,7 @@ public class Client implements NetFramework {
 		}
 		
 		serverAddress = servAddr;
-		ConnectThread cThread = new ConnectThread(this,serverAddress,playerName,typeOfAutomobile);
+		ConnectThread cThread = new ConnectThread(this,serverAddress,player.getName(),typeOfAutomobile);
 		cThread.start();
 		myBuffer = new ConcurrentCircularBuffer();
 		receiveBuffer = new ConcurrentCircularBuffer();
