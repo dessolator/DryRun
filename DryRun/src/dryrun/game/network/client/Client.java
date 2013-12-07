@@ -29,9 +29,8 @@ public class Client implements NetFramework {
 	public void findServers(ArrayList<InetAddress> servers) {
 		GetServers gServ = new GetServers(this,servers);
 		gServ.start();
-		long startTime = System.currentTimeMillis();
-		while(System.currentTimeMillis()-startTime < 3000000000l) {}//TODO timer u novi thread
-		gServ.obavesti();
+		
+		DestroyGetServersThread destroy = new DestroyGetServersThread(gServ);
 	}
 	
 	public void connectToServer(InetAddress serverAddress, String playerName, int typeOfAutomobile) {
