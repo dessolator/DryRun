@@ -21,5 +21,33 @@ public class BasicFrame extends Frame {
 			e.printStackTrace();
 		}
 	}
+	/*
+	 * funkcije ispod ne moraju da budu implementirane za sada, po potrebi 
+	 * vracaju koordinate dela teksture
+	 * 
+	 * */
+	@Override
+	public float getTexX1() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float getTexX2() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float getTexY1() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float getTexY2() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 }

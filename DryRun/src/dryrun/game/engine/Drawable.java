@@ -17,8 +17,11 @@ public interface Drawable {
 	public float getDimY();
 	
 	public float getTexX1();
-	public float getTexX2();
+	
+	public float getTexX2();	
+	
 	public float getTexY1();
+	
 	public float getTexY2();
 	
 	

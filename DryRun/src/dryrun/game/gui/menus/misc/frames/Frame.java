@@ -29,7 +29,7 @@ public abstract class Frame implements Drawable {
 	}
 
 	@Override
-	public float getCoordX() {
+	public float getX() {
 		return coordX;
 	}
 
@@ -39,7 +39,7 @@ public abstract class Frame implements Drawable {
 	}
 
 	@Override
-	public float getCoordY() {
+	public float getY() {
 		return coordY;
 	}
 
