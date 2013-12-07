@@ -35,9 +35,9 @@ public class Engine {
 			glLoadIdentity();
 			glEnable(GL_TEXTURE_2D);			
 			
-			Mouse.create();
-			
+			Mouse.create();			
 			Keyboard.create();
+			
 		} catch (LWJGLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
