@@ -17,10 +17,7 @@ public class Server implements NetFramework {
 	private ArrayList<ServerThread> myThreads;
 	
 	public int numOfPlayers=0;
-	
-	
-	private static volatile int refreshThreadExists = 0;
-	private static volatile int killRefreshThread = 0;
+
 	
 	
 	public ArrayList<Socket> mySockets=new ArrayList<Socket>();
@@ -39,7 +36,7 @@ public class Server implements NetFramework {
 			rrt.start();
 			
 			
-		}
+		
 	}
 	
 	
@@ -62,8 +59,8 @@ public class Server implements NetFramework {
 	}
 	
 	
-	public void CreateClThread(int currentUdp, String split[]){
-		myThreads.add(new ServerThread(currentUdp, split));
+	public void CreateClThread(int currentUdp, String split[], InetAddress ip) throws SocketException{
+		myThreads.add(new ServerThread(currentUdp, split, ip));
 	}
 	
 	
