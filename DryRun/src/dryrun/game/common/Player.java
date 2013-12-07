@@ -15,7 +15,9 @@ public class Player extends GameObject implements Drawable, Movable, Updateable 
 	private ArrayList<Timer> myTimers;
 	private String name;
 	
-	
+	public Player(String n){
+		name=n;
+	}
 	public String getName() {
 		return name;
 	}
