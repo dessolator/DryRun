@@ -13,7 +13,7 @@ public class ConcurrentCircularBuffer {
 	private int currentHead;
 	private int currentTail;
 	
-	public ConcurrentCircularBuffer(int p) {
+	public ConcurrentCircularBuffer() {
 		data = new GameObjectValues[SIZE_OF_BUFFER][MAX_PLAYERS-1];
 		bufferEmpty = new Semaphore(0);
 		mutex = new ReentrantLock();

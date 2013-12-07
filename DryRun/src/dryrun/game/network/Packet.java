@@ -8,20 +8,21 @@ public abstract class Packet implements Serializable {
 	public Packet(){}
 	
 	
-	public byte[] write(){ //SERIALIZING
+	public static byte[] write(){ //SERIALIZING
 		byte[] x = null;
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		ObjectOutputStream oos;
 		try {
-			oos = new ObjectOutputStream(baos);		
-			oos.writeObject(this);
+			oos = new ObjectOutputStream(baos);	
+			Packet p = new Packet();
+			oos.writeObject(p);
 			x=baos.toByteArray();
 			oos.close();
 		} catch (IOException e) {e.printStackTrace();}
 		return x;
 	}
 	
-	public Packet read(byte[] x){ //DESERIALIZING
+	public static Packet read(byte[] x){ //DESERIALIZING
 		Packet p=null;
 		try {
 			ByteArrayInputStream bais = new ByteArrayInputStream(x);

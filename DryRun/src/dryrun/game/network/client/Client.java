@@ -4,6 +4,8 @@ import java.net.*;
 import java.util.*;
 import java.io.*;
 
+import dryrun.game.common.GameObjectValues;
+import dryrun.game.network.ConcurrentCircularBuffer;
 import dryrun.game.network.GameStatePacket;
 import dryrun.game.network.NetFramework;
 import dryrun.game.network.Packet;
@@ -14,7 +16,9 @@ public class Client implements NetFramework {
 	private Socket tcpSocket;
 	private volatile boolean connected;
 	private volatile int serverPort;
-	
+	private InetAddress serverAddress;
+	private ConcurrentCircularBuffer myBuffer;
+	private ConcurrentCircularBuffer receiveBuffer;
 	
 	
  	public Client() {
@@ -34,15 +38,18 @@ public class Client implements NetFramework {
 		destroy.start();
 	}
 	
-	public void connectToServer(InetAddress serverAddress, String playerName, int typeOfAutomobile) {
+	public void connectToServer(InetAddress servAddr, String playerName, int typeOfAutomobile) {
 		try {
-			tcpSocket = new Socket(serverAddress,TCPPORT);
+			tcpSocket = new Socket(servAddr,TCPPORT);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
+		serverAddress = servAddr;
 		ConnectThread cThread = new ConnectThread(this,serverAddress,playerName,typeOfAutomobile);
 		cThread.start();
+		myBuffer = new ConcurrentCircularBuffer();
+		receiveBuffer = new ConcurrentCircularBuffer();
 	}
 	
 	public void setServerPort(int p) {
@@ -65,17 +72,40 @@ public class Client implements NetFramework {
 		return tcpSocket;
 	}
 	
+	public int serverPort() {
+		return serverPort;
+	}
+	
+	public InetAddress serverAddress() {
+		return serverAddress;
+	}
+	
 	public DatagramSocket getUDPSocket() {
 		return udpSocket;
 	}
-	
-	public void send(Packet p) {
-		
+
+	public void send(GameObjectValues [] p) {
+		myBuffer.push(p);
 	}
 	
-	public ArrayList<GameStatePacket> receive() {
+	public GameObjectValues[] receive() {
+		try {
+			return receiveBuffer.pop();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
+
+	public ConcurrentCircularBuffer getSenderBuffer() {
+		return myBuffer;
+	}
+	
+	public ConcurrentCircularBuffer getReceiveBuffer() {
+		return receiveBuffer;
+	}
+	
+	
 	
 	
 }
