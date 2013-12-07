@@ -4,9 +4,9 @@ import org.newdawn.slick.opengl.Texture;
 import dryrun.game.engine.*;
 import dryrun.game.common.*;
 
-public class GameObject implements Drawable{
+public abstract class GameObject implements Drawable{
 	private Tex coords;
-	private Texture myTexture=Null;
+	private Texture myTexture=null;
 	GameObjectValues myValues;
 	@Override
 	
@@ -14,62 +14,57 @@ public class GameObject implements Drawable{
 		return myTexture;
 	}
 	
+	public void setTexture(Texture t){
+		this.myTexture=t;
+	}
+	
 	public void SetTex(Tex t){
 		coords = t;	
 	}
 	
-	@Override
-	public void render() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public float getX() {
-		// TODO Auto-generated method stub
-		return 0;
+		return myValues.getCoordX();
 	}
 
 	@Override
-	public float getY() {
-		// TODO Auto-generated method stub
-		return 0;
+	public float getY() {		
+		return myValues.getCoordY();
 	}
 
 	@Override
-	public float getDimX() {
-		// TODO Auto-generated method stub
-		return 0;
+	public float getDimX() {		
+		return myValues.getDimX();
 	}
 
 	@Override
-	public float getDimY() {
-		// TODO Auto-generated method stub
-		return 0;
+	public float getDimY() {		
+		return myValues.getDimY();
 	}
 
 	@Override
 	public float getTexX1() {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return coords.getX1();
 	}
 
 	@Override
 	public float getTexX2() {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return coords.getX2();
 	}
 
 	@Override
 	public float getTexY1() {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return coords.getY1();
 	}
 
 	@Override
 	public float getTexY2() {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return coords.getY2();
 	}
 
 }
