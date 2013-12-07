@@ -23,7 +23,7 @@ public abstract class Bonus extends GameObject implements Collidable {
 	@Override
 	public void collided(GameObject o) {
 		// TODO Auto-generated method stub
-		
+		//kolizijaaaaa!!!
 	}
 	
 	public static void spawnBonus(){		
@@ -34,18 +34,15 @@ public abstract class Bonus extends GameObject implements Collidable {
 			else if(factor>0.72)
 				Game.getLevel().addBonus(new SpeedUpBonus(b.getCoordX(),b.getCoordY()));
 			else if(factor>0.58)
-				Game.getLevel().addBonus(new (b.getCoordX(),b.getCoordY()));
+				Game.getLevel().addBonus(new Rocketbonus(b.getCoordX(),b.getCoordY()));
 			else if(factor>0.44)
-				Game.getLevel().addBonus(new (b.getCoordX(),b.getCoordY()));
+				Game.getLevel().addBonus(new RoadSpike(b.getCoordX(),b.getCoordY()));
 			else if(factor>0.30)
-				PaddleGame.getLevel().addBonus(new (b.getCoordX(),b.getCoordY()));
+				PaddleGame.getLevel().addBonus(new Explosive(b.getCoordX(),b.getCoordY()));
 			else if(factor>0.16)
-				Game.getLevel().addBonus(new (b.getCoordX(),b.getCoordY()));
-			else if(factor>0)
-				Game.getLevel().addBonus(new (b.getCoordX(),b.getCoordY()));			
-			BonusesSpawned++;*/
-		
-			
+				Game.getLevel().addBonus(new Mines(b.getCoordX(),b.getCoordY()));
+						
+			BonusesSpawned++;*/			
 		}		
 	}
 
