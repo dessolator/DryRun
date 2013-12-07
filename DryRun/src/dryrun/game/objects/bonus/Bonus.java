@@ -6,7 +6,7 @@ import dryrun.game.engine.DrawObject;
 import dryrun.game.engine.Drawable;
 import dryrun.game.objects.GameObject;
 
-public abstract class Bonus extends GameObject implements Collidable {
+public abstract class Bonus extends GameObject implements Collidable, Drawable {
 	private static final int MAX_ACTIVE_BONUSES_PER_LEVEL=6;
 	private static int bonusesSpawned=0;
 
@@ -20,11 +20,6 @@ public abstract class Bonus extends GameObject implements Collidable {
 		DrawObject.draw(this);
 	}
 
-	@Override
-	public void collided(GameObject o) {
-		// TODO Auto-generated method stub
-		//kolizijaaaaa!!!
-	}
 	
 	public static void spawnBonus(){		
 		if (bonusesSpawned<MAX_ACTIVE_BONUSES_PER_LEVEL){
@@ -45,5 +40,7 @@ public abstract class Bonus extends GameObject implements Collidable {
 			BonusesSpawned++;*/			
 		}		
 	}
-
+	
+	public abstract void undo();
+	
 }
