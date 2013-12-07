@@ -3,6 +3,7 @@ package dryrun.game.common;
 import java.util.ArrayList;
 
 import dryrun.game.common.*;
+import dryrun.game.engine.DrawObject;
 import dryrun.game.engine.Drawable;
 import dryrun.game.engine.Movable;
 import dryrun.game.engine.Updateable;
@@ -52,7 +53,7 @@ public class Player extends GameObject implements Drawable, Movable, Updateable 
 
 	@Override
 	public void render() {
-		// TODO Auto-generated method stub
+		DrawObject.draw(this);
 
 	}
 	

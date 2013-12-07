@@ -21,6 +21,7 @@ static{
 	}
 	
 	public static void startGame(){
+		Player
 		while((!Display.isCloseRequested())&& !terminate) {
 			glClear(GL_COLOR_BUFFER_BIT);
 			

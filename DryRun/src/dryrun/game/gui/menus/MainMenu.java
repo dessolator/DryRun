@@ -18,9 +18,9 @@ public class MainMenu extends Menu {
 		myButtons=new ArrayList<Button>();
 		myFrame=new BasicFrame(
 				Display.getWidth()/2,
-				Display.getHeight()/2,
-				Display.getWidth()/3,
-				Display.getHeight()/3
+				(int)((float)Display.getHeight()/2.5),
+				Display.getWidth()/5,
+				Display.getHeight()/2
 				);
 		myButtons.add(new ExitGameButton(
 				Display.getWidth()/2,
