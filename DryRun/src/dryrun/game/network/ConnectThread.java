@@ -51,7 +51,7 @@ public class ConnectThread extends Thread {
 		String str = new String(b);
 		String []split = str.split("#");
 		if (split[0].equals(CONNECT_ACC)) {
-			client.setServerPort(Integer.parseInt(split[1]));
+			client.setServerPort(Integer.parseInt(split[1]));//TODO kreiraj UDP soket na fiksnom portu i vrati ga klijentu
 			client.setConnectedFlag(true);
 		}
 		if (split[0].equals(CONNECT_REF)) {

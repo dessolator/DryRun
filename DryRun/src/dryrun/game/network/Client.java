@@ -9,8 +9,8 @@ import static dryrun.game.network.NetConstants.*;
 public class Client implements NetFramework {
 	private DatagramSocket udpSocket;
 	private Socket tcpSocket;
-	private boolean connected;
-	private int serverPort;
+	private volatile boolean connected;
+	private volatile int serverPort;
 	
 	
 	
@@ -27,7 +27,7 @@ public class Client implements NetFramework {
 		GetServers gServ = new GetServers(this,servers);
 		gServ.start();
 		long startTime = System.currentTimeMillis();
-		while(System.currentTimeMillis()-startTime < 3000000000l) {}
+		while(System.currentTimeMillis()-startTime < 3000000000l) {}//TODO timer u novi thread
 		gServ.obavesti();
 	}
 	
