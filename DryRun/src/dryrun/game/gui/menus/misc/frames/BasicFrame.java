@@ -5,6 +5,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import dryrun.game.engine.Tex;
+import dryrun.game.objects.TextureHolder;
+
 import org.newdawn.slick.opengl.TextureLoader;
 
 public class BasicFrame extends Frame {
@@ -12,7 +15,7 @@ public class BasicFrame extends Frame {
 	public BasicFrame(float coordX, float coordY, float dimX, float dimY) {
 		super(coordX, coordY, dimX, dimY);
 		try {
-			frame=TextureLoader.getTexture("PNG", new FileInputStream(new File("res/basicFrame.png")));
+			frame=new TextureHolder(TextureLoader.getTexture("PNG", new FileInputStream(new File("res/basicFrame.png"))),new Tex(0f,0f,0f,0f));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

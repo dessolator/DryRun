@@ -3,10 +3,12 @@ package dryrun.game.gui.menus.misc.frames;
 
 import dryrun.game.engine.DrawObject;
 import dryrun.game.engine.Drawable;
+import dryrun.game.objects.TextureHolder;
+
 import org.newdawn.slick.opengl.Texture;
 
 public abstract class Frame implements Drawable {
-	protected Texture frame;
+	protected TextureHolder frame;
 	private float coordX;
 	private float coordY;
 	private float dimX;
@@ -25,7 +27,7 @@ public abstract class Frame implements Drawable {
 
 	@Override
 	public Texture getTexture() {
-		return frame;
+		return frame.getMyTexture();
 	}
 
 	@Override

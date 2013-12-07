@@ -46,13 +46,14 @@ public class MainMenu extends Menu {
 				Display.getWidth()/10,
 				Display.getHeight()/15)
 		);
-		try {
-			background=TextureLoader.getTexture("PNG", new FileInputStream(new File("res/mainMenuBackground.png")));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//		try {
+			background=null;
+					//TextureLoader.getTexture("PNG", new FileInputStream(new File("res/mainMenuBackground.png")));
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 	}
 
 	@Override
