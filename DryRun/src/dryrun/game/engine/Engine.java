@@ -20,6 +20,8 @@ public class Engine {
 			Display.setDisplayMode(new DisplayMode(WIDTH, HEIGHT));
 			Display.setFullscreen(fullscreen);//fullscreen? 
 			Display.create();//create Display
+			Mouse.create();			
+			Keyboard.create();
 			Display.setVSyncEnabled(vsync);//vsync ukljucen
 			
 			
@@ -35,8 +37,7 @@ public class Engine {
 			glLoadIdentity();
 			glEnable(GL_TEXTURE_2D);			
 			
-			Mouse.create();			
-			Keyboard.create();
+			
 			
 		} catch (LWJGLException e) {
 			// TODO Auto-generated catch block
@@ -46,6 +47,8 @@ public class Engine {
 	
 	public static void kill(){
 		Display.destroy();
+		Mouse.destroy();
+		Keyboard.destroy();
 	}
 
 }

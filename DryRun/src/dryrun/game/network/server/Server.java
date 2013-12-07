@@ -88,7 +88,7 @@ public class Server implements NetFramework {
 					
 					
 					if (split[0]==CONNECT_REQ && numOfPlayers<MAX_PLAYERS){ //TODO IMPLEMENT MAX PLAYERS
-						dos.writeBytes(CONNECT_ACC+"#"+currentUdp);
+						dos.writeBytes(CONNECT_ACC+"#"+currentUdp);//TODO allow getting playerName, PlayerCar
 						myThreads.add(new ServerThread(currentUdp++, split));
 					}
 					else{

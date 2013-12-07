@@ -28,9 +28,9 @@ static{
 	public static void startGame(){
 		while((!Display.isCloseRequested())&& !isTerminate()) {
 			glClear(GL_COLOR_BUFFER_BIT);
-			getCurrentDraw().render();
-			getCurrentUpdate().update();
 			
+			getCurrentUpdate().update();
+			getCurrentDraw().render();
 			//gameloop yet to be done 
 			
 			
