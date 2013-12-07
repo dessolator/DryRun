@@ -13,6 +13,7 @@ public class NewGameButton extends Button {
 	@Override
 	public void pressed() {
 	//	RaceGame.setCurrentGameState(GameState.NewGameMenu);
+		System.out.println("Button works");
 	}
 
 	@Override
