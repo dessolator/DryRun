@@ -54,14 +54,7 @@ public class ConnectThread extends Thread {
 		String str = new String(b);
 		String []split = str.split("#");
 		if (split[0].equals(CONNECT_ACC)) {
-			client.setServerPort(Integer.parseInt(split[1]));//TODO kreiraj UDP soket na fiksnom portu i vrati ga klijentu DA
-			DatagramSocket socket = null;	// da li moze ovako ????
-			socket = client.getUDPSocket();
-			try {
-				socket = new DatagramSocket(UDP_GSCL_PORT);
-			} catch (SocketException e) {
-				e.printStackTrace();
-			}
+			client.setUDPSocket();
 			client.setConnectedFlag(true);
 		}
 		if (split[0].equals(CONNECT_REF)) {

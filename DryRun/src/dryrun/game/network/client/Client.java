@@ -31,6 +31,7 @@ public class Client implements NetFramework {
 		gServ.start();
 		
 		DestroyGetServersThread destroy = new DestroyGetServersThread(gServ);
+		destroy.start();
 	}
 	
 	public void connectToServer(InetAddress serverAddress, String playerName, int typeOfAutomobile) {
@@ -46,6 +47,14 @@ public class Client implements NetFramework {
 	
 	public void setServerPort(int p) {
 		serverPort = p;
+	}
+	
+	public void setUDPSocket() {
+		try {
+			udpSocket = new DatagramSocket(UDPPORT);
+		} catch (SocketException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void setConnectedFlag(boolean flag) {
@@ -68,5 +77,5 @@ public class Client implements NetFramework {
 		return null;
 	}
 	
-
+	
 }
