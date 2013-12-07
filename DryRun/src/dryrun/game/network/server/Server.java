@@ -1,10 +1,14 @@
-package dryrun.game.network;
+package dryrun.game.network.server;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.*;
 import java.util.ArrayList;
+
+import dryrun.game.network.GameStatePacket;
+import dryrun.game.network.NetFramework;
+import dryrun.game.network.Packet;
 import static dryrun.game.network.NetConstants.*;
 
 public class Server implements NetFramework {

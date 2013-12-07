@@ -1,4 +1,4 @@
-package dryrun.game.network;
+package dryrun.game.network.client;
 
 import static dryrun.game.network.NetConstants.FIND_SERVER;
 import static dryrun.game.network.NetConstants.FIND_SERVER_R;

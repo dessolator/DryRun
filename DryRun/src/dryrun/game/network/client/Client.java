@@ -1,9 +1,12 @@
-package dryrun.game.network;
+package dryrun.game.network.client;
 
 import java.net.*;
 import java.util.*;
 import java.io.*;
 
+import dryrun.game.network.GameStatePacket;
+import dryrun.game.network.NetFramework;
+import dryrun.game.network.Packet;
 import static dryrun.game.network.NetConstants.*;
 
 public class Client implements NetFramework {

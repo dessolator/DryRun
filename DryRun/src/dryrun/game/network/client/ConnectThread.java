@@ -1,4 +1,4 @@
-package dryrun.game.network;
+package dryrun.game.network.client;
 
 import static dryrun.game.network.NetConstants.CONNECT_ACC;
 import static dryrun.game.network.NetConstants.CONNECT_REF;
