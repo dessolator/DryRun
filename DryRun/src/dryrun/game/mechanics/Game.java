@@ -33,7 +33,7 @@ static{
 			getCurrentUpdate().update();
 			getCurrentDraw().render();
 			//gameloop yet to be done 
-			p.render();
+			//p.render();
 			
 			Display.sync(60);
 			Display.update();			
