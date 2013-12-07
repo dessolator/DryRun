@@ -10,6 +10,8 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.net.DatagramSocket;
+import java.net.SocketException;
 
 public class ConnectThread extends Thread {
 	private InetAddress serverAddress;
@@ -51,7 +53,14 @@ public class ConnectThread extends Thread {
 		String str = new String(b);
 		String []split = str.split("#");
 		if (split[0].equals(CONNECT_ACC)) {
-			client.setServerPort(Integer.parseInt(split[1]));//TODO kreiraj UDP soket na fiksnom portu i vrati ga klijentu
+			client.setServerPort(Integer.parseInt(split[1]));//TODO kreiraj UDP soket na fiksnom portu i vrati ga klijentu DA
+			DatagramSocket socket = null;	// da li moze ovako ????
+			socket = client.getUDPSocket();
+			try {
+				socket = new DatagramSocket();
+			} catch (SocketException e) {
+				e.printStackTrace();
+			}
 			client.setConnectedFlag(true);
 		}
 		if (split[0].equals(CONNECT_REF)) {
