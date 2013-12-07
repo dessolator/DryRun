@@ -1,15 +1,20 @@
 package dryrun.game.network;
 
-import java.io.IOException;
 import java.net.*;
 import java.util.*;
+import java.io.*;
+
 import static dryrun.game.network.NetConstants.*;
 
 public class Client implements NetFramework {
 	private DatagramSocket udpSocket;
 	private Socket tcpSocket;
+	private boolean connected;
+	private int serverPort;
 	
-	public Client() {
+	
+	
+ 	public Client() {
 		try {
 			udpSocket = new DatagramSocket();
 		} catch (SocketException e) {
@@ -18,32 +23,42 @@ public class Client implements NetFramework {
 		
 	}
 	
-	public ArrayList<InetAddress> findServers() {
-		byte [] broadcast = "find_server".getBytes();
-		try {
-			DatagramPacket data = new DatagramPacket(broadcast,broadcast.length,InetAddress.getByName("255.255.255.255"),UDPPORT);
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-		}
-		ArrayList<InetAddress> servers = new ArrayList<InetAddress> ();
+	public void findServers(ArrayList<InetAddress> servers) {
+		GetServers gServ = new GetServers(this,servers);
+		gServ.start();
 		long startTime = System.currentTimeMillis();
-		while (System.currentTimeMillis()-startTime<3000000000l) {
-			byte [] receiveMessage = new byte[20];
-			DatagramPacket receivePacket = new DatagramPacket(receiveMessage,receiveMessage.length);
-			try {
-				udpSocket.receive(receivePacket);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			String server = new String(receivePacket.getData()).trim();
-			if (server.equals("find_server_reply")) {
-				servers.add(receivePacket.getAddress());
-			}
-		}
-		return servers;		
+		while(System.currentTimeMillis()-startTime < 3000000000l) {}
+		gServ.obavesti();
 	}
 	
-	public void send(GameStatePacket gState) {
+	public void connectToServer(InetAddress serverAddress, String playerName, int typeOfAutomobile) {
+		try {
+			tcpSocket = new Socket(serverAddress,TCPPORT);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		ConnectThread cThread = new ConnectThread(this,serverAddress,playerName,typeOfAutomobile);
+		cThread.start();
+	}
+	
+	public void setServerPort(int p) {
+		serverPort = p;
+	}
+	
+	public void setConnectedFlag(boolean flag) {
+		connected = flag;
+	}
+	
+	public Socket getTCPSocket() {
+		return tcpSocket;
+	}
+	
+	public DatagramSocket getUDPSocket() {
+		return udpSocket;
+	}
+	
+	public void send(Packet p) {
 		
 	}
 	
