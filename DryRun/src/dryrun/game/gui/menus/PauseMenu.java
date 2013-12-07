@@ -39,7 +39,6 @@ public class PauseMenu extends Menu {
 	public void render() {
 		//RaceGame.getMyLevel().render();//TODO FIX ME!!!!!!
 		glColor4f(0f, 0f, 0f,0.5f);
-		DrawObject.drawColoredRect(getX(), getY(), getDimX(), getDimY());
 		if(Mouse.isGrabbed())Mouse.setGrabbed(false);
 		myFrame.render();
 		for (Button b:myButtons)
@@ -49,6 +48,30 @@ public class PauseMenu extends Menu {
 	@Override
 	public Texture getTexture() {
 		return null;
+	}
+
+	@Override
+	public float getTexX1() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float getTexX2() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float getTexY1() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float getTexY2() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	

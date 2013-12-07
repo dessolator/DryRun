@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.*;
 import java.util.ArrayList;
 
+import dryrun.game.common.Player;
 import dryrun.game.network.GameStatePacket;
 import dryrun.game.network.NetFramework;
 import dryrun.game.network.Packet;
@@ -36,6 +37,7 @@ public class ServerThread extends Thread implements NetFramework  {
 
 	@Override
 	public ArrayList<GameStatePacket> receive() {
+		return null;
 		
 	}
 

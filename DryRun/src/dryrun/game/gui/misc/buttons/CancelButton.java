@@ -1,7 +1,6 @@
 package dryrun.game.gui.misc.buttons;
 
-import game.GameState;
-import game.RaceGame;
+
 
 
 public class CancelButton extends Button {
@@ -12,8 +11,32 @@ public class CancelButton extends Button {
 
 	@Override
 	public void pressed() {
-		RaceGame.setCurrentGameState(GameState.MainMenu);
+	//	RaceGame.setCurrentGameState(GameState.MainMenu);
 
+	}
+
+	@Override
+	public float getTexX1() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float getTexX2() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float getTexY1() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float getTexY2() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

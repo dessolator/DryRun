@@ -87,7 +87,7 @@ public class Server implements NetFramework {
 					String split[]=str.split("#+"); //NAME MUST NOT BE #
 					
 					
-					if (split[0]==CONNECT_REQ && numOfPlayers<MaxPlayers){ //TODO IMPLEMENT MAX PLAYERS
+					if (split[0]==CONNECT_REQ && numOfPlayers<MAX_PLAYERS){ //TODO IMPLEMENT MAX PLAYERS
 						dos.writeBytes(CONNECT_ACC+"#"+currentUdp);
 						myThreads.add(new ServerThread(currentUdp++, split));
 					}
