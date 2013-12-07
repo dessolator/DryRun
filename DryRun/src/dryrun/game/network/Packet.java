@@ -2,6 +2,7 @@ package dryrun.game.network;
 
 import java.io.*;
 
+@SuppressWarnings("serial")
 public abstract class Packet implements Serializable {
 	
 	public Packet(){}
