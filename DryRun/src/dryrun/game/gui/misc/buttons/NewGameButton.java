@@ -15,7 +15,7 @@ public class NewGameButton extends Button {
 
 	@Override
 	public void pressed() {
-		Game.setCurrentGameState(GameState.Game);//TODO temporary
+		Game.setCurrentGameState(GameState.JoinGame);//TODO temporary
 	}
 
 
