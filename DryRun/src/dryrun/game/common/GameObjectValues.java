@@ -46,6 +46,8 @@ public class GameObjectValues implements Serializable{
 		return (GameObjectValues) ois.readObject();
 	}
 */
+	
+	//setters and getters
 	public float getCoordX() {
 		return coordX;
 	}
