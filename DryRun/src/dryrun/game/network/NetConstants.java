@@ -10,4 +10,5 @@ public class NetConstants {
 	public static final String CONNECT_ACC = "connect_req_accept";
 	public static final String CONNECT_REF = "connect_req_refuse";
 	public static final int MAX_PLAYERS=4;
+	public static final int SIZE_OF_BUFFER = 50;
 }
