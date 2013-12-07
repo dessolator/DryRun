@@ -4,7 +4,7 @@ import java.util.*;
 
 public interface NetFramework {
 	
-	public void send(GameStatePacket gState);
+	public void send(Packet p);
 	
 	public ArrayList<GameStatePacket> receive();
 	

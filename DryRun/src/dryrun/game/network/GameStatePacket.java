@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import dryrun.game.common.GameObjectValues;
 
+@SuppressWarnings("serial")
 public class GameStatePacket extends Packet {
 	private ArrayList<GameObjectValues> myObjects=new ArrayList<GameObjectValues>();
 	
