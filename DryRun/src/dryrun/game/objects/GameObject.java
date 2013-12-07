@@ -5,8 +5,24 @@ import dryrun.game.engine.*;
 import dryrun.game.common.*;
 
 public abstract class GameObject implements Drawable{
-	TextureHolder holder;
-	GameObjectValues myValues;
+	private TextureHolder holder;
+	private GameObjectValues myValues;
+	public TextureHolder getHolder() {
+		return holder;
+	}
+
+	public void setHolder(TextureHolder holder) {
+		this.holder = holder;
+	}
+
+	public GameObjectValues getMyValues() {
+		return myValues;
+	}
+
+	public void setMyValues(GameObjectValues myValues) {
+		this.myValues = myValues;
+	}
+
 	@Override
 	
 	public Texture getTexture() {
