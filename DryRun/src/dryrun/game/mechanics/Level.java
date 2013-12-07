@@ -2,7 +2,6 @@ package dryrun.game.mechanics;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import org.lwjgl.opengl.Display;
@@ -24,20 +23,18 @@ public class Level implements Drawable,Updateable {
 	ArrayList<Checkpoint> checkpoints;
 	
 	public Level(){
-		try {
-			th=new TextureHolder(TextureLoader.getTexture("PNG", new FileInputStream(new File("res/button-sprite.png"))),new Tex(0f,((float)3/10+(float)1/200),1f,((float)4/10+(float)1/200)));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		players=new ArrayList<Player>();
-		walls=new ArrayList<Wall>();
-		bonuses=new ArrayList<Bonus>();
-		checkpoints=new ArrayList<Checkpoint>();
+		th=new TextureHolder(TextureLoader.getTexture("PNG", new FileInputStream(new File("res/button-sprite.png"))),new Tex(0f,((float)3/10+(float)1/200),1f,((float)4/10+(float)1/200)));
+		
 	}
 	
 	@Override
 	public Texture getTexture() {
+<<<<<<< HEAD
 		return th.getMyTexture();
+=======
+		// TODO Auto-generated method stub
+		return null;
+>>>>>>> refs/heads/master
 	}
 
 	@Override

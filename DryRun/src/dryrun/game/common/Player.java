@@ -1,22 +1,38 @@
 package dryrun.game.common;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import org.newdawn.slick.opengl.TextureLoader;
+
+import dryrun.game.objects.*;
 import dryrun.game.common.*;
-import dryrun.game.engine.DrawObject;
 import dryrun.game.engine.Drawable;
 import dryrun.game.engine.Movable;
+import dryrun.game.engine.Tex;
 import dryrun.game.engine.Updateable;
 import dryrun.game.objects.GameObject;
 import dryrun.game.objects.bonus.Timer;
 
-public class Player extends GameObject implements Drawable, Movable, Updateable {
+public class Player extends GameObject implements Movable {
 	private PlayerValues myStats;
 	private ArrayList<Timer> myTimers;
 	private String name;
 	
-	public Player(String n){
-		name=n;
+	public Player(String n, float x, float y, float dimx, float dimy){
+		super(x, y, dimx, dimy);
+		name=n;	
+		myStats=new PlayerValues();
+		try {			
+			holder=new TextureHolder(TextureLoader.getTexture("PNG", new FileInputStream(new File("res/player.png"))),new Tex(0f,0f,1f,1f));
+		} catch (FileNotFoundException e) {			
+			e.printStackTrace();
+		} catch (IOException e){
+			e.printStackTrace();
+		}
 	}
 	public String getName() {
 		return name;

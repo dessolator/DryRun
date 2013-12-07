@@ -19,7 +19,6 @@ public class Engine {
 		try {
 			Display.setDisplayMode(new DisplayMode(WIDTH, HEIGHT));
 			Display.setFullscreen(fullscreen);//fullscreen? 
-			Display.setResizable(true);
 			Display.create();//create Display
 			Mouse.create();			
 			Keyboard.create();

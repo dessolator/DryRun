@@ -4,9 +4,17 @@ import org.newdawn.slick.opengl.Texture;
 import dryrun.game.engine.*;
 import dryrun.game.common.*;
 
-public abstract class GameObject implements Drawable{
-	private TextureHolder holder;
-	private GameObjectValues myValues;
+public abstract class GameObject implements Drawable,Updateable{
+	protected TextureHolder holder;
+	protected GameObjectValues myValues;
+	
+	public GameObject(float x, float y, float dimx, float dimy){
+			myValues = new GameObjectValues();
+			myValues.setCoordX(x);
+			myValues.setCoordY(y);
+			myValues.setDimX(dimx);
+			myValues.setDimY(dimy);		
+	}
 	public TextureHolder getHolder() {
 		return holder;
 	}
@@ -23,41 +31,55 @@ public abstract class GameObject implements Drawable{
 		this.myValues = myValues;
 	}
 
-	@Override
-	
 	public Texture getTexture() {
 		return holder.getMyTexture();
 	}
 	
 	public void setTexture(Texture t){
-		holder.setMyTexture(t);
+		holder = new TextureHolder(t, new Tex(0, 1, 0, 1));		
 	}
 	
 	public void SetTex(Tex t){
 		holder.setMyCoords(t);	
 	}
 	
-
-	@Override
 	public float getX() {
 		return myValues.getCoordX();
 	}
 
-	@Override
 	public float getY() {		
 		return myValues.getCoordY();
 	}
 
-	@Override
+	
 	public float getDimX() {		
 		return myValues.getDimX();
 	}
 
-	@Override
 	public float getDimY() {		
 		return myValues.getDimY();
 	}
 
+	
+	public void setX(float x) {
+		myValues.setCoordX(x);
+	}
+
+	
+	public void setY(float y) {		
+	    myValues.setCoordY(y);
+	}
+
+	
+	public void setDimX(float dimx) {		
+		myValues.setDimX(dimx);
+	}
+
+
+	public void setDimY(float dimy) {		
+		myValues.setDimY(dimy);
+	}
+	
 	@Override
 	public float getTexX1() {
 		

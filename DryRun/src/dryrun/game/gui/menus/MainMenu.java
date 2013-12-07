@@ -18,13 +18,13 @@ public class MainMenu extends Menu {
 		myButtons=new ArrayList<Button>();
 		myFrame=new BasicFrame(
 				Display.getWidth()/2,
-				(int)((float)Display.getHeight()/2.5),
-				Display.getWidth()/5,
-				Display.getHeight()/2
+				Display.getHeight()/2,
+				Display.getWidth()/3,
+				Display.getHeight()/3
 				);
 		myButtons.add(new ExitGameButton(
 				Display.getWidth()/2,
-				Display.getHeight()/2-Display.getHeight()/14+Display.getHeight()/30)
+				Display.getHeight()/2-Display.getHeight()/10+Display.getHeight()/30)
 		);
 		myButtons.add(new SettingsButton(
 				Display.getWidth()/2,
@@ -32,7 +32,7 @@ public class MainMenu extends Menu {
 		);
 		myButtons.add(new NewGameButton(
 				Display.getWidth()/2,
-				Display.getHeight()/2+Display.getHeight()/14+Display.getHeight()/30)
+				Display.getHeight()/2+Display.getHeight()/10+Display.getHeight()/30)
 		);
 		try {
 			background=TextureLoader.getTexture("PNG", new FileInputStream(new File("res/MenuBackground.png")));

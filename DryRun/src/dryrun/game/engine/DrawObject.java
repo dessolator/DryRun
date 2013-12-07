@@ -1,5 +1,6 @@
 package dryrun.game.engine;
 
+
 import static org.lwjgl.opengl.GL11.*;
 
 import org.lwjgl.opengl.Display;
@@ -54,7 +55,6 @@ public class DrawObject {
 		glEnd();
 		glPopMatrix();//when done with object manipulation merge model matrices.		
 	}
-	
 	public static void drawRect(float x, float y, float dimX, float dimY, float alpha){
 		drawRect( x,  y,  dimX, dimY, 1, 1, 1, alpha);		
 	}
