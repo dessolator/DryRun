@@ -1,6 +1,6 @@
 package dryrun.game.engine;
 
-import game.common.GameObject;
+import dryrun.game .objects.GameObject;
 
 
 public interface Collidable {

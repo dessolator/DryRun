@@ -6,7 +6,7 @@ import dryrun.game.common.*;
 
 public class GameObject implements Drawable{
 	private Tex coords;
-	private Texture myTexture=Null;
+	private Texture myTexture=null;
 	GameObjectValues myValues;
 	@Override
 	
