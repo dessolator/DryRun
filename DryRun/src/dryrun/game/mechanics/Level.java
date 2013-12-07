@@ -5,16 +5,18 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import org.lwjgl.opengl.Display;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 
 import dryrun.game.common.Player;
 import dryrun.game.engine.Drawable;
 import dryrun.game.engine.Tex;
+import dryrun.game.engine.Updateable;
 import dryrun.game.objects.TextureHolder;
 import dryrun.game.objects.bonus.Bonus;
 
-public class Level implements Drawable {
+public class Level implements Drawable,Updateable {
 	TextureHolder th;
 	ArrayList<Player> players;
 	ArrayList<Wall> walls;
@@ -35,62 +37,76 @@ public class Level implements Drawable {
 	
 	@Override
 	public Texture getTexture() {
-		
 		return th.getMyTexture();
 	}
 
 	@Override
 	public void render() {
-		// TODO Auto-generated method stub
-
+		for(Player p :players){
+			p.render();
+		}
+		for(Wall w: walls){
+			w.render();
+		}
+		for(Bonus b:bonuses){
+			b.render();
+		}
 	}
 
 	@Override
 	public float getX() {
-		// TODO Auto-generated method stub
-		return 0;
+		return Display.getWidth()/2;
 	}
 
 	@Override
 	public float getY() {
-		// TODO Auto-generated method stub
-		return 0;
+		return Display.getHeight()/2;
 	}
 
 	@Override
 	public float getDimX() {
-		// TODO Auto-generated method stub
-		return 0;
+		return Display.getWidth();
 	}
 
 	@Override
 	public float getDimY() {
-		// TODO Auto-generated method stub
-		return 0;
+		return Display.getHeight();
 	}
 
 	@Override
 	public float getTexX1() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public float getTexX2() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 1;
 	}
 
 	@Override
 	public float getTexY1() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public float getTexY2() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 1;
+	}
+
+	@Override
+	public void update() {
+		for(Player p :players){
+			p.update();
+		}
+		for(Wall w: walls){
+			w.update();
+		}
+		for(Bonus b:bonuses){
+			b.update();
+		}
+		for(Checkpoint c:checkpoints){
+			c.update();
+		}
 	}
 
 }
