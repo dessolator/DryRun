@@ -11,6 +11,7 @@ import dryrun.game.network.NetFramework;
 import dryrun.game.network.Packet;
 import static dryrun.game.network.NetConstants.*;
 
+
 public class Server implements NetFramework {
 	private ServerSocket SrvSocket;
 	private DatagramSocket myUdpSocket;
