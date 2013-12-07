@@ -28,6 +28,7 @@ public class ConnectAcceptorThread extends Thread {
 				//TODO if number of players exceeded
 				myServer.mySockets.add(s=SrvSocket.accept());
 				myServer.numOfPlayers++;
+				s.getInetAddress();
 				DataInputStream dis= new DataInputStream(s.getInputStream());
 				DataOutputStream dos= new DataOutputStream(s.getOutputStream());
 				dis.readFully(b=new byte[dis.available()]);										//TODO string split
@@ -35,13 +36,14 @@ public class ConnectAcceptorThread extends Thread {
 				String split[]=str.split("#+"); //NAME MUST NOT BE #
 				
 				
-				if (split[0]==CONNECT_REQ && myServer.numOfPlayers<MAX_PLAYERS){ //TODO IMPLEMENT MAX PLAYERS
+				if (split[0].equals(CONNECT_REQ) && myServer.numOfPlayers<MAX_PLAYERS){ //TODO IMPLEMENT MAX PLAYERS
 					dos.writeBytes(CONNECT_ACC+"#"+currentUdp);//TODO allow getting playerName, PlayerCar
-					myServer.CreateClThread(currentUdp++, split);
+					myServer.CreateClThread(currentUdp++, split, s.getInetAddress());
 				}
 				else{
 					dos.writeBytes(CONNECT_REF);//TODO close s
 				}
+				split[0]="waiting for next packet";
 				
 				
 			} catch (IOException e) { e.printStackTrace();}
