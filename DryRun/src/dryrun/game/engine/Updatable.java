@@ -1,5 +1,5 @@
 package dryrun.game.engine;
 
-public class Updatable {
-
+public interface Updatable {
+	public void update();
 }
