@@ -32,11 +32,11 @@ public abstract class Button implements Drawable, Updateable{
 		this.myText=new TimesNewRomanText(coordX,coordY,myText);
 		this.coordX = coordX;
 		this.coordY = coordY;
-		this.dimX = Display.getWidth()/10;
-		this.dimY = Display.getHeight()/15;
+		this.dimX = Display.getWidth()/5;
+		this.dimY = Display.getHeight()/10;
 		try {
-			myTexture=new TextureHolder(TextureLoader.getTexture("PNG", new FileInputStream(new File("res/button-sprite.png"))),new Tex(0f,0f,1f,((float)1/10)));
-			pressedTexture=new TextureHolder(TextureLoader.getTexture("PNG", new FileInputStream(new File("res/button-sprite.png"))),new Tex(0f,((float)1/2),1f,((float)6/10)));
+			myTexture=new TextureHolder(TextureLoader.getTexture("PNG", new FileInputStream(new File("res/button-sprite.png"))),new Tex(0f,((float)3/10+(float)1/200),1f,((float)4/10+(float)1/200)));
+			pressedTexture=new TextureHolder(TextureLoader.getTexture("PNG", new FileInputStream(new File("res/button-sprite.png"))),new Tex(0f,((float)9/10),1f,((float)1)));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
