@@ -1,5 +1,8 @@
 package dryrun.game.gui.misc.buttons;
 
+import dryrun.game.common.GameState;
+import dryrun.game.mechanics.Game;
+
 
 
 
@@ -12,8 +15,7 @@ public class NewGameButton extends Button {
 
 	@Override
 	public void pressed() {
-	//	RaceGame.setCurrentGameState(GameState.NewGameMenu);
-		System.out.println("Button works");
+		Game.setCurrentGameState(GameState.Game);//TODO temporary
 	}
 
 

@@ -84,4 +84,12 @@ static{
 		return terminate;
 	}
 
+	public static GameState getCurrentGameState() {
+		return currentGameState;
+	}
+
+	public static void setCurrentGameState(GameState currentGameState) {
+		Game.currentGameState = currentGameState;
+	}
+
 }

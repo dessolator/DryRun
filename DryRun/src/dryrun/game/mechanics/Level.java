@@ -1,11 +1,15 @@
 package dryrun.game.mechanics;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.ArrayList;
 
 import org.newdawn.slick.opengl.Texture;
+import org.newdawn.slick.opengl.TextureLoader;
 
 import dryrun.game.common.Player;
 import dryrun.game.engine.Drawable;
+import dryrun.game.engine.Tex;
 import dryrun.game.objects.TextureHolder;
 import dryrun.game.objects.bonus.Bonus;
 
@@ -17,6 +21,7 @@ public class Level implements Drawable {
 	ArrayList<Checkpoint> checkpoints;
 	
 	public Level(){
+		th=new TextureHolder(TextureLoader.getTexture("PNG", new FileInputStream(new File("res/button-sprite.png"))),new Tex(0f,((float)3/10+(float)1/200),1f,((float)4/10+(float)1/200)));
 		
 	}
 	

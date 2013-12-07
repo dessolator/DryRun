@@ -7,5 +7,5 @@ import dryrun.game .objects.GameObject;
 
 public interface Collidable {
 	//desila se kolizija
-	public void collided(Player o);
+	public void collided(GameObject o);
 }

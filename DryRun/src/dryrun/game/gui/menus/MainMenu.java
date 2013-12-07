@@ -22,7 +22,6 @@ public class MainMenu extends Menu {
 				Display.getWidth()/3,
 				Display.getHeight()/3
 				);
-		
 		myButtons.add(new ExitGameButton(
 				Display.getWidth()/2,
 				Display.getHeight()/2-Display.getHeight()/14+Display.getHeight()/30)
