@@ -9,7 +9,7 @@ public abstract class DropDownEntry extends Button {
 
 	@Override
 	public Texture getTexture() {
-		return myTexture;
+		return myTexture.getMyTexture();
 	}
 
 	public DropDownEntry(float coordX, float coordY, float dimX, float dimY,String myResolution) {

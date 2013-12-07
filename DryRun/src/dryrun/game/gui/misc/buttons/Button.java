@@ -8,9 +8,11 @@ import java.io.IOException;
 
 import dryrun.game.engine.DrawObject;
 import dryrun.game.engine.Drawable;
+import dryrun.game.engine.Tex;
 import dryrun.game.engine.Updateable;
 import dryrun.game.gui.menus.misc.text.Text;
 import dryrun.game.gui.menus.misc.text.TimesNewRomanText;
+import dryrun.game.objects.TextureHolder;
 
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.opengl.Texture;
@@ -18,8 +20,8 @@ import org.newdawn.slick.opengl.TextureLoader;
 
 
 public abstract class Button implements Drawable, Updateable{
-	protected Texture myTexture;
-	protected Texture pressedTexture;
+	protected TextureHolder myTexture;
+	protected TextureHolder pressedTexture;
 	Text myText;
 	protected boolean clicked=false;
 	private boolean previousMouseState=false;
@@ -32,8 +34,8 @@ public abstract class Button implements Drawable, Updateable{
 		this.dimX = dimX;
 		this.dimY = dimY;
 		try {
-			myTexture=TextureLoader.getTexture("PNG", new FileInputStream(new File("res/Button.png")));
-			pressedTexture=TextureLoader.getTexture("PNG", new FileInputStream(new File("res/pressedButton.png")));
+			myTexture=new TextureHolder(TextureLoader.getTexture("PNG", new FileInputStream(new File("res/button-sprite.png"))),new Tex(1f,1f,1f,1f));
+			pressedTexture=new TextureHolder(TextureLoader.getTexture("PNG", new FileInputStream(new File("res/button-sprite.png"))),new Tex(1f,1f,1f,1f));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -71,8 +73,8 @@ public abstract class Button implements Drawable, Updateable{
 	@Override
 	public Texture getTexture() {
 		if(clicked)
-			return pressedTexture;
-		return myTexture;
+			return pressedTexture.getMyTexture();
+		return myTexture.getMyTexture();
 	}
 	@Override
 	public float getX() {
