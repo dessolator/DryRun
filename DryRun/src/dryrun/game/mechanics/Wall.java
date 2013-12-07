@@ -1,5 +1,6 @@
 package dryrun.game.mechanics;
 
+import dryrun.game.common.Player;
 import dryrun.game.engine.Collidable;
 import dryrun.game.engine.DrawObject;
 import dryrun.game.objects.GameObject;
@@ -18,7 +19,7 @@ public abstract class Wall extends GameObject implements Collidable{
 	}
 
 	@Override
-	public void collided(GameObject o) {
+	public void collided(Player o) {
 		// TODO Auto-generated method stub
 		//add collision detection
 	}

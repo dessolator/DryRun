@@ -1,5 +1,6 @@
 package dryrun.game.objects.bonus;
 
+import dryrun.game.common.Player;
 import dryrun.game.objects.GameObject;
 
 public class MachineGun extends Bonus {
@@ -10,8 +11,16 @@ public class MachineGun extends Bonus {
 		super(coordX, coordY);
 		// TODO Auto-generated constructor stub
 	}
-	public void collided(GameObject o){
+	
+	public void undo(){
 		
 	}
+	@Override
+	public void collided(Player o){
+		Timer t = new Timer(0, this);
+		o.addTimer(t);		
+	}
+
 
 }
+

@@ -41,4 +41,14 @@ public class Timer {
 		}
 	
 	}
+
+	public Bonus getMyBonus() {
+		return myBonus;
+	}
+
+	public void setMyBonus(Bonus myBonus) {
+		this.myBonus = myBonus;
+	}
+
+	
 }
