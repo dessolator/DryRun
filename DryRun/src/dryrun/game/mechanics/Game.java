@@ -63,6 +63,37 @@ static{
 				return null;
 		}
 	}
+	public static goBack(){
+		switch(currentGameState){
+			case MainMenu:
+				currentGameState= GameState.MainMenu;
+				break;
+			case Game:
+				currentGameState= GameState.Game;
+				break;
+			case HostGameScreen:
+				currentGameState= GameState.PlayMenu;
+				break;
+			case HostJoinMenu:
+				currentGameState= GameState.PlayMenu;
+				break;
+			case JoinGame:
+				currentGameState= GameState.HostJoinMenu;
+				break;
+			case LobbyScreen:
+				currentGameState= GameState.PlayMenu;
+				break;
+			case PlayMenu:
+				currentGameState= GameState.MainMenu;
+				break;
+			case SplashScreen:
+				currentGameState= GameState.SplashScreen;
+				break;
+			default:
+				currentGameState= GameState.MainMenu;
+				break;
+}
+}
 
 	private static Drawable getCurrentDraw() {
 		switch(currentGameState){
