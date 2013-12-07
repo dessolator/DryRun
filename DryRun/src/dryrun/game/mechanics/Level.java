@@ -1,13 +1,9 @@
 package dryrun.game.mechanics;
 
-import java.util.ArrayList;
-
 import org.newdawn.slick.opengl.Texture;
 
-import dryrun.game.common.Player;
 import dryrun.game.engine.Drawable;
 import dryrun.game.objects.TextureHolder;
-import dryrun.game.objects.bonus.Bonus;
 
 public class Level implements Drawable {
 	TextureHolder th;
@@ -15,6 +11,9 @@ public class Level implements Drawable {
 	ArrayList<Wall> walls;
 	ArrayList<Bonus> bonuses;
 	ArrayList<Checkpoint> checkpoints;
+	
+	public Level
+	
 	@Override
 	public Texture getTexture() {
 		// TODO Auto-generated method stub

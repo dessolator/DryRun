@@ -1,16 +1,15 @@
 package dryrun.game.common;
 
 public enum GameState {
-	MainMenu,
+	SplashScreen,
+		MainMenu,
 	
-	NewGameMenu,
-		NetworkGameMenu,
-			CreateGameScreen,
-			JoinGameScreen,
-				Game,
-	SettingsScreen,
-	
-	ExitGameDialog;
+			PlayMenu,
+				HostJoinMenu,
+					HostGameScreen,
+					LobbyScreen,
+						JoinGame,
+						Game;
 
 }
 

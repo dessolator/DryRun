@@ -1,8 +1,6 @@
 package dryrun.game.mechanics;
 
 import org.lwjgl.opengl.Display;
-import org.lwjgl.opengl.GLContext;
-
 import static org.lwjgl.opengl.GL11.*;
 import dryrun.game.common.GameState;
 import dryrun.game.engine.Drawable;
@@ -15,14 +13,11 @@ public class Game {
 	private static MainMenu myMainMenu;
 	private static boolean terminate=false;	
 	private static GameState currentGameState=GameState.MainMenu;
-	private static PauseMenu myPauseMenu; 
 	
 static{		
 		//myLevel=new Level(currentLevel);
 		myMainMenu=new MainMenu();
-		myPauseMenu=new PauseMenu();
-		//mySettingsMenu=new SettingsMenu();
-		//myScoresMenu=new ScoresMenu();//TODO probably have menus as static?		
+		//mySettingsMenu=new SettingsMenu();	
 	}
 	
 	public static void startGame(){
@@ -43,19 +38,19 @@ static{
 		switch(currentGameState){
 			case MainMenu:
 				return myMainMenu;
-			case CreateGameScreen:
-				return null;
-			case ExitGameDialog:
-				return null;
 			case Game:
 				return null;
-			case JoinGameScreen:
+			case HostGameScreen:
 				return null;
-			case NetworkGameMenu:
+			case HostJoinMenu:
 				return null;
-			case NewGameMenu:
+			case JoinGame:
 				return null;
-			case SettingsScreen:
+			case LobbyScreen:
+				return null;
+			case PlayMenu:
+				return null;
+			case SplashScreen:
 				return null;
 			default:
 				return null;
@@ -66,19 +61,19 @@ static{
 		switch(currentGameState){
 		case MainMenu:
 			return myMainMenu;
-		case CreateGameScreen:
-			return null;
-		case ExitGameDialog:
-			return null;
 		case Game:
 			return null;
-		case JoinGameScreen:
+		case HostGameScreen:
 			return null;
-		case NetworkGameMenu:
+		case HostJoinMenu:
 			return null;
-		case NewGameMenu:
+		case JoinGame:
 			return null;
-		case SettingsScreen:
+		case LobbyScreen:
+			return null;
+		case PlayMenu:
+			return null;
+		case SplashScreen:
 			return null;
 		default:
 			return null;
