@@ -67,4 +67,6 @@ public class Client implements NetFramework {
 	public ArrayList<GameStatePacket> receive() {
 		return null;
 	}
+	
+
 }

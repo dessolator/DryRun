@@ -4,6 +4,7 @@ import static dryrun.game.network.NetConstants.CONNECT_ACC;
 import static dryrun.game.network.NetConstants.CONNECT_REF;
 import static dryrun.game.network.NetConstants.CONNECT_REQ;
 import static dryrun.game.network.NetConstants.TCPPORT;
+import static dryrun.game.network.NetConstants.*;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -57,7 +58,7 @@ public class ConnectThread extends Thread {
 			DatagramSocket socket = null;	// da li moze ovako ????
 			socket = client.getUDPSocket();
 			try {
-				socket = new DatagramSocket();
+				socket = new DatagramSocket(UDP_GSCL_PORT);
 			} catch (SocketException e) {
 				e.printStackTrace();
 			}
