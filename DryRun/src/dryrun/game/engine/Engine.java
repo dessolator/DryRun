@@ -1,10 +1,11 @@
 package dryrun.game.engine;
 
 import org.lwjgl.LWJGLException;
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
-import static org.lwjgl.opengl.GL11.GL_PROJECTION;
-import static org.lwjgl.opengl.GL11.glMatrixMode;
+
 import static org.lwjgl.opengl.GL11.*;
 
 public class Engine {
@@ -34,6 +35,9 @@ public class Engine {
 			glLoadIdentity();
 			glEnable(GL_TEXTURE_2D);			
 			
+			Mouse.create();
+			
+			Keyboard.create();
 		} catch (LWJGLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
