@@ -13,12 +13,16 @@ import dryrun.game.gui.menus.*;
 
 public class Game {
 	private static MainMenu myMainMenu;
+	private static GameMenu myGameMenu;
 	private static boolean terminate=false;	
 	private static GameState currentGameState=GameState.MainMenu;
 	
 static{		
 		//myLevel=new Level(currentLevel);
 		myMainMenu=new MainMenu();
+		myMainMenu = new MainMenu();
+		myGameMenu = new GameMenu();
+		
 		//mySettingsMenu=new SettingsMenu();	
 	}
 	
@@ -52,7 +56,7 @@ static{
 			case LobbyScreen:
 				return null;
 			case PlayMenu:
-				return null;
+				return myGameMenu ;
 			case SplashScreen:
 				return null;
 			default:
@@ -65,7 +69,7 @@ static{
 		case MainMenu:
 			return myMainMenu;
 		case Game:
-			return null;
+			return myGameMenu;
 		case HostGameScreen:
 			return null;
 		case HostJoinMenu:
@@ -75,7 +79,7 @@ static{
 		case LobbyScreen:
 			return null;
 		case PlayMenu:
-			return null;
+			return myGameMenu;
 		case SplashScreen:
 			return null;
 		default:
