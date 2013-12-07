@@ -19,8 +19,8 @@ public abstract class CheckBox extends Button{
 
 	boolean isChecked=false;
 	TextureHolder checked;
-	public CheckBox(float coordX, float coordY, float dimX, float dimY) {
-		super(coordX, coordY, dimX, dimY,"");
+	public CheckBox(float coordX, float coordY) {
+		super(coordX, coordY, "");
 		try {
 			myTexture=new TextureHolder(TextureLoader.getTexture("PNG", new FileInputStream(new File("res/button-sprite.png"))),new Tex(1f,1f,1f,1f));
 			checked=new TextureHolder(TextureLoader.getTexture("PNG", new FileInputStream(new File("res/button-sprite.png"))),new Tex(1f,1f,1f,1f));

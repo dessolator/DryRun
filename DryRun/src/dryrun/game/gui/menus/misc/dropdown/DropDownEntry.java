@@ -12,8 +12,8 @@ public abstract class DropDownEntry extends Button {
 		return myTexture.getMyTexture();
 	}
 
-	public DropDownEntry(float coordX, float coordY, float dimX, float dimY,String myResolution) {
-		super(coordX, coordY, dimX, dimY,myResolution);
+	public DropDownEntry(float coordX, float coordY,String myResolution) {
+		super(coordX, coordY,myResolution);
 	}
 
 	

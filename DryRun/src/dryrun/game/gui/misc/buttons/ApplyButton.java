@@ -9,8 +9,8 @@ import java.io.IOException;
 
 public class ApplyButton extends Button {
 
-	public ApplyButton(float coordX, float coordY, float dimX, float dimY) {
-		super(coordX, coordY, dimX, dimY,"Apply");
+	public ApplyButton(float coordX, float coordY) {
+		super(coordX, coordY, "Apply");
 	}
 
 	@Override
@@ -30,28 +30,7 @@ public class ApplyButton extends Button {
 
 	}
 
-	@Override
-	public float getTexX1() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
-	@Override
-	public float getTexX2() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
-	@Override
-	public float getTexY1() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public float getTexY2() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 }

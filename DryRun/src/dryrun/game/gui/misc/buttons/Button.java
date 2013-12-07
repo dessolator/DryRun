@@ -15,6 +15,7 @@ import dryrun.game.gui.menus.misc.text.TimesNewRomanText;
 import dryrun.game.objects.TextureHolder;
 
 import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.Display;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 
@@ -27,15 +28,15 @@ public abstract class Button implements Drawable, Updateable{
 	private boolean previousMouseState=false;
 	
 	
-	public Button(float coordX, float coordY, float dimX, float dimY,String myText) {
+	public Button(float coordX, float coordY,String myText) {
 		this.myText=new TimesNewRomanText(coordX,coordY,myText);
 		this.coordX = coordX;
 		this.coordY = coordY;
-		this.dimX = dimX;
-		this.dimY = dimY;
+		this.dimX = Display.getWidth()/10;
+		this.dimY = Display.getHeight()/15;
 		try {
-			myTexture=new TextureHolder(TextureLoader.getTexture("PNG", new FileInputStream(new File("res/button-sprite.png"))),new Tex(0f,0f,1f,1f));
-			pressedTexture=new TextureHolder(TextureLoader.getTexture("PNG", new FileInputStream(new File("res/button-sprite.png"))),new Tex(1f,1f,1f,1f));
+			myTexture=new TextureHolder(TextureLoader.getTexture("PNG", new FileInputStream(new File("res/button-sprite.png"))),new Tex(0f,0f,1f,((float)1/10)));
+			pressedTexture=new TextureHolder(TextureLoader.getTexture("PNG", new FileInputStream(new File("res/button-sprite.png"))),new Tex(0f,((float)1/2),1f,((float)6/10)));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -107,6 +108,30 @@ public abstract class Button implements Drawable, Updateable{
 		}
 		unClick();
 		
+	}
+	@Override
+	public float getTexX1() {
+		if(clicked)
+			return pressedTexture.getMyCoords().getX1();
+		return myTexture.getMyCoords().getX1();
+	}
+	@Override
+	public float getTexX2() {
+		if(clicked)
+			return pressedTexture.getMyCoords().getX2();
+		return myTexture.getMyCoords().getX2();
+	}
+	@Override
+	public float getTexY1() {
+		if(clicked)
+			return pressedTexture.getMyCoords().getY1();
+		return myTexture.getMyCoords().getY1();
+	}
+	@Override
+	public float getTexY2() {
+		if(clicked)
+			return pressedTexture.getMyCoords().getY2();
+		return myTexture.getMyCoords().getY2();
 	}
 
 }
