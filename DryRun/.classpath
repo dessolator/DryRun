@@ -5,5 +5,8 @@
 	<classpathentry kind="lib" path="lib/lwjgl_util.jar"/>
 	<classpathentry kind="lib" path="lib/lwjgl.jar"/>
 	<classpathentry kind="lib" path="lib/slick-util.jar"/>
+	<classpathentry kind="lib" path="lib/jbox2d-library-2.2.1.1.jar"/>
+	<classpathentry kind="lib" path="lib/jbox2d-serialization-1.1.0-jar-with-dependencies.jar"/>
+	<classpathentry kind="lib" path="lib/jbox2d-serialization-1.1.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
