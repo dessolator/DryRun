@@ -11,6 +11,9 @@ import dryrun.game.network.NetFramework;
 import dryrun.game.network.Packet;
 import static dryrun.game.network.NetConstants.*;
 
+import dryrun.game.common.Player;
+import dryrun.game.common.PlayerValues;
+
 public class Client implements NetFramework {
 	private DatagramSocket udpSocket;
 	private Socket tcpSocket;
@@ -19,6 +22,7 @@ public class Client implements NetFramework {
 	private InetAddress serverAddress;
 	private ConcurrentCircularBuffer myBuffer;
 	private ConcurrentCircularBuffer receiveBuffer;
+	private Player player;
 	
 	
  	public Client() {
