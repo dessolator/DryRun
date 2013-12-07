@@ -8,4 +8,5 @@ public class NetConstants {
 	static final String FIND_SERVER_R = "find_server_reply";
 	static final String CONNECT_REQ = "want_to_connect";
 	static final String CONNECT_ACC = "connect_req_accept";
+	static final String CONNECT_REF = "connect_req_refuse";
 }

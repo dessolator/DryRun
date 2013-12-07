@@ -12,7 +12,7 @@ public class Server implements NetFramework {
 	private DatagramSocket myUdpSocket;
 	private ArrayList<ServerThread> myThreads;
 	private ArrayList<Socket> mySockets=new ArrayList<Socket>();
-	private int numOfPlayers=0;
+	private int numOfPlayers=0; //TODO SHOULD GO IN GAMESTATE
 	
 	
 	private static volatile int refreshThreadExists = 0;
@@ -77,10 +77,17 @@ public class Server implements NetFramework {
 					numOfPlayers++;
 					DataInputStream dis= new DataInputStream(s.getInputStream());
 					DataOutputStream dos= new DataOutputStream(s.getOutputStream());
-					dis.readFully(b);
-					if (new String(b)==CONNECT_REQ){
-						dos.writeBytes(CONNECT_ACC+" "+currentUdp);
-						myThreads.add(new ServerThread(currentUdp++));
+					dis.readFully(b=new byte[dis.available()]);										//TODO string split
+					String str=new String(b);
+					String split[]=str.split("#+"); //NAME MUST NOT BE #
+					
+					
+					if (split[0]==CONNECT_REQ && numOfPlayers<MaxPlayers){ //TODO IMPLEMENT MAX PLAYERS
+						dos.writeBytes(CONNECT_ACC+"#"+currentUdp);
+						myThreads.add(new ServerThread(currentUdp++, split));
+					}
+					else{
+						dos.writeBytes(CONNECT_REF)
 					}
 					
 					
