@@ -6,7 +6,9 @@ import dryrun.game.engine.DrawObject;
 import dryrun.game.objects.GameObject;
 
 public abstract class Wall extends GameObject implements Collidable{
-
+	/*
+	 *konstruktor
+	 */
 	public Wall(float x, float y, float dimx, float dimy){
 		super(x, y, dimx, dimy);		
 	}
@@ -20,5 +22,4 @@ public abstract class Wall extends GameObject implements Collidable{
 		// TODO Auto-generated method stub
 		//add collision detection
 	}
-
 }

@@ -9,7 +9,11 @@ import dryrun.game.objects.GameObject;
 public abstract class Bonus extends GameObject implements Collidable, Drawable {
 	private static final int MAX_ACTIVE_BONUSES_PER_LEVEL=6;
 	private static int bonusesSpawned=0;
-
+	
+	/*
+	 *konstruktor, klasika kao GameObject
+	 * 
+	 */
 	public Bonus(float x, float y, float dimx, float dimy) {
 		super(x, y, dimx, dimy);
 	}
@@ -19,7 +23,10 @@ public abstract class Bonus extends GameObject implements Collidable, Drawable {
 		DrawObject.draw(this);
 	}
 
-	
+	/*
+	 * Level jos nije implementiran
+	 * logika iza dodavanja bonusa na Level
+	 */
 	public static void spawnBonus(){		
 		if (bonusesSpawned<MAX_ACTIVE_BONUSES_PER_LEVEL){
 			/*double factor=Math.random();
@@ -39,7 +46,7 @@ public abstract class Bonus extends GameObject implements Collidable, Drawable {
 			BonusesSpawned++;*/			
 		}		
 	}
-	
+	//vracanje na stanje pre pokupljenog bonusa
 	public abstract void undo();
 	
 }

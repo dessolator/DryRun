@@ -14,6 +14,9 @@ import dryrun.game.gui.menus.*;
 
 
 public class Game {
+	/*
+	 * polja, meniji, staticki GameState, pocetni main menu
+	 */
 	private static MainMenu myMainMenu;
 	private static GameMenu myGameMenu;
 	private static boolean terminate=false;	
@@ -29,20 +32,21 @@ static{
 	}
 	
 	public static void startGame(){
+		
 //		Player p = new Player("Kesler",Display.getWidth()/2, Display.getHeight()/2, Display.getWidth()/6, Display.getHeight()/10);
 	
 		while((!Display.isCloseRequested())&& !terminate) {
 			glClear(GL_COLOR_BUFFER_BIT);
 			getCurrentUpdate().update();
 			getCurrentDraw().render();
-			//gameloop yet to be done 
-//			p.render();
-			
+//			gameloop yet to be done 
+//			p.render();			
 			Display.sync(60);
 			Display.update();			
 		}		
 	}
 	
+//	get current game state update
 	private static Updateable getCurrentUpdate() {
 		switch(currentGameState){
 			case MainMenu:
@@ -65,6 +69,8 @@ static{
 				return null;
 		}
 	}
+	
+//	navigate a game state back
 	public static void goBack(){
 		switch(currentGameState){
 			case MainMenu:
@@ -94,9 +100,9 @@ static{
 			default:
 				currentGameState= GameState.MainMenu;
 				break;
-}
-}
-
+			}
+	}
+//	na osnovu game state-a nacrtaj...
 	private static Drawable getCurrentDraw() {
 		switch(currentGameState){
 		case MainMenu:
@@ -119,7 +125,7 @@ static{
 			return null;
 	}
 	}
-
+//	getteri
 	public static boolean isTerminate() {
 		return terminate;
 	}

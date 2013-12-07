@@ -4,13 +4,14 @@ import dryrun.game.common.Player;
 import dryrun.game.objects.GameObject;
 
 public class MachineGun extends Bonus {
-	//ukoliko je nepotrebno izbaciti pickedUp
-	private static boolean puckedUp = false;//pokupljen i odmah se aktivira
+	/*ukoliko je nepotrebno izbaciti pickedUp
+	 *pokupljen i odmah se aktivira
+	 */
+	private static boolean puckedUp = false;
 	
 	public MachineGun(float coordX, float coordY, float dimx, float dimy) {
 		super(coordX, coordY, dimx, dimy);		
-	}
-	
+	}	
 	
 	@Override
 	public void collided(Player o){
