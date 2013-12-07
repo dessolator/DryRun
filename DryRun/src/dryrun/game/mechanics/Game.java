@@ -27,14 +27,14 @@ static{
 	}
 	
 	public static void startGame(){
-		Player p = new Player("Kesler",Display.getWidth()/2, Display.getHeight()/2, Display.getWidth()/6, Display.getHeight()/10);
+//		Player p = new Player("Kesler",Display.getWidth()/2, Display.getHeight()/2, Display.getWidth()/6, Display.getHeight()/10);
 	
 		while((!Display.isCloseRequested())&& !terminate) {
 			glClear(GL_COLOR_BUFFER_BIT);
 			getCurrentUpdate().update();
 			getCurrentDraw().render();
 			//gameloop yet to be done 
-			p.render();
+//			p.render();
 			
 			Display.sync(60);
 			Display.update();			
@@ -63,7 +63,7 @@ static{
 				return null;
 		}
 	}
-	public static goBack(){
+	public static void goBack(){
 		switch(currentGameState){
 			case MainMenu:
 				currentGameState= GameState.MainMenu;
