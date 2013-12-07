@@ -1,24 +1,29 @@
 package dryrun.game.network;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.*;
 import java.util.ArrayList;
 import static dryrun.game.network.NetConstants.*;
 
 public class Server implements NetFramework {
-	private ServerSocket myTcpSockets;
+	private ServerSocket SrvSocket;
 	private DatagramSocket myUdpSocket;
 	private ArrayList<ServerThread> myThreads;
+	private ArrayList<Socket> mySockets=new ArrayList<Socket>();
 	private int numOfPlayers=0;
 	
 	
 	private static volatile int refreshThreadExists = 0;
 	private static volatile int killRefreshThread = 0;
+	private static volatile int currentUdp = 50010;
 	
+
 	
 	public Server(){
 		try {
-			myTcpSockets= new ServerSocket(TCPPORT);
+			SrvSocket= new ServerSocket(TCPPORT);
 			myUdpSocket= new DatagramSocket(UDPPORT);
 			myThreads = new ArrayList<ServerThread>();
 		} catch (IOException e) {e.printStackTrace();}
@@ -54,7 +59,7 @@ public class Server implements NetFramework {
 	
 	
 	public void host(){
-		while(1){
+		while(true){
 			getRefresh();
 			getConnect();
 			
@@ -65,6 +70,21 @@ public class Server implements NetFramework {
 	private void getConnect(){
 		new Thread(){
 			public void run(){
+				try {
+					byte[] b=null;
+					Socket s;
+					mySockets.add(s=SrvSocket.accept());
+					numOfPlayers++;
+					DataInputStream dis= new DataInputStream(s.getInputStream());
+					DataOutputStream dos= new DataOutputStream(s.getOutputStream());
+					dis.readFully(b);
+					if (new String(b)==CONNECT_REQ){
+						dos.writeBytes(CONNECT_ACC+" "+currentUdp);
+						myThreads.add(new ServerThread(currentUdp++));
+					}
+					
+					
+				} catch (IOException e) { e.printStackTrace();}
 				
 			}
 		}.start();
