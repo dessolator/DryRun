@@ -12,8 +12,17 @@ import dryrun.game.objects.bonus.Timer;
 public class Player extends GameObject implements Drawable, Movable, Updateable {
 	private PlayerValues myStats;
 	private ArrayList<Timer> myTimers;
+	private String name;
 	
 	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public PlayerValues getMyStats() {
 		return myStats;
 	}

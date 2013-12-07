@@ -12,15 +12,14 @@ public class MachineGun extends Bonus {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void undo(){
-		
-	}
+	
 	@Override
 	public void collided(Player o){
 		Timer t = new Timer(0, this);
 		o.addTimer(t);		
 	}
 
+	public void undo(){}
 
 }
 
