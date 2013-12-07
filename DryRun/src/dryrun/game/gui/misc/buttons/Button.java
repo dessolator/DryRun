@@ -32,8 +32,8 @@ public abstract class Button implements Drawable, Updateable{
 		this.dimX = dimX;
 		this.dimY = dimY;
 		try {
-			myTexture=TextureLoader.getTexture("PNG", new FileInputStream(new File("res/Button.png")));
-			pressedTexture=TextureLoader.getTexture("PNG", new FileInputStream(new File("res/pressedButton.png")));
+			myTexture=TextureLoader.getTexture("PNG", new FileInputStream(new File("res/button-sprite.png")));
+			pressedTexture=TextureLoader.getTexture("PNG", new FileInputStream(new File("res/button-sprite.png")));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
