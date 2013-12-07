@@ -43,7 +43,7 @@ public class Server implements NetFramework {
 							myUdpSocket.receive(receive);
 						} catch (IOException e) {refreshThreadExists=0; e.printStackTrace(); break;}
 						String s = new String(receive.getData()).trim();
-						if(s==FIND_SERVER){
+						if(s==FIND_SERVER){//TODO string.equals
 							s=FIND_SERVER_R;
 							x=s.getBytes();
 							DatagramPacket reply = new DatagramPacket(x, x.length, receive.getAddress(), receive.getPort());
@@ -61,7 +61,7 @@ public class Server implements NetFramework {
 	public void host(){
 		while(true){
 			getRefresh();
-			getConnect();
+			getConnect();//TODO make getConnect a singleton
 			
 			
 		}
@@ -73,6 +73,7 @@ public class Server implements NetFramework {
 				try {
 					byte[] b=null;
 					Socket s;
+					//TODO if number of players exceeded
 					mySockets.add(s=SrvSocket.accept());
 					numOfPlayers++;
 					DataInputStream dis= new DataInputStream(s.getInputStream());
@@ -87,7 +88,7 @@ public class Server implements NetFramework {
 						myThreads.add(new ServerThread(currentUdp++, split));
 					}
 					else{
-						dos.writeBytes(CONNECT_REF)
+						dos.writeBytes(CONNECT_REF);//TODO close s
 					}
 					
 					

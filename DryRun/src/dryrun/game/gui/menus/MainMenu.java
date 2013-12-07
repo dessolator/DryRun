@@ -54,6 +54,30 @@ public class MainMenu extends Menu {
 			e.printStackTrace();
 		}
 	}
+
+	@Override
+	public float getTexX1() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float getTexX2() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float getTexY1() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float getTexY2() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 
 }
