@@ -1,3 +1,4 @@
+
 package dryrun.game.gui.menus;
 
 import dryrun.game.engine.DrawObject;
@@ -97,3 +98,4 @@ public abstract class Menu implements Drawable, Updateable{
 	}
 
 }
+

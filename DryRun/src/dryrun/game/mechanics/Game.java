@@ -1,12 +1,13 @@
 package dryrun.game.mechanics;
 
-import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import static org.lwjgl.opengl.GL11.*;
 import dryrun.game.common.*;
 import dryrun.game.engine.Drawable;
 import dryrun.game.engine.Updateable;
 import dryrun.game.gui.menus.*;
+import dryrun.game.network.client.Client;
+import dryrun.game.network.server.Server;
 
 import java.util.*;
 import java.net.*;
@@ -33,16 +34,19 @@ static{
 	}
 	
 	public static void startGame(){
+
 		Player p = new Player("Kesler", "Lamburghini", Display.getWidth()/2, Display.getHeight()/4, Display.getWidth()/6, Display.getHeight()/10);
-	
+
 		while((!Display.isCloseRequested())&& !terminate) {
 			glClear(GL_COLOR_BUFFER_BIT);
 			getCurrentUpdate().update();
 			getCurrentDraw().render();
 			//gameloop yet to be done 
+
 			p.render();
 			p.playerInput();
 			//System.out.println(p.direction.x + " " +p.direction.y+ "   "+ p.direction.length());
+
 			Display.sync(60);
 			Display.update();			
 		}		
@@ -145,11 +149,13 @@ static{
 	public static void setCurrentGameState(GameState currentGameState) {
 		Game.currentGameState = currentGameState;
 	}
+
 	
 	public static List<InetAddress> getPossibleServers() {
 		return serverAddresses;
 	}
-	
+
+
 
 
 	public static JoinMenu getMyLobbyMenu() {

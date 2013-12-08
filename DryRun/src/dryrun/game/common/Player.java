@@ -33,10 +33,11 @@ public class Player extends GameObject implements Movable {
 	private double angle = Math.PI/2;
 	public Vec2 direction;
 
+
 	
 	public Player(String n, float x, float y, float dimx, float dimy){
 		super(x, y, dimx, dimy);
-		
+
 		name=n;	
 		myStats=new PlayerValues();
 		direction = new Vec2(1,0);
