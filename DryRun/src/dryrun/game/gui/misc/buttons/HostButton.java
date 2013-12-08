@@ -1,5 +1,7 @@
 package dryrun.game.gui.misc.buttons;
 
+import dryrun.game.mechanics.Game;
+import dryrun.game.common.*;
 public class HostButton extends Button {
 
 	public HostButton(float coordX, float coordY) {
@@ -10,7 +12,7 @@ public class HostButton extends Button {
 	@Override
 	public void pressed() {
 		// TODO Auto-generated method stub
-
+		Game.setCurrentGameState(GameState.HostGameScreen);
 	}
 
 }
