@@ -38,16 +38,16 @@ public class GetServers extends Thread {
 				e.printStackTrace();
 			}
 			try {
-				client.getUDPSocket().send(broadcastMessage);
+				comm.send(broadcastMessage);
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
-		
+			System.out.println("paket poslat");
 			while (!endOfThread) {
 				byte [] receiveMessage = new byte[20];
 				DatagramPacket receivePacket = new DatagramPacket(receiveMessage,receiveMessage.length);
 				try {
-					client.getUDPSocket().receive(receivePacket);
+					comm.receive(receivePacket);
 				} catch (IOException e) {
 					endOfThread = true;
 					continue;
@@ -64,6 +64,5 @@ public class GetServers extends Thread {
 	
 	public void obavesti() {
 		comm.close();
-		interrupt();
 	}
 }

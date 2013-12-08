@@ -1,5 +1,7 @@
 package dryrun.game.gui.misc.buttons;
 
+import dryrun.game.network.client.Client;
+
 public class RefreshButton extends Button {
 
 	public RefreshButton(float coordX, float coordY) {
@@ -10,7 +12,7 @@ public class RefreshButton extends Button {
 	@Override
 	public void pressed() {
 		// TODO Auto-generated method stub
-
+		Client.getClient().findServers();
 	}
 
 }
