@@ -23,7 +23,7 @@ import static dryrun.game.gui.misc.buttons.ButtonConstants.*;
 public abstract class Button implements Drawable, Updateable{
 	protected TextureHolder myTexture;
 	protected TextureHolder pressedTexture;
-	Text myText;
+	private Text myText;
 	protected boolean clicked=false;
 	private boolean previousMouseState=false;
 	
@@ -139,6 +139,12 @@ public abstract class Button implements Drawable, Updateable{
 	public double getAngle() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	public Text getMyText() {
+		return myText;
+	}
+	public void setMyText(Text myText) {
+		this.myText = myText;
 	}
 	
 

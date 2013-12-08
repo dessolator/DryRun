@@ -10,7 +10,7 @@ public abstract class Text{
 	TrueTypeFont myFont;
 	float coordX;
 	float coordY;
-	String myString;
+	private String myString;
 	Color myColor;
 
 	public Text(float coordX, float coordY, String myString, String myFont, Color myColor) {
@@ -29,6 +29,14 @@ public abstract class Text{
 			myString,
 			myColor);
 		
+	}
+
+	public String getMyString() {
+		return myString;
+	}
+
+	public void setMyString(String myString) {
+		this.myString = myString;
 	}
 	
 

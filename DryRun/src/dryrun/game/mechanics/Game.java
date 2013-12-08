@@ -97,7 +97,6 @@ static{
 				currentGameState= GameState.PlayMenu;
 				Client.disposeClient();
 				myLobbyMenu.setServerFrame(null);
-				Game.getMyLobbyMenu().setRefreshTriggered(false);
 				Game.getMyLobbyMenu().deleteServerButtons();
 				break;
 			case PlayMenu:

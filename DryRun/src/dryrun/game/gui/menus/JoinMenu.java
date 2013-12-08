@@ -1,7 +1,7 @@
 package dryrun.game.gui.menus;
 
+import dryrun.game.common.ServerButtonProto;
 import dryrun.game.engine.DrawObject;
-
 import dryrun.game.gui.menus.misc.frames.BasicFrame;
 import dryrun.game.gui.misc.buttons.*;
 
@@ -10,21 +10,27 @@ import java.util.*;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.newdawn.slick.opengl.TextureLoader;
+
 import java.io.*;
+
 import dryrun.game.gui.menus.misc.frames.*;
 import dryrun.game.mechanics.Game;
 
 import java.net.*;
+
 import static dryrun.game.gui.misc.buttons.ButtonConstants.*;
 
 public class JoinMenu extends Menu {
 	private Frame serverFrame;
-	private List<Button> serverButtons;
-	private boolean refreshTriggered;
+	private List<ServerButton> serverButtons;
+	private List<ServerButtonProto> buttonsToAdd;
+	private static float currentPosition = displayHeight/2;
 	
 	public JoinMenu() {
 		
 		myButtons = new ArrayList<Button>();
+		buttonsToAdd = Collections.synchronizedList(new ArrayList<ServerButtonProto>());
+		serverButtons = Collections.synchronizedList(new ArrayList<ServerButton>());
 		myFrame = new BasicFrame(Display.getWidth()/4,
 				Display.getHeight()/2,
 				Display.getWidth()/3,
@@ -45,10 +51,6 @@ public class JoinMenu extends Menu {
 	
 	public void render() {
 		Mouse.setGrabbed(false);//show the mouse
-		if (refreshTriggered) {
-			Game.getMyLobbyMenu().createServerButtons();
-			Game.getMyLobbyMenu().createServersFrame();
-		}
 		DrawObject.draw(this);//draw the background
 		if(myFrame!=null) myFrame.render();//draw the frame
 		if (myButtons!=null) {
@@ -62,6 +64,40 @@ public class JoinMenu extends Menu {
 			}
 		}
 	}
+	@Override
+	public void update(){
+		for(int j=0;j<buttonsToAdd.size();j++){
+			for(int i=0;i<serverButtons.size();i++){
+				if(serverButtons.get(i).getMyText().getMyString().equals(buttonsToAdd.get(j).t)){
+					break;
+				}
+				else{
+					serverButtons.add(new ServerButton(buttonsToAdd.get(j).x,buttonsToAdd.get(j).y,buttonsToAdd.get(j).t));
+					break;
+				}
+			}
+			if(serverButtons.isEmpty()){
+				serverButtons.add(new ServerButton(buttonsToAdd.get(j).x,buttonsToAdd.get(j).y,buttonsToAdd.get(j).t));
+			}
+		}
+		if(System.nanoTime()<(long)menuCalled+(long)125000000){	
+			Mouse.next();//if the cooldown hasn't passed flip to next mouse event.
+		}
+		else{
+			while(Mouse.next()){
+				if(myButtons!=null)
+					for(Button b:myButtons){
+						b.update();//else check if any of the buttons were pressed.
+					}
+				if(serverButtons!=null)
+					for(ServerButton s:serverButtons){
+						s.update();
+					}
+			}
+		}
+	}
+	
+	
 	
 	public void createServersFrame() {
 		serverFrame = new BasicFrame(3*displayWidth/4,
@@ -70,16 +106,7 @@ public class JoinMenu extends Menu {
 				displayHeight/3);
 	}
 	
-	public void createServerButtons() {
-		float currentPosition = displayHeight/2;
-		serverButtons = Collections.synchronizedList(new ArrayList<Button>());
-		List<InetAddress> l = Game.getPossibleServers();
-		for(int i = 0 ; i < l.size(); i++) {
-			String s=new String((l.get(i).getHostAddress()));
-			serverButtons.add(new ServerButton(3*displayWidth/4,currentPosition,s));
-			currentPosition -= 41;
-		}
-	}
+	
 	
 	
 	public void deleteServerButtons() {
@@ -94,12 +121,24 @@ public class JoinMenu extends Menu {
 		this.serverFrame = serverFrame;
 	}
 
-	public boolean isRefreshTriggered() {
-		return refreshTriggered;
-	}
-
-	public void setRefreshTriggered(boolean refreshTriggered) {
-		this.refreshTriggered = refreshTriggered;
+	public void loadServerList() {
+		List<InetAddress> l = Game.getPossibleServers();
+		for(int i = 0 ; i < l.size(); i++) {
+			String str=new String((l.get(i).getHostAddress()));
+			ServerButtonProto temp=new ServerButtonProto(3*displayWidth/4,currentPosition,str);
+			boolean contained=false;
+			for(int j=0;j<buttonsToAdd.size();j++){
+				if(buttonsToAdd.get(j).t.equals(str)){
+					contained=true;
+					break;
+				}
+			}
+			if(!contained){
+				buttonsToAdd.add(temp);
+				currentPosition -= 41;
+			}
+		}
+		
 	}
 		
 }

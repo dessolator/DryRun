@@ -18,7 +18,7 @@ public abstract class Menu implements Drawable, Updateable{
 	protected ArrayList<Button> myButtons;//The buttons in the menu
 	protected Texture background;//The menu background
 	protected Frame myFrame;//The menu frame (the thing around the buttons)
-	private static long menuCalled;//cooldown timer for menu buttons
+	protected static long menuCalled;//cooldown timer for menu buttons
 	
 	@Override
 	public void render() {
