@@ -116,9 +116,8 @@ public class Level implements Drawable,Updateable {
 
 	@Override
 	public void update() {
-		for(Player p :players){
-			p.update();
-		}
+		parseAndUpdate(net.receive());
+		myPlayer.update();
 		for(Wall w: walls){
 			w.update();
 		}
@@ -128,9 +127,14 @@ public class Level implements Drawable,Updateable {
 		for(Checkpoint c:checkpoints){
 			c.update();
 		}
-		GameObjectValues p[]=new GameObjectValues[3];
+		GameObjectValues p[]=new GameObjectValues[5];
 		p[0]=myPlayer.getMyValues();
 		net.send(p);
+	}
+
+	private void parseAndUpdate(GameObjectValues[] receive) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
