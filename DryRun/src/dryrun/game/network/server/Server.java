@@ -33,7 +33,9 @@ public class Server implements NetFramework {
 	}
 	
 	public static void disposeServer() throws IOException{
+		System.out.print("disposing server");
 		if (getServer()!=null){
+			System.out.println("- disposed");
 			getServer().killListenerThreads();
 			getServer().terminate();
 			server=null;
