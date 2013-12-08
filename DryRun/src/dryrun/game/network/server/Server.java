@@ -78,17 +78,17 @@ public class Server implements NetFramework {
 	
 	public void CreateClThread(int currentUdp, String split[], InetAddress ip,DataInputStream tcpin, DataOutputStream tcpout) throws SocketException{
 		myThreads.add(new ServerThread(currentUdp, split, ip,buffer,tcpin,tcpout));
-	}
+	} //Creatuib of a new ClientThread, this method is executed in the ConnectAcceptorThread.
 	
-	ConcurrentCircularBuffer getBuffer(){return buffer;}
+	ConcurrentCircularBuffer getBuffer(){return buffer;} //returns the buffer.
 	
 	@Override
 	public void send(GameObjectValues[] p) {
-		for(int i=0; i<myThreads.size();i++) myThreads.get(i).send(p);
+		for(int i=0; i<myThreads.size();i++) myThreads.get(i).send(p); //queues a packet for broadcasting to clients
 	}
 
 	@Override
-	public GameObjectValues[] receive() {
+	public GameObjectValues[] receive() { //returns a single clients gameObjectValues[]
 		try {
 			return buffer.pop();
 		} catch (InterruptedException e) {e.printStackTrace();}

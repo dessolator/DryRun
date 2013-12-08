@@ -9,7 +9,7 @@ import dryrun.game.common.GameObjectValues;
 import dryrun.game.network.GameStatePacket;
 
 public class ServerSender extends Thread {
-	private ServerThread myOwner;
+	private ServerThread myOwner; //remembering who's my daddy
 	
 	public ServerSender(ServerThread myOwn){myOwner=myOwn;}
 	
