@@ -96,6 +96,10 @@ public abstract class Menu implements Drawable, Updateable{
 		// TODO Auto-generated method stub
 		return 1;
 	}
+	@Override
+	public double getAngle() {
+		return 0;
+	}
 
 }
 

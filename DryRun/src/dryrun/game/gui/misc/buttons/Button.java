@@ -135,7 +135,12 @@ public abstract class Button implements Drawable, Updateable{
 		}
 		unClick();		
 	}
+	@Override
+	public double getAngle() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 
 }
->>>>>>> refs/remotes/origin/master
+

@@ -27,6 +27,7 @@ public class Player extends GameObject implements Movable {
 	private PlayerValues myStats;
 	private ArrayList<Timer> myTimers;
 	private String name;
+	private String carType;
 	private Vec2 velocity;
 	private static float speed=4;//implementirati kasnije
 	private double rangle = (double)(Math.PI/160);
@@ -35,9 +36,9 @@ public class Player extends GameObject implements Movable {
 
 
 	
-	public Player(String n, float x, float y, float dimx, float dimy){
+	public Player(String n, String carType, float x, float y, float dimx, float dimy){
 		super(x, y, dimx, dimy);
-
+		this.carType=carType;
 		name=n;	
 		myStats=new PlayerValues();
 		direction = new Vec2(1,0);
