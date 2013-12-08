@@ -21,7 +21,7 @@ public class RefreshButton extends Button {
 			new Thread(){
 				public void run(){
 					long startTime=System.nanoTime();
-					while(startTime-System.nanoTime()<3000000000l){
+					while(System.nanoTime()-startTime<3000000000l){
 						Game.getMyLobbyMenu().loadServerList();
 						try {
 							sleep(500);
