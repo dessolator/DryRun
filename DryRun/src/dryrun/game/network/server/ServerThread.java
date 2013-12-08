@@ -9,10 +9,9 @@ import dryrun.game.common.Player;
 import dryrun.game.network.ConcurrentCircularBuffer;
 import dryrun.game.network.GameStatePacket;
 import dryrun.game.network.NetFramework;
-import dryrun.game.network.Packet;
 import static dryrun.game.network.NetConstants.*;
 
-public class ServerThread implements NetFramework  {
+public class ServerThread  {
 	private DatagramSocket mySocket;
 	private Player myPlayer;
 	private InetAddress clientAddr;
@@ -37,15 +36,15 @@ public class ServerThread implements NetFramework  {
 	}
 	
 
-	@Override
 	public void send(GameObjectValues[] p) {
-		new GameStatePacket
+		mySendBuffer.push(p);
 	}
 
-	@Override
-	public ArrayList<GameStatePacket> receive() {
+	public GameObjectValues receive() {
+		try {
+			return myRecBuffer.pop()[0];
+		} catch (InterruptedException e) {e.printStackTrace();}
 		return null;
-		
 	}
 
 	public ConcurrentCircularBuffer getReceiveBuffer() {return myRecBuffer;}
@@ -53,5 +52,7 @@ public class ServerThread implements NetFramework  {
 	public ConcurrentCircularBuffer getSendBuffer() {return mySendBuffer;}
 
 	public InetAddress clientAddress() {return clientAddr;}
+	
+	public DatagramSocket getUDPSocket(){return mySocket;}
 
 }

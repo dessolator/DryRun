@@ -6,9 +6,9 @@ import java.io.IOException;
 import java.net.*;
 import java.util.ArrayList;
 
+import dryrun.game.common.GameObjectValues;
 import dryrun.game.network.GameStatePacket;
 import dryrun.game.network.NetFramework;
-import dryrun.game.network.Packet;
 import static dryrun.game.network.NetConstants.*;
 
 
@@ -66,15 +66,19 @@ public class Server implements NetFramework {
 	
 	
 	@Override
-	public void send(Packet p) {
-		// TODO Auto-generated method stub
-
+	public void send(GameObjectValues[] p) {
+		for(int i=0; i<myThreads.size();i++) myThreads.get(i).send(p);
 	}
 
 	@Override
-	public ArrayList<GameStatePacket> receive() {
-		// TODO Auto-generated method stub
-		return null;
+	public GameObjectValues[] receive() {
+		GameObjectValues a[];
+		a=new GameObjectValues [myThreads.size()];
+		for(int i=0; i<myThreads.size();i++)a[i]=myThreads.get(i).receive();
+		return a;
 	}
+
+	@Override
+	public DatagramSocket getUDPSocket() {return myUdpSocket;}
 
 }
