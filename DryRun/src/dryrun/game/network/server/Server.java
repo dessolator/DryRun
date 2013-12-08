@@ -25,12 +25,19 @@ public class Server implements NetFramework {
 
 	
 	
-	public ArrayList<Socket> mySockets=new ArrayList<Socket>(); //TODO make private
+	//public ArrayList<Socket> mySockets=new ArrayList<Socket>(); //TODO make private
 	
 	public static Server getServer(){  //Server getter
 		if (server==null) {server = new Server();System.out.println("Server Object created");}
 		return server;
 	}
+	
+	public static void disposeServer(){
+		if (getServer()!=null){
+			getServer().killListenerThreads();
+			server=null;
+			}
+		}
 	
 	
 	protected Server(){
@@ -90,14 +97,19 @@ public class Server implements NetFramework {
 			e.printStackTrace();
 		}
 		rrt.obavesti();
+		cat=null;
+		rrt=null;
 		}
 	
+
 	
-	public void CreateClThread(int currentUdp, String split[], InetAddress ip,DataInputStream tcpin, DataOutputStream tcpout) throws SocketException{
-		myThreads.add(new ServerThread(currentUdp, split, ip,buffer,tcpin,tcpout));
+	
+	public void CreateClThread(int currentUdp, String split[], InetAddress ip,DataInputStream tcpin, DataOutputStream tcpout, Socket s) throws SocketException{
+		myThreads.add(new ServerThread(currentUdp, split, ip,buffer,tcpin,tcpout, s));
 	} //Creation of a new ClientThread, this method is executed in the ConnectAcceptorThread.
 	
 	ConcurrentCircularBuffer getBuffer(){return buffer;} //returns the buffer.
+	
 	
 	@Override
 	public void send(GameObjectValues[] p) {

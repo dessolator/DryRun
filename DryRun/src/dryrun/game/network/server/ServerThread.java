@@ -10,6 +10,7 @@ public class ServerThread  { //Client instance on the server
 	private DatagramSocket mySocket; //I send my UDP data to the client here
 	private Player myPlayer;		//this is my clients player info (will be used by TCP?)
 	private InetAddress clientAddr; //My clients address
+	private Socket myTcpSocket;
 	
 	private ServerSender sender;	//This little guy creates a thread which does all the sending by puting data in the sendBuffer.
 	private ServerReceiver receiver;//And this little guy creates a thread which does all the receiving by picking data from the recBuffer.
@@ -21,11 +22,12 @@ public class ServerThread  { //Client instance on the server
 	
 
 
-	public ServerThread(int i, String[] split, InetAddress cladr, ConcurrentCircularBuffer srvB, DataInputStream tcpin, DataOutputStream tcpout) throws SocketException {
+	public ServerThread(int i, String[] split, InetAddress cladr, ConcurrentCircularBuffer srvB, DataInputStream tcpin, DataOutputStream tcpout, Socket s) throws SocketException {
 		mySocket=new DatagramSocket(i);
 		ldr = new ServerLoader(srvB,myRecBuffer);
 		myRecBuffer=new ConcurrentCircularBuffer();
 		mySendBuffer=new ConcurrentCircularBuffer();
+		myTcpSocket = s;
 		//TODO SET MYPLAYER DATA
 	}
 	

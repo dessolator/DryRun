@@ -28,7 +28,7 @@ public class ConnectAcceptorThread extends Thread {
 
 				if(myServer.numOfPlayers>=MAX_PLAYERS)continue; //if I reached maxplayers im gonna be stuck in an infinite loop
 				
-				myServer.mySockets.add(s=SrvSocket.accept()); //I block on this line if there's no connectReq
+				s=SrvSocket.accept(); //I block on this line if there's no connectReq
 				//TCP init
 				DataInputStream dis= new DataInputStream(s.getInputStream()); 
 				DataOutputStream dos= new DataOutputStream(s.getOutputStream());
@@ -42,7 +42,7 @@ public class ConnectAcceptorThread extends Thread {
 				if (split[0]==CONNECT_REQ && myServer.numOfPlayers<MAX_PLAYERS){ //if packet is CONNECT_REQ and I have not reached maxPlayers
 					myServer.numOfPlayers++; //then increase number of connected players
 					dos.writeBytes(CONNECT_ACC+"#"+currentUdp);//notify the client that it's request is accepted
-					myServer.CreateClThread(currentUdp++, split, s.getInetAddress(),dis,dos); //create a serverside thread which serves this client
+					myServer.CreateClThread(currentUdp++, split, s.getInetAddress(),dis,dos,s); //create a serverside thread which serves this client
 				}
 				else{
 					dos.writeBytes(CONNECT_REF);//TODO close s
