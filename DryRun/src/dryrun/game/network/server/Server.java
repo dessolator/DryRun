@@ -1,5 +1,7 @@
 package dryrun.game.network.server;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.*;
 import java.util.ArrayList;
@@ -74,8 +76,8 @@ public class Server implements NetFramework {
 	//to begin sending packets and start the loader.
 	
 	
-	public void CreateClThread(int currentUdp, String split[], InetAddress ip) throws SocketException{
-		myThreads.add(new ServerThread(currentUdp, split, ip,this));
+	public void CreateClThread(int currentUdp, String split[], InetAddress ip,DataInputStream tcpin, DataOutputStream tcpout) throws SocketException{
+		myThreads.add(new ServerThread(currentUdp, split, ip,buffer,tcpin,tcpout));
 	}
 	
 	ConcurrentCircularBuffer getBuffer(){return buffer;}

@@ -37,7 +37,7 @@ public class ConnectAcceptorThread extends Thread {
 				
 				if (split[0]==CONNECT_REQ && myServer.numOfPlayers<MAX_PLAYERS){ //TODO IMPLEMENT MAX PLAYERS
 					dos.writeBytes(CONNECT_ACC+"#"+currentUdp);//TODO allow getting playerName, PlayerCar
-					myServer.CreateClThread(currentUdp++, split, s.getInetAddress());
+					myServer.CreateClThread(currentUdp++, split, s.getInetAddress(),dis,dos);
 				}
 				else{
 					dos.writeBytes(CONNECT_REF);//TODO close s
