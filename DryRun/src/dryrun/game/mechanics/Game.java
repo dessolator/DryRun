@@ -78,17 +78,17 @@ static{
 				break;
 			case HostGameScreen:
 				currentGameState= GameState.PlayMenu;
+				Server.getServer().disposeServer();
 				break;
 			case HostJoinMenu:
 				currentGameState= GameState.PlayMenu;
-				Client.getClient().disposeClient();
 				break;
 			case JoinGame:
 				currentGameState= GameState.HostJoinMenu;
 				break;
 			case LobbyScreen:
 				currentGameState= GameState.PlayMenu;
-				Server.getServer().disposeServer();
+				Client.getClient().disposeClient();
 				break;
 			case PlayMenu:
 				currentGameState= GameState.MainMenu;

@@ -48,7 +48,7 @@ public class Client implements NetFramework {
  	private void closeSockets() {
  		udpSocket.close();
  		try {
-			if (tcpSocket.isConnected()) tcpSocket.close();
+			if (tcpSocket!=null) tcpSocket.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
