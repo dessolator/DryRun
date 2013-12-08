@@ -22,10 +22,12 @@ public class Player extends GameObject implements Movable {
 	private PlayerValues myStats;
 	private ArrayList<Timer> myTimers;
 	private String name;
+	private String car_Type;
 	
-	public Player(String n, float x, float y, float dimx, float dimy){
+	public Player(String n, String car, float x, float y, float dimx, float dimy){
 		super(x, y, dimx, dimy);
-		name=n;	
+		name = n;	
+		car_Type = car; 
 		myStats=new PlayerValues();
 		try {			
 			holder=new TextureHolder(TextureLoader.getTexture("PNG", new FileInputStream(new File("res/player.png"))),new Tex(0f,0f,1f,1f));
@@ -34,6 +36,15 @@ public class Player extends GameObject implements Movable {
 		} catch (IOException e){
 			e.printStackTrace();
 		}
+	}
+	public String getCar_Type() {
+		return car_Type;
+	}
+	public void setCar_Type(String car_Type) {
+		this.car_Type = car_Type;
+	}
+	public ArrayList<Timer> getMyTimers() {
+		return myTimers;
 	}
 	public String getName() {
 		return name;
