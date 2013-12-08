@@ -4,42 +4,35 @@ import java.io.IOException;
 import java.net.*;
 import java.util.ArrayList;
 
-import dryrun.game.common.GameObjectValues;
 import dryrun.game.common.Player;
-import dryrun.game.network.ConcurrentCircularBuffer;
 import dryrun.game.network.GameStatePacket;
 import dryrun.game.network.NetFramework;
 import dryrun.game.network.Packet;
 import static dryrun.game.network.NetConstants.*;
 
-public class ServerThread implements NetFramework  {
+public class ServerThread extends Thread implements NetFramework  {
 	private DatagramSocket mySocket;
+	InetAddress myAdr;
 	private Player myPlayer;
-	private InetAddress clientAddr;
 	
-	private ServerSender sender;
-	private ServerReceiver receiver;
-	private ConcurrentCircularBuffer myRecBuffer;
-	private ConcurrentCircularBuffer mySendBuffer;
+	
+	public ServerThread(int port){
+		try {
+			mySocket=new DatagramSocket(port);
+		} catch (SocketException e) {e.printStackTrace();}
+	}
 
-	public ServerThread(int i, String[] split, InetAddress cladr) throws SocketException {
-		mySocket=new DatagramSocket(i);
-		
-		myRecBuffer=new ConcurrentCircularBuffer();
-		mySendBuffer=new ConcurrentCircularBuffer();
-		//TODO SET MYPLAYER DATA
+	public ServerThread(int i, String[] split) {
+		// TODO Auto-generated constructor stub
 	}
-	
-	//public ConcurrentCircularBuffer getBuffer(){return myBuffer;}
-	
-	public void run(){
-		
-	}
-	
 
 	@Override
-	public void send(GameObjectValues[] p) {
-		new GameStatePacket
+	public void send(Packet p) {
+		byte x[]=p.write();
+		try {
+			mySocket.send(new DatagramPacket(x, x.length, myAdr, UDP_GSCL_PORT));
+		} catch (IOException e) {e.printStackTrace();}
+		
 	}
 
 	@Override
@@ -47,11 +40,5 @@ public class ServerThread implements NetFramework  {
 		return null;
 		
 	}
-
-	public ConcurrentCircularBuffer getReceiveBuffer() {return myRecBuffer;}
-	
-	public ConcurrentCircularBuffer getSendBuffer() {return mySendBuffer;}
-
-	public InetAddress clientAddress() {return clientAddr;}
 
 }

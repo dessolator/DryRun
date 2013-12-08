@@ -1,30 +1,22 @@
 package dryrun.game.mechanics;
 
 import org.lwjgl.opengl.Display;
-
 import static org.lwjgl.opengl.GL11.*;
-import dryrun.game.common.GameObjectValues;
-import dryrun.game.common.GameState;
-import dryrun.game.common.Player;
-import dryrun.game.common.PlayerValues;
+import dryrun.game.common.*;
 import dryrun.game.engine.Drawable;
-import dryrun.game.engine.Engine;
 import dryrun.game.engine.Updateable;
 import dryrun.game.gui.menus.*;
 
 
 
 public class Game {
-	/*
-	 * polja, meniji, staticki GameState, pocetni main menu
-	 */
 	private static MainMenu myMainMenu;
 	private static GameMenu myGameMenu;
 	private static boolean terminate=false;	
 	private static GameState currentGameState=GameState.MainMenu;
 	
 static{		
-	    //myLevel=new Level(currentLevel);
+		//myLevel=new Level(currentLevel);
 		myMainMenu=new MainMenu();
 		myMainMenu = new MainMenu();
 		myGameMenu = new GameMenu();
@@ -32,25 +24,21 @@ static{
 		//mySettingsMenu=new SettingsMenu();	
 	}
 	
-	public static void startGame(){		
+	public static void startGame(){
 //		Player p = new Player("Kesler",Display.getWidth()/2, Display.getHeight()/2, Display.getWidth()/6, Display.getHeight()/10);
 	
 		while((!Display.isCloseRequested())&& !terminate) {
-			if(Display.wasResized()){
-				Engine.resize();
-				//u GameMenu dodati refresh and update da bi se ponovo iscrtati 
-			}
 			glClear(GL_COLOR_BUFFER_BIT);
 			getCurrentUpdate().update();
 			getCurrentDraw().render();
-//			gameloop yet to be done 
-//			p.render();			
+			//gameloop yet to be done 
+//			p.render();
+			
 			Display.sync(60);
 			Display.update();			
 		}		
 	}
 	
-//	get current game state update
 	private static Updateable getCurrentUpdate() {
 		switch(currentGameState){
 			case MainMenu:
@@ -73,8 +61,6 @@ static{
 				return null;
 		}
 	}
-	
-//	navigate a game state back
 	public static void goBack(){
 		switch(currentGameState){
 			case MainMenu:
@@ -104,9 +90,9 @@ static{
 			default:
 				currentGameState= GameState.MainMenu;
 				break;
-			}
-	}
-//	na osnovu game state-a nacrtaj...
+}
+}
+
 	private static Drawable getCurrentDraw() {
 		switch(currentGameState){
 		case MainMenu:
@@ -129,7 +115,10 @@ static{
 			return null;
 	}
 	}
-//	getteri
+	public static void setTerminate(boolean b) {
+		terminate = true;
+	}
+	
 	public static boolean isTerminate() {
 		return terminate;
 	}

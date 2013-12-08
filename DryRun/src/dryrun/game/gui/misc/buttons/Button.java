@@ -93,7 +93,22 @@ public abstract class Button implements Drawable, Updateable{
 	public float getDimY() {
 		return dimY;
 	}
-	
+	public abstract void pressed();
+	@Override
+	public void update() {
+		if(Mouse.getEventButtonState()&&isInBounds(Mouse.getX(), Mouse.getY())){
+			click();
+			previousMouseState=true;
+			return;
+		}
+		if(previousMouseState&&!Mouse.getEventButtonState()&&isInBounds(Mouse.getX(), Mouse.getY()) && isClicked()){
+			pressed();
+			previousMouseState=false;
+			return;
+		}
+		unClick();
+		
+	}
 	@Override
 	public float getTexX1() {
 		if(clicked)
@@ -118,23 +133,5 @@ public abstract class Button implements Drawable, Updateable{
 			return pressedTexture.getMyCoords().getY2();
 		return myTexture.getMyCoords().getY2();
 	}
-	
-	public abstract void pressed();
-	
-	@Override
-	public void update() {
-		if(Mouse.getEventButtonState()&&isInBounds(Mouse.getX(), Mouse.getY())){
-			click();
-			previousMouseState=true;
-			return;
-		}
-		if(previousMouseState&&!Mouse.getEventButtonState()&&isInBounds(Mouse.getX(), Mouse.getY()) && isClicked()){
-			pressed();
-			previousMouseState=false;
-			return;
-		}
-		unClick();		
-	}
-	
 
 }

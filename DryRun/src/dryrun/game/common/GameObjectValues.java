@@ -12,9 +12,6 @@ import dryrun.game.network.Packet;
 import java.io.*;
 
 public class GameObjectValues implements Serializable{
-	/*
-	 * polja koordinate i dimenzije
-	 */
 	private float coordX;
 	private float coordY;
 	private float dimX;
@@ -49,8 +46,6 @@ public class GameObjectValues implements Serializable{
 		return (GameObjectValues) ois.readObject();
 	}
 */
-	
-	//setters and getters
 	public float getCoordX() {
 		return coordX;
 	}

@@ -24,18 +24,20 @@ public class GameMenu extends Menu {
 				Display.getHeight()/2 + Display.getHeight()/30));
 	
 		myButtons.add(new BackButton(Display.getWidth()/2,
-				Display.getHeight()/2 - Display.getHeight()/10 + Display.getHeight()/30));		
+				Display.getHeight()/2 - Display.getHeight()/10 + Display.getHeight()/30));
+
+		
+		
+		
+		
 		try {
 			background = TextureLoader.getTexture("PNG", new FileInputStream(new File("res/MenuBackground.png")));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}		
+		}
 		
 	}
 
-	
-	
 }
-
