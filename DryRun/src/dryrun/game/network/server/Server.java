@@ -32,13 +32,17 @@ public class Server implements NetFramework {
 		return server;
 	}
 	
-	public static void disposeServer(){
+	public static void disposeServer() throws IOException{
 		if (getServer()!=null){
 			getServer().killListenerThreads();
+			getServer().terminate();
 			server=null;
 			}
 		}
 	
+	public void terminate() throws IOException{
+		for(int i=1;i<myThreads.size();i++)myThreads.get(i).terminate();
+	}
 	
 	protected Server(){
 		try {

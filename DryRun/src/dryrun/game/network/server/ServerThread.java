@@ -38,7 +38,13 @@ public class ServerThread  { //Client instance on the server
 	
 	public void close() throws IOException{tis.close();tos.close();} //Close TCP
 	
-	public void terminate(){mySocket.close();ldr.interrupt(); sender.interrupt(); receiver.interrupt();} //Close UDP and interrupt threads
+	public void terminate() throws IOException{
+		mySocket.close();
+		ldr.interrupt();
+		sender.interrupt();
+		receiver.interrupt();
+		myTcpSocket.close();
+		} //Close UDP and interrupt threads
 	
 	public void send(GameObjectValues[] p) { //Queue data to be sent
 		mySendBuffer.push(p);
