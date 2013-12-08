@@ -16,12 +16,12 @@ public class RefreshReplyThread extends Thread {
 	public void run(){
 		byte x[] = new byte [100];
 		while(!interrupted()){ //while im not requested to stop
-			DatagramPacket receive = new DatagramPacket(x, 100); 
+			DatagramPacket receive = new DatagramPacket(x, x.length); 
 			try {
 				myUdpSocket.receive(receive);
 			} catch (IOException e) {e.printStackTrace(); break;}
 			String s = new String(receive.getData()).trim();
-			if(s==FIND_SERVER){//TODO string.equals
+			if(s.equals(FIND_SERVER)){//TODO string.equals
 				s=FIND_SERVER_R;
 				x=s.getBytes();
 				DatagramPacket reply = new DatagramPacket(x, x.length, receive.getAddress(), receive.getPort());
