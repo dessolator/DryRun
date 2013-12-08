@@ -24,9 +24,9 @@ public abstract class Menu implements Drawable, Updateable{
 		Mouse.setGrabbed(false);//show the mouse
 		DrawObject.draw(this);//draw the background
 		if(myFrame!=null) myFrame.render();//draw the frame
-		if (myButtons.size()!=0) {
+		if (myButtons!=null) {
 			for (Button b:myButtons)
-			b.render();//draw the buttons
+				if(b!=null)b.render();//draw the buttons
 		}
 	}
 	@Override
@@ -56,6 +56,7 @@ public abstract class Menu implements Drawable, Updateable{
 		}
 		else{
 			while(Mouse.next()){
+				if(myButtons!=null)
 				for(Button b:myButtons){
 					b.update();//else check if any of the buttons were pressed.
 				}

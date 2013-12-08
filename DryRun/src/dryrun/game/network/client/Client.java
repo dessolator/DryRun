@@ -22,7 +22,7 @@ public class Client implements NetFramework {
 	private ConcurrentCircularBuffer myBuffer;
 	private ConcurrentCircularBuffer receiveBuffer;
 	private Player player;
-	
+	private ArrayList<InetAddress> servers;
 	
 	
  	public Client() {
@@ -34,7 +34,7 @@ public class Client implements NetFramework {
 		
 	}
 	
-	public void findServers(ArrayList<InetAddress> servers) {
+	public void findServers() {
 		GetServers gServ = new GetServers(this,servers);
 		gServ.start();
 		
@@ -54,6 +54,10 @@ public class Client implements NetFramework {
 		cThread.start();
 		myBuffer = new ConcurrentCircularBuffer();
 		receiveBuffer = new ConcurrentCircularBuffer();
+	}
+	
+	public ArrayList<InetAddress> getPossibleServers() {
+		return servers;
 	}
 	
 	public void setServerPort(int p) {
@@ -88,7 +92,7 @@ public class Client implements NetFramework {
 		return udpSocket;
 	}
 
-	public void send(GameObjectValues [] p) {
+	public void send(GameObjectValues [] p) { 
 		myBuffer.push(p);
 	}
 	

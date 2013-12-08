@@ -1,8 +1,6 @@
 package dryrun.game.mechanics;
 
-import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
-
 import static org.lwjgl.opengl.GL11.*;
 import dryrun.game.common.*;
 import dryrun.game.engine.Drawable;
@@ -15,6 +13,7 @@ public class Game {
 	private static MainMenu myMainMenu;
 	private static GameMenu myGameMenu;
 	private static HostMenu myHostMenu;
+	private static JoinMenu myLobbyMenu;
 	private static boolean terminate=false;	
 	private static GameState currentGameState=GameState.MainMenu;
 	
@@ -24,20 +23,21 @@ static{
 		myMainMenu = new MainMenu();
 		myGameMenu = new GameMenu();
 		myHostMenu = new HostMenu();
+		myLobbyMenu = new JoinMenu();
 		
 		
 		//mySettingsMenu=new SettingsMenu();	
 	}
 	
 	public static void startGame(){
-		Player p = new Player("Kesler", "Lamburghini", Display.getWidth()/2, Display.getHeight()/2, Display.getWidth()/6, Display.getHeight()/10);
+//		Player p = new Player("Kesler",Display.getWidth()/2, Display.getHeight()/2, Display.getWidth()/6, Display.getHeight()/10);
 	
 		while((!Display.isCloseRequested())&& !terminate) {
 			glClear(GL_COLOR_BUFFER_BIT);
 			getCurrentUpdate().update();
 			getCurrentDraw().render();
 			//gameloop yet to be done 
-			p.render();
+//			p.render();
 			
 			Display.sync(60);
 			Display.update();			
@@ -57,7 +57,7 @@ static{
 			case JoinGame:
 				return null;
 			case LobbyScreen:
-				return null;
+				return myLobbyMenu;
 			case PlayMenu:
 				return myGameMenu ;
 			case SplashScreen:
@@ -111,7 +111,7 @@ static{
 		case JoinGame:
 			return null;
 		case LobbyScreen:
-			return null;
+			return myLobbyMenu;
 		case PlayMenu:
 			return myGameMenu;
 		case SplashScreen:
@@ -136,25 +136,4 @@ static{
 		Game.currentGameState = currentGameState;
 	}
 
-
-
-
-//	pokusaj kretanja objekata
-
-	private void playerInput(){
-		if(Keyboard.isKeyDown(Keyboard.KEY_A)||Keyboard.isKeyDown(Keyboard.KEY_LEFT)){//if left was pressed
-			
-		}
-		if(Keyboard.isKeyDown(Keyboard.KEY_D)|| Keyboard.isKeyDown(Keyboard.KEY_RIGHT)){//if right was pressed
-			
-		}
-		if(Keyboard.isKeyDown(Keyboard.KEY_W) ||Keyboard.isKeyDown(Keyboard.KEY_UP)){//if UP was pressed
-			
-		}
-		if(Keyboard.isKeyDown(Keyboard.KEY_D) ||Keyboard.isKeyDown(Keyboard.KEY_DOWN)){//if DOWN was pressed 
-			
-		}
-		
-	}
-	
 }
