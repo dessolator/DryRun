@@ -1,13 +1,11 @@
 package dryrun.game.network.server;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.*;
 import java.util.ArrayList;
 
 import dryrun.game.common.GameObjectValues;
-import dryrun.game.network.GameStatePacket;
+import dryrun.game.network.ConcurrentCircularBuffer;
 import dryrun.game.network.NetFramework;
 import static dryrun.game.network.NetConstants.*;
 
@@ -15,73 +13,72 @@ import static dryrun.game.network.NetConstants.*;
 public class Server implements NetFramework {
 	private DatagramSocket myUdpSocket;
 	private ArrayList<ServerThread> myThreads;
-	private boolean startGame=false;
-	
+	private RefreshReplyThread rrt=null;
+	private ConnectAcceptorThread cat=null;
+	private ConcurrentCircularBuffer buffer;
 	public int numOfPlayers=0;
 	
-	private static Server server=null;
+	private static Server server=null; //Server is unique
 
 	
 	
-	public ArrayList<Socket> mySockets=new ArrayList<Socket>();
+	public ArrayList<Socket> mySockets=new ArrayList<Socket>(); //TODO make private
 	
-	public static Server getServer(){
+	public static Server getServer(){  //Server getter
 		if (server==null) server = new Server();
 		return server;
 	}
 	
 	protected Server(){
 		try {
-			myUdpSocket= new DatagramSocket(UDPPORT);
-			myThreads = new ArrayList<ServerThread>();
-		} catch (IOException e) {e.printStackTrace();}
+			buffer=new ConcurrentCircularBuffer();
+			myUdpSocket= new DatagramSocket(UDPPORT);  	//Port for receiving and replying refresh requests
+			myThreads = new ArrayList<ServerThread>();	//array of objects which contain all info for communicating with a single connected client
+			
+		} catch (IOException e) {e.printStackTrace();}  
 		
 		
 	}
 	
-	private void getRefresh(){
-			RefreshReplyThread rrt = new RefreshReplyThread(myUdpSocket);
-			rrt.start();
-			
-			
+	private void getRefresh(){							//TODO make singleton!!
+			if(rrt==null){
+				rrt =new RefreshReplyThread(myUdpSocket);	//creates a thread which listens to refresh requests
+				rrt.start();								//and starts it
+			}
+			else System.out.print("Refresh thread already running.\n");
 		
-	}
-	
-	public void startGame(){startGame=true;notify();}
-	
-	public void host(){
-			getRefresh();
-			getConnect();//TODO make getConnect a singleton
-			while(!startGame)
-				try {
-					wait();
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			for(int i=0; i<myThreads.size();i++){myThreads.get(i).start();}
-			
 	}
 	
 	private void getConnect(){
-		ConnectAcceptorThread Cat=null;
-		try {
-			Cat = new ConnectAcceptorThread(this);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		if(Cat!=null){Cat.start();}
-		
+		if(cat==null){
+			try {
+				cat = new ConnectAcceptorThread(this);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			if(cat!=null){cat.start();}
+		}else{System.out.print("ConnectAcceptorThread.");}
 	}
+
+	
+	public void host(){						//function called by the game when a user requests to host a game
+			getRefresh();					//listen to refresh
+			getConnect();					//listen to connect requests
+			
+	}
+	
+	public void startGame(){for(int i=0; i<myThreads.size();i++)myThreads.get(i).start();} 
+	//this method is executed by the engine thread
+	//to begin sending packets and start the loader.
 	
 	
 	public void CreateClThread(int currentUdp, String split[], InetAddress ip) throws SocketException{
-		myThreads.add(new ServerThread(currentUdp, split, ip));
+		myThreads.add(new ServerThread(currentUdp, split, ip,this));
 	}
 	
-	
+	ConcurrentCircularBuffer getBuffer(){return buffer;}
 	
 	@Override
 	public void send(GameObjectValues[] p) {
@@ -90,10 +87,10 @@ public class Server implements NetFramework {
 
 	@Override
 	public GameObjectValues[] receive() {
-		GameObjectValues a[];
-		a=new GameObjectValues [myThreads.size()];
-		for(int i=0; i<myThreads.size();i++)a[i]=myThreads.get(i).receive();
-		return a;
+		try {
+			return buffer.pop();
+		} catch (InterruptedException e) {e.printStackTrace();}
+		return null;
 	}
 
 

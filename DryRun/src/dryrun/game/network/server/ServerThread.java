@@ -1,15 +1,9 @@
 package dryrun.game.network.server;
 
-import java.io.IOException;
 import java.net.*;
-import java.util.ArrayList;
-
 import dryrun.game.common.GameObjectValues;
 import dryrun.game.common.Player;
 import dryrun.game.network.ConcurrentCircularBuffer;
-import dryrun.game.network.GameStatePacket;
-import dryrun.game.network.NetFramework;
-import static dryrun.game.network.NetConstants.*;
 
 public class ServerThread  {
 	private DatagramSocket mySocket;
@@ -20,10 +14,14 @@ public class ServerThread  {
 	private ServerReceiver receiver;
 	private ConcurrentCircularBuffer myRecBuffer;
 	private ConcurrentCircularBuffer mySendBuffer;
+	private ServerLoader Ldr;
+	
+	
 
-	public ServerThread(int i, String[] split, InetAddress cladr) throws SocketException {
+
+	public ServerThread(int i, String[] split, InetAddress cladr, Server srv) throws SocketException {
 		mySocket=new DatagramSocket(i);
-		
+		Ldr = new ServerLoader(srv);
 		myRecBuffer=new ConcurrentCircularBuffer();
 		mySendBuffer=new ConcurrentCircularBuffer();
 		//TODO SET MYPLAYER DATA
@@ -31,16 +29,16 @@ public class ServerThread  {
 	
 	//public ConcurrentCircularBuffer getBuffer(){return myBuffer;}
 	
-	public void start(){sender.start();receiver.start();}
+	public void start(){sender.start();receiver.start(); Ldr.start();}
 	
 
 	public void send(GameObjectValues[] p) {
 		mySendBuffer.push(p);
 	}
 
-	public GameObjectValues receive() {
+	public GameObjectValues[] receive() {
 		try {
-			return myRecBuffer.pop()[0];
+			return myRecBuffer.pop();
 		} catch (InterruptedException e) {e.printStackTrace();}
 		return null;
 	}
