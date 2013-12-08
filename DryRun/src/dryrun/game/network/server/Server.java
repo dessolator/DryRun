@@ -18,6 +18,9 @@ public class Server implements NetFramework {
 	private RefreshReplyThread rrt=null;
 	private ConnectAcceptorThread cat=null;
 	private ConcurrentCircularBuffer buffer;
+	
+	private String name;
+	
 	public int numOfPlayers=0;
 	
 	private static Server server=null; //Server is unique
@@ -27,12 +30,17 @@ public class Server implements NetFramework {
 	public ArrayList<Socket> mySockets=new ArrayList<Socket>(); //TODO make private
 	
 	public static Server getServer(){  //Server getter
-		if (server==null) server = new Server();
+		if (server==null) server = new Server("");
 		return server;
 	}
 	
-	protected Server(){
+	public static Server getServer(String n){  //Server getter
+		if (server==null) server = new Server(n);
+		return server;
+	}
+	protected Server(String s){
 		try {
+			name=s;
 			buffer=new ConcurrentCircularBuffer();
 			myUdpSocket= new DatagramSocket(UDPPORT);  	//Port for receiving and replying refresh requests
 			myThreads = new ArrayList<ServerThread>();	//array of objects which contain all info for communicating with a single connected client
@@ -66,8 +74,11 @@ public class Server implements NetFramework {
 
 	
 	public void host(){						//function called by the game when a user requests to host a game
+			System.out.println("Creating refresh and connect SrvThreads");
 			getRefresh();					//listen to refresh
+			System.out.println("Created refresh thread");
 			getConnect();					//listen to connect requests
+			System.out.println("Created ConnectRef thread");
 			
 	}
 	
@@ -78,7 +89,7 @@ public class Server implements NetFramework {
 	
 	public void CreateClThread(int currentUdp, String split[], InetAddress ip,DataInputStream tcpin, DataOutputStream tcpout) throws SocketException{
 		myThreads.add(new ServerThread(currentUdp, split, ip,buffer,tcpin,tcpout));
-	} //Creatuib of a new ClientThread, this method is executed in the ConnectAcceptorThread.
+	} //Creation of a new ClientThread, this method is executed in the ConnectAcceptorThread.
 	
 	ConcurrentCircularBuffer getBuffer(){return buffer;} //returns the buffer.
 	
