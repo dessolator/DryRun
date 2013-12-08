@@ -32,12 +32,14 @@ public class Server implements NetFramework {
 		return server;
 	}
 	
-	public static void disposeServer() throws IOException{
+	public static void disposeServer(){
 		System.out.print("disposing server");
 		if (getServer()!=null){
 			System.out.println("- disposed");
 			getServer().killListenerThreads();
-			getServer().terminate();
+			try {
+				getServer().terminate();
+			} catch (IOException e) {e.printStackTrace();}
 			server=null;
 			}
 		}
