@@ -10,13 +10,13 @@ public class RefreshReplyThread extends Thread {
 	private DatagramSocket myUdpSocket;
 	
 	
-	public RefreshReplyThread(DatagramSocket UdpSocket){myUdpSocket=UdpSocket;}
+	public RefreshReplyThread(DatagramSocket UdpSocket){myUdpSocket=UdpSocket;} //this is Where I listen
 	
 	
 	public void run(){
 		byte x[] = new byte [100];
-		while(!interrupted()){
-			DatagramPacket receive = new DatagramPacket(x, 100);
+		while(!interrupted()){ //while im not requested to stop
+			DatagramPacket receive = new DatagramPacket(x, 100); 
 			try {
 				myUdpSocket.receive(receive);
 			} catch (IOException e) {e.printStackTrace(); break;}
