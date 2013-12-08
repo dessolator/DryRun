@@ -53,4 +53,5 @@ public class BasicFrame extends Frame {
 		return frame.getMyCoords().getY2();
 	}
 
+	
 }

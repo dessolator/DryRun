@@ -8,6 +8,7 @@ import dryrun.game.common.GameState;
 import dryrun.game.common.Player;
 import dryrun.game.common.PlayerValues;
 import dryrun.game.engine.Drawable;
+import dryrun.game.engine.Engine;
 import dryrun.game.engine.Updateable;
 import dryrun.game.gui.menus.*;
 
@@ -23,7 +24,7 @@ public class Game {
 	private static GameState currentGameState=GameState.MainMenu;
 	
 static{		
-		//myLevel=new Level(currentLevel);
+	    //myLevel=new Level(currentLevel);
 		myMainMenu=new MainMenu();
 		myMainMenu = new MainMenu();
 		myGameMenu = new GameMenu();
@@ -31,11 +32,14 @@ static{
 		//mySettingsMenu=new SettingsMenu();	
 	}
 	
-	public static void startGame(){
-		
+	public static void startGame(){		
 //		Player p = new Player("Kesler",Display.getWidth()/2, Display.getHeight()/2, Display.getWidth()/6, Display.getHeight()/10);
 	
 		while((!Display.isCloseRequested())&& !terminate) {
+			if(Display.wasResized()){
+				Engine.resize();
+				//u GameMenu dodati refresh and update da bi se ponovo iscrtati 
+			}
 			glClear(GL_COLOR_BUFFER_BIT);
 			getCurrentUpdate().update();
 			getCurrentDraw().render();

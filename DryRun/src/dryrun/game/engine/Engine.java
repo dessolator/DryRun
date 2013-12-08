@@ -17,12 +17,17 @@ public class Engine {
 	
 	public static void init(){		
 		try {
+			//init Display
+			Display.setResizable(true);
 			Display.setDisplayMode(new DisplayMode(WIDTH, HEIGHT));
-			Display.setFullscreen(fullscreen);//fullscreen? 
-			Display.create();//create Display
-			Mouse.create();			
-			Keyboard.create();
+			Display.setFullscreen(fullscreen);//fullscreen? 			
 			Display.setVSyncEnabled(vsync);//vsync ukljucen
+			
+			Display.create();//create Display
+			
+			Mouse.create();			
+			
+			Keyboard.create();
 			
 			
 			//inicijalzacija gl
@@ -49,6 +54,22 @@ public class Engine {
 		Display.destroy();
 		Mouse.destroy();
 		Keyboard.destroy();
+	}
+	
+	public static void resize(){
+		glViewport(0, 0, Display.getWidth(), Display.getHeight());
+		
+		//update matrica
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		glOrtho(0, WIDTH = Display.getWidth(),HEIGHT = Display.getHeight(), 0, 1, -1);
+		glMatrixMode(GL_MODELVIEW);
+		glClearColor(0, 0, 0, 1);
+		glDisable(GL_DEPTH_TEST);
+		glClear(GL_COLOR_BUFFER_BIT);
+		glColor3f(1, 0, 0);
+		glLoadIdentity();
+		glEnable(GL_TEXTURE_2D);
 	}
 
 }
