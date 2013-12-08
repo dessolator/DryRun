@@ -23,9 +23,11 @@ public abstract class Menu implements Drawable, Updateable{
 	public void render() {
 		Mouse.setGrabbed(false);//show the mouse
 		DrawObject.draw(this);//draw the background
-		myFrame.render();//draw the frame
-		for (Button b:myButtons)
+		if(myFrame!=null) myFrame.render();//draw the frame
+		if (myButtons.size()!=0) {
+			for (Button b:myButtons)
 			b.render();//draw the buttons
+		}
 	}
 	@Override
 	public Texture getTexture() {
