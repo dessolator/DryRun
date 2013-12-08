@@ -13,5 +13,10 @@ public class SettingsButton extends Button {
 	//	RaceGame.setCurrentGameState(GameState.SettingsScreen);
 		
 	}
+	@Override
+	public double getAngle() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 }

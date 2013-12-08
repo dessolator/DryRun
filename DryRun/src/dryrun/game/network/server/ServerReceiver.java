@@ -9,7 +9,7 @@ import dryrun.game.network.GameStatePacket;
 ;
 
 public class ServerReceiver extends Thread {
-	private ServerThread myOwner;
+	private ServerThread myOwner; //remembering who's my daddy
 
 	
 	public ServerReceiver(ServerThread myOwn) {
@@ -17,31 +17,31 @@ public class ServerReceiver extends Thread {
 	}
 	
 	public void run() {
-		while(!interrupted()) {
-			byte [] receiveByteArray = new byte[1500];
+		while(!interrupted()) { //while im not requested to end
+			byte [] receiveByteArray = new byte[1500]; //take a byte array
 			DatagramPacket receivePacket = null;
 			try {
-				receivePacket = new DatagramPacket(receiveByteArray,receiveByteArray.length);
+				receivePacket = new DatagramPacket(receiveByteArray,receiveByteArray.length); //prepare a packet for receiving
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
 			try {
-				myOwner.getUDPSocket().receive(receivePacket);
+				myOwner.getUDPSocket().receive(receivePacket); //actually receive
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 			
-			receiveByteArray = receivePacket.getData();
+			receiveByteArray = receivePacket.getData(); 
 			
-			GameStatePacket gsp = GameStatePacket.read(receiveByteArray);
+			GameStatePacket gsp = GameStatePacket.read(receiveByteArray); //convert bytes to a Packet
 			
-			GameObjectValues [] temp = gsp.get();
-			myOwner.getReceiveBuffer().push(temp);
+			GameObjectValues [] temp = gsp.get(); //get data from it
+			myOwner.getReceiveBuffer().push(temp); //push the data to the receiveBuffer
 			
 		}
 	}
 	
-	public void obavesti() {
+	public void obavesti() { //I wanna shut down method
 		myOwner.getUDPSocket().close();
 		interrupt();
 	}

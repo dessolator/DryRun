@@ -5,6 +5,7 @@ import java.util.*;
 import java.io.*;
 
 import dryrun.game.common.GameObjectValues;
+import dryrun.game.mechanics.Game;
 import dryrun.game.network.ConcurrentCircularBuffer;
 import dryrun.game.network.GameStatePacket;
 import dryrun.game.network.NetFramework;
@@ -22,10 +23,10 @@ public class Client implements NetFramework {
 	private ConcurrentCircularBuffer myBuffer;
 	private ConcurrentCircularBuffer receiveBuffer;
 	private Player player;
+	private static Client client = null;
 	
 	
-	
- 	public Client() {
+ 	protected Client() {
 		try {
 			udpSocket = new DatagramSocket();
 		} catch (SocketException e) {
@@ -34,8 +35,36 @@ public class Client implements NetFramework {
 		
 	}
 	
-	public void findServers(ArrayList<InetAddress> servers) {
-		GetServers gServ = new GetServers(this,servers);
+ 	public static void disposeClient() {
+ 		System.out.println("dispose");
+ 		if (getClient()!=null) {
+ 			System.out.println("dispose client");
+ 			getClient().closeSockets();
+ 			client = null;
+ 		}
+
+ 	}
+ 	
+ 	private void closeSockets() {
+ 		udpSocket.close();
+ 		try {
+			if (tcpSocket!=null) tcpSocket.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+ 		System.out.println("Sockets close");
+ 	}
+ 	
+ 	public static Client getClient() {
+ 		if(client==null) {
+ 			client = new Client();
+ 			System.out.println("Join created client.");
+ 		}
+ 		return client;
+ 	}
+ 	
+	public void findServers() {
+		GetServers gServ = new GetServers(this,Game.getPossibleServers());
 		gServ.start();
 		
 		DestroyGetServersThread destroy = new DestroyGetServersThread(gServ);
@@ -55,6 +84,7 @@ public class Client implements NetFramework {
 		myBuffer = new ConcurrentCircularBuffer();
 		receiveBuffer = new ConcurrentCircularBuffer();
 	}
+	
 	
 	public void setServerPort(int p) {
 		serverPort = p;
@@ -88,7 +118,7 @@ public class Client implements NetFramework {
 		return udpSocket;
 	}
 
-	public void send(GameObjectValues [] p) {
+	public void send(GameObjectValues [] p) { 
 		myBuffer.push(p);
 	}
 	

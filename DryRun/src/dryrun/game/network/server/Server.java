@@ -7,7 +7,7 @@ import java.net.*;
 import java.util.ArrayList;
 
 import dryrun.game.common.GameObjectValues;
-import dryrun.game.network.GameStatePacket;
+import dryrun.game.network.ConcurrentCircularBuffer;
 import dryrun.game.network.NetFramework;
 import static dryrun.game.network.NetConstants.*;
 
@@ -15,85 +15,121 @@ import static dryrun.game.network.NetConstants.*;
 public class Server implements NetFramework {
 	private DatagramSocket myUdpSocket;
 	private ArrayList<ServerThread> myThreads;
-	private boolean startGame=false;
+	private RefreshReplyThread rrt=null;
+	private ConnectAcceptorThread cat=null;
+	private ConcurrentCircularBuffer buffer;
 	
 	public int numOfPlayers=0;
 	
-	private static Server server=null;
+	private static Server server=null; //Server is unique
 
 	
 	
-	public ArrayList<Socket> mySockets=new ArrayList<Socket>();
+	//public ArrayList<Socket> mySockets=new ArrayList<Socket>(); //TODO make private
 	
-	public static Server getServer(){
-		if (server==null) server = new Server();
+	public static Server getServer(){  //Server getter
+		if (server==null) {server = new Server();System.out.println("Server Object created");}
 		return server;
+	}
+	
+	public static void disposeServer(){
+		System.out.print("disposing server");
+		if (getServer()!=null){
+			System.out.println("- disposed");
+			getServer().killListenerThreads();
+			try {
+				getServer().terminate();
+			} catch (IOException e) {e.printStackTrace();}
+			server=null;
+			}
+		}
+	
+	public void terminate() throws IOException{
+		for(int i=1;i<myThreads.size();i++)myThreads.get(i).terminate();
 	}
 	
 	protected Server(){
 		try {
-			myUdpSocket= new DatagramSocket(UDPPORT);
-			myThreads = new ArrayList<ServerThread>();
-		} catch (IOException e) {e.printStackTrace();}
+
+			buffer=new ConcurrentCircularBuffer();
+			myUdpSocket= new DatagramSocket(UDPPORT);  	//Port for receiving and replying refresh requests
+			myThreads = new ArrayList<ServerThread>();	//array of objects which contain all info for communicating with a single connected client
+			
+		} catch (IOException e) {e.printStackTrace();}  
 		
 		
 	}
 	
-	private void getRefresh(){
-			RefreshReplyThread rrt = new RefreshReplyThread(myUdpSocket);
-			rrt.start();
-			
-			
+	private void getRefresh(){							//TODO make singleton!!
+			if(rrt==null){
+				rrt =new RefreshReplyThread(myUdpSocket);	//creates a thread which listens to refresh requests
+				rrt.start();								//and starts it
+			}
+			else System.out.print("Refresh thread already running.\n");
 		
-	}
-	
-	public void startGame(){startGame=true;notify();}
-	
-	public void host(){
-			getRefresh();
-			getConnect();//TODO make getConnect a singleton
-			while(!startGame)
-				try {
-					wait();
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			for(int i=0; i<myThreads.size();i++){myThreads.get(i).start();}
-			
 	}
 	
 	private void getConnect(){
-		ConnectAcceptorThread Cat=null;
+		if(cat==null){
+			try {
+				cat = new ConnectAcceptorThread(this);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			if(cat!=null){cat.start();}
+		}else{System.out.print("ConnectAcceptorThread.");}
+	}
+
+	
+	public void host(){						//function called by the game when a user requests to host a game
+			System.out.println("Creating refresh and connect SrvThreads");
+			getRefresh();					//listen to refresh
+			System.out.println("Created refresh thread");
+			getConnect();					//listen to connect requests
+			System.out.println("Created ConnectRef thread");
+			
+	}
+	
+	public void startGame(){
+		for(int i=0; i<myThreads.size();i++)myThreads.get(i).start();} 
+	//this method is executed by the engine thread
+	//to begin sending packets and start the loader.
+	
+	public void killListenerThreads(){
 		try {
-			Cat = new ConnectAcceptorThread(this);
+			cat.obavesti();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		if(Cat!=null){Cat.start();}
-		
-	}
+		rrt.obavesti();
+		cat=null;
+		rrt=null;
+		}
+	
+
 	
 	
-	public void CreateClThread(int currentUdp, String split[], InetAddress ip) throws SocketException{
-		myThreads.add(new ServerThread(currentUdp, split, ip));
-	}
+	public void CreateClThread(int currentUdp, String split[], InetAddress ip,DataInputStream tcpin, DataOutputStream tcpout, Socket s) throws SocketException{
+		myThreads.add(new ServerThread(currentUdp, split, ip,buffer,tcpin,tcpout, s));
+	} //Creation of a new ClientThread, this method is executed in the ConnectAcceptorThread.
 	
+	ConcurrentCircularBuffer getBuffer(){return buffer;} //returns the buffer.
 	
 	
 	@Override
 	public void send(GameObjectValues[] p) {
-		for(int i=0; i<myThreads.size();i++) myThreads.get(i).send(p);
+		for(int i=0; i<myThreads.size();i++) myThreads.get(i).send(p); //queues a packet for broadcasting to clients
 	}
 
 	@Override
-	public GameObjectValues[] receive() {
-		GameObjectValues a[];
-		a=new GameObjectValues [myThreads.size()];
-		for(int i=0; i<myThreads.size();i++)a[i]=myThreads.get(i).receive();
-		return a;
+	public GameObjectValues[] receive() { //returns a single clients gameObjectValues[]
+		try {
+			return buffer.pop();
+		} catch (InterruptedException e) {e.printStackTrace();}
+		return null;
 	}
 
 

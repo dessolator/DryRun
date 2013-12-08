@@ -1,11 +1,16 @@
 package dryrun.game.common;
 
+import static org.lwjgl.opengl.GL11.*;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import org.jbox2d.common.Vec2;
+import org.jbox2d.dynamics.contacts.Velocity;
+import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.opengl.TextureLoader;
 
 import dryrun.game.objects.*;
@@ -22,13 +27,20 @@ public class Player extends GameObject implements Movable {
 	private PlayerValues myStats;
 	private ArrayList<Timer> myTimers;
 	private String name;
-	private String car_Type;
+	private Vec2 velocity;
+	private static float speed=4;//implementirati kasnije
+	private double rangle = (double)(Math.PI/160);
+	private double angle = Math.PI/2;
+	public Vec2 direction;
+
 	
-	public Player(String n, String car, float x, float y, float dimx, float dimy){
+	public Player(String n, float x, float y, float dimx, float dimy){
 		super(x, y, dimx, dimy);
-		name = n;	
-		car_Type = car; 
+		
+		name=n;	
 		myStats=new PlayerValues();
+		direction = new Vec2(1,0);
+		velocity = new Vec2(4, 0);
 		try {			
 			holder=new TextureHolder(TextureLoader.getTexture("PNG", new FileInputStream(new File("res/player.png"))),new Tex(0f,0f,1f,1f));
 		} catch (FileNotFoundException e) {			
@@ -36,15 +48,6 @@ public class Player extends GameObject implements Movable {
 		} catch (IOException e){
 			e.printStackTrace();
 		}
-	}
-	public String getCar_Type() {
-		return car_Type;
-	}
-	public void setCar_Type(String car_Type) {
-		this.car_Type = car_Type;
-	}
-	public ArrayList<Timer> getMyTimers() {
-		return myTimers;
 	}
 	public String getName() {
 		return name;
@@ -71,22 +74,73 @@ public class Player extends GameObject implements Movable {
 	}
 
 	public void update() {
-		// TODO Auto-generated method stub
-
 	}
+	
+	public void setDirectionR(){
+		float	oldx = direction.x;
+		float	oldy = direction.y;
+			direction.x=(float) ( oldx * Math.cos(-rangle) - oldy*Math.sin(-rangle));			
+			direction.y =(float)( oldx*Math.sin(-rangle) + oldy*Math.cos(-rangle));				
+	}
+	
+	
+	public void setdirectionL(){
+		float	oldx = direction.x;
+		float	oldy = direction.y;
+			direction.x=(float) ( oldx * Math.cos(rangle) - oldy*Math.sin(rangle));			
+			direction.y =(float)( oldx*Math.sin(rangle) + oldy*Math.cos(rangle)); 
+			}
 
 	@Override
 	public void move(int i) {
-		// TODO Auto-generated method stub
+		switch(i){
+		case 1:{//stisnuto desno
+			setDirectionR();
+			velocity.x = speed*direction.x;
+			velocity.y = speed*direction.y;
+			angle+=rangle;
+			break;			
+			}
+		
+		case -1:{//stisnuto levi
+			setdirectionL();
+			velocity.x = speed*direction.x;
+			velocity.y = speed*direction.y;
+			angle-=rangle;
+			break;				
+		}
+				
+			
+		case 2:{ //stisnuto napred ili strelica
+			myValues.setCoordX((myValues.getCoordX()+velocity.x));
+			myValues.setCoordY((myValues.getCoordY()+velocity.y));
+			//glPushMatrix();
+			glTranslatef(-myValues.getCoordX(), -myValues.getCoordY(), 0);
+			//glPopMatrix();
+			break;
+		}
+		case -2:{ //stisnuto nazad ili s
+			myValues.setCoordX((myValues.getCoordX()-velocity.x));
+			myValues.setCoordY((myValues.getCoordY()-velocity.y));
+		//	glPushMatrix();
+			glTranslatef(myValues.getCoordX(), myValues.getCoordY(), 0);
+			//glPopMatrix();
+			break;
+			}
+		}
 
 	}
 
 	@Override
 	public void render() {
 		DrawObject.draw(this);
+		
 
 	}
 	
+	public double getAngle() {
+		return angle;
+	}
 	public void setMyStats(GameObjectValues stats) {
 		myStats=(PlayerValues) stats;
 	}
@@ -101,7 +155,24 @@ public class Player extends GameObject implements Movable {
 			 myTimers.get(i).getMyBonus().undo();
 			 myTimers.remove(i--);
 			}		
-		}		
-	}
+		}	
+	}	
+		
+//		pokusaj kretanja objekata
 
+	public void playerInput(){
+			if(Keyboard.isKeyDown(Keyboard.KEY_A)||Keyboard.isKeyDown(Keyboard.KEY_LEFT)){//if left was pressed
+				this.move(-1);
+			}
+			if(Keyboard.isKeyDown(Keyboard.KEY_D)|| Keyboard.isKeyDown(Keyboard.KEY_RIGHT)){//if right was pressed
+				this.move(+1);
+			}
+			if(Keyboard.isKeyDown(Keyboard.KEY_W) ||Keyboard.isKeyDown(Keyboard.KEY_UP)){//if UP was pressed
+				this.move(2);
+			}
+			if(Keyboard.isKeyDown(Keyboard.KEY_D) ||Keyboard.isKeyDown(Keyboard.KEY_DOWN)){//if DOWN was pressed 
+				this.move(-2);
+			}
+			
+		}
 }

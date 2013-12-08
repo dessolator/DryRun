@@ -11,14 +11,15 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class GetServers extends Thread {
 	private DatagramSocket comm;
 	private boolean endOfThread = false;
-	private ArrayList<InetAddress> listOfAddress;
+	private List<InetAddress> listOfAddress;
 	private Client client;
 	
-	public GetServers(Client cli, ArrayList<InetAddress> lOfAdd) {
+	public GetServers(Client cli, List<InetAddress> lOfAdd) {
 		client = cli;
 		listOfAddress = lOfAdd;
 		try {
@@ -38,16 +39,17 @@ public class GetServers extends Thread {
 				e.printStackTrace();
 			}
 			try {
-				client.getUDPSocket().send(broadcastMessage);
+				comm.send(broadcastMessage);
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
-		
+			System.out.println(new String(broadcastMessage.getData()).trim());
+			
 			while (!endOfThread) {
 				byte [] receiveMessage = new byte[20];
 				DatagramPacket receivePacket = new DatagramPacket(receiveMessage,receiveMessage.length);
 				try {
-					client.getUDPSocket().receive(receivePacket);
+					comm.receive(receivePacket);
 				} catch (IOException e) {
 					endOfThread = true;
 					continue;
@@ -55,15 +57,18 @@ public class GetServers extends Thread {
 				
 				String server = new String(receivePacket.getData()).trim();
 				if (server.equals(FIND_SERVER_R)) {
+					if (receivePacket.getAddress()==null) System.out.println("paket null");
+					if (listOfAddress == null) System.out.println("listOfAddress null");
+					System.out.println(FIND_SERVER_R);
 					listOfAddress.add(receivePacket.getAddress());
 				}
 			
 			}
+			
 		}
 	}
 	
 	public void obavesti() {
 		comm.close();
-		interrupt();
 	}
 }

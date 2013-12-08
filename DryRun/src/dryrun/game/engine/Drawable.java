@@ -24,6 +24,6 @@ public interface Drawable {
 	
 	public float getTexY2();
 	
-	
+	public double getAngle();
 
 }

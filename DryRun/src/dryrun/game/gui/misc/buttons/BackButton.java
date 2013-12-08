@@ -15,4 +15,10 @@ public class BackButton extends Button {
 		Game.goBack();
 	}
 
+	@Override
+	public double getAngle() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

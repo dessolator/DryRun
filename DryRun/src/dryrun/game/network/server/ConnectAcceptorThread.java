@@ -12,9 +12,9 @@ import java.io.IOException;
 import java.net.*;
 
 public class ConnectAcceptorThread extends Thread {
-	private Server myServer;
+	private Server myServer;  //myDaddy
 	private ServerSocket SrvSocket;
-	private static volatile int currentUdp = 50010;
+	private static volatile int currentUdp = 50010; //assigning UDP from 50010
 	
 	public ConnectAcceptorThread (Server srv) throws IOException{
 		myServer=srv; SrvSocket= new ServerSocket(TCPPORT);
@@ -25,19 +25,24 @@ public class ConnectAcceptorThread extends Thread {
 			try {
 				byte[] b=null;
 				Socket s;
-				//TODO if number of players exceeded
-				myServer.mySockets.add(s=SrvSocket.accept());
-				myServer.numOfPlayers++;
-				DataInputStream dis= new DataInputStream(s.getInputStream());
+
+				if(myServer.numOfPlayers>=MAX_PLAYERS)continue; //if I reached maxplayers im gonna be stuck in an infinite loop
+				
+				s=SrvSocket.accept(); //I block on this line if there's no connectReq
+				//TCP init
+				DataInputStream dis= new DataInputStream(s.getInputStream()); 
 				DataOutputStream dos= new DataOutputStream(s.getOutputStream());
-				dis.readFully(b=new byte[dis.available()]);										//TODO string split
-				String str=new String(b);
+				
+				//reading TCP packet.
+				dis.readFully(b=new byte[dis.available()]);										
+				String str=new String(b); //splitting packet
 				String split[]=str.split("#+"); //NAME MUST NOT BE #
 				
 				
-				if (split[0]==CONNECT_REQ && myServer.numOfPlayers<MAX_PLAYERS){ //TODO IMPLEMENT MAX PLAYERS
-					dos.writeBytes(CONNECT_ACC+"#"+currentUdp);//TODO allow getting playerName, PlayerCar
-					myServer.CreateClThread(currentUdp++, split, s.getInetAddress());
+				if (split[0]==CONNECT_REQ && myServer.numOfPlayers<MAX_PLAYERS){ //if packet is CONNECT_REQ and I have not reached maxPlayers
+					myServer.numOfPlayers++; //then increase number of connected players
+					dos.writeBytes(CONNECT_ACC+"#"+currentUdp);//notify the client that it's request is accepted
+					myServer.CreateClThread(currentUdp++, split, s.getInetAddress(),dis,dos,s); //create a serverside thread which serves this client
 				}
 				else{
 					dos.writeBytes(CONNECT_REF);//TODO close s
@@ -50,7 +55,7 @@ public class ConnectAcceptorThread extends Thread {
 		
 	}
 	
-	public void Obavesti() throws IOException{SrvSocket.close();interrupt();}
+	public void obavesti() throws IOException{SrvSocket.close();interrupt();}
 	
 }
 

@@ -1,6 +1,7 @@
 package dryrun.game.gui.misc.buttons;
 
 import dryrun.game.mechanics.Game;
+import dryrun.game.network.server.Server;
 import dryrun.game.common.*;
 public class HostButton extends Button {
 
@@ -13,6 +14,8 @@ public class HostButton extends Button {
 	public void pressed() {
 		// TODO Auto-generated method stub
 		Game.setCurrentGameState(GameState.HostGameScreen);
+		Server.getServer();
+		Server.getServer().host();
 	}
 
 }

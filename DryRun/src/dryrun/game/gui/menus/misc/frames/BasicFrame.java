@@ -52,5 +52,10 @@ public class BasicFrame extends Frame {
 		// TODO Auto-generated method stub
 		return frame.getMyCoords().getY2();
 	}
+	@Override
+	public double getAngle() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 }

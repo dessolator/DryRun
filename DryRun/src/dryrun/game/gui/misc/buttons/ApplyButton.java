@@ -30,6 +30,12 @@ public class ApplyButton extends Button {
 
 	}
 
+	@Override
+	public double getAngle() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 
 
 

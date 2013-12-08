@@ -94,4 +94,10 @@ public class Level implements Drawable {
 		return 0;
 	}
 
+	@Override
+	public double getAngle() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

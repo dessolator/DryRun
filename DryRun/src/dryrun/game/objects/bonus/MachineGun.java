@@ -24,7 +24,14 @@ public class MachineGun extends Bonus {
 		
 	}
 
-	public void undo(){}	
+	public void undo(){}
+
+
+	@Override
+	public double getAngle() {
+		// TODO Auto-generated method stub
+		return 0;
+	}	
 
 }
 

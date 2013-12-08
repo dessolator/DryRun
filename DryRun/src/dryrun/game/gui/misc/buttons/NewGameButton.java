@@ -18,5 +18,11 @@ public class NewGameButton extends Button {
 		Game.setCurrentGameState(GameState.PlayMenu);//TODO temporary
 	}
 
+	@Override
+	public double getAngle() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 
 }

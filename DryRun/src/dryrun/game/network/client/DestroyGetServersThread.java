@@ -8,8 +8,9 @@ public class DestroyGetServersThread extends Thread {
 	}
 	
 	public void run() {
-		long currentTime = System.currentTimeMillis();
-		while (System.currentTimeMillis()-currentTime < 3000000000l) {}
+		long currentTime = System.nanoTime();
+		while (System.nanoTime()-currentTime < 3000000000l) {}
 		thread.obavesti();
+		thread.interrupt();
 	}
 }

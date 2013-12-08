@@ -12,5 +12,11 @@ public class ExitGameButton extends Button {
 		Game.setTerminate(true);
 	}
 
+	@Override
+	public double getAngle() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 
 }
