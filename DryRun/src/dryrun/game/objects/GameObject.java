@@ -1,10 +1,14 @@
 package dryrun.game.objects;
+import org.jbox2d.callbacks.ContactImpulse;
+import org.jbox2d.callbacks.ContactListener;
+import org.jbox2d.collision.Manifold;
+import org.jbox2d.dynamics.contacts.Contact;
 import org.newdawn.slick.opengl.Texture;
 
 import dryrun.game.engine.*;
 import dryrun.game.common.*;
 
-public abstract class GameObject implements Drawable,Updateable{
+public abstract class GameObject implements Drawable,Updateable,ContactListener,Collidable{
 	protected TextureHolder holder;
 	protected GameObjectValues myValues;
 	
@@ -102,6 +106,34 @@ public abstract class GameObject implements Drawable,Updateable{
 	public float getTexY2() {
 		
 		return holder.getMyCoords().getY2();
+	}
+	@Override
+	public void beginContact(Contact arg0) {
+	}
+	@Override
+	public void endContact(Contact arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void postSolve(Contact arg0, ContactImpulse arg1) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void preSolve(Contact arg0, Manifold arg1) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void render() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

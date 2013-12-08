@@ -20,14 +20,15 @@ import dryrun.game.objects.TextureHolder;
 import dryrun.game.objects.bonus.Bonus;
 
 public class Level implements Drawable,Updateable {
-	TextureHolder th;
-	ArrayList<Player> players;
-	ArrayList<Wall> walls;
-	ArrayList<Bonus> bonuses;
-	ArrayList<Checkpoint> checkpoints;
-	NetFramework net;
-	Player myPlayer;
-	String myName;
+	protected TextureHolder th;
+	protected ArrayList<Player> players;
+	protected ArrayList<Wall> walls;
+	protected ArrayList<Bonus> bonuses;
+	protected ArrayList<Checkpoint> checkpoints;
+	protected NetFramework net;
+	protected Player myPlayer;
+	protected String myName;
+	protected Player bonusPlayer;
 	
 	public Level(String myName){
 		try {
@@ -132,7 +133,7 @@ public class Level implements Drawable,Updateable {
 		net.send(p);
 	}
 
-	private void parseAndUpdate(GameObjectValues[] receive) {
+	protected void parseAndUpdate(GameObjectValues[] receive) {
 		// TODO Auto-generated method stub
 		
 	}
