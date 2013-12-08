@@ -19,8 +19,6 @@ public class Server implements NetFramework {
 	private ConnectAcceptorThread cat=null;
 	private ConcurrentCircularBuffer buffer;
 	
-	private String name;
-	
 	public int numOfPlayers=0;
 	
 	private static Server server=null; //Server is unique
@@ -30,17 +28,14 @@ public class Server implements NetFramework {
 	public ArrayList<Socket> mySockets=new ArrayList<Socket>(); //TODO make private
 	
 	public static Server getServer(){  //Server getter
-		if (server==null) {server = new Server("");System.out.println("Server Object created");}
+		if (server==null) {server = new Server();System.out.println("Server Object created");}
 		return server;
 	}
 	
-	public static Server getServer(String n){  //Server getter
-		if (server==null) {server = new Server(n);System.out.println("Server Object created");}
-		return server;
-	}
-	protected Server(String s){
+	
+	protected Server(){
 		try {
-			name=s;
+
 			buffer=new ConcurrentCircularBuffer();
 			myUdpSocket= new DatagramSocket(UDPPORT);  	//Port for receiving and replying refresh requests
 			myThreads = new ArrayList<ServerThread>();	//array of objects which contain all info for communicating with a single connected client
