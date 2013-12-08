@@ -2,9 +2,7 @@ package dryrun.game.mechanics;
 
 import org.lwjgl.opengl.Display;
 import static org.lwjgl.opengl.GL11.*;
-import dryrun.game.common.GameObjectValues;
-import dryrun.game.common.GameState;
-import dryrun.game.common.PlayerValues;
+import dryrun.game.common.*;
 import dryrun.game.engine.Drawable;
 import dryrun.game.engine.Updateable;
 import dryrun.game.gui.menus.*;
@@ -117,7 +115,10 @@ static{
 			return null;
 	}
 	}
-
+	public static void setTerminate(boolean b) {
+		terminate = true;
+	}
+	
 	public static boolean isTerminate() {
 		return terminate;
 	}

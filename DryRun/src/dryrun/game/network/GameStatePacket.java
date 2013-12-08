@@ -19,8 +19,6 @@ public class GameStatePacket  {
 		myObjects = new GameObjectValues[MAX_PLAYERS-1];
 	}
 	
-	public GameStatePacket(GameObjectValues[] array){myObjects=array;}
-	
 	public void put(GameObjectValues gov){
 		if (i<MAX_PLAYERS-1) myObjects[i++] = gov;
 	}
