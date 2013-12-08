@@ -8,10 +8,7 @@ import dryrun.game.objects.GameObject;
 public abstract class Wall extends GameObject implements Collidable{
 
 	public Wall(float x, float y, float dimx, float dimy){
-		getMyValues().setCoordX(x);
-		getMyValues().setCoordY(y);
-		getMyValues().setDimX(dimx);
-		getMyValues().setDimY(dimy);		
+		super(x, y, dimx, dimy);		
 	}
 	
 	@Override

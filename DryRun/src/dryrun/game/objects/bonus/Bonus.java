@@ -10,9 +10,8 @@ public abstract class Bonus extends GameObject implements Collidable, Drawable {
 	private static final int MAX_ACTIVE_BONUSES_PER_LEVEL=6;
 	private static int bonusesSpawned=0;
 
-	public Bonus(float coordX, float coordY) {
-		this.getMyValues().setCoordX(coordX);
-		this.getMyValues().setCoordY(coordY);
+	public Bonus(float x, float y, float dimx, float dimy) {
+		super(x, y, dimx, dimy);
 	}
 	
 	@Override

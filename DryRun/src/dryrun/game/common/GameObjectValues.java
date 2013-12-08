@@ -8,7 +8,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 import dryrun.game.network.GameStatePacket;
-import dryrun.game.network.Packet;
+
 import java.io.*;
 
 public class GameObjectValues implements Serializable{
