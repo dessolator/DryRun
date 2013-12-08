@@ -8,7 +8,6 @@ import dryrun.game.common.GameObjectValues;
 import dryrun.game.network.ConcurrentCircularBuffer;
 import dryrun.game.network.GameStatePacket;
 import dryrun.game.network.NetFramework;
-import dryrun.game.network.Packet;
 import static dryrun.game.network.NetConstants.*;
 
 import dryrun.game.common.Player;

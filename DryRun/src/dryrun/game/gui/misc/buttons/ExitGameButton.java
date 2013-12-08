@@ -1,5 +1,5 @@
 package dryrun.game.gui.misc.buttons;
-
+import dryrun.game.mechanics.*;
 
 public class ExitGameButton extends Button {
 
@@ -9,7 +9,7 @@ public class ExitGameButton extends Button {
 
 	@Override
 	public void pressed() {
-	//	RaceGame.setTerminate(true);
+		Game.setTerminate(true);
 	}
 
 

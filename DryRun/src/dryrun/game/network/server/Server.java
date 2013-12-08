@@ -6,26 +6,31 @@ import java.io.IOException;
 import java.net.*;
 import java.util.ArrayList;
 
+import dryrun.game.common.GameObjectValues;
 import dryrun.game.network.GameStatePacket;
 import dryrun.game.network.NetFramework;
-import dryrun.game.network.Packet;
 import static dryrun.game.network.NetConstants.*;
 
 
 public class Server implements NetFramework {
 	private DatagramSocket myUdpSocket;
 	private ArrayList<ServerThread> myThreads;
+	private boolean startGame=false;
 	
 	public int numOfPlayers=0;
 	
-	
-	private static volatile int refreshThreadExists = 0;
-	private static volatile int killRefreshThread = 0;
+	private static Server server=null;
+
 	
 	
 	public ArrayList<Socket> mySockets=new ArrayList<Socket>();
 	
-	public Server(){
+	public static Server getServer(){
+		if (server==null) server = new Server();
+		return server;
+	}
+	
+	protected Server(){
 		try {
 			myUdpSocket= new DatagramSocket(UDPPORT);
 			myThreads = new ArrayList<ServerThread>();
@@ -39,13 +44,23 @@ public class Server implements NetFramework {
 			rrt.start();
 			
 			
-		}
+		
 	}
 	
+	public void startGame(){startGame=true;notify();}
 	
 	public void host(){
 			getRefresh();
 			getConnect();//TODO make getConnect a singleton
+			while(!startGame)
+				try {
+					wait();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			for(int i=0; i<myThreads.size();i++){myThreads.get(i).start();}
+			
 	}
 	
 	private void getConnect(){
@@ -62,22 +77,26 @@ public class Server implements NetFramework {
 	}
 	
 	
-	public void CreateClThread(int currentUdp, String split[]){
-		myThreads.add(new ServerThread(currentUdp, split));
+	public void CreateClThread(int currentUdp, String split[], InetAddress ip) throws SocketException{
+		myThreads.add(new ServerThread(currentUdp, split, ip));
 	}
 	
 	
 	
 	@Override
-	public void send(Packet p) {
-		// TODO Auto-generated method stub
-
+	public void send(GameObjectValues[] p) {
+		for(int i=0; i<myThreads.size();i++) myThreads.get(i).send(p);
 	}
 
 	@Override
-	public ArrayList<GameStatePacket> receive() {
-		// TODO Auto-generated method stub
-		return null;
+	public GameObjectValues[] receive() {
+		GameObjectValues a[];
+		a=new GameObjectValues [myThreads.size()];
+		for(int i=0; i<myThreads.size();i++)a[i]=myThreads.get(i).receive();
+		return a;
 	}
+
+
+
 
 }

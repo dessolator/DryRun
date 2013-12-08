@@ -1,10 +1,10 @@
 package dryrun.game.mechanics;
 
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
+
 import static org.lwjgl.opengl.GL11.*;
-import dryrun.game.common.GameObjectValues;
-import dryrun.game.common.GameState;
-import dryrun.game.common.PlayerValues;
+import dryrun.game.common.*;
 import dryrun.game.engine.Drawable;
 import dryrun.game.engine.Updateable;
 import dryrun.game.gui.menus.*;
@@ -14,27 +14,30 @@ import dryrun.game.gui.menus.*;
 public class Game {
 	private static MainMenu myMainMenu;
 	private static GameMenu myGameMenu;
+	private static HostMenu myHostMenu;
 	private static boolean terminate=false;	
 	private static GameState currentGameState=GameState.MainMenu;
 	
 static{		
 		//myLevel=new Level(currentLevel);
-		myMainMenu=new MainMenu();
+	
 		myMainMenu = new MainMenu();
 		myGameMenu = new GameMenu();
+		myHostMenu = new HostMenu();
+		
 		
 		//mySettingsMenu=new SettingsMenu();	
 	}
 	
 	public static void startGame(){
-//		Player p = new Player("Kesler",Display.getWidth()/2, Display.getHeight()/2, Display.getWidth()/6, Display.getHeight()/10);
+		Player p = new Player("Kesler",Display.getWidth()/2, Display.getHeight()/2, Display.getWidth()/6, Display.getHeight()/10);
 	
 		while((!Display.isCloseRequested())&& !terminate) {
 			glClear(GL_COLOR_BUFFER_BIT);
 			getCurrentUpdate().update();
 			getCurrentDraw().render();
 			//gameloop yet to be done 
-//			p.render();
+			p.render();
 			
 			Display.sync(60);
 			Display.update();			
@@ -48,7 +51,7 @@ static{
 			case Game:
 				return null;
 			case HostGameScreen:
-				return null;
+				return myHostMenu;
 			case HostJoinMenu:
 				return null;
 			case JoinGame:
@@ -102,7 +105,7 @@ static{
 		case Game:
 			return myGameMenu;
 		case HostGameScreen:
-			return null;
+			return myHostMenu;
 		case HostJoinMenu:
 			return null;
 		case JoinGame:
@@ -117,7 +120,10 @@ static{
 			return null;
 	}
 	}
-
+	public static void setTerminate(boolean b) {
+		terminate = true;
+	}
+	
 	public static boolean isTerminate() {
 		return terminate;
 	}
@@ -130,4 +136,25 @@ static{
 		Game.currentGameState = currentGameState;
 	}
 
+
+
+
+//	pokusaj kretanja objekata
+
+	private void playerInput(){
+		if(Keyboard.isKeyDown(Keyboard.KEY_A)||Keyboard.isKeyDown(Keyboard.KEY_LEFT)){//if left was pressed
+			
+		}
+		if(Keyboard.isKeyDown(Keyboard.KEY_D)|| Keyboard.isKeyDown(Keyboard.KEY_RIGHT)){
+			
+		}
+		if(Keyboard.isKeyDown(Keyboard.KEY_W) ||Keyboard.isKeyDown(Keyboard.KEY_UP)){
+			
+		}
+		if(Keyboard.isKeyDown(Keyboard.KEY_D) ||Keyboard.isKeyDown(Keyboard.KEY_DOWN)){
+			
+		}
+		
+	}
+	
 }
