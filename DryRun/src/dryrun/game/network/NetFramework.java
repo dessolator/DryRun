@@ -12,7 +12,5 @@ public interface NetFramework {
 	public void send(GameObjectValues [] p);
 	
 	public GameObjectValues[] receive();
-	
-	public DatagramSocket getUDPSocket();
 
 }
