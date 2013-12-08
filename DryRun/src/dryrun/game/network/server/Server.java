@@ -77,9 +77,20 @@ public class Server implements NetFramework {
 			
 	}
 	
-	public void startGame(){for(int i=0; i<myThreads.size();i++)myThreads.get(i).start();} 
+	public void startGame(){
+		for(int i=0; i<myThreads.size();i++)myThreads.get(i).start();} 
 	//this method is executed by the engine thread
 	//to begin sending packets and start the loader.
+	
+	public void killListenerThreads(){
+		try {
+			cat.obavesti();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		rrt.obavesti();
+		}
 	
 	
 	public void CreateClThread(int currentUdp, String split[], InetAddress ip,DataInputStream tcpin, DataOutputStream tcpout) throws SocketException{

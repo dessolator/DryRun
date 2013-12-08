@@ -55,7 +55,7 @@ public class ConnectAcceptorThread extends Thread {
 		
 	}
 	
-	public void Obavesti() throws IOException{SrvSocket.close();interrupt();}
+	public void obavesti() throws IOException{SrvSocket.close();interrupt();}
 	
 }
 
