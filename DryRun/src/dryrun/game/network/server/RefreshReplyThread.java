@@ -16,6 +16,7 @@ public class RefreshReplyThread extends Thread {
 	public void run(){
 		byte x[] = new byte [100];
 		while(!interrupted()){ //while im not requested to stop
+			x=new byte [100];
 			DatagramPacket receive = new DatagramPacket(x, x.length); 
 			try {
 				myUdpSocket.receive(receive);
@@ -25,6 +26,7 @@ public class RefreshReplyThread extends Thread {
 				s=FIND_SERVER_R;
 				x=s.getBytes();
 				DatagramPacket reply = new DatagramPacket(x, x.length, receive.getAddress(), receive.getPort());
+				System.out.println(receive.getAddress().toString());
 				try {
 					myUdpSocket.send(reply);
 				} catch (IOException e) { e.printStackTrace(); break;}
