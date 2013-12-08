@@ -9,10 +9,12 @@ import org.lwjgl.opengl.Display;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 
+import dryrun.game.common.GameObjectValues;
 import dryrun.game.common.Player;
 import dryrun.game.engine.Drawable;
 import dryrun.game.engine.Tex;
 import dryrun.game.engine.Updateable;
+import dryrun.game.network.NetFramework;
 import dryrun.game.objects.TextureHolder;
 import dryrun.game.objects.bonus.Bonus;
 
@@ -22,17 +24,35 @@ public class Level implements Drawable,Updateable {
 	ArrayList<Wall> walls;
 	ArrayList<Bonus> bonuses;
 	ArrayList<Checkpoint> checkpoints;
+	NetFramework net;
+	Player myPlayer;
+	String myName;
 	
-	public Level(){
+	public Level(String myName){
 		try {
 			th=new TextureHolder(TextureLoader.getTexture("PNG", new FileInputStream(new File("res/button-sprite.png"))),new Tex(0f,((float)3/10+(float)1/200),1f,((float)4/10+(float)1/200)));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		this.myName=myName;
 		players=new ArrayList<Player>();
 		walls=new ArrayList<Wall>();
 		bonuses=new ArrayList<Bonus>();
 		checkpoints=new ArrayList<Checkpoint>();
+	}
+	
+	public void setNetFramework(NetFramework n){
+		net=n;
+	}
+	
+	
+	public void addPlayer(String name,String carType){
+		Player p=new Player(name,carType);
+		players.add(p);
+		if(name.equals(myName)){
+			myPlayer=p;
+		}
+		
 	}
 	
 	@Override
@@ -107,6 +127,9 @@ public class Level implements Drawable,Updateable {
 		for(Checkpoint c:checkpoints){
 			c.update();
 		}
+		GameObjectValues p[]=new GameObjectValues[3];
+		p[0]=myPlayer.getMyValues();
+		net.send(p);
 	}
 
 }
