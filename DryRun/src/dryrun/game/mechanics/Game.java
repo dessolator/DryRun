@@ -9,7 +9,8 @@ import dryrun.game.gui.menus.*;
 import dryrun.game.network.client.Client;
 import dryrun.game.network.server.Server;
 
-
+import java.util.*;
+import java.net.*;
 
 public class Game {
 	private static MainMenu myMainMenu;
@@ -19,15 +20,16 @@ public class Game {
 	private static boolean terminate=false;	
 	private static GameState currentGameState=GameState.MainMenu;
 	
+	private static List<InetAddress> serverAddresses;
+	 
 static{		
 		//myLevel=new Level(currentLevel);
-	
+		
+		serverAddresses = Collections.synchronizedList(new ArrayList<InetAddress>());
 		myMainMenu = new MainMenu();
 		myGameMenu = new GameMenu();
 		myHostMenu = new HostMenu();
 		myLobbyMenu = new JoinMenu();
-		
-		
 		//mySettingsMenu=new SettingsMenu();	
 	}
 	
@@ -45,6 +47,7 @@ static{
 			Display.update();			
 		}		
 	}
+	
 	
 	private static Updateable getCurrentUpdate() {
 		switch(currentGameState){
@@ -78,7 +81,7 @@ static{
 				break;
 			case HostGameScreen:
 				currentGameState= GameState.PlayMenu;
-				Server.getServer().disposeServer();
+				Server.disposeServer();
 				break;
 			case HostJoinMenu:
 				currentGameState= GameState.PlayMenu;
@@ -88,7 +91,10 @@ static{
 				break;
 			case LobbyScreen:
 				currentGameState= GameState.PlayMenu;
-				Client.getClient().disposeClient();
+				Client.disposeClient();
+				myLobbyMenu.setServerFrame(null);
+				Game.getMyLobbyMenu().setRefreshTriggered(false);
+				Game.getMyLobbyMenu().deleteServerButtons();
 				break;
 			case PlayMenu:
 				currentGameState= GameState.MainMenu;
@@ -138,6 +144,20 @@ static{
 
 	public static void setCurrentGameState(GameState currentGameState) {
 		Game.currentGameState = currentGameState;
+	}
+	
+	public static List<InetAddress> getPossibleServers() {
+		return serverAddresses;
+	}
+
+
+	public static JoinMenu getMyLobbyMenu() {
+		return myLobbyMenu;
+	}
+
+
+	public static void setMyLobbyMenu(JoinMenu myLobbyMenu) {
+		Game.myLobbyMenu = myLobbyMenu;
 	}
 
 }

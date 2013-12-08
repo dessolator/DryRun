@@ -5,6 +5,7 @@ import java.util.*;
 import java.io.*;
 
 import dryrun.game.common.GameObjectValues;
+import dryrun.game.mechanics.Game;
 import dryrun.game.network.ConcurrentCircularBuffer;
 import dryrun.game.network.GameStatePacket;
 import dryrun.game.network.NetFramework;
@@ -22,7 +23,6 @@ public class Client implements NetFramework {
 	private ConcurrentCircularBuffer myBuffer;
 	private ConcurrentCircularBuffer receiveBuffer;
 	private Player player;
-	private ArrayList<InetAddress> servers;
 	private static Client client = null;
 	
 	
@@ -64,7 +64,7 @@ public class Client implements NetFramework {
  	}
  	
 	public void findServers() {
-		GetServers gServ = new GetServers(this,servers);
+		GetServers gServ = new GetServers(this,Game.getPossibleServers());
 		gServ.start();
 		
 		DestroyGetServersThread destroy = new DestroyGetServersThread(gServ);
@@ -85,9 +85,6 @@ public class Client implements NetFramework {
 		receiveBuffer = new ConcurrentCircularBuffer();
 	}
 	
-	public ArrayList<InetAddress> getPossibleServers() {
-		return servers;
-	}
 	
 	public void setServerPort(int p) {
 		serverPort = p;
