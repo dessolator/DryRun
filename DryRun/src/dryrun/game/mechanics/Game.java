@@ -1,6 +1,8 @@
 package dryrun.game.mechanics;
 
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
+
 import static org.lwjgl.opengl.GL11.*;
 import dryrun.game.common.*;
 import dryrun.game.engine.Drawable;
@@ -25,14 +27,14 @@ static{
 	}
 	
 	public static void startGame(){
-//		Player p = new Player("Kesler",Display.getWidth()/2, Display.getHeight()/2, Display.getWidth()/6, Display.getHeight()/10);
+		Player p = new Player("Kesler",Display.getWidth()/2, Display.getHeight()/2, Display.getWidth()/6, Display.getHeight()/10);
 	
 		while((!Display.isCloseRequested())&& !terminate) {
 			glClear(GL_COLOR_BUFFER_BIT);
 			getCurrentUpdate().update();
 			getCurrentDraw().render();
 			//gameloop yet to be done 
-//			p.render();
+			p.render();
 			
 			Display.sync(60);
 			Display.update();			
@@ -131,4 +133,25 @@ static{
 		Game.currentGameState = currentGameState;
 	}
 
+
+
+
+//	pokusaj kretanja objekata
+
+	private void playerInput(){
+		if(Keyboard.isKeyDown(Keyboard.KEY_A)||Keyboard.isKeyDown(Keyboard.KEY_LEFT)){//if left was pressed
+			
+		}
+		if(Keyboard.isKeyDown(Keyboard.KEY_D)|| Keyboard.isKeyDown(Keyboard.KEY_RIGHT)){
+			
+		}
+		if(Keyboard.isKeyDown(Keyboard.KEY_W) ||Keyboard.isKeyDown(Keyboard.KEY_UP)){
+			
+		}
+		if(Keyboard.isKeyDown(Keyboard.KEY_D) ||Keyboard.isKeyDown(Keyboard.KEY_DOWN)){
+			
+		}
+		
+	}
+	
 }
