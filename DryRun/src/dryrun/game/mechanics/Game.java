@@ -6,6 +6,8 @@ import dryrun.game.common.*;
 import dryrun.game.engine.Drawable;
 import dryrun.game.engine.Updateable;
 import dryrun.game.gui.menus.*;
+import dryrun.game.network.client.Client;
+import dryrun.game.network.server.Server;
 
 
 
@@ -79,12 +81,14 @@ static{
 				break;
 			case HostJoinMenu:
 				currentGameState= GameState.PlayMenu;
+				Client.getClient().disposeClient();
 				break;
 			case JoinGame:
 				currentGameState= GameState.HostJoinMenu;
 				break;
 			case LobbyScreen:
 				currentGameState= GameState.PlayMenu;
+				Server.getServer().disposeServer();
 				break;
 			case PlayMenu:
 				currentGameState= GameState.MainMenu;

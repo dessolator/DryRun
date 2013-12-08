@@ -12,13 +12,13 @@ public class JoinMenu extends Menu {
 
 	public JoinMenu() {
 		myButtons = new ArrayList<Button>();
-		myFrame = new BasicFrame(Display.getWidth()/2,
+		myFrame = new BasicFrame(Display.getWidth()/4,
 				Display.getHeight()/2,
 				Display.getWidth()/3,
 				Display.getHeight()/3);
-		myButtons.add(new RefreshButton(Display.getWidth()/2,
+		myButtons.add(new RefreshButton(Display.getWidth()/4,
 				Display.getHeight()/2 + Display.getHeight()/10 + Display.getHeight()/30));
-		myButtons.add(new BackButton(Display.getWidth()/2,
+		myButtons.add(new BackButton(Display.getWidth()/4,
 				Display.getHeight()/2 + Display.getHeight()/30));
 		
 		try {

@@ -23,9 +23,10 @@ public class Client implements NetFramework {
 	private ConcurrentCircularBuffer receiveBuffer;
 	private Player player;
 	private ArrayList<InetAddress> servers;
+	private static Client client = null;
 	
 	
- 	public Client() {
+ 	protected Client() {
 		try {
 			udpSocket = new DatagramSocket();
 		} catch (SocketException e) {
@@ -34,6 +35,34 @@ public class Client implements NetFramework {
 		
 	}
 	
+ 	public static void disposeClient() {
+ 		System.out.println("dispose");
+ 		if (getClient()!=null) {
+ 			System.out.println("dispose client");
+ 			getClient().closeSockets();
+ 			client = null;
+ 		}
+
+ 	}
+ 	
+ 	private void closeSockets() {
+ 		udpSocket.close();
+ 		try {
+			if (tcpSocket.isConnected()) tcpSocket.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+ 		System.out.println("Sockets close");
+ 	}
+ 	
+ 	public static Client getClient() {
+ 		if(client==null) {
+ 			client = new Client();
+ 			System.out.println("Join created client.");
+ 		}
+ 		return client;
+ 	}
+ 	
 	public void findServers() {
 		GetServers gServ = new GetServers(this,servers);
 		gServ.start();

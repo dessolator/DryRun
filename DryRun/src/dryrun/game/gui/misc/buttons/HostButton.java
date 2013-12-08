@@ -15,6 +15,7 @@ public class HostButton extends Button {
 		// TODO Auto-generated method stub
 		Game.setCurrentGameState(GameState.HostGameScreen);
 		Server.getServer();
+		Server.getServer().host();
 	}
 
 }
