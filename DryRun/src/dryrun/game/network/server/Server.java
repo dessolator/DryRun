@@ -30,12 +30,12 @@ public class Server implements NetFramework {
 	public ArrayList<Socket> mySockets=new ArrayList<Socket>(); //TODO make private
 	
 	public static Server getServer(){  //Server getter
-		if (server==null) server = new Server("");
+		if (server==null) {server = new Server("");System.out.println("Server Object created");}
 		return server;
 	}
 	
 	public static Server getServer(String n){  //Server getter
-		if (server==null) server = new Server(n);
+		if (server==null) {server = new Server(n);System.out.println("Server Object created");}
 		return server;
 	}
 	protected Server(String s){
