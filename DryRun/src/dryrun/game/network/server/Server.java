@@ -15,14 +15,22 @@ import static dryrun.game.network.NetConstants.*;
 public class Server implements NetFramework {
 	private DatagramSocket myUdpSocket;
 	private ArrayList<ServerThread> myThreads;
+	private boolean startGame=false;
 	
 	public int numOfPlayers=0;
+	
+	private static Server server=null;
 
 	
 	
 	public ArrayList<Socket> mySockets=new ArrayList<Socket>();
 	
-	public Server(){
+	public static Server getServer(){
+		if (server==null) server = new Server();
+		return server;
+	}
+	
+	protected Server(){
 		try {
 			myUdpSocket= new DatagramSocket(UDPPORT);
 			myThreads = new ArrayList<ServerThread>();
@@ -39,10 +47,20 @@ public class Server implements NetFramework {
 		
 	}
 	
+	public void startGame(){startGame=true;notify();}
 	
 	public void host(){
 			getRefresh();
 			getConnect();//TODO make getConnect a singleton
+			while(!startGame)
+				try {
+					wait();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			for(int i=0; i<myThreads.size();i++){myThreads.get(i).start();}
+			
 	}
 	
 	private void getConnect(){

@@ -31,9 +31,7 @@ public class ServerThread  {
 	
 	//public ConcurrentCircularBuffer getBuffer(){return myBuffer;}
 	
-	public void run(){
-		
-	}
+	public void start(){sender.start();receiver.start();}
 	
 
 	public void send(GameObjectValues[] p) {
