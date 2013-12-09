@@ -28,7 +28,7 @@ public class ConnectThread extends Thread {
 	}
 	
 	public void run() {
-		System.out.print("usao u run");
+		
 		DataInputStream dis = null;
 		DataOutputStream dos = null;
 	
@@ -46,7 +46,7 @@ public class ConnectThread extends Thread {
 			e.printStackTrace();
 		}
 		try {
-			sleep(2000);
+			sleep(3000);
 		} catch (InterruptedException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -57,6 +57,7 @@ public class ConnectThread extends Thread {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 		String str = new String(b);
 		System.out.println(str);
 		String []split = str.split("#");

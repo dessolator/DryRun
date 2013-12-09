@@ -85,6 +85,9 @@ public class Client implements NetFramework {
 		receiveBuffer = new ConcurrentCircularBuffer();
 	}
 	
+	public void sync () {
+		
+	}
 	
 	public void setServerPort(int p) {
 		serverPort = p;
