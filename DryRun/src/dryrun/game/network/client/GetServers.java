@@ -24,6 +24,7 @@ public class GetServers extends Thread {
 		listOfAddress = lOfAdd;
 		try {
 			comm = new DatagramSocket();
+			comm.setBroadcast(true);
 		} catch (SocketException e) {
 			e.printStackTrace();
 		}
@@ -34,7 +35,7 @@ public class GetServers extends Thread {
 			byte [] broadcast = FIND_SERVER.getBytes();
 			DatagramPacket broadcastMessage = null;
 			try {
-				broadcastMessage = new DatagramPacket(broadcast,broadcast.length,InetAddress.getByName("255.255.255.255"),UDPPORT);
+				broadcastMessage = new DatagramPacket(broadcast,broadcast.length,InetAddress.getByName("192.168.1.255"),UDPPORT);
 			} catch (UnknownHostException e) {
 				e.printStackTrace();
 			}
