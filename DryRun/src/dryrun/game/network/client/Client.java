@@ -79,7 +79,7 @@ public class Client implements NetFramework {
 		}
 		
 		serverAddress = servAddr;
-		ConnectThread cThread = new ConnectThread(this,serverAddress,player.getName(),typeOfAutomobile);
+		ConnectThread cThread = new ConnectThread(this,serverAddress,"goksiii",1);
 		cThread.start();
 		myBuffer = new ConcurrentCircularBuffer();
 		receiveBuffer = new ConcurrentCircularBuffer();

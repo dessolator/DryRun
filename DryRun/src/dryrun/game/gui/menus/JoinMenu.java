@@ -72,12 +72,12 @@ public class JoinMenu extends Menu {
 					break;
 				}
 				else{
-					serverButtons.add(new ServerButton(buttonsToAdd.get(j).x,buttonsToAdd.get(j).y,buttonsToAdd.get(j).t));
+					serverButtons.add(new ServerButton(buttonsToAdd.get(j).myAddress,buttonsToAdd.get(j).x,buttonsToAdd.get(j).y,buttonsToAdd.get(j).t));
 					break;
 				}
 			}
 			if(serverButtons.isEmpty()){
-				serverButtons.add(new ServerButton(buttonsToAdd.get(j).x,buttonsToAdd.get(j).y,buttonsToAdd.get(j).t));
+				serverButtons.add(new ServerButton(buttonsToAdd.get(j).myAddress,buttonsToAdd.get(j).x,buttonsToAdd.get(j).y,buttonsToAdd.get(j).t));
 			}
 		}
 		if(System.nanoTime()<(long)menuCalled+(long)125000000){	
@@ -125,7 +125,7 @@ public class JoinMenu extends Menu {
 		List<InetAddress> l = Game.getPossibleServers();
 		for(int i = 0 ; i < l.size(); i++) {
 			String str=new String((l.get(i).getHostAddress()));
-			ServerButtonProto temp=new ServerButtonProto(3*displayWidth/4,currentPosition,str);
+			ServerButtonProto temp=new ServerButtonProto(l.get(i),3*displayWidth/4,currentPosition,str);
 			boolean contained=false;
 			for(int j=0;j<buttonsToAdd.size();j++){
 				if(buttonsToAdd.get(j).t.equals(str)){
