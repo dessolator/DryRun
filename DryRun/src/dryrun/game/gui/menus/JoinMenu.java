@@ -122,6 +122,7 @@ public class JoinMenu extends Menu {
 	}
 
 	public void loadServerList() {
+		currentPosition=displayHeight/2;
 		List<InetAddress> l = Game.getPossibleServers();
 		for(int i = 0 ; i < l.size(); i++) {
 			String str=new String((l.get(i).getHostAddress()));
@@ -139,6 +140,14 @@ public class JoinMenu extends Menu {
 			}
 		}
 		
+	}
+
+	public List<ServerButtonProto> getButtonsToAdd() {
+		return buttonsToAdd;
+	}
+
+	public void setButtonsToAdd(List<ServerButtonProto> buttonsToAdd) {
+		this.buttonsToAdd = buttonsToAdd;
 	}
 		
 }

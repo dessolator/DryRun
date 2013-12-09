@@ -14,6 +14,7 @@ public class RefreshButton extends Button {
 	@Override
 	public void pressed() {
 		Game.getMyLobbyMenu().deleteServerButtons();
+		Game.getMyLobbyMenu().getButtonsToAdd().clear();
 		Game.getPossibleServers().clear();
 		Client.getClient().findServers();
 		if(!refreshRunning){
@@ -34,12 +35,7 @@ public class RefreshButton extends Button {
 				}
 			}.start();
 		}
-		
-		
-		
-		//new SomeThr().start();
-		//Game.getMyLobbyMenu().createServerButtons();
-		//Game.getMyLobbyMenu().createServersFrame();
+
 	}
 
 }
