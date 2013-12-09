@@ -270,13 +270,23 @@ public class Player extends GameObject implements Movable {
 			System.out.println("speed = "+speed+"  something = "+something);
 			
 			//nista nije pritisnuto
-			if(Player.something==false) {
+			if(Player.something == false) {				
+				if(Keyboard.isKeyDown(Keyboard.KEY_A)||Keyboard.isKeyDown(Keyboard.KEY_LEFT)){				
+					setdirectionL();
+					angle-=rangle;
+					
+				}				
+				if(Keyboard.isKeyDown(Keyboard.KEY_D)||Keyboard.isKeyDown(Keyboard.KEY_RIGHT)){					
+					setDirectionR();
+					angle+=rangle;			
+				}
 				returnToStatic();
 				velocity.x =(float) speed*direction.x;
 				velocity.y =(float)speed*direction.y;				
 				myValues.setCoordX((myValues.getCoordX()+velocity.x));
 				myValues.setCoordY((myValues.getCoordY()+velocity.y));					
-			}			
+			}	
+			
 			else Player.something=false;
 	}
 }
