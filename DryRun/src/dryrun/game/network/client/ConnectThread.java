@@ -28,6 +28,7 @@ public class ConnectThread extends Thread {
 	}
 	
 	public void run() {
+		System.out.print("usao u run");
 		DataInputStream dis = null;
 		DataOutputStream dos = null;
 	
@@ -44,7 +45,12 @@ public class ConnectThread extends Thread {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+		try {
+			sleep(2000);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		byte[] b = null;
 		try { 
 			dis.readFully(b=new byte[dis.available()]);
@@ -52,6 +58,7 @@ public class ConnectThread extends Thread {
 			e.printStackTrace();
 		}
 		String str = new String(b);
+		System.out.println(str);
 		String []split = str.split("#");
 		if (split[0].equals(CONNECT_ACC)) {
 			client.setUDPSocket();
