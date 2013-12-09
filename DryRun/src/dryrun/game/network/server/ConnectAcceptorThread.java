@@ -32,19 +32,26 @@ public class ConnectAcceptorThread extends Thread {
 				//TCP init
 				DataInputStream dis= new DataInputStream(s.getInputStream()); 
 				DataOutputStream dos= new DataOutputStream(s.getOutputStream());
-				
+				try {
+					sleep(1000);
+				} catch (InterruptedException e) {e.printStackTrace();}
 				//reading TCP packet.
 				dis.readFully(b=new byte[dis.available()]);										
 				String str=new String(b); //splitting packet
+				System.out.print(str);
 				String split[]=str.split("#+"); //NAME MUST NOT BE #
 				
 				
-				if (split[0]==CONNECT_REQ && myServer.numOfPlayers<MAX_PLAYERS){ //if packet is CONNECT_REQ and I have not reached maxPlayers
+				if (split[0].equals(CONNECT_REQ) && myServer.numOfPlayers<MAX_PLAYERS){ //if packet is CONNECT_REQ and I have not reached maxPlayers
+					System.out.println("usao u if");
 					myServer.numOfPlayers++; //then increase number of connected players
-					dos.writeBytes(CONNECT_ACC+"#"+currentUdp);//notify the client that it's request is accepted
+					System.out.println("accepting connection");
+					str = new String(CONNECT_ACC+"#"+currentUdp);
+					dos.writeBytes(str);//notify the client that it's request is accepted
 					myServer.CreateClThread(currentUdp++, split, s.getInetAddress(),dis,dos,s); //create a serverside thread which serves this client
 				}
 				else{
+					System.out.print("usao u else");
 					dos.writeBytes(CONNECT_REF);//TODO close s
 				}
 				

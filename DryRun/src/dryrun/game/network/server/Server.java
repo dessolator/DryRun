@@ -113,6 +113,7 @@ public class Server implements NetFramework {
 	
 	
 	public void CreateClThread(int currentUdp, String split[], InetAddress ip,DataInputStream tcpin, DataOutputStream tcpout, Socket s) throws SocketException{
+		System.out.println("Creating Client Thread.");
 		myThreads.add(new ServerThread(currentUdp, split, ip,buffer,tcpin,tcpout, s));
 	} //Creation of a new ClientThread, this method is executed in the ConnectAcceptorThread.
 	
