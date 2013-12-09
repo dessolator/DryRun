@@ -24,15 +24,28 @@ import dryrun.game.objects.GameObject;
 import dryrun.game.objects.bonus.Timer;
 
 public class Player extends GameObject implements Movable {
+	//player related
 	private PlayerValues myStats;
 	private ArrayList<Timer> myTimers;
 	private String name;
 	private String carType;
 	private Vec2 velocity;
-	private static float speed=4;//implementirati kasnije
+	private static double speed=0;//implementirati kasnije
 	private double rangle = (double)(Math.PI/160);
 	private double angle = 0;
 	public Vec2 direction;
+	private static boolean something=false;// da li je nesto kliknuto na tastaturi od koriscenih tastera
+	
+	//speed related constants
+	private static final float maxSpeed=5;
+	private static final double maxThrottle= 0.5; 
+	private static final double maxrthrottle = -0.2;
+	private static final float maxReverse = -2;
+	//speed related changes d
+	private static double throttle = 0.00;
+	private double dthrottle = 0.05;	
+	private double breaks = -0.1;
+	private double inertivebreaks = 0.001;
 
 
 	
@@ -78,6 +91,7 @@ public class Player extends GameObject implements Movable {
 	public void update() {
 	}
 	
+	//direction logic
 	public void setDirectionR(){
 		float	oldx = direction.x;
 		float	oldy = direction.y;
@@ -92,7 +106,60 @@ public class Player extends GameObject implements Movable {
 			direction.x=(float) ( oldx * Math.cos(rangle) - oldy*Math.sin(rangle));			
 			direction.y =(float)( oldx*Math.sin(rangle) + oldy*Math.cos(rangle)); 
 			}
-
+	
+	public void calcSpeedUp(){
+		if(speed < 0) {
+			speed-=breaks;
+			if(speed > 0) speed =0; 
+		}
+		if(speed == 0) throttle = 0;
+		if(speed < maxSpeed || speed >= 0 ){			
+			if(throttle < maxThrottle) throttle+=dthrottle;
+			speed += throttle;
+			if(speed > maxSpeed) speed = maxSpeed;
+			if(throttle > maxThrottle) throttle = maxThrottle;
+		}		
+	}
+	
+	
+	public void calcSpeedDown(){
+		if(speed > 0 && speed <= maxSpeed){
+			speed += breaks; 
+			if(speed < 0) speed = 0;
+		}
+		if(speed == 0) throttle = 0;
+		if(speed <= 0 && speed >= maxReverse){
+			if(throttle >  maxrthrottle) throttle-=dthrottle;
+			speed += throttle;			
+			if(speed < maxReverse) speed = maxReverse;
+			if(throttle < maxrthrottle) throttle = maxrthrottle;
+		}
+	}
+	
+	public void returnToStatic(){
+		if(speed > 0){ 
+			speed-=inertivebreaks;
+			if(speed < 0) speed = 0;
+		}
+		else if(speed < 0) {
+			speed += inertivebreaks;
+			if (speed > 0) speed = 0;
+		}
+		throttle =0;
+	}
+	
+	public void setVelocityandAngleR(){
+		velocity.x = (float)speed*direction.x;
+		velocity.y = (float)speed*direction.y;
+		angle+=rangle;
+	}	
+	public void setVelocityandAngleL(){
+		velocity.x =(float) speed*direction.x;
+		velocity.y =(float)speed*direction.y;
+		angle-=rangle;
+	}
+	
+	
 	@Override
 	public void move(int i) {
 		switch(i){
@@ -101,37 +168,22 @@ public class Player extends GameObject implements Movable {
 			System.out.println("mindfuck");
 			break;
 		}
-		/*case 1:{//stisnuto desno
-			setDirectionR();
-			velocity.x = speed*direction.x;
-			velocity.y = speed*direction.y;
-			angle+=rangle;
-			break;			
-			}*/
 		
-		/*case -1:{//stisnuto levi
-			setdirectionL();
-			velocity.x = speed*direction.x;
-			velocity.y = speed*direction.y;
-			angle-=rangle;
-			break;				
-		}*/
-				
-			
-		case 2:{ //stisnuto napred ili strelica
-			if(Keyboard.isKeyDown(Keyboard.KEY_A)||Keyboard.isKeyDown(Keyboard.KEY_LEFT)){
-			setdirectionL();
-			velocity.x = speed*direction.x;
-			velocity.y = speed*direction.y;
-			angle-=rangle;
+		case 2:{ //stisnuto napred ili strelica napred			
+			if(Keyboard.isKeyDown(Keyboard.KEY_A)||Keyboard.isKeyDown(Keyboard.KEY_LEFT)){				
+				setdirectionL();
+				angle -= rangle;
 			}
 			
-			if(Keyboard.isKeyDown(Keyboard.KEY_D)||Keyboard.isKeyDown(Keyboard.KEY_RIGHT)){
+			if(Keyboard.isKeyDown(Keyboard.KEY_D)||Keyboard.isKeyDown(Keyboard.KEY_RIGHT)){					
 				setDirectionR();
-				velocity.x = speed*direction.x;
-				velocity.y = speed*direction.y;
-				angle+=rangle;				
-			}			
+				angle += rangle;			
+			}		
+			velocity.x =(float) speed*direction.x;
+			velocity.y =(float) speed*direction.y;
+			
+			calcSpeedUp();
+			
 			// setting player coords
 			myValues.setCoordX((myValues.getCoordX()+velocity.x));
 			myValues.setCoordY((myValues.getCoordY()+velocity.y));
@@ -143,23 +195,23 @@ public class Player extends GameObject implements Movable {
 		}
 		case -2:{ //stisnuto nazad ili s
 			
-			if(Keyboard.isKeyDown(Keyboard.KEY_A)||Keyboard.isKeyDown(Keyboard.KEY_LEFT)){
+			if(Keyboard.isKeyDown(Keyboard.KEY_A)||Keyboard.isKeyDown(Keyboard.KEY_LEFT)){				
 				setDirectionR();
-				velocity.x = speed*direction.x;
-				velocity.y = speed*direction.y;
-				angle+=rangle;			
+				angle+= rangle;			
 			}
 			
-			if(Keyboard.isKeyDown(Keyboard.KEY_D)||Keyboard.isKeyDown(Keyboard.KEY_RIGHT)){
+			if(Keyboard.isKeyDown(Keyboard.KEY_D)||Keyboard.isKeyDown(Keyboard.KEY_RIGHT)){				
 				setdirectionL();
-				velocity.x = speed*direction.x;
-				velocity.y = speed*direction.y;
-				angle-=rangle;
-			}		
-			//
-			myValues.setCoordX((myValues.getCoordX()-velocity.x));
-			myValues.setCoordY((myValues.getCoordY()-velocity.y));
-		//	glPushMatrix();
+				angle -= rangle;
+			}	
+			velocity.x =(float) speed*direction.x;
+			velocity.y =(float)speed*direction.y;
+			
+			calcSpeedDown();
+			
+			myValues.setCoordX((myValues.getCoordX()+velocity.x));
+			myValues.setCoordY((myValues.getCoordY()+velocity.y));
+			//glPushMatrix();
 			//glTranslatef(myValues.getCoordX(), myValues.getCoordY(), 0);
 			//glPopMatrix();
 			break;
@@ -192,25 +244,39 @@ public class Player extends GameObject implements Movable {
 			}		
 		}	
 	}	
+	
+	
 		
 //		pokusaj kretanja objekata
 
-	public void playerInput(){
+	public void playerInput(){//all movement keys pressed
 			if(	(Keyboard.isKeyDown(Keyboard.KEY_A)||Keyboard.isKeyDown(Keyboard.KEY_LEFT))&&
 					(Keyboard.isKeyDown(Keyboard.KEY_S) ||Keyboard.isKeyDown(Keyboard.KEY_DOWN))
 					|| ((Keyboard.isKeyDown(Keyboard.KEY_W) ||Keyboard.isKeyDown(Keyboard.KEY_UP))&&
-							(Keyboard.isKeyDown(Keyboard.KEY_S) ||Keyboard.isKeyDown(Keyboard.KEY_DOWN)))){//if left was pressed
-				this.move(1);
-			}
-			//if(Keyboard.isKeyDown(Keyboard.KEY_D)|| Keyboard.isKeyDown(Keyboard.KEY_RIGHT)){//if right was pressed
-			//	this.move(+1);
-			//}
+							(Keyboard.isKeyDown(Keyboard.KEY_S) ||Keyboard.isKeyDown(Keyboard.KEY_DOWN)))){
+				Player.something=true;
+				this.move(1);				
+			}			
+			
 			if(Keyboard.isKeyDown(Keyboard.KEY_W) ||Keyboard.isKeyDown(Keyboard.KEY_UP)){//if UP was pressed
-				this.move(2);
-			}
-			if(Keyboard.isKeyDown(Keyboard.KEY_S) ||Keyboard.isKeyDown(Keyboard.KEY_DOWN)){//if DOWN was pressed 
-				this.move(-2);
+				Player.something=true;				
+				this.move(2);				
 			}
 			
-		}
+			if(Keyboard.isKeyDown(Keyboard.KEY_S) ||Keyboard.isKeyDown(Keyboard.KEY_DOWN)){//if DOWN was pressed 
+				Player.something=true;					
+				this.move(-2);				
+			}	
+			System.out.println("speed = "+speed+"  something = "+something);
+			
+			//nista nije pritisnuto
+			if(Player.something==false) {
+				returnToStatic();
+				velocity.x =(float) speed*direction.x;
+				velocity.y =(float)speed*direction.y;				
+				myValues.setCoordX((myValues.getCoordX()+velocity.x));
+				myValues.setCoordY((myValues.getCoordY()+velocity.y));					
+			}			
+			else Player.something=false;
+	}
 }

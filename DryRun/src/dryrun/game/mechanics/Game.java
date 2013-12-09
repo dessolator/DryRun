@@ -45,7 +45,7 @@ static{
 
 			p.render();
 			p.playerInput();
-			//System.out.println(p.direction.x + " " +p.direction.y+ "   "+ p.direction.length());
+			
 
 			Display.sync(60);
 			Display.update();			
