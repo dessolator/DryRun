@@ -10,5 +10,7 @@ public abstract class Checkpoint extends GameObject implements Collidable {
 	@Override
 	public void render() {		
 	}
+	
+
 }
 
