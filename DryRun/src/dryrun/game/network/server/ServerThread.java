@@ -41,8 +41,8 @@ public class ServerThread  { //Client instance on the server
 	public void terminate() throws IOException{
 		mySocket.close();
 		ldr.interrupt();
-		sender.interrupt();
-		receiver.interrupt();
+		//sender.interrupt();
+		//receiver.interrupt();
 		myTcpSocket.close();
 		} //Close UDP and interrupt threads
 	

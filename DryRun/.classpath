@@ -12,5 +12,10 @@
 	<classpathentry kind="lib" path="lib/jbox2d-library-2.2.1.1.jar"/>
 	<classpathentry kind="lib" path="lib/jbox2d-serialization-1.1.0-jar-with-dependencies.jar"/>
 	<classpathentry kind="lib" path="lib/jbox2d-serialization-1.1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/LT 241012/git/DryRun/DryRun/lib/LibraryLWJGLOpenAL.jar"/>
+	<classpathentry kind="lib" path="C:/Users/LT 241012/git/DryRun/DryRun/lib/SoundSystem.jar"/>
+	<classpathentry kind="lib" path="C:/Users/LT 241012/git/DryRun/DryRun/lib/SoundSystemJPCT.jar"/>
+	<classpathentry kind="lib" path="C:/Users/LT 241012/git/DryRun/DryRun/lib/CodecJOgg.jar"/>
+	<classpathentry kind="lib" path="C:/Users/LT 241012/git/DryRun/DryRun/lib/SoundSystemUtils.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
