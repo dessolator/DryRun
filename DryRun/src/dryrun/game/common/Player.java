@@ -31,7 +31,7 @@ public class Player extends GameObject implements Movable {
 	private Vec2 velocity;
 	private static float speed=4;//implementirati kasnije
 	private double rangle = (double)(Math.PI/160);
-	private double angle = Math.PI/2;
+	private double angle = 0;
 	public Vec2 direction;
 
 
@@ -117,7 +117,7 @@ public class Player extends GameObject implements Movable {
 			myValues.setCoordX((myValues.getCoordX()+velocity.x));
 			myValues.setCoordY((myValues.getCoordY()+velocity.y));
 			//glPushMatrix();
-			glTranslatef(-myValues.getCoordX(), -myValues.getCoordY(), 0);
+			//glTranslatef(-myValues.getCoordX(), -myValues.getCoordY(), 0);
 			//glPopMatrix();
 			break;
 		}
@@ -125,7 +125,7 @@ public class Player extends GameObject implements Movable {
 			myValues.setCoordX((myValues.getCoordX()-velocity.x));
 			myValues.setCoordY((myValues.getCoordY()-velocity.y));
 		//	glPushMatrix();
-			glTranslatef(myValues.getCoordX(), myValues.getCoordY(), 0);
+			//glTranslatef(myValues.getCoordX(), myValues.getCoordY(), 0);
 			//glPopMatrix();
 			break;
 			}
@@ -172,7 +172,7 @@ public class Player extends GameObject implements Movable {
 			if(Keyboard.isKeyDown(Keyboard.KEY_W) ||Keyboard.isKeyDown(Keyboard.KEY_UP)){//if UP was pressed
 				this.move(2);
 			}
-			if(Keyboard.isKeyDown(Keyboard.KEY_D) ||Keyboard.isKeyDown(Keyboard.KEY_DOWN)){//if DOWN was pressed 
+			if(Keyboard.isKeyDown(Keyboard.KEY_S) ||Keyboard.isKeyDown(Keyboard.KEY_DOWN)){//if DOWN was pressed 
 				this.move(-2);
 			}
 			
