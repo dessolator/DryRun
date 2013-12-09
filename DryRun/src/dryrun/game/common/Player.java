@@ -96,32 +96,67 @@ public class Player extends GameObject implements Movable {
 	@Override
 	public void move(int i) {
 		switch(i){
-		case 1:{//stisnuto desno
+		
+		case 1:{
+			System.out.println("mindfuck");
+			break;
+		}
+		/*case 1:{//stisnuto desno
 			setDirectionR();
 			velocity.x = speed*direction.x;
 			velocity.y = speed*direction.y;
 			angle+=rangle;
 			break;			
-			}
+			}*/
 		
-		case -1:{//stisnuto levi
+		/*case -1:{//stisnuto levi
 			setdirectionL();
 			velocity.x = speed*direction.x;
 			velocity.y = speed*direction.y;
 			angle-=rangle;
 			break;				
-		}
+		}*/
 				
 			
 		case 2:{ //stisnuto napred ili strelica
+			if(Keyboard.isKeyDown(Keyboard.KEY_A)||Keyboard.isKeyDown(Keyboard.KEY_LEFT)){
+			setdirectionL();
+			velocity.x = speed*direction.x;
+			velocity.y = speed*direction.y;
+			angle-=rangle;
+			}
+			
+			if(Keyboard.isKeyDown(Keyboard.KEY_D)||Keyboard.isKeyDown(Keyboard.KEY_RIGHT)){
+				setDirectionR();
+				velocity.x = speed*direction.x;
+				velocity.y = speed*direction.y;
+				angle+=rangle;				
+			}			
+			// setting player coords
 			myValues.setCoordX((myValues.getCoordX()+velocity.x));
 			myValues.setCoordY((myValues.getCoordY()+velocity.y));
+			
 			//glPushMatrix();
 			//glTranslatef(-myValues.getCoordX(), -myValues.getCoordY(), 0);
 			//glPopMatrix();
 			break;
 		}
 		case -2:{ //stisnuto nazad ili s
+			
+			if(Keyboard.isKeyDown(Keyboard.KEY_A)||Keyboard.isKeyDown(Keyboard.KEY_LEFT)){
+				setDirectionR();
+				velocity.x = speed*direction.x;
+				velocity.y = speed*direction.y;
+				angle+=rangle;			
+			}
+			
+			if(Keyboard.isKeyDown(Keyboard.KEY_D)||Keyboard.isKeyDown(Keyboard.KEY_RIGHT)){
+				setdirectionL();
+				velocity.x = speed*direction.x;
+				velocity.y = speed*direction.y;
+				angle-=rangle;
+			}		
+			//
 			myValues.setCoordX((myValues.getCoordX()-velocity.x));
 			myValues.setCoordY((myValues.getCoordY()-velocity.y));
 		//	glPushMatrix();
@@ -130,19 +165,17 @@ public class Player extends GameObject implements Movable {
 			break;
 			}
 		}
-
 	}
 
 	@Override
 	public void render() {
 		DrawObject.draw(this);
-		
-
 	}
 	
 	public double getAngle() {
 		return angle;
 	}
+	
 	public void setMyStats(GameObjectValues stats) {
 		myStats=(PlayerValues) stats;
 	}
@@ -163,12 +196,15 @@ public class Player extends GameObject implements Movable {
 //		pokusaj kretanja objekata
 
 	public void playerInput(){
-			if(Keyboard.isKeyDown(Keyboard.KEY_A)||Keyboard.isKeyDown(Keyboard.KEY_LEFT)){//if left was pressed
-				this.move(-1);
+			if(	(Keyboard.isKeyDown(Keyboard.KEY_A)||Keyboard.isKeyDown(Keyboard.KEY_LEFT))&&
+					(Keyboard.isKeyDown(Keyboard.KEY_S) ||Keyboard.isKeyDown(Keyboard.KEY_DOWN))
+					|| ((Keyboard.isKeyDown(Keyboard.KEY_W) ||Keyboard.isKeyDown(Keyboard.KEY_UP))&&
+							(Keyboard.isKeyDown(Keyboard.KEY_S) ||Keyboard.isKeyDown(Keyboard.KEY_DOWN)))){//if left was pressed
+				this.move(1);
 			}
-			if(Keyboard.isKeyDown(Keyboard.KEY_D)|| Keyboard.isKeyDown(Keyboard.KEY_RIGHT)){//if right was pressed
-				this.move(+1);
-			}
+			//if(Keyboard.isKeyDown(Keyboard.KEY_D)|| Keyboard.isKeyDown(Keyboard.KEY_RIGHT)){//if right was pressed
+			//	this.move(+1);
+			//}
 			if(Keyboard.isKeyDown(Keyboard.KEY_W) ||Keyboard.isKeyDown(Keyboard.KEY_UP)){//if UP was pressed
 				this.move(2);
 			}
