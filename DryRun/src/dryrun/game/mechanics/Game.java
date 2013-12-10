@@ -1,18 +1,25 @@
 package dryrun.game.mechanics;
 
 import org.lwjgl.opengl.Display;
-
 import static org.lwjgl.opengl.GL11.*;
-import dryrun.game.common.*;
+import dryrun.game.common.GameState;
+import dryrun.game.common.Player;
 import dryrun.game.engine.Drawable;
 import dryrun.game.engine.Tex;
 import dryrun.game.engine.Updateable;
-import dryrun.game.gui.menus.*;
+import dryrun.game.gui.menus.GameMenu;
+import dryrun.game.gui.menus.HostMenu;
+import dryrun.game.gui.menus.JoinMenu;
+import dryrun.game.gui.menus.MainMenu;
 import dryrun.game.network.GameStatePacket;
 import dryrun.game.network.client.Client;
 import dryrun.game.network.server.Server;
 import dryrun.game.objects.TextureHolder;
-import static dryrun.game.engine.LoadTex.*;
+
+import static dryrun.game.engine.LoadTex.tex;
+import static dryrun.game.engine.LoadTex.loading1;
+import static dryrun.game.engine.LoadTex.ls;
+
 
 import java.util.*;
 import java.net.*;

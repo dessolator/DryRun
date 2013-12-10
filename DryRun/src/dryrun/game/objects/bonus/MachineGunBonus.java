@@ -4,6 +4,7 @@ import dryrun.game.common.Player;
 import dryrun.game.objects.GameObject;
 
 public class MachineGunBonus extends Bonus {
+	
 	//ukoliko je nepotrebno izbaciti pickedUp
 	public final int bId=1;
 	

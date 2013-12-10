@@ -1,9 +1,7 @@
 package dryrun.game.gui.misc.buttons;
 
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import static dryrun.game.engine.LoadTex.*;
+
 import dryrun.game.engine.DrawObject;
 import dryrun.game.engine.Drawable;
 import dryrun.game.engine.Tex;
@@ -13,7 +11,11 @@ import dryrun.game.gui.menus.misc.text.TimesNewRomanText;
 import dryrun.game.objects.TextureHolder;
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.opengl.Texture;
-import static dryrun.game.gui.misc.buttons.ButtonConstants.*;
+
+import static dryrun.game.gui.misc.buttons.ButtonConstants.displayHeight;
+import static dryrun.game.gui.misc.buttons.ButtonConstants.displayWidth;
+import static dryrun.game.engine.LoadTex.buttonTextures;
+import static dryrun.game.engine.LoadTex.pushedButtonTextures;
 
 public abstract class Button implements Drawable, Updateable{
 	protected TextureHolder myTexture;
