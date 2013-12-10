@@ -11,10 +11,7 @@ public class Main {
 		Engine.init();
 		LoadTex.init();
 		Game.initGame();
-		Game.startGame();
-		
-	
-		
+		Game.startGame();		
 		Engine.kill();
 	}
 
