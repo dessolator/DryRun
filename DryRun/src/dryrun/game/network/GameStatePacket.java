@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import dryrun.game.common.GameObjectValues;
+import dryrun.game.common.Player;
 import static dryrun.game.network.NetConstants.*;
 
 public class GameStatePacket implements Serializable  {
@@ -17,6 +18,7 @@ public class GameStatePacket implements Serializable  {
 	private int i=0;
 	
 	public GameStatePacket(){
+		//myObjects = new GameObjectValues[MAX_PLAYERS-1];
 		myObjects = new GameObjectValues[1];
 	}
 	
@@ -58,6 +60,15 @@ public class GameStatePacket implements Serializable  {
 		return p;
 		
 	}
+	
+
+	public GameStatePacket test(){
+		GameStatePacket packet= new GameStatePacket();
+		Player player=new Player("test1","",450,350,133,60);
+		packet.put(player.getMyValues());
+		return packet;
+	}
+	
 	
 	
 	

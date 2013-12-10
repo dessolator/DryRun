@@ -95,6 +95,10 @@ public class Server implements NetFramework {
 			System.out.println("Created ConnectRef thread");
 			
 	}
+	public void startGame(){
+		for(int i=0; i<myThreads.size();i++)myThreads.get(i).send();
+		
+	}
 	
 	public void startGame(GameStatePacket p){
 		
