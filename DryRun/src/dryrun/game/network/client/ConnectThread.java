@@ -1,12 +1,9 @@
 package dryrun.game.network.client;
 
-import static dryrun.game.network.NetConstants.CONNECT_ACC;
-import static dryrun.game.network.NetConstants.CONNECT_REF;
-import static dryrun.game.network.NetConstants.CONNECT_REQ;
-import static dryrun.game.network.NetConstants.TCPPORT;
 import static dryrun.game.network.NetConstants.*;
-
+import dryrun.game.common.StringObject;
 import dryrun.game.network.*;
+import dryrun.game.common.GameObjectValues;
 import dryrun.game.mechanics.*;
 
 import java.io.DataInputStream;
@@ -74,7 +71,7 @@ public class ConnectThread extends Thread {
 			return;
 		}
 		
-		int sizeOfArray = 0;
+		/*int sizeOfArray = 0;
 		while(sizeOfArray<10000) {
 			try {
 				sizeOfArray = dis.available();
@@ -92,10 +89,24 @@ public class ConnectThread extends Thread {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+		}*/
+		
+		try {
+			sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			dis.read(b = new byte[dis.available()]);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		
 		GameStatePacket firstGamePositions = GameStatePacket.read(b);
-		Game.setFirstPlayersPositions(firstGamePositions);
+		GameObjectValues [] gov = firstGamePositions.objects();
+		System.out.println(((StringObject)gov[0]).message);
+		
 		
 	}
 }
