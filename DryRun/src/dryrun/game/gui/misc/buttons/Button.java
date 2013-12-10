@@ -15,7 +15,6 @@ import dryrun.game.gui.menus.misc.text.TimesNewRomanText;
 import dryrun.game.objects.TextureHolder;
 
 import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.Display;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 import static dryrun.game.gui.misc.buttons.ButtonConstants.*;
