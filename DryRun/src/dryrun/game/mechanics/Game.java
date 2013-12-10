@@ -22,6 +22,7 @@ import static dryrun.game.engine.LoadTex.ls;
 
 
 import java.util.*;
+import java.io.IOException;
 import java.net.*;
 
 public class Game {
@@ -106,6 +107,11 @@ static{
 				break;
 			case HostGameScreen:
 				currentGameState= GameState.PlayMenu;
+			try {
+				Server.getServer().terminate();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 				Server.disposeServer();
 				break;
 			case HostJoinMenu:

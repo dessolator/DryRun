@@ -1,6 +1,6 @@
 package dryrun.game.engine;
 
-import org.lwjgl.opengl.Display;
+
 
 import dryrun.game.mechanics.Game;
 

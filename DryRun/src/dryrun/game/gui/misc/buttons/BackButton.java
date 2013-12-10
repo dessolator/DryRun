@@ -1,6 +1,6 @@
 package dryrun.game.gui.misc.buttons;
 
-import dryrun.game.common.GameState;
+
 import dryrun.game.mechanics.Game;
 
 public class BackButton extends Button {
