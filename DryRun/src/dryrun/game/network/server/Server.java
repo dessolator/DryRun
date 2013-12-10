@@ -142,6 +142,14 @@ public class Server implements NetFramework {
 		return null;
 	}
 
+	public ArrayList<ServerThread> getMyThreads() {
+		return myThreads;
+	}
+
+	public void setMyThreads(ArrayList<ServerThread> myThreads) {
+		this.myThreads = myThreads;
+	}
+
 
 
 
