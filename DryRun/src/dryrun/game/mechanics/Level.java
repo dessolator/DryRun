@@ -13,18 +13,25 @@ import dryrun.game.engine.Drawable;
 import dryrun.game.engine.Tex;
 import dryrun.game.engine.Updateable;
 import dryrun.game.objects.TextureHolder;
-import dryrun.game.objects.bonus.Bonus;
+
 
 
 @SuppressWarnings("serial")
 public class Level implements Drawable, Serializable,Updateable {
+	
 	public TextureHolder th;//Level Background texture
 	public ArrayList<Player> players;//arrayList of all the Players
 	public ArrayList<Wall> walls;//arrayList of all the walls
-	public ArrayList<Bonus> bonuses;//arrayList of all the bonuses
+	
+	//bonus related	
+	public static int positionsX[] ={};//predefined postiions
+	public static int positionsY[] ={};// FILL IT UP KESLEEEERRRRRR
+	public static final int MAX_BONUSES = 30;//max bonuses
+	
+	
 	public ArrayList<Checkpoint> checkpoints;//arrayList of all the Checkpoints
 	public static final World world = new World(new Vec2(0, 0));//world for box2d purposes	
-	public static final int MAX_BONUSES = 30;//Maximum number of bonuses constant
+
 	
 
 	
@@ -40,11 +47,8 @@ public class Level implements Drawable, Serializable,Updateable {
 	
 	@Override
 	public void update() {
-		world.step(1 / 60f, 8, 3);
-		
-	}
-	
-	
+		world.step(1 / 60f, 8, 3);		
+	}	
 	
 	/*
 	 * Getters and Setters
@@ -98,9 +102,4 @@ public class Level implements Drawable, Serializable,Updateable {
 	public double getAngle() {
 		return 0;
 	}
-
-
-	
-
-
 }

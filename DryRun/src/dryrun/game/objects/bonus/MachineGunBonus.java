@@ -1,15 +1,18 @@
 package dryrun.game.objects.bonus;
 
+import org.jbox2d.common.Vec2;
+
 import dryrun.game.common.Player;
-import dryrun.game.objects.GameObject;
+
 
 public class MachineGunBonus extends Bonus {
 	
 	//ukoliko je nepotrebno izbaciti pickedUp
 	public final int bId=1;
 	
-	public MachineGunBonus(int ind, float locX, float locY) {
-		super(ind, locX, locY);	
+	public MachineGunBonus(float x, float y, float dimx, float dimy, int myInd,
+			Vec2 position) {
+		super(x, y, dimx, dimy, myInd, position);	
 	}
 
 	public void applyBonus(Player p){

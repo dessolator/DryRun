@@ -1,10 +1,13 @@
 package dryrun.game.objects.bonus;
 
+import org.jbox2d.common.Vec2;
+
+import dryrun.game.common.Player;
+
 public class Mines extends Bonus {
 
-	public Mines(int index, float x, float y) {
-		super(index, x, y);
-		// TODO Auto-generated constructor stub
+	public Mines(float x, float y, float dimx, float dimy, int myInd, Vec2 position) {
+		super(x, y, dimx, dimy, myInd, position);	
 	}
 
 	@Override
@@ -23,6 +26,11 @@ public class Mines extends Bonus {
 	public void undo() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void applyBonus(Player p) {
+		p.setMinescount(p.getMinescount()+1);
 	}
 
 }

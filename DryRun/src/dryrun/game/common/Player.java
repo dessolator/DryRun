@@ -26,8 +26,17 @@ public class Player extends GameObject implements Movable {
 	private static double speed=0;//implementirati kasnije
 	private double rangle = (double)(Math.PI/180);
 	private double angle = 0;
-	public Vec2 direction;
+	private Vec2 direction;
 	
+	public Vec2 getDirection() {
+		return direction;
+	}
+
+
+	public void setDirection(Vec2 direction) {
+		this.direction = direction;
+	}
+
 	//is w or s clicked
 	private static boolean something=false;
 	
@@ -47,10 +56,10 @@ public class Player extends GameObject implements Movable {
 	//bonus related 
 	//if a player picks up certain bonus the count increased 
 	//for a certain amount ...
-	public static int ammo = 0; 
-	public static int minescount = 0;
-	public static double nitro = 0.0;
-	public static int rockets = 0;
+	public int ammo = 0; 
+	public int minescount = 0;
+	public double nitro = 0.0;
+	public int health = 0;
 
 	//constructor
 	public Player(String n, String carType, float x, float y, float dimx, float dimy){
@@ -338,5 +347,44 @@ public class Player extends GameObject implements Movable {
 		myStats=(PlayerValues) stats;
 	}
 	
-	public List<GameObject> getMyObjects(){return myObjects;}
+	public List<GameObject> getMyObjects(){return myObjects;}	
+
+	public  int getAmmo() {
+		return ammo;
+	}
+
+
+	public  void setAmmo(int ammo) {
+		this.ammo = ammo;
+	}
+
+
+	public  int getMinescount() {
+		return minescount;
+	}
+
+
+	public  void setMinescount(int minescount) {
+		this.minescount = minescount;
+	}
+
+
+	public  double getNitro() {
+		return nitro;
+	}
+
+
+	public void setNitro(double nitro) {
+		this.nitro = nitro;
+	}
+
+
+	public int getHealth() {
+		return health;
+	}
+
+
+	public void setHealth(int rockets) {
+		this.health = rockets;
+	}
 }
