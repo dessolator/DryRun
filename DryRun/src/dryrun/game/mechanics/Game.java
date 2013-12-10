@@ -21,7 +21,9 @@ public class Game {
 	private static GameState currentGameState=GameState.MainMenu;
 	
 	private static List<InetAddress> serverAddresses;
-	 
+	
+	private static Level myLvl;
+	
 static{		
 		//myLevel=new Level(currentLevel);
 		
@@ -30,7 +32,8 @@ static{
 		myGameMenu = new GameMenu();
 		myHostMenu = new HostMenu();
 		myLobbyMenu = new JoinMenu();
-		//mySettingsMenu=new SettingsMenu();	
+		//mySettingsMenu=new SettingsMenu();
+		myLvl = new Level();
 	}
 	
 	public static void startGame(){
@@ -165,5 +168,18 @@ static{
 	public static void setMyLobbyMenu(JoinMenu myLobbyMenu) {
 		Game.myLobbyMenu = myLobbyMenu;
 	}
+	
+	public static Level getMyLevel(){
+		return myLvl;
+	}
+
+
+	public static Player createPlayer(String string, String string2) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	
 
 }
