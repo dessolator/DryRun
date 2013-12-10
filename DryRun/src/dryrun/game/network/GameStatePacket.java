@@ -5,18 +5,21 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import dryrun.game.common.GameObjectValues;
+import dryrun.game.common.Player;
 import static dryrun.game.network.NetConstants.*;
 
-public class GameStatePacket  {
+public class GameStatePacket implements Serializable  {
 //	private ArrayList<GameObjectValues> myObjects=new ArrayList<GameObjectValues>();
 	private GameObjectValues [] myObjects;
 	private int i=0;
 	
 	public GameStatePacket(){
-		myObjects = new GameObjectValues[MAX_PLAYERS-1];
+		//myObjects = new GameObjectValues[MAX_PLAYERS-1];
+		myObjects = new GameObjectValues[1];
 	}
 	
 	public void put(GameObjectValues gov){
@@ -52,15 +55,20 @@ public class GameStatePacket  {
 			ByteArrayInputStream bais = new ByteArrayInputStream(x);
 			ObjectInputStream ois;
 			ois = new ObjectInputStream(bais);
-			p = getPacket(ois);
+			p = (GameStatePacket) ois.readObject();
 		} catch (IOException e) {e.printStackTrace();} catch (ClassNotFoundException e){e.printStackTrace();}
 		return p;
 		
 	}
 	
-	protected  static GameStatePacket getPacket(ObjectInputStream ois) throws ClassNotFoundException, IOException {
-		return (GameStatePacket) ois.readObject();
+	public GameStatePacket test(){
+		GameStatePacket packet= new GameStatePacket();
+		Player player=new Player("test1","",450,350,133,60);
+		packet.put(player.getMyValues());
+		return packet;
 	}
+	
+	
 	
 	
 	
