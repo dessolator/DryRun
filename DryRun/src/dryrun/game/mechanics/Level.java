@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import org.newdawn.slick.opengl.Texture;
@@ -15,12 +16,15 @@ import dryrun.game.engine.Tex;
 import dryrun.game.objects.TextureHolder;
 import dryrun.game.objects.bonus.Bonus;
 
-public class Level implements Drawable {
+@SuppressWarnings("serial")
+public class Level implements Drawable, Serializable {
 	public TextureHolder th;
 	public ArrayList<Player> players;
 	public ArrayList<Wall> walls;
 	public ArrayList<Bonus> bonuses;
 	public ArrayList<Checkpoint> checkpoints;
+	
+	public static final int MAX_BONUSES = 30;
 	
 
 	
@@ -102,6 +106,22 @@ public class Level implements Drawable {
 	public double getAngle() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+
+
+	public float[] getBonusLocX() {
+		return null;
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	public float[] getBonusLocY() {
+		return null;
+		// TODO Auto-generated method stub
+		
 	}
 
 }

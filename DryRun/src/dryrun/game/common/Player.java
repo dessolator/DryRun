@@ -7,6 +7,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.contacts.Velocity;
@@ -21,15 +23,16 @@ import dryrun.game.engine.Movable;
 import dryrun.game.engine.Tex;
 import dryrun.game.engine.Updateable;
 import dryrun.game.objects.GameObject;
+import dryrun.game.objects.bonus.Bonus;
 import dryrun.game.objects.bonus.Timer;
 
 public class Player extends GameObject implements Movable {
 	//player related
 	private PlayerValues myStats;
 	private ArrayList<Timer> myTimers;
-	private ArrayList<GameObject> myObjects;
+
+	protected List<GameObject> myObjects=Collections.synchronizedList(new ArrayList<GameObject>());
 	private String name;
-	private String carType;
 	private Vec2 velocity;
 	private static double speed=0;//implementirati kasnije
 	private double rangle = (double)(Math.PI/180);
@@ -56,7 +59,6 @@ public class Player extends GameObject implements Movable {
 	
 	public Player(String n, String carType, float x, float y, float dimx, float dimy){
 		super(x, y, dimx, dimy);
-		this.carType=carType;
 		name=n;	
 		myStats=new PlayerValues();
 		direction = new Vec2(1,0);
@@ -330,7 +332,12 @@ public class Player extends GameObject implements Movable {
 	}
 	
 	
-	public ArrayList<GameObject> getMyObjects(){return myObjects;}
+	public List<GameObject> getMyObjects(){return myObjects;}
+	
+	
+	public void applyBonus(Bonus bonus) {
+		
+	}
 	
 	
 }
