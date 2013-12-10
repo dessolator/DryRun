@@ -1,19 +1,43 @@
 package dryrun.game.objects;
-import org.newdawn.slick.opengl.Texture;
 
+import org.jbox2d.collision.shapes.PolygonShape;
+import org.jbox2d.dynamics.Body;
+import org.jbox2d.dynamics.BodyDef;
+import org.jbox2d.dynamics.BodyType;
+import org.jbox2d.dynamics.FixtureDef;
+import org.newdawn.slick.opengl.Texture;
+import static dryrun.game.network.NetConstants.P2M;
 import dryrun.game.engine.*;
+import dryrun.game.mechanics.Level;
 import dryrun.game.common.*;
 
-public abstract class GameObject implements Drawable,Updateable{
+public abstract class GameObject implements Drawable,Updateable,Collidable{
 	protected TextureHolder holder;
 	protected GameObjectValues myValues;
+	protected Body myBody;
+	
+
+	
 	
 	public GameObject(float x, float y, float dimx, float dimy){
-			myValues = new GameObjectValues();
-			myValues.setCoordX(x);
-			myValues.setCoordY(y);
-			myValues.setDimX(dimx);
-			myValues.setDimY(dimy);		
+		BodyDef boxDef = new BodyDef();//make new jbox2d body definition
+        boxDef.position.set(x*P2M,y*P2M);//set the position in meters
+        boxDef.type = BodyType.DYNAMIC;//almost all game objects are dynamic
+        PolygonShape boxShape = new PolygonShape();//define shape as a polygon
+        boxShape.setAsBox(0.75f, 0.75f);//namely as a box
+        Body box = Level.world.createBody(boxDef);
+        FixtureDef boxFixture = new FixtureDef();
+        boxFixture.density = 0.1f;
+        boxFixture.shape = boxShape;
+        box.createFixture(boxFixture);
+        Level.bodies.add(box);
+        this.myBody=box;
+        box.setUserData(this);
+		myValues = new GameObjectValues();
+		myValues.setCoordX(x);
+		myValues.setCoordY(y);
+		myValues.setDimX(dimx);
+		myValues.setDimY(dimy);		
 	}
 	public TextureHolder getHolder() {
 		return holder;

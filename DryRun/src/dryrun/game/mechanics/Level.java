@@ -4,23 +4,35 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
+import org.jbox2d.common.Vec2;
+import org.jbox2d.dynamics.Body;
+import org.jbox2d.dynamics.World;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 
 import dryrun.game.common.Player;
 import dryrun.game.engine.Drawable;
 import dryrun.game.engine.Tex;
+import dryrun.game.engine.Updateable;
 import dryrun.game.objects.TextureHolder;
 import dryrun.game.objects.bonus.Bonus;
 
-public class Level implements Drawable {
+
+public class Level implements Drawable, Serializable,Updateable {
 	public TextureHolder th;
 	public ArrayList<Player> players;
 	public ArrayList<Wall> walls;
 	public ArrayList<Bonus> bonuses;
 	public ArrayList<Checkpoint> checkpoints;
+	public static final World world = new World(new Vec2(0, -9.8f));
+    public static final Set<Body> bodies = new HashSet<Body>();
+	
+	public static final int MAX_BONUSES = 30;
 	
 
 	
@@ -102,6 +114,15 @@ public class Level implements Drawable {
 	public double getAngle() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+
+
+	@Override
+	public void update() {
+		world.step(1 / 60f, 8, 3);
+		// TODO Auto-generated method stub
+		
 	}
 
 }

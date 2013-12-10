@@ -1,8 +1,7 @@
 package dryrun.game.gui.menus;
 
 import org.lwjgl.opengl.Display;
-import org.newdawn.slick.opengl.TextureLoader;
-import java.io.*;
+import static dryrun.game.engine.LoadTex.mainMenuBackground;
 import dryrun.game.gui.menus.misc.frames.*;
 import java.util.*;
 import dryrun.game.gui.misc.buttons.*;
@@ -20,15 +19,7 @@ public class HostMenu extends Menu {
 				Display.getHeight()/2 + Display.getHeight()/10 + Display.getHeight()/30));
 		myButtons.add(new BackButton(Display.getWidth()/2,
 				Display.getHeight()/2 + Display.getHeight()/30));
-		try {
-			background = TextureLoader.getTexture("PNG", new FileInputStream(new File("res/MenuBackground.png")));
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		background=mainMenuBackground;
 	}
 
 }

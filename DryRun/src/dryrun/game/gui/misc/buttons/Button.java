@@ -1,11 +1,9 @@
 package dryrun.game.gui.misc.buttons;
 
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
+import static dryrun.game.engine.LoadTex.*;
 import dryrun.game.engine.DrawObject;
 import dryrun.game.engine.Drawable;
 import dryrun.game.engine.Tex;
@@ -13,10 +11,8 @@ import dryrun.game.engine.Updateable;
 import dryrun.game.gui.menus.misc.text.Text;
 import dryrun.game.gui.menus.misc.text.TimesNewRomanText;
 import dryrun.game.objects.TextureHolder;
-
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.opengl.Texture;
-import org.newdawn.slick.opengl.TextureLoader;
 import static dryrun.game.gui.misc.buttons.ButtonConstants.*;
 
 public abstract class Button implements Drawable, Updateable{
@@ -33,14 +29,9 @@ public abstract class Button implements Drawable, Updateable{
 		this.coordY = coordY;
 		this.dimX = displayWidth/5;
 		this.dimY = displayHeight/10;
-		try {
-			myTexture=new TextureHolder(TextureLoader.getTexture("PNG", new FileInputStream(new File("res/button-sprite.png"))),new Tex(0f,((float)3/10+(float)1/200),1f,((float)4/10+(float)1/200)));
-			pressedTexture=new TextureHolder(TextureLoader.getTexture("PNG", new FileInputStream(new File("res/button-sprite.png"))),new Tex(0f,((float)9/10),1f,((float)1)));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		myTexture=new TextureHolder(buttonTextures,new Tex(0f,((float)3/10+(float)1/200),1f,((float)4/10+(float)1/200)));
+		pressedTexture=new TextureHolder(pushedButtonTextures,new Tex(0f,((float)9/10),1f,((float)1)));
+
 	}
 	private float coordX;
 	private float coordY;

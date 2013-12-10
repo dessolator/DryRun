@@ -4,7 +4,7 @@ import dryrun.game.common.ServerButtonProto;
 import dryrun.game.engine.DrawObject;
 import dryrun.game.gui.menus.misc.frames.BasicFrame;
 import dryrun.game.gui.misc.buttons.*;
-
+import static dryrun.game.engine.LoadTex.mainMenuBackground;
 import java.util.*;
 
 import org.lwjgl.input.Mouse;
@@ -40,13 +40,7 @@ public class JoinMenu extends Menu {
 		myButtons.add(new BackButton(Display.getWidth()/4,
 				Display.getHeight()/2 + Display.getHeight()/30));
 		
-		try {
-			background = TextureLoader.getTexture("PNG", new FileInputStream(new File("res/MenuBackground.png")));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		background=mainMenuBackground;
 	}
 	
 	public void render() {
