@@ -1,8 +1,6 @@
 package dryrun.game.common;
 
 import static dryrun.game.engine.LoadTex.playerTex;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -15,6 +13,7 @@ import dryrun.game.engine.Tex;
 import dryrun.game.objects.GameObject;
 import dryrun.game.objects.bonus.Bonus;
 import dryrun.game.objects.bonus.Timer;
+import static org.lwjgl.opengl.GL11.glTranslatef;
 
 public class Player extends GameObject implements Movable {
 	//player related
