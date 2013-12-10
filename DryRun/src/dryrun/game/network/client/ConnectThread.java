@@ -9,6 +9,8 @@ import dryrun.game.mechanics.*;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.DatagramSocket;
@@ -29,12 +31,12 @@ public class ConnectThread extends Thread {
 	
 	public void run() {
 		
-		DataInputStream dis = null;
-		DataOutputStream dos = null;
+		ObjectInputStream dis = null;
+		ObjectOutputStream dos = null;
 	
 		try {
-			dis = new DataInputStream(client.getTCPSocket().getInputStream());
-			dos = new DataOutputStream(client.getTCPSocket().getOutputStream());
+			dis = new ObjectInputStream(client.getTCPSocket().getInputStream());
+			dos = new ObjectOutputStream(client.getTCPSocket().getOutputStream());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
