@@ -36,6 +36,8 @@ public class ServerThread  { //Client instance on the server
 		receiver = new ServerReceiver(this);
 		ldr = new ServerLoader(srvB,myRecBuffer);
 		
+		tos=tcpout;
+		tis=tcpin;
 	}
 	
 	//public ConcurrentCircularBuffer getBuffer(){return myBuffer;}
@@ -46,7 +48,23 @@ public class ServerThread  { //Client instance on the server
 			tos.write(b);
 		} catch (IOException e) {e.printStackTrace();}
 		
+		
 	}
+	
+	public void send(){
+		GameStatePacket p= new GameStatePacket().test();
+		byte b[]=GameStatePacket.write(p);
+		try {
+			System.out.print("Saljem -");
+			tos.write(b);
+			System.out.print(" poslao");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
 	
 	public void start(){sender.start();receiver.start(); ldr.start();} //Starting all threads
 	

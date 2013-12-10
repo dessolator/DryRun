@@ -92,7 +92,7 @@ public class ConnectThread extends Thread {
 		}*/
 		
 		try {
-			sleep(1000);
+			sleep(10000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
