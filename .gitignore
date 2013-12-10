@@ -2,12 +2,10 @@
 *.jar
 *.war
 *.ear
+*.ini
 
 
-# Package Files #
-*.jar
-*.war
-*.ear
+# Exceptions to gitignore #
 !lwjgl.jar
 !lwjgl_util.jar
 !slick-util.jar
@@ -19,4 +17,4 @@
 !SoundSystem.jar
 !SoundSystemJPCT.jar
 !SoundSystemUtils.jar
-*.ini
+

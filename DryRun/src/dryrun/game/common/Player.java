@@ -44,6 +44,13 @@ public class Player extends GameObject implements Movable {
 	private double breaks = -0.15;
 	private double inertivebreaks = 0.08;
 
+	//bonus related 
+	//if a player picks up certain bonus the count increased 
+	//for a certain amount ...
+	public static int ammo = 0; 
+	public static int minescount = 0;
+	public static double nitro = 0.0;
+	public static int rockets = 0;
 
 	//constructor
 	public Player(String n, String carType, float x, float y, float dimx, float dimy){
@@ -55,23 +62,6 @@ public class Player extends GameObject implements Movable {
 		holder=new TextureHolder(playerTex,new Tex(0f,0f,1f,1f));
 	}
 	
-	//getters and setters
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public PlayerValues getMyStats() {
-		return myStats;
-	}
-
-	public void setMyStats(PlayerValues myStats) {
-		this.myStats = myStats;
-	}
-
 	
 	//player update input should be here
 	public void update() {
@@ -146,7 +136,7 @@ public class Player extends GameObject implements Movable {
 		
 		case 1:{ //blocking when all buttons pressed			
 			break;
-		}
+			}
 		
 		case 2:{ //stisnuto napred ili strelica napred	
 			
@@ -170,10 +160,8 @@ public class Player extends GameObject implements Movable {
 				myValues.setCoordY((myValues.getCoordY()+velocity.y));
 				//speed calculation
 				calcSpeedUp();
-				
-				//glPushMatrix();
-				glTranslatef(-velocity.x, velocity.y, 0);
-				//glPopMatrix();
+				//screen movement
+				glTranslatef(-velocity.x, velocity.y, 0);			
 				break;
 			
 		}
@@ -209,9 +197,8 @@ public class Player extends GameObject implements Movable {
 			//speed calcuation
 			calcSpeedDown();
 			
-//			glPushMatrix();
+			//screen movement
 			glTranslatef(-velocity.x, velocity.y, 0);
-//			glPopMatrix();
 			break;
 			}
 		}
@@ -222,14 +209,7 @@ public class Player extends GameObject implements Movable {
 		DrawObject.draw(this);
 	}
 	
-	public double getAngle() {
-		return angle;
-	}
-	
-	public void setMyStats(GameObjectValues stats) {
-		myStats=(PlayerValues) stats;
-	}
-	
+
 	//timer methods
 	public ArrayList<Timer> getMytimers() {
 		return myTimers;
@@ -323,9 +303,40 @@ public class Player extends GameObject implements Movable {
 	public void collided(Player b) {
 		// TODO Auto-generated method stub
 		
-	}
-	public List<GameObject> getMyObjects(){return myObjects;}
+	}	
 	
-	
+	//bonus 
 	public void applyBonus(Bonus bonus) { }
+
+	public void incMachinegunAmmo(int i) {
+		ammo += i; 		
+		}
+	
+	
+	//getters and setters
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public PlayerValues getMyStats() {
+		return myStats;
+	}
+
+	public void setMyStats(PlayerValues myStats) {
+		this.myStats = myStats;
+	}
+
+	public double getAngle() {
+		return angle;
+	}
+	
+	public void setMyStats(GameObjectValues stats) {
+		myStats=(PlayerValues) stats;
+	}
+	
+	public List<GameObject> getMyObjects(){return myObjects;}
 }

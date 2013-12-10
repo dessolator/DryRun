@@ -1,21 +1,12 @@
 package dryrun.game.mechanics;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
-
 import org.jbox2d.common.Vec2;
-import org.jbox2d.dynamics.Body;
 import org.jbox2d.dynamics.World;
 import org.lwjgl.opengl.Display;
 import org.newdawn.slick.opengl.Texture;
-import org.newdawn.slick.opengl.TextureLoader;
-
+import static dryrun.game.engine.LoadTex.levelBackground;
 import dryrun.game.common.Player;
 import dryrun.game.engine.DrawObject;
 import dryrun.game.engine.Drawable;
@@ -25,106 +16,91 @@ import dryrun.game.objects.TextureHolder;
 import dryrun.game.objects.bonus.Bonus;
 
 
+@SuppressWarnings("serial")
 public class Level implements Drawable, Serializable,Updateable {
-	public TextureHolder th;
-	public ArrayList<Player> players;
-	public ArrayList<Wall> walls;
-	public ArrayList<Bonus> bonuses;
-	public ArrayList<Checkpoint> checkpoints;
-	public static final World world = new World(new Vec2(0, 0));
-    public static final Set<Body> bodies = new HashSet<Body>();
-	
-	public static final int MAX_BONUSES = 30;
+	public TextureHolder th;//Level Background texture
+	public ArrayList<Player> players;//arrayList of all the Players
+	public ArrayList<Wall> walls;//arrayList of all the walls
+	public ArrayList<Bonus> bonuses;//arrayList of all the bonuses
+	public ArrayList<Checkpoint> checkpoints;//arrayList of all the Checkpoints
+	public static final World world = new World(new Vec2(0, 0));//world for box2d purposes	
+	public static final int MAX_BONUSES = 30;//Maximum number of bonuses constant
 	
 
 	
 	public Level(){
-		try {
-			th=new TextureHolder(TextureLoader.getTexture("PNG", new FileInputStream(new File("res/raceTrack.png"))),new Tex(0,1,0,1));
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}		
+			th=new TextureHolder(levelBackground,new Tex(0,1,0,1));//load the texture
 	}
 	
-
-	
-	@Override
-	public Texture getTexture() {
-		// TODO Auto-generated method stub
-		return th.getMyTexture();
-	}
-
 	@Override
 	public void render() {
 		DrawObject.draw(this);
 
 	}
+	
+	@Override
+	public void update() {
+		world.step(1 / 60f, 8, 3);
+		
+	}
+	
+	
+	
+	/*
+	 * Getters and Setters
+	 */
+	@Override
+	public Texture getTexture() {
+		return th.getMyTexture();
+	}
 
 	@Override
 	public float getX() {
-		// TODO Auto-generated method stub
 		return Display.getWidth()/2;
 	}
 
 	@Override
 	public float getY() {
-		// TODO Auto-generated method stub
 		return Display.getHeight()/2;
 	}
 
 	@Override
 	public float getDimX() {
-		// TODO Auto-generated method stub
-		return Display.getWidth()*10;
+		return Display.getWidth()*10;//TODO map stretch factor
 	}
 
 	@Override
 	public float getDimY() {
-		// TODO Auto-generated method stub
-		return Display.getHeight()*10;
+		return Display.getHeight()*10;//TODO map stretch factor
 	}
 
 	@Override
 	public float getTexX1() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public float getTexX2() {
-		// TODO Auto-generated method stub
 		return 1;
 	}
 
 	@Override
 	public float getTexY1() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public float getTexY2() {
-		// TODO Auto-generated method stub
 		return 1;
 	}
 
 	@Override
 	public double getAngle() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 
+	
 
-	@Override
-	public void update() {
-		world.step(1 / 60f, 8, 3);
-		// TODO Auto-generated method stub
-		
-	}
 
 }
