@@ -64,7 +64,7 @@ static{
 			case MainMenu:
 				return myMainMenu;
 			case Game:
-				return null;
+				return myLvl;
 			case HostGameScreen:
 				return myHostMenu;
 			case HostJoinMenu:
@@ -122,7 +122,7 @@ static{
 		case MainMenu:
 			return myMainMenu;
 		case Game:
-			return myGameMenu;
+			return myLvl;
 		case HostGameScreen:
 			return myHostMenu;
 		case HostJoinMenu:

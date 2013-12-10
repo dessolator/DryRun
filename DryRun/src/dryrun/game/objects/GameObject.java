@@ -24,15 +24,15 @@ public abstract class GameObject implements Drawable,Updateable,Collidable{
         boxDef.position.set(x*P2M,y*P2M);//set the position in meters
         boxDef.type = BodyType.DYNAMIC;//almost all game objects are dynamic
         PolygonShape boxShape = new PolygonShape();//define shape as a polygon
-        boxShape.setAsBox(0.75f, 0.75f);//namely as a box
-        Body box = Level.world.createBody(boxDef);
-        FixtureDef boxFixture = new FixtureDef();
-        boxFixture.density = 0.1f;
-        boxFixture.shape = boxShape;
-        box.createFixture(boxFixture);
-        Level.bodies.add(box);
-        this.myBody=box;
-        box.setUserData(this);
+        boxShape.setAsBox(dimx*P2M, dimy*P2M);//namely as a box
+        Body box = Level.world.createBody(boxDef);//create a body base on the body definition
+        FixtureDef boxFixture = new FixtureDef();//create a fixture definition
+        boxFixture.density = 0.1f;//adjust density
+        boxFixture.shape = boxShape;//set the fixture shape to the previously created polygon
+        box.createFixture(boxFixture);//attach the fixture to the body(or rather vice verca)
+        Level.bodies.add(box);//add to the Level list of boddies
+        this.myBody=box;//attach the body to the game object
+        box.setUserData(this);//set the body userData to it's parent object
 		myValues = new GameObjectValues();
 		myValues.setCoordX(x);
 		myValues.setCoordY(y);
