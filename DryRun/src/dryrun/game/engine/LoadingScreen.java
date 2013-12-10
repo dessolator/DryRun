@@ -1,58 +1,37 @@
 package dryrun.game.engine;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
-import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
-import org.lwjgl.opengl.GLContext;
 import org.newdawn.slick.opengl.Texture;
-import org.newdawn.slick.opengl.TextureLoader;
-
-import dryrun.game.mechanics.Game;
+import static dryrun.game.engine.LoadTex.tex;
 import dryrun.game.objects.TextureHolder;
 import static dryrun.game.engine.LoadTex.loading1;
 import static dryrun.game.engine.Main.i;
+
+
+
 public class LoadingScreen implements Drawable {
-	protected TextureHolder background;
+
 	
-	
-	public LoadingScreen() {
-		super();	
-			switch((i%3)){
-			case 0: {
-				background=new TextureHolder (loading1,new Tex(0f, 0f, (float)1/8f, 1f));
-				break;
-			}
-			case 1: {
-				background=new TextureHolder (loading1,new Tex((float)1/8f, 0f, (float)2/8f, 1f));
-				break;}
-			case 2: {
-				background=new TextureHolder (loading1,new Tex((float)2/8f, 0f, (float)3/8f, 1f));
-				break;}
-			}
+	public LoadingScreen(){
 		
 	}
 	
-	public void init() {
-		System.out.println("cao");
-		//while(!Game.theEnd) {
-			
-			render();
-	}
+	
+	
 		//	@Override
 	public Texture getTexture() {
 		// TODO Auto-generated method stub
-		return background.getMyTexture();
+		return tex.getMyTexture();
 	}
 	
 	@Override
 	public void render() {
-		Mouse.setGrabbed(true);
+//		Mouse.setGrabbed(true);
+		System.out.println("loading");
 		DrawObject.draw(this);
+		Display.update();
 		// TODO Auto-generated method stub
 
 	}
@@ -84,25 +63,25 @@ public class LoadingScreen implements Drawable {
 	@Override
 	public float getTexX1() {
 		// TODO Auto-generated method stub
-		return background.getMyCoords().getX1();
+		return tex.getMyCoords().getX1();
 	}
 
 	@Override
 	public float getTexX2() {
 		// TODO Auto-generated method stub
-		 	return background.getMyCoords().getX2();
+		 	return tex.getMyCoords().getX2();
 	}
 
 	@Override
 	public float getTexY1() {
 		// TODO Auto-generated method stub
-		return background.getMyCoords().getY1();
+		return tex.getMyCoords().getY1();
 	}
 
 	@Override
 	public float getTexY2() {
 		// TODO Auto-generated method stub
-		return background.getMyCoords().getY2();
+		return tex.getMyCoords().getY2();
 	}
 
 	@Override

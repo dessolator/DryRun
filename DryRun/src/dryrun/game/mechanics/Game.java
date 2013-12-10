@@ -1,14 +1,18 @@
 package dryrun.game.mechanics;
 
 import org.lwjgl.opengl.Display;
+
 import static org.lwjgl.opengl.GL11.*;
 import dryrun.game.common.*;
 import dryrun.game.engine.Drawable;
+import dryrun.game.engine.Tex;
 import dryrun.game.engine.Updateable;
 import dryrun.game.gui.menus.*;
 import dryrun.game.network.GameStatePacket;
 import dryrun.game.network.client.Client;
 import dryrun.game.network.server.Server;
+import dryrun.game.objects.TextureHolder;
+import static dryrun.game.engine.LoadTex.*;
 
 import java.util.*;
 import java.net.*;
@@ -193,12 +197,23 @@ static{
 		//myLevel=new Level(currentLevel);
 		
 				serverAddresses = Collections.synchronizedList(new ArrayList<InetAddress>());
+				tex=new TextureHolder(loading1,new Tex(1/8f,0f,2/8f,1f));
+				ls.render();
 				myMainMenu = new MainMenu();
+				tex=new TextureHolder(loading1,new Tex(2/8f,0f,3/8f,1f));
+				ls.render();
 				myGameMenu = new GameMenu();
+				tex=new TextureHolder(loading1,new Tex(3/8f,0f,4/8f,1f));
+				ls.render();
 				myHostMenu = new HostMenu();
+				tex=new TextureHolder(loading1,new Tex(4/8f,0f,5/8f,1f));
+				ls.render();
 				myLobbyMenu = new JoinMenu();
+				tex=new TextureHolder(loading1,new Tex(5/8f,0f,6/8f,1f));
+				ls.render();
 				//mySettingsMenu=new SettingsMenu();
 				myLvl = new Level();
+				ls.render();
 				theEnd = true;
 		// TODO Auto-generated method stub
 		

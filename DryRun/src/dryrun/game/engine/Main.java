@@ -10,11 +10,8 @@ public class Main {
 	public static void main(String[] args) {
 		Engine.init();
 		LoadTex.init();
-
-		Game.startGame();
-		
-	
-		
+		Game.initGame();
+		Game.startGame();		
 		Engine.kill();
 	}
 
