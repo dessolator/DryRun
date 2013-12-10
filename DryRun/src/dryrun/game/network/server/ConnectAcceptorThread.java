@@ -41,7 +41,9 @@ public class ConnectAcceptorThread extends Thread {
 				//reading TCP packet.
 				String str=null;
 				try {
+					System.out.println("about to read str:");
 					str = (String)dis.readObject();
+					System.out.println(str);
 				} catch (ClassNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
