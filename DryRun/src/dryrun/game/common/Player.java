@@ -32,7 +32,7 @@ public class Player extends GameObject implements Movable {
 	private static boolean something=false;
 	
 	//speed related constants
-	private static final float maxSpeed=5;
+	private static final float maxSpeed=8;
 	private static final double maxThrottle= 0.5; 
 	private static final double maxrthrottle = -0.2;
 	private static final float maxReverse = -3;
@@ -144,8 +144,7 @@ public class Player extends GameObject implements Movable {
 	public void move(int i) {
 		switch(i){
 		
-		case 1:{
-			System.out.println("mindfuck");
+		case 1:{ //blocking when all buttons pressed			
 			break;
 		}
 		
@@ -265,27 +264,24 @@ public class Player extends GameObject implements Movable {
 					&& ((Keyboard.isKeyDown(Keyboard.KEY_W) ||Keyboard.isKeyDown(Keyboard.KEY_UP))&&
 							(Keyboard.isKeyDown(Keyboard.KEY_D) ||Keyboard.isKeyDown(Keyboard.KEY_RIGHT)))){
 				Player.something=true;
-				this.move(1);				
-			}
+				this.move(1);
+				}
 		//W and S pressed at same time
 		if((Keyboard.isKeyDown(Keyboard.KEY_S) ||Keyboard.isKeyDown(Keyboard.KEY_DOWN))
 				&& ((Keyboard.isKeyDown(Keyboard.KEY_W) ||Keyboard.isKeyDown(Keyboard.KEY_UP)))){
 			Player.something=false;
-			this.move(1);				
-		}
-		else{
-			
+			this.move(1);
+			}
+		else{			
 			if(Keyboard.isKeyDown(Keyboard.KEY_W) ||Keyboard.isKeyDown(Keyboard.KEY_UP)){//if UP was pressed
 				Player.something=true;				
-				this.move(2);				
-			}
-			
+				this.move(2);	
+				}			
 			if(Keyboard.isKeyDown(Keyboard.KEY_S) ||Keyboard.isKeyDown(Keyboard.KEY_DOWN)){//if DOWN was pressed 
 				Player.something=true;					
-				this.move(-2);				
-			}
+				this.move(-2);	
+				}
 		}
-			System.out.println("speed = "+speed+ "  throttle " + throttle);
 			
 			
 			//nista nije pritisnuto

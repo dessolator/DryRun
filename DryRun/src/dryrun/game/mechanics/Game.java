@@ -25,17 +25,10 @@ public class Game {
 	private static GameStatePacket firstPlayersPositions;
 	
 	private static Level myLvl;
+	public static boolean theEnd = false;
 	
 static{		
-		//myLevel=new Level(currentLevel);
 		
-		serverAddresses = Collections.synchronizedList(new ArrayList<InetAddress>());
-		myMainMenu = new MainMenu();
-		myGameMenu = new GameMenu();
-		myHostMenu = new HostMenu();
-		myLobbyMenu = new JoinMenu();
-		//mySettingsMenu=new SettingsMenu();
-		myLvl = new Level();
 	}
 	
 
@@ -193,6 +186,22 @@ static{
 
 	public static void setFirstPlayersPositions(GameStatePacket firstPlayPos) {
 		firstPlayersPositions = firstPlayPos;
+	}
+
+
+	public static void initGame() {
+		//myLevel=new Level(currentLevel);
+		
+				serverAddresses = Collections.synchronizedList(new ArrayList<InetAddress>());
+				myMainMenu = new MainMenu();
+				myGameMenu = new GameMenu();
+				myHostMenu = new HostMenu();
+				myLobbyMenu = new JoinMenu();
+				//mySettingsMenu=new SettingsMenu();
+				myLvl = new Level();
+				theEnd = true;
+		// TODO Auto-generated method stub
+		
 	}
 
 }
