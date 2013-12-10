@@ -83,6 +83,9 @@ public class Server implements NetFramework {
 		}else{System.out.print("ConnectAcceptorThread.");}
 	}
 
+	public ArrayList<ServerThread> getServerThreads() {
+		return myThreads;
+	}
 	
 	public void host(){						//function called by the game when a user requests to host a game
 			System.out.println("Creating refresh and connect SrvThreads");

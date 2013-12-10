@@ -1,5 +1,6 @@
 package dryrun.game.mechanics;
 
+import org.jbox2d.dynamics.BodyType;
 import org.lwjgl.opengl.Display;
 import static org.lwjgl.opengl.GL11.*;
 import dryrun.game.common.GameState;
@@ -31,7 +32,7 @@ public class Game {
 	private static HostMenu myHostMenu;//my host menu
 	private static JoinMenu myLobbyMenu;//my join menu
 	private static boolean terminate=false;	//window kill flag
-	private static GameState currentGameState=GameState.Game;//current game state
+	private static GameState currentGameState=GameState.MainMenu;//current game state
 	private static List<InetAddress> serverAddresses;//list of known server addresses
 	private static GameStatePacket firstPlayersPositions;//TODO someone else added this I do not understand it @Ivan
 	private static Level myLvl;//myLevel
@@ -57,7 +58,7 @@ static{
 				Display.getWidth()/6,
 				Display.getHeight()/10);//@Vuk Test
 		
-		d.myBody.m_type=BodyType.STATIC;//@Vuk Test
+//		d.myBody.m_type=BodyType.STATIC;//@Vuk Test
 		while((!Display.isCloseRequested())&& !terminate) {
 			glClear(GL_COLOR_BUFFER_BIT);//clear the screen
 			getCurrentUpdate().update();//update what needs to be updated

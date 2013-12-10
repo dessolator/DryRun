@@ -36,7 +36,7 @@ public abstract class GameObject implements Drawable,Updateable,Collidable{
         boxFixture.density = 0.1f;//adjust density
         boxFixture.shape = boxShape;//set the fixture shape to the previously created polygon
         box.createFixture(boxFixture);//attach the fixture to the body(or rather vice verca)
-        Level.bodies.add(box);//add to the Level list of boddies
+//        Level.bodies.add(box);//add to the Level list of boddies
         this.myBody=box;//attach the body to the game object
         box.setUserData(this);//set the body userData to it's parent object
 		myValues = new GameObjectValues();

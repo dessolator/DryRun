@@ -28,6 +28,10 @@ public class GameStatePacket  {
 		return myObjects;
 	}
 	
+	// added : goksiii
+	public GameObjectValues[] objects() {
+		return myObjects;
+	}
 	
 	public static byte[] write(GameStatePacket p){ //SERIALIZING
 		byte[] x = null;

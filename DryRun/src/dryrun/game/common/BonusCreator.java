@@ -5,12 +5,12 @@ import dryrun.game.mechanics.Level;
 import dryrun.game.objects.bonus.*;
 
 public class BonusCreator extends Player {
+	
 	private static float locX[];
-	private static float locY[];
-	
-	public static boolean isItSpawned[];
-	
+	private static float locY[];	
+	public static boolean isItSpawned[];	
 	public static long timeSincePickedUp[];
+	
 
 	public BonusCreator() {
 		super("Bonus", "", 0, 0, 0, 0);
@@ -25,23 +25,29 @@ public class BonusCreator extends Player {
 		
 	
 	
-	public static void loadBonusLoc(){locX=Game.getMyLevel().getBonusLocX(); Game.getMyLevel().getBonusLocY();}
-	
-	
+	public static void loadBonusLoc(int i){
+		locX=Game.getMyLevel().bonuses.get();
+		LocY=Game.getMyLevel().bonuses.get();
+		}
+
 	
 	public synchronized void spawnBonus(float locX, float locY,int ind){
 			double factor=Math.random();
-			myObjects.remove(ind);
+			this.getMyStats().getObjList().remove(ind);
 			if(factor>0.75)
-				myObjects.add(ind, new MachineGunBonus(ind,locX,locY));			
+				this.getMyStats().getObjList().add(ind, new MachineGunBonus(ind,locX,locY));			
+	//		else if(factor>0.5)
+	//			this.getMyStats().getObjList().add(ind, new NitroBonus(ind,locX,locY));
+	//		else if(factor>0.25)
+	//			this.getMyStats().getObjList().add(ind, new Rocketbonus(ind,locX,locY));
+			
+				myObjects.add(ind, new MachineGunBonus(ind,locX,locY));		
 			else if(factor>0.5)
 				myObjects.add(ind, new NitroBonus(ind,locX,locY));
 			else if(factor>0.25)
-				myObjects.add(ind, new Rocketbonus(ind,locX,locY));
-			
-			else myObjects.add(ind, new Mines(ind,locX,locY));
+				myObjects.add(ind, new RocketBonus(ind,locX,locY));
+	//		else this.getMyStats().getObjList().add(ind, new Mines(ind,locX,locY));
 	}
-
 
 
 	public synchronized void check() {
@@ -63,8 +69,7 @@ public class BonusCreator extends Player {
 
 
 
-	public static synchronized boolean isBonusSpawned(int i) {
-		
+	public static synchronized boolean isBonusSpawned(int i) {		
 		return isItSpawned[i];
 	}
 
