@@ -1,20 +1,17 @@
 package dryrun.game.network.client;
 
 import static dryrun.game.network.NetConstants.*;
-import dryrun.game.common.StringObject;
+
 import dryrun.game.network.*;
 import dryrun.game.common.GameObjectValues;
-import dryrun.game.mechanics.*;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.InetAddress;
-import java.net.Socket;
-import java.net.DatagramSocket;
-import java.net.SocketException;
+
 
 public class ConnectThread extends Thread {
 	private InetAddress serverAddress;
@@ -35,12 +32,14 @@ public class ConnectThread extends Thread {
 		ObjectOutputStream dos = null;
 	
 		try {
-			dis = new ObjectInputStream(client.getTCPSocket().getInputStream());
 			dos = new ObjectOutputStream(client.getTCPSocket().getOutputStream());
+			dos.flush();
+			dis = new ObjectInputStream(client.getTCPSocket().getInputStream());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
+		System.out.println("Streams created");
 		String s = new String(CONNECT_REQ + "#" + playerName + "#" + typeOfAutomobile);
 		try {
 			dos.writeObject(s);
