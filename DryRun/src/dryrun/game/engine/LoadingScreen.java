@@ -33,12 +33,11 @@ public class LoadingScreen implements Drawable {
 	
 	public void init() {
 		System.out.println("cao");
-		while(!Game.theEnd) {
+		//while(!Game.theEnd) {
 			
 			render();
-		}
 	}
-	@Override
+		//	@Override
 	public Texture getTexture() {
 		// TODO Auto-generated method stub
 		return background;
