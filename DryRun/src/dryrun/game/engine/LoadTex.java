@@ -19,6 +19,8 @@ public class LoadTex {
 	public static TextureHolder tex;
 	public static LoadingScreen ls;
 	public static Texture levelBackground;
+	
+	
 	public static void init(){
 		try {
 			ls=new LoadingScreen();

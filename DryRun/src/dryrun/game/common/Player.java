@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.List;
 import org.jbox2d.common.Vec2;
 import org.lwjgl.input.Keyboard;
-import dryrun.game.objects.*;
+import dryrun.game.objects.TextureHolder;
 import dryrun.game.engine.DrawObject;
 import dryrun.game.engine.Movable;
 import dryrun.game.engine.Tex;
@@ -327,7 +327,5 @@ public class Player extends GameObject implements Movable {
 	public List<GameObject> getMyObjects(){return myObjects;}
 	
 	
-	public void applyBonus(Bonus bonus) {
-		
-	}
+	public void applyBonus(Bonus bonus) { }
 }

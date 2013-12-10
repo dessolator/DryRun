@@ -1,7 +1,9 @@
 package dryrun.game.objects;
 
 import org.newdawn.slick.opengl.Texture;
-import dryrun.game.engine.*;
+import dryrun.game.engine.Tex;
+
+
 public class TextureHolder {
 	private Texture myTexture; //moja tekstura
 	

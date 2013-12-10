@@ -6,17 +6,23 @@ import org.jbox2d.dynamics.BodyDef;
 import org.jbox2d.dynamics.BodyType;
 import org.jbox2d.dynamics.FixtureDef;
 import org.newdawn.slick.opengl.Texture;
-import static dryrun.game.network.NetConstants.P2M;
-import dryrun.game.engine.*;
+
+import dryrun.game.engine.Collidable;
+import dryrun.game.engine.Drawable;
+import dryrun.game.engine.Tex;
+import dryrun.game.engine.Updateable;
+import dryrun.game.objects.TextureHolder;
 import dryrun.game.mechanics.Level;
-import dryrun.game.common.*;
+import dryrun.game.common.GameObjectValues;
+
+import static dryrun.game.network.NetConstants.P2M;
+
 
 public abstract class GameObject implements Drawable,Updateable,Collidable{
+	
 	protected TextureHolder holder;
 	protected GameObjectValues myValues;
-	public Body myBody;//TODO make me protected
-	
-
+	protected Body myBody;
 	
 	
 	public GameObject(float x, float y, float dimx, float dimy){
@@ -68,11 +74,11 @@ public abstract class GameObject implements Drawable,Updateable,Collidable{
 	}
 	
 	public float getX() {
-		return myBody.getLocalCenter().x/P2M;
+		return myValues.getCoordX();
 	}
 
 	public float getY() {		
-		return myBody.getLocalCenter().y/P2M;
+		return myValues.getCoordY();
 	}
 
 	
@@ -104,25 +110,24 @@ public abstract class GameObject implements Drawable,Updateable,Collidable{
 		myValues.setDimY(dimy);
 	}
 	
-	@Override
+
 	public float getTexX1() {
 		
 		return holder.getMyCoords().getX1();
 	}
 
-	@Override
 	public float getTexX2() {
 		
 		return holder.getMyCoords().getX2();
 	}
 
-	@Override
+
 	public float getTexY1() {
 		
 		return holder.getMyCoords().getY1();
 	}
 
-	@Override
+
 	public float getTexY2() {
 		
 		return holder.getMyCoords().getY2();

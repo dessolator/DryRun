@@ -44,6 +44,11 @@ public class Level implements Drawable, Serializable,Updateable {
 		
 	}
 	
+	
+	
+	/*
+	 * Getters and Setters
+	 */
 	@Override
 	public Texture getTexture() {
 		return th.getMyTexture();
