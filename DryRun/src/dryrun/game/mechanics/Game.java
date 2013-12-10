@@ -6,6 +6,7 @@ import dryrun.game.common.*;
 import dryrun.game.engine.Drawable;
 import dryrun.game.engine.Updateable;
 import dryrun.game.gui.menus.*;
+import dryrun.game.network.GameStatePacket;
 import dryrun.game.network.client.Client;
 import dryrun.game.network.server.Server;
 
@@ -21,6 +22,7 @@ public class Game {
 	private static GameState currentGameState=GameState.MainMenu;
 	
 	private static List<InetAddress> serverAddresses;
+	private static GameStatePacket firstPlayersPositions;
 	
 	private static Level myLvl;
 	
@@ -181,5 +183,15 @@ static{
 
 
 	
+
+
+	public static GameStatePacket getFirstPlayersPositions() {
+		return firstPlayersPositions;
+	}
+
+
+	public static void setFirstPlayersPositions(GameStatePacket firstPlayPos) {
+		firstPlayersPositions = firstPlayPos;
+	}
 
 }
