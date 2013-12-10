@@ -5,7 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-
+import static dryrun.game.engine.LoadTex.mainMenuBackground;
 import org.lwjgl.opengl.Display;
 import org.newdawn.slick.opengl.TextureLoader;
 
@@ -34,13 +34,8 @@ public class MainMenu extends Menu {
 				Display.getWidth()/2,
 				Display.getHeight()/2+Display.getHeight()/10+Display.getHeight()/30)
 		);
-		try {
-			background=TextureLoader.getTexture("PNG", new FileInputStream(new File("res/MenuBackground.png")));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		background=mainMenuBackground;
+		
 	}
 
 	@Override

@@ -1,4 +1,6 @@
 package dryrun.game.gui.menus;
+import static dryrun.game.engine.LoadTex.mainMenuBackground;
+
 import java.util.ArrayList;
 
 import org.lwjgl.opengl.Display;
@@ -25,18 +27,12 @@ public class GameMenu extends Menu {
 	
 		myButtons.add(new BackButton(Display.getWidth()/2,
 				Display.getHeight()/2 - Display.getHeight()/10 + Display.getHeight()/30));
-
+		background=mainMenuBackground;
 		
 		
 		
 		
-		try {
-			background = TextureLoader.getTexture("PNG", new FileInputStream(new File("res/MenuBackground.png")));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		
 		
 	}
 

@@ -1,28 +1,18 @@
 package dryrun.game.gui.menus.misc.frames;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
+import static dryrun.game.engine.LoadTex.basicFrame;
 import dryrun.game.engine.Tex;
 import dryrun.game.objects.TextureHolder;
 
-import org.newdawn.slick.opengl.TextureLoader;
 
 public class BasicFrame extends Frame {
 
 	public BasicFrame(float coordX, float coordY, float dimX, float dimY) {
 		super(coordX, coordY, dimX, dimY);
-		try {
-			frame=new TextureHolder(TextureLoader.getTexture("PNG", new FileInputStream(new File("res/basicFrame.png"))),new Tex(0f,0f,1f,1f));
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
+			frame=new TextureHolder(basicFrame,new Tex(0f,0f,1f,1f));
+		
 	}
 	/*
 	 * funkcije ispod ne moraju da budu implementirane za sada, po potrebi 

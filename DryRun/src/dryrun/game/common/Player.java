@@ -1,25 +1,15 @@
 package dryrun.game.common;
 
-import static org.lwjgl.opengl.GL11.*;
-
-import java.io.File;
-import java.io.FileInputStream;
+import static dryrun.game.engine.LoadTex.playerTex;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-
 import org.jbox2d.common.Vec2;
-import org.jbox2d.dynamics.contacts.Velocity;
 import org.lwjgl.input.Keyboard;
-import org.newdawn.slick.opengl.TextureLoader;
-
 import dryrun.game.objects.*;
-import dryrun.game.common.*;
 import dryrun.game.engine.DrawObject;
-import dryrun.game.engine.Drawable;
 import dryrun.game.engine.Movable;
 import dryrun.game.engine.Tex;
-import dryrun.game.engine.Updateable;
 import dryrun.game.objects.GameObject;
 import dryrun.game.objects.bonus.Timer;
 
@@ -60,13 +50,7 @@ public class Player extends GameObject implements Movable {
 		myStats=new PlayerValues();
 		direction = new Vec2(1,0);
 		velocity = new Vec2(4, 0);
-		try {			
-			holder=new TextureHolder(TextureLoader.getTexture("PNG", new FileInputStream(new File("res/player.png"))),new Tex(0f,0f,1f,1f));
-		} catch (FileNotFoundException e) {			
-			e.printStackTrace();
-		} catch (IOException e){
-			e.printStackTrace();
-		}
+		holder=new TextureHolder(playerTex,new Tex(0f,0f,1f,1f));
 	}
 	public String getName() {
 		return name;
@@ -326,5 +310,10 @@ public class Player extends GameObject implements Movable {
 				returnToStatic();
 			}				
 			else Player.something=false;
+	}
+	@Override
+	public void collided(Player b) {
+		// TODO Auto-generated method stub
+		
 	}
 }
