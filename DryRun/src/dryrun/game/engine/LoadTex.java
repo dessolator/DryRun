@@ -12,7 +12,8 @@ public class LoadTex {
 	public static Texture basicFrame;
 	public static Texture buttonTextures;
 	public static Texture pushedButtonTextures;
-	
+	public static Texture loading1;
+
 	public static void init(){
 		try {
 			playerTex=TextureLoader.getTexture("PNG", new FileInputStream(new File("res/player.png")));
@@ -20,6 +21,8 @@ public class LoadTex {
 			basicFrame=TextureLoader.getTexture("PNG", new FileInputStream(new File("res/basicFrame.png")));
 			buttonTextures=TextureLoader.getTexture("PNG", new FileInputStream(new File("res/button-sprite.png")));
 			pushedButtonTextures=TextureLoader.getTexture("PNG", new FileInputStream(new File("res/button-sprite.png")));
+			loading1=TextureLoader.getTexture("PNG", new FileInputStream(new File("res/loading.png")));
+		
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

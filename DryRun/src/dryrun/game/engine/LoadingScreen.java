@@ -13,22 +13,28 @@ import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 
 import dryrun.game.mechanics.Game;
-
+import dryrun.game.objects.TextureHolder;
+import static dryrun.game.engine.LoadTex.loading1;
+import static dryrun.game.engine.Main.i;
 public class LoadingScreen implements Drawable {
-	protected Texture background;
-
+	protected TextureHolder background;
+	
 	
 	public LoadingScreen() {
-		super();
-		try {
-			background = TextureLoader.getTexture("PNG", new FileInputStream(new File("res/MenuBackground.png")));
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		super();	
+			switch((i%3)){
+			case 0: {
+				background=new TextureHolder (loading1,new Tex(0f, 0f, (float)1/8f, 1f));
+				break;
+			}
+			case 1: {
+				background=new TextureHolder (loading1,new Tex((float)1/8f, 0f, (float)2/8f, 1f));
+				break;}
+			case 2: {
+				background=new TextureHolder (loading1,new Tex((float)2/8f, 0f, (float)3/8f, 1f));
+				break;}
+			}
+		
 	}
 	
 	public void init() {
@@ -40,7 +46,7 @@ public class LoadingScreen implements Drawable {
 		//	@Override
 	public Texture getTexture() {
 		// TODO Auto-generated method stub
-		return background;
+		return background.getMyTexture();
 	}
 	
 	@Override
@@ -66,37 +72,37 @@ public class LoadingScreen implements Drawable {
 	@Override
 	public float getDimX() {
 		// TODO Auto-generated method stub
-		return (float)Display.getWidth();
+		return (float)Display.getWidth()/20;
 	}
 
 	@Override
 	public float getDimY() {
 		// TODO Auto-generated method stub
-		return (float)Display.getHeight();
+		return (float)Display.getHeight()/8;
 	}
 
 	@Override
 	public float getTexX1() {
 		// TODO Auto-generated method stub
-		return 0;
+		return background.getMyCoords().getX1();
 	}
 
 	@Override
 	public float getTexX2() {
 		// TODO Auto-generated method stub
-		return 1;
+		 	return background.getMyCoords().getX2();
 	}
 
 	@Override
 	public float getTexY1() {
 		// TODO Auto-generated method stub
-		return 0;
+		return background.getMyCoords().getY1();
 	}
 
 	@Override
 	public float getTexY2() {
 		// TODO Auto-generated method stub
-		return 1;
+		return background.getMyCoords().getY2();
 	}
 
 	@Override
