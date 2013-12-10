@@ -38,9 +38,10 @@ static{
 		myLvl = new Level();
 	}
 	
+
 	public static void startGame(){
 
-		Player p = new Player("Kesler", "Lamburghini", Display.getWidth()/2, Display.getHeight()/4, Display.getWidth()/6, Display.getHeight()/10);
+		Player p = new Player("Kesler", "Lamburghini", Display.getWidth()/2, Display.getHeight()/2, Display.getWidth()/6, Display.getHeight()/10);
 
 		while((!Display.isCloseRequested())&& !terminate) {
 			glClear(GL_COLOR_BUFFER_BIT);

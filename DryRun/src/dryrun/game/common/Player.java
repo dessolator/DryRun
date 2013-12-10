@@ -56,7 +56,7 @@ public class Player extends GameObject implements Movable {
 	private double inertivebreaks = 0.08;
 
 
-	
+	//constructor
 	public Player(String n, String carType, float x, float y, float dimx, float dimy){
 		super(x, y, dimx, dimy);
 		name=n;	
@@ -71,6 +71,8 @@ public class Player extends GameObject implements Movable {
 			e.printStackTrace();
 		}
 	}
+	
+	//getters and setters
 	public String getName() {
 		return name;
 	}
@@ -87,16 +89,11 @@ public class Player extends GameObject implements Movable {
 		this.myStats = myStats;
 	}
 
-	public ArrayList<Timer> getMytimers() {
-		return myTimers;
-	}
-
-	public void setMyTimers(ArrayList<Timer> mytimers) {
-		this.myTimers = mytimers;
-	}
-
+	
+	//player update input should be here
 	public void update() {
 	}
+	
 	
 	//direction logic
 	public void setDirectionR(){
@@ -114,7 +111,8 @@ public class Player extends GameObject implements Movable {
 			direction.y =(float)( oldx*Math.sin(rangle) + oldy*Math.cos(rangle)); 
 			}
 	
-	//speedLogic
+	
+	//speed calculation Logic	
 	public void calcSpeedUp(){
 		if(speed < 0) {
 			speed-=breaks;
@@ -158,7 +156,7 @@ public class Player extends GameObject implements Movable {
 	
 
 	
-	
+	//very complicated move method
 	@Override
 	public void move(int i) {
 		switch(i){
@@ -192,7 +190,7 @@ public class Player extends GameObject implements Movable {
 				calcSpeedUp();
 				
 				//glPushMatrix();
-				//glTranslatef(-myValues.getCoordX(), -myValues.getCoordY(), 0);
+				glTranslatef(-velocity.x, velocity.y, 0);
 				//glPopMatrix();
 				break;
 			
@@ -229,9 +227,9 @@ public class Player extends GameObject implements Movable {
 			//speed calcuation
 			calcSpeedDown();
 			
-			//glPushMatrix();
-			//glTranslatef(myValues.getCoordX(), myValues.getCoordY(), 0);
-			//glPopMatrix();
+//			glPushMatrix();
+			glTranslatef(-velocity.x, velocity.y, 0);
+//			glPopMatrix();
 			break;
 			}
 		}
@@ -250,6 +248,15 @@ public class Player extends GameObject implements Movable {
 		myStats=(PlayerValues) stats;
 	}
 	
+	//timer methods
+	public ArrayList<Timer> getMytimers() {
+		return myTimers;
+	}
+
+	public void setMyTimers(ArrayList<Timer> mytimers) {
+		this.myTimers = mytimers;
+	}
+	
 	public void addTimer(Timer t){
 		myTimers.add(t);
 	}
@@ -265,10 +272,11 @@ public class Player extends GameObject implements Movable {
 	
 	
 		
-//		pokusaj kretanja objekata
 
+	// player keyboard input used to render movement
+	
 	public void playerInput(){//all movement keys pressed
-			
+		//all movement keys pressed	
 		if(	(Keyboard.isKeyDown(Keyboard.KEY_A)||Keyboard.isKeyDown(Keyboard.KEY_LEFT))&&
 					(Keyboard.isKeyDown(Keyboard.KEY_S) ||Keyboard.isKeyDown(Keyboard.KEY_DOWN))
 					&& ((Keyboard.isKeyDown(Keyboard.KEY_W) ||Keyboard.isKeyDown(Keyboard.KEY_UP))&&
@@ -276,7 +284,8 @@ public class Player extends GameObject implements Movable {
 				Player.something=true;
 				this.move(1);				
 			}
-		if(	(Keyboard.isKeyDown(Keyboard.KEY_S) ||Keyboard.isKeyDown(Keyboard.KEY_DOWN))
+		//W and S pressed at same time
+		if((Keyboard.isKeyDown(Keyboard.KEY_S) ||Keyboard.isKeyDown(Keyboard.KEY_DOWN))
 				&& ((Keyboard.isKeyDown(Keyboard.KEY_W) ||Keyboard.isKeyDown(Keyboard.KEY_UP)))){
 			Player.something=false;
 			this.move(1);				
@@ -325,6 +334,7 @@ public class Player extends GameObject implements Movable {
 					velocity.y =(float)speed*direction.y;				
 					myValues.setCoordX((myValues.getCoordX()+velocity.x));
 					myValues.setCoordY((myValues.getCoordY()+velocity.y));	
+					glTranslatef(-velocity.x, velocity.y, 0);
 				}				
 				returnToStatic();
 			}				
