@@ -9,6 +9,8 @@ import dryrun.game.mechanics.*;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.DatagramSocket;
@@ -29,12 +31,12 @@ public class ConnectThread extends Thread {
 	
 	public void run() {
 		
-		DataInputStream dis = null;
-		DataOutputStream dos = null;
+		ObjectInputStream dis = null;
+		ObjectOutputStream dos = null;
 	
 		try {
-			dis = new DataInputStream(client.getTCPSocket().getInputStream());
-			dos = new DataOutputStream(client.getTCPSocket().getOutputStream());
+			dis = new ObjectInputStream(client.getTCPSocket().getInputStream());
+			dos = new ObjectOutputStream(client.getTCPSocket().getOutputStream());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -51,14 +53,18 @@ public class ConnectThread extends Thread {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		byte[] b = null;
+		String str = null;
 		try { 
-			dis.readFully(b=new byte[dis.available()]);
+			try {
+				str = (String) dis.readObject();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		String str = new String(b);
+
 		System.out.println(str);
 		String []split = str.split("#");
 		if (split[0].equals(CONNECT_ACC)) {
@@ -90,21 +96,19 @@ public class ConnectThread extends Thread {
 				e.printStackTrace();
 			}
 		}*/
-		
+		GameStatePacket p = null;
+
 		try {
-			sleep(15000);
-		} catch (InterruptedException e) {
+			p = (GameStatePacket) dis.readObject();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
-		try {
-			dis.read(b = new byte[dis.available()]);
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 		
-		GameStatePacket p = new GameStatePacket();
-		p = GameStatePacket.read(b);
 		GameObjectValues [] gov = p.get();
 		System.out.println(gov[0].getCoordX());
 		System.out.println(gov[0].getCoordY());
