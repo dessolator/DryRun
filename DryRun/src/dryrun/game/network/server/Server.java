@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import dryrun.game.common.GameObjectValues;
 import dryrun.game.network.ConcurrentCircularBuffer;
+import dryrun.game.network.GameStatePacket;
 import dryrun.game.network.NetFramework;
 import static dryrun.game.network.NetConstants.*;
 
@@ -19,7 +20,7 @@ public class Server implements NetFramework {
 	private ConnectAcceptorThread cat=null;
 	private ConcurrentCircularBuffer buffer;
 	
-	public int numOfPlayers=0;
+	public int numOfPlayers=1;
 	
 	private static Server server=null; //Server is unique
 
@@ -92,8 +93,16 @@ public class Server implements NetFramework {
 			
 	}
 	
-	public void startGame(){
-		for(int i=0; i<myThreads.size();i++)myThreads.get(i).start();} 
+	public void startGame(GameStatePacket p){
+		
+		
+		for(int i=0; i<myThreads.size();i++)myThreads.get(i).startGame(p);
+		//may need some sleep
+		for(int i=0; i<myThreads.size();i++)myThreads.get(i).start();
+		killListenerThreads();
+	
+	
+	} 
 	//this method is executed by the engine thread
 	//to begin sending packets and start the loader.
 	

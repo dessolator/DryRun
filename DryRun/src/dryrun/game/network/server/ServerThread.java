@@ -4,7 +4,9 @@ import java.io.*;
 import java.net.*;
 import dryrun.game.common.GameObjectValues;
 import dryrun.game.common.Player;
+import dryrun.game.mechanics.Game;
 import dryrun.game.network.ConcurrentCircularBuffer;
+import dryrun.game.network.GameStatePacket;
 
 public class ServerThread  { //Client instance on the server
 	private DatagramSocket mySocket; //I send my UDP data to the client here
@@ -24,14 +26,27 @@ public class ServerThread  { //Client instance on the server
 
 	public ServerThread(int i, String[] split, InetAddress cladr, ConcurrentCircularBuffer srvB, DataInputStream tcpin, DataOutputStream tcpout, Socket s) throws SocketException {
 		mySocket=new DatagramSocket(i);
-		ldr = new ServerLoader(srvB,myRecBuffer);
+		
 		myRecBuffer=new ConcurrentCircularBuffer();
 		mySendBuffer=new ConcurrentCircularBuffer();
 		myTcpSocket = s;
-		//TODO SET MYPLAYER DATA
+		myPlayer=Game.createPlayer(split[1],split[2]);
+		
+		sender = new ServerSender(this);
+		receiver = new ServerReceiver(this);
+		ldr = new ServerLoader(srvB,myRecBuffer);
+		
 	}
 	
 	//public ConcurrentCircularBuffer getBuffer(){return myBuffer;}
+	
+	public void startGame(GameStatePacket p){
+		byte b[]=GameStatePacket.write(p);
+		try {
+			tos.write(b);
+		} catch (IOException e) {e.printStackTrace();}
+		
+	}
 	
 	public void start(){sender.start();receiver.start(); ldr.start();} //Starting all threads
 	
@@ -41,8 +56,8 @@ public class ServerThread  { //Client instance on the server
 	public void terminate() throws IOException{
 		mySocket.close();
 		ldr.interrupt();
-		//sender.interrupt();
-		//receiver.interrupt();
+		sender.interrupt();
+		receiver.interrupt();
 		myTcpSocket.close();
 		} //Close UDP and interrupt threads
 	

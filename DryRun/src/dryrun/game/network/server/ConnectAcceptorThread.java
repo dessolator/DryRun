@@ -11,6 +11,9 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.*;
 
+import dryrun.game.common.Player;
+import dryrun.game.mechanics.Game;
+
 public class ConnectAcceptorThread extends Thread {
 	private Server myServer;  //myDaddy
 	private ServerSocket SrvSocket;
@@ -45,6 +48,7 @@ public class ConnectAcceptorThread extends Thread {
 				if (split[0].equals(CONNECT_REQ) && myServer.numOfPlayers<MAX_PLAYERS){ //if packet is CONNECT_REQ and I have not reached maxPlayers
 					System.out.println("usao u if");
 					myServer.numOfPlayers++; //then increase number of connected players
+					
 					System.out.println("accepting connection");
 					str = new String(CONNECT_ACC+"#"+currentUdp);
 					dos.writeBytes(str);//notify the client that it's request is accepted

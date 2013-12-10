@@ -22,10 +22,10 @@ public abstract class Bonus extends GameObject implements Collidable, Drawable {
 	
 	public static void spawnBonus(){		
 		if (bonusesSpawned<MAX_ACTIVE_BONUSES_PER_LEVEL){
-			/*double factor=Math.random();
+			double factor=Math.random();
 			if(factor>0.86)
 				Game.getLevel().addBonus(new MachineGunBonus(b.getCoordX(),b.getCoordY()));
-			else if(factor>0.72)
+	/*		else if(factor>0.72)
 				Game.getLevel().addBonus(new SpeedUpBonus(b.getCoordX(),b.getCoordY()));
 			else if(factor>0.58)
 				Game.getLevel().addBonus(new Rocketbonus(b.getCoordX(),b.getCoordY()));
@@ -35,8 +35,8 @@ public abstract class Bonus extends GameObject implements Collidable, Drawable {
 				PaddleGame.getLevel().addBonus(new Explosive(b.getCoordX(),b.getCoordY()));
 			else if(factor>0.16)
 				Game.getLevel().addBonus(new Mines(b.getCoordX(),b.getCoordY()));
-						
-			BonusesSpawned++;*/			
+						*/
+			BonusesSpawned++;		
 		}		
 	}
 	

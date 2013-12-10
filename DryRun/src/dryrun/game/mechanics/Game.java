@@ -23,7 +23,9 @@ public class Game {
 	
 	private static List<InetAddress> serverAddresses;
 	private static GameStatePacket firstPlayersPositions;
-	 
+	
+	private static Level myLvl;
+	
 static{		
 		//myLevel=new Level(currentLevel);
 		
@@ -32,13 +34,14 @@ static{
 		myGameMenu = new GameMenu();
 		myHostMenu = new HostMenu();
 		myLobbyMenu = new JoinMenu();
-		//mySettingsMenu=new SettingsMenu();	
+		//mySettingsMenu=new SettingsMenu();
+		myLvl = new Level();
 	}
 	
 
 	public static void startGame(){
 
-		Player p = new Player("Kesler", "Lamburghini", Display.getWidth()/2, Display.getHeight()/4, Display.getWidth()/6, Display.getHeight()/10);
+		Player p = new Player("Kesler", "Lamburghini", Display.getWidth()/2, Display.getHeight()/2, Display.getWidth()/6, Display.getHeight()/10);
 
 		while((!Display.isCloseRequested())&& !terminate) {
 			glClear(GL_COLOR_BUFFER_BIT);
@@ -168,6 +171,19 @@ static{
 	public static void setMyLobbyMenu(JoinMenu myLobbyMenu) {
 		Game.myLobbyMenu = myLobbyMenu;
 	}
+	
+	public static Level getMyLevel(){
+		return myLvl;
+	}
+
+
+	public static Player createPlayer(String string, String string2) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	
 
 
 	public static GameStatePacket getFirstPlayersPositions() {

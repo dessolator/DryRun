@@ -16,11 +16,13 @@ import dryrun.game.objects.TextureHolder;
 import dryrun.game.objects.bonus.Bonus;
 
 public class Level implements Drawable {
-	TextureHolder th;
-	ArrayList<Player> players;
-	ArrayList<Wall> walls;
-	ArrayList<Bonus> bonuses;
-	ArrayList<Checkpoint> checkpoints;
+	public TextureHolder th;
+	public ArrayList<Player> players;
+	public ArrayList<Wall> walls;
+	public ArrayList<Bonus> bonuses;
+	public ArrayList<Checkpoint> checkpoints;
+	
+
 	
 	public Level(){
 		try {
@@ -33,6 +35,8 @@ public class Level implements Drawable {
 			e.printStackTrace();
 		}		
 	}
+	
+
 	
 	@Override
 	public Texture getTexture() {
