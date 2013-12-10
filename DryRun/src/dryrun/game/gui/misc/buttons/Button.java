@@ -1,8 +1,6 @@
 package dryrun.game.gui.misc.buttons;
 
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import static dryrun.game.engine.LoadTex.*;
 import dryrun.game.engine.DrawObject;
 import dryrun.game.engine.Drawable;

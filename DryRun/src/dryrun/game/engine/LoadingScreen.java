@@ -1,13 +1,11 @@
 package dryrun.game.engine;
 
 
-import org.lwjgl.input.Mouse;
+
 import org.lwjgl.opengl.Display;
 import org.newdawn.slick.opengl.Texture;
 import static dryrun.game.engine.LoadTex.tex;
-import dryrun.game.objects.TextureHolder;
-import static dryrun.game.engine.LoadTex.loading1;
-import static dryrun.game.engine.Main.i;
+
 
 
 
@@ -29,7 +27,6 @@ public class LoadingScreen implements Drawable {
 	@Override
 	public void render() {
 //		Mouse.setGrabbed(true);
-		System.out.println("loading");
 		DrawObject.draw(this);
 		Display.update();
 		// TODO Auto-generated method stub
