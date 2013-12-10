@@ -24,7 +24,15 @@ public class ServerThread  { //Client instance on the server
 	
 
 
-	public ServerThread(int i, String[] split, InetAddress cladr, ConcurrentCircularBuffer srvB, ObjectInputStream tcpin, ObjectOutputStream tcpout, Socket s) throws SocketException {
+	public ServerThread(int i,
+						String[] split,
+						InetAddress cladr,
+						ConcurrentCircularBuffer srvB,
+						ObjectInputStream tcpin,
+						ObjectOutputStream tcpout,
+						Socket s) throws SocketException {
+		
+		
 		mySocket=new DatagramSocket(i);
 		
 		myRecBuffer=new ConcurrentCircularBuffer();
@@ -50,22 +58,7 @@ public class ServerThread  { //Client instance on the server
 		
 		
 	}
-	
-	public void send(){
-		GameStatePacket p= new GameStatePacket().test();
-		byte b[]=GameStatePacket.write(p);
-		try {
-			System.out.print("Saljem -");
-			tos.write(b);
-			System.out.print(" poslao");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
-	}
-	
-	
 	public void start(){sender.start();receiver.start(); ldr.start();} //Starting all threads
 	
 	

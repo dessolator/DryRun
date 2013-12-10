@@ -1,7 +1,5 @@
 package dryrun.game.network.server;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -97,10 +95,8 @@ public class Server implements NetFramework {
 			System.out.println("Created ConnectRef thread");
 			
 	}
-	public void startGame(){
-		for(int i=0; i<myThreads.size();i++)myThreads.get(i).send();
-		
-	}
+	
+
 	
 	public void startGame(GameStatePacket p){
 		

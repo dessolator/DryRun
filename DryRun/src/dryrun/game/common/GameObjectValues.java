@@ -1,16 +1,8 @@
 package dryrun.game.common;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-import dryrun.game.network.GameStatePacket;
-
-import java.io.*;
-
+@SuppressWarnings("serial")
 public class GameObjectValues implements Serializable{
 	private float coordX;
 	private float coordY;
