@@ -35,6 +35,7 @@ static{
 		//mySettingsMenu=new SettingsMenu();	
 	}
 	
+
 	public static void startGame(){
 
 		Player p = new Player("Kesler", "Lamburghini", Display.getWidth()/2, Display.getHeight()/4, Display.getWidth()/6, Display.getHeight()/10);
