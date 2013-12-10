@@ -45,6 +45,10 @@ public class Server implements NetFramework {
 			}
 		}
 	
+	public ArrayList<ServerThread> getServerThreads() {
+		return myThreads;
+	}
+	
 	public void terminate() throws IOException{
 		for(int i=1;i<myThreads.size();i++)myThreads.get(i).terminate();
 	}
@@ -95,11 +99,12 @@ public class Server implements NetFramework {
 	
 	public void startGame(GameStatePacket p){
 		
-		
-		for(int i=0; i<myThreads.size();i++)myThreads.get(i).startGame(p);
-		//may need some sleep
-		for(int i=0; i<myThreads.size();i++)myThreads.get(i).start();
-		killListenerThreads();
+		if (myThreads!=null) {
+			for(int i=0; i<myThreads.size();i++)myThreads.get(i).startGame(p);
+			//may need some sleep
+			for(int i=0; i<myThreads.size();i++)myThreads.get(i).start();
+			killListenerThreads();
+		}
 	
 	
 	} 

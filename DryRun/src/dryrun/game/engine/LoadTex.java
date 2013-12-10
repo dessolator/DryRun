@@ -20,6 +20,8 @@ public class LoadTex {
 	public static Texture loading1;
 	public static TextureHolder tex;
 	public static LoadingScreen ls;
+	
+	
 	public static void init(){
 		try {
 			ls=new LoadingScreen();
