@@ -65,9 +65,9 @@ static{
 			getCurrentDraw().render();//render what needs to be rendered
 			//gameloop yet to be done 
 
-			p.render();//@Vuk Test
-			d.render();//@Vuk Test
-			p.playerInput();//@Vuk Test
+		//	p.render();//@Vuk Test
+		//	d.render();//@Vuk Test
+		//	p.playerInput();//@Vuk Test
 			
 
 			Display.sync(60);//limit fps to 60
