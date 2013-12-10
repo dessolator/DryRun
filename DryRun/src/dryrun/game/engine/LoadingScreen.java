@@ -7,6 +7,8 @@ import org.newdawn.slick.opengl.Texture;
 import static dryrun.game.engine.LoadTex.tex;
 
 
+
+
 public class LoadingScreen implements Drawable {
 	
 	public LoadingScreen(){	}	
@@ -19,7 +21,6 @@ public class LoadingScreen implements Drawable {
 	
 	@Override
 	public void render() {
-		System.out.println("loading");
 		DrawObject.draw(this);
 		Display.update();
 		}

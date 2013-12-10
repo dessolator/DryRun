@@ -22,21 +22,19 @@ import static dryrun.game.engine.LoadTex.ls;
 
 
 import java.util.*;
+import java.io.IOException;
 import java.net.*;
 
 public class Game {
-	private static MainMenu myMainMenu;
-	private static GameMenu myGameMenu;
-	private static HostMenu myHostMenu;
-	private static JoinMenu myLobbyMenu;
-	private static boolean terminate=false;	
-	private static GameState currentGameState=GameState.MainMenu;
-	
-	private static List<InetAddress> serverAddresses;
-	private static GameStatePacket firstPlayersPositions;
-	
-	private static Level myLvl;
-	public static boolean theEnd = false;
+	private static MainMenu myMainMenu;//my main menu
+	private static GameMenu myGameMenu;//my game menu
+	private static HostMenu myHostMenu;//my host menu
+	private static JoinMenu myLobbyMenu;//my join menu
+	private static boolean terminate=false;	//window kill flag
+	private static GameState currentGameState=GameState.Game;//current game state
+	private static List<InetAddress> serverAddresses;//list of known server addresses
+	private static GameStatePacket firstPlayersPositions;//TODO someone else added this I do not understand it @Ivan
+	private static Level myLvl;//myLevel
 	
 static{		
 		
@@ -45,20 +43,34 @@ static{
 
 	public static void startGame(){
 
-		Player p = new Player("Kesler", "Lamburghini", Display.getWidth()/2, Display.getHeight()/2, Display.getWidth()/6, Display.getHeight()/10);
-
+		Player p = new Player("Kesler",
+				"Lamburghini",
+				Display.getWidth()/2,
+				Display.getHeight()/2,
+				Display.getWidth()/6, 
+				Display.getHeight()/10);//@Vuk Test
+		
+		Player d = new Player("Ksler", 
+				"Lamburghini",
+				Display.getWidth()/2,
+				Display.getHeight()/2-300,
+				Display.getWidth()/6,
+				Display.getHeight()/10);//@Vuk Test
+		
+		d.myBody.m_type=BodyType.STATIC;//@Vuk Test
 		while((!Display.isCloseRequested())&& !terminate) {
-			glClear(GL_COLOR_BUFFER_BIT);
-			getCurrentUpdate().update();
-			getCurrentDraw().render();
+			glClear(GL_COLOR_BUFFER_BIT);//clear the screen
+			getCurrentUpdate().update();//update what needs to be updated
+			getCurrentDraw().render();//render what needs to be rendered
 			//gameloop yet to be done 
 
-			p.render();
-			p.playerInput();
+			p.render();//@Vuk Test
+			d.render();//@Vuk Test
+			p.playerInput();//@Vuk Test
 			
 
-			Display.sync(60);
-			Display.update();			
+			Display.sync(60);//limit fps to 60
+			Display.update();//draw the GLContext
 		}		
 	}
 	
@@ -95,6 +107,11 @@ static{
 				break;
 			case HostGameScreen:
 				currentGameState= GameState.PlayMenu;
+			try {
+				Server.getServer().terminate();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 				Server.disposeServer();
 				break;
 			case HostJoinMenu:
@@ -221,7 +238,6 @@ static{
 				//mySettingsMenu=new SettingsMenu();
 				myLvl = new Level();
 				ls.render();
-				theEnd = true;
 		// TODO Auto-generated method stub
 		
 	}
