@@ -25,12 +25,13 @@ import static dryrun.game.engine.LoadTex.ls;
 import java.util.*;
 import java.io.IOException;
 import java.net.*;
-
+import dryrun.game.gui.menus.*;
 public class Game {
 	private static MainMenu myMainMenu;//my main menu
 	private static GameMenu myGameMenu;//my game menu
 	private static HostMenu myHostMenu;//my host menu
 	private static JoinMenu myLobbyMenu;//my join menu
+	private static WaitServerMenu waitServerReply;
 	private static boolean terminate=false;	//window kill flag
 	private static GameState currentGameState=GameState.MainMenu;//current game state
 	private static List<InetAddress> serverAddresses;//list of known server addresses
@@ -90,6 +91,8 @@ static{
 				return null;
 			case LobbyScreen:
 				return myLobbyMenu;
+			case WaitServerReply:
+				return waitServerReply;
 			case PlayMenu:
 				return myGameMenu ;
 			case SplashScreen:
@@ -157,6 +160,8 @@ static{
 			return myGameMenu;
 		case SplashScreen:
 			return null;
+		case WaitServerReply:
+			return waitServerReply;
 		default:
 			return null;
 	}
@@ -228,6 +233,7 @@ static{
 				tex=new TextureHolder(loading1,new Tex(2/8f,0f,3/8f,1f));
 				ls.render();
 				myGameMenu = new GameMenu();
+				waitServerReply = new WaitServerMenu();
 				tex=new TextureHolder(loading1,new Tex(3/8f,0f,4/8f,1f));
 				ls.render();
 				myHostMenu = new HostMenu();
@@ -236,6 +242,7 @@ static{
 				myLobbyMenu = new JoinMenu();
 				tex=new TextureHolder(loading1,new Tex(5/8f,0f,6/8f,1f));
 				ls.render();
+				
 				//mySettingsMenu=new SettingsMenu();
 				myLvl = new Level();
 				ls.render();

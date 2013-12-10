@@ -34,7 +34,7 @@ public class JoinMenu extends Menu {
 		myFrame = new BasicFrame(Display.getWidth()/4,
 				Display.getHeight()/2,
 				Display.getWidth()/3,
-				Display.getHeight()/3);
+				Display.getHeight()/2);
 		myButtons.add(new RefreshButton(Display.getWidth()/4,
 				Display.getHeight()/2 + Display.getHeight()/10 + Display.getHeight()/30));
 		myButtons.add(new BackButton(Display.getWidth()/4,

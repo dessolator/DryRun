@@ -9,6 +9,7 @@ public enum GameState {
 					HostGameScreen,
 					LobbyScreen,
 						JoinGame,
+						WaitServerReply,
 						Game;
 
 }
