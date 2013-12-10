@@ -1,6 +1,8 @@
 package dryrun.game.mechanics;
 
+import org.jbox2d.dynamics.BodyType;
 import org.lwjgl.opengl.Display;
+
 import static org.lwjgl.opengl.GL11.*;
 import dryrun.game.common.*;
 import dryrun.game.engine.Drawable;
@@ -19,7 +21,7 @@ public class Game {
 	private static HostMenu myHostMenu;
 	private static JoinMenu myLobbyMenu;
 	private static boolean terminate=false;	
-	private static GameState currentGameState=GameState.MainMenu;
+	private static GameState currentGameState=GameState.Game;
 	
 	private static List<InetAddress> serverAddresses;
 	private static GameStatePacket firstPlayersPositions;
@@ -35,14 +37,16 @@ static{
 	public static void startGame(){
 
 		Player p = new Player("Kesler", "Lamburghini", Display.getWidth()/2, Display.getHeight()/2, Display.getWidth()/6, Display.getHeight()/10);
-
+		Player d = new Player("Ksler", "Lamburghini", Display.getWidth()/2, Display.getHeight()/2-300, Display.getWidth()/6, Display.getHeight()/10);
+		d.myBody.m_type=BodyType.STATIC;
 		while((!Display.isCloseRequested())&& !terminate) {
 			glClear(GL_COLOR_BUFFER_BIT);
 			getCurrentUpdate().update();
 			getCurrentDraw().render();
 			//gameloop yet to be done 
-
+			
 			p.render();
+			d.render();
 			p.playerInput();
 			
 

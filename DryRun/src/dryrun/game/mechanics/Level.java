@@ -12,10 +12,12 @@ import java.util.Set;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
 import org.jbox2d.dynamics.World;
+import org.lwjgl.opengl.Display;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 
 import dryrun.game.common.Player;
+import dryrun.game.engine.DrawObject;
 import dryrun.game.engine.Drawable;
 import dryrun.game.engine.Tex;
 import dryrun.game.engine.Updateable;
@@ -29,7 +31,7 @@ public class Level implements Drawable, Serializable,Updateable {
 	public ArrayList<Wall> walls;
 	public ArrayList<Bonus> bonuses;
 	public ArrayList<Checkpoint> checkpoints;
-	public static final World world = new World(new Vec2(0, -9.8f));
+	public static final World world = new World(new Vec2(0, 0));
     public static final Set<Body> bodies = new HashSet<Body>();
 	
 	public static final int MAX_BONUSES = 30;
@@ -38,7 +40,7 @@ public class Level implements Drawable, Serializable,Updateable {
 	
 	public Level(){
 		try {
-			th=new TextureHolder(TextureLoader.getTexture("PNG", new FileInputStream(new File("res/button-sprite.png"))),new Tex(0f,((float)3/10+(float)1/200),1f,((float)4/10+(float)1/200)));
+			th=new TextureHolder(TextureLoader.getTexture("PNG", new FileInputStream(new File("res/raceTrack.png"))),new Tex(0,1,0,1));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -53,37 +55,37 @@ public class Level implements Drawable, Serializable,Updateable {
 	@Override
 	public Texture getTexture() {
 		// TODO Auto-generated method stub
-		return null;
+		return th.getMyTexture();
 	}
 
 	@Override
 	public void render() {
-		// TODO Auto-generated method stub
+		DrawObject.draw(this);
 
 	}
 
 	@Override
 	public float getX() {
 		// TODO Auto-generated method stub
-		return 0;
+		return Display.getWidth()/2;
 	}
 
 	@Override
 	public float getY() {
 		// TODO Auto-generated method stub
-		return 0;
+		return Display.getHeight()/2;
 	}
 
 	@Override
 	public float getDimX() {
 		// TODO Auto-generated method stub
-		return 0;
+		return Display.getWidth()*10;
 	}
 
 	@Override
 	public float getDimY() {
 		// TODO Auto-generated method stub
-		return 0;
+		return Display.getHeight()*10;
 	}
 
 	@Override
@@ -95,7 +97,7 @@ public class Level implements Drawable, Serializable,Updateable {
 	@Override
 	public float getTexX2() {
 		// TODO Auto-generated method stub
-		return 0;
+		return 1;
 	}
 
 	@Override
@@ -107,7 +109,7 @@ public class Level implements Drawable, Serializable,Updateable {
 	@Override
 	public float getTexY2() {
 		// TODO Auto-generated method stub
-		return 0;
+		return 1;
 	}
 
 	@Override

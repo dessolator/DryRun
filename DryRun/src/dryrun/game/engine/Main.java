@@ -10,7 +10,7 @@ public class Main {
 	public static void main(String[] args) {
 		Engine.init();
 		LoadTex.init();
-
+		Game.initGame();
 		Game.startGame();
 		
 	

@@ -14,7 +14,7 @@ import dryrun.game.common.*;
 public abstract class GameObject implements Drawable,Updateable,Collidable{
 	protected TextureHolder holder;
 	protected GameObjectValues myValues;
-	protected Body myBody;
+	public Body myBody;//TODO make me protected
 	
 
 	
@@ -68,11 +68,11 @@ public abstract class GameObject implements Drawable,Updateable,Collidable{
 	}
 	
 	public float getX() {
-		return myValues.getCoordX();
+		return myBody.getLocalCenter().x/P2M;
 	}
 
 	public float getY() {		
-		return myValues.getCoordY();
+		return myBody.getLocalCenter().y/P2M;
 	}
 
 	
