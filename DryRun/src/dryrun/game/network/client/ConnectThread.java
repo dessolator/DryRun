@@ -49,15 +49,15 @@ public class ConnectThread extends Thread {
 		}
 	
 		String str = null;
-		try { 
-			try {
-				str = (String) dis.readObject();
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
+		
+		try {
+			str = (String) dis.readObject();
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
 
 		System.out.println(str);
