@@ -6,7 +6,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		Engine.init();
-//		LoadTex.init();
+		LoadTex.init();
 		Game.startGame();
 		Engine.kill();
 	}

@@ -40,7 +40,7 @@ public abstract class Menu implements Drawable, Updateable{
 	}
 	@Override
 	public float getDimX() {
-		return (float)Display.getWidth();
+		return (float)Display.getWidth()*10;
 	}
 	@Override
 	public float getY() {
@@ -48,7 +48,7 @@ public abstract class Menu implements Drawable, Updateable{
 	}
 	@Override
 	public float getDimY(){
-		return (float)Display.getHeight();
+		return (float)Display.getHeight()*10;
 	}
 	@Override
 	public void update() {
