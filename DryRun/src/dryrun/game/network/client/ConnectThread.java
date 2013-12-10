@@ -6,6 +6,9 @@ import static dryrun.game.network.NetConstants.CONNECT_REQ;
 import static dryrun.game.network.NetConstants.TCPPORT;
 import static dryrun.game.network.NetConstants.*;
 
+import dryrun.game.network.*;
+import dryrun.game.mechanics.*;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -67,6 +70,32 @@ public class ConnectThread extends Thread {
 		}
 		if (split[0].equals(CONNECT_REF)) {
 			client.setConnectedFlag(false);
+			System.out.println("ConnectThread CONNECT_REF");
+			return;
 		}
+		
+		int sizeOfArray = 0;
+		while(sizeOfArray<10000) {
+			try {
+				sizeOfArray = dis.available();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		
+		
+		
+		while(sizeOfArray<10000)  { // OVO PROVERITI PRILIKOM SLANJA PRVOG GAME STATE PAKETA
+			try {
+				dis.readFully(b=new byte[sizeOfArray = dis.available()]);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		GameStatePacket firstGamePositions = GameStatePacket.read(b);
+		Game.setFirstPlayersPositions(firstGamePositions);
+		
 	}
 }
