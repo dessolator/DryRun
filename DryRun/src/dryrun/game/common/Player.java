@@ -27,6 +27,7 @@ public class Player extends GameObject implements Movable {
 	//player related
 	private PlayerValues myStats;
 	private ArrayList<Timer> myTimers;
+	private ArrayList<GameObject> myObjects;
 	private String name;
 	private String carType;
 	private Vec2 velocity;
@@ -327,4 +328,9 @@ public class Player extends GameObject implements Movable {
 			}				
 			else Player.something=false;
 	}
+	
+	
+	public ArrayList<GameObject> getMyObjects(){return myObjects;}
+	
+	
 }
