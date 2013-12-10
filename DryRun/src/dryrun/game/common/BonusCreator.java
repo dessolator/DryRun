@@ -31,15 +31,15 @@ public class BonusCreator extends Player {
 	
 	public synchronized void spawnBonus(float locX, float locY,int ind){
 			double factor=Math.random();
-			myObjects.remove(ind);
+			this.getMyStats().getObjList().remove(ind);
 			if(factor>0.75)
-				myObjects.add(ind, new MachineGunBonus(ind,locX,locY));			
-			else if(factor>0.5)
-				myObjects.add(ind, new NitroBonus(ind,locX,locY));
-			else if(factor>0.25)
-				myObjects.add(ind, new Rocketbonus(ind,locX,locY));
+				this.getMyStats().getObjList().add(ind, new MachineGunBonus(ind,locX,locY));			
+	//		else if(factor>0.5)
+	//			this.getMyStats().getObjList().add(ind, new NitroBonus(ind,locX,locY));
+	//		else if(factor>0.25)
+	//			this.getMyStats().getObjList().add(ind, new Rocketbonus(ind,locX,locY));
 			
-			else myObjects.add(ind, new Mines(ind,locX,locY));
+	//		else this.getMyStats().getObjList().add(ind, new Mines(ind,locX,locY));
 	}
 
 
