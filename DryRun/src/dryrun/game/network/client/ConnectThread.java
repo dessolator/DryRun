@@ -43,7 +43,7 @@ public class ConnectThread extends Thread {
 		
 		String s = new String(CONNECT_REQ + "#" + playerName + "#" + typeOfAutomobile);
 		try {
-			dos.writeBytes(s);
+			dos.writeObject(s);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
