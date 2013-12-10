@@ -16,7 +16,7 @@ public abstract class Bonus extends GameObject implements Collidable, Drawable {
 	
 	public static void setOwner(BonusCreator b){}
 	
-	public Bonus(float x, float y, int index) {
+	public Bonus( int index, float x, float y) {
 		super(x, y, BONUS_DIMX, BONUS_DIMY);
 		myInd=index;
 	}
@@ -30,12 +30,14 @@ public abstract class Bonus extends GameObject implements Collidable, Drawable {
 	
 
 	public void collided(Player p){
-		p.applyBonus(this);
+		applyBonus(p);
 		BonusCreator.notifyPickedUp(myInd);
 		
 		
 	}
 	
+	private void applyBonus(Player p) {}
+
 	public boolean amISpawned(){return BonusCreator.isBonusSpawned(myInd);}
 	
 	
