@@ -20,7 +20,7 @@ public class Player extends GameObject implements Movable {
 	private PlayerValues myStats;
 	private ArrayList<Timer> myTimers;
 
-	
+	protected List<GameObject> myObjects=Collections.synchronizedList(new ArrayList<GameObject>());
 	private String name;
 	private Vec2 velocity;
 	private static double speed=0;//implementirati kasnije
@@ -43,10 +43,6 @@ public class Player extends GameObject implements Movable {
 	private double dthrottle = 0.025;	
 	private double breaks = -0.15;
 	private double inertivebreaks = 0.08;
-	
-	//ammo and bonus shit
-	private int machinegunAmmo =100;
-	
 
 
 	//constructor
@@ -322,44 +318,16 @@ public class Player extends GameObject implements Movable {
 				returnToStatic();
 			}				
 			else Player.something=false;
-			
-			
-			
-			
-			
 	}
 	@Override
 	public void collided(Player b) {
 		// TODO Auto-generated method stub
 		
 	}
-	public List<GameObject> getMyObjects(){return myStats.getObjList();}
+	public List<GameObject> getMyObjects(){return myObjects;}
 	
 	
-	public Vec2 getDirection() {
-		return direction;
-	}
-	public float getDirectionX() {
-		return direction.x;
-	}
-	public float getDirectionY() {
-		return direction.x;
-	}
-
-	public void setDirection(Vec2 direction) {
-		this.direction = direction;
-	}
-
 	public void applyBonus(Bonus bonus) {
 		
 	}
-	
-	public synchronized void incMachinegunAmmo(int inc){machinegunAmmo+=inc;}
-	
-	public void checkAndShootMG(){
-		if(Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)||Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)){
-			new shotLine(this);
-		}
-	}
-	
 }
