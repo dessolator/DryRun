@@ -9,6 +9,8 @@ import static dryrun.game.network.NetConstants.TCPPORT;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.*;
 
 import dryrun.game.common.Player;
@@ -33,14 +35,17 @@ public class ConnectAcceptorThread extends Thread {
 				
 				s=SrvSocket.accept(); //I block on this line if there's no connectReq
 				//TCP init
-				DataInputStream dis= new DataInputStream(s.getInputStream()); 
-				DataOutputStream dos= new DataOutputStream(s.getOutputStream());
-				try {
-					sleep(1000);
-				} catch (InterruptedException e) {e.printStackTrace();}
+				ObjectInputStream dis= new ObjectInputStream(s.getInputStream()); 
+				ObjectOutputStream dos= new ObjectOutputStream(s.getOutputStream());
+
 				//reading TCP packet.
-				dis.readFully(b=new byte[dis.available()]);										
-				String str=new String(b); //splitting packet
+				String str=null;
+				try {
+					str = (String)dis.readObject();
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}										
 				System.out.println(str);
 				String split[]=str.split("#+"); //NAME MUST NOT BE #
 				
@@ -51,7 +56,7 @@ public class ConnectAcceptorThread extends Thread {
 					
 					System.out.println("accepting connection");
 					str = new String(CONNECT_ACC+"#"+currentUdp);
-					dos.writeBytes(str);//notify the client that it's request is accepted
+					dos.writeObject(str);//notify the client that it's request is accepted
 					myServer.CreateClThread(currentUdp++, split, s.getInetAddress(),dis,dos,s); //create a serverside thread which serves this client
 				}
 				else{

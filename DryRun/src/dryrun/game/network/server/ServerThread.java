@@ -19,12 +19,12 @@ public class ServerThread  { //Client instance on the server
 	private ConcurrentCircularBuffer myRecBuffer;//buffer self-fucking-explanatory
 	private ConcurrentCircularBuffer mySendBuffer;//buffer self-fucking-explanatory
 	private ServerLoader ldr; //A loader which takes data from the recBuffer and puts it in the ServerBuffer
-	DataInputStream tis; //TCP In-Stream
-	DataOutputStream tos;//TCP Out-Stream
+	ObjectInputStream tis; //TCP In-Stream
+	ObjectOutputStream tos;//TCP Out-Stream
 	
 
 
-	public ServerThread(int i, String[] split, InetAddress cladr, ConcurrentCircularBuffer srvB, DataInputStream tcpin, DataOutputStream tcpout, Socket s) throws SocketException {
+	public ServerThread(int i, String[] split, InetAddress cladr, ConcurrentCircularBuffer srvB, ObjectInputStream tcpin, ObjectOutputStream tcpout, Socket s) throws SocketException {
 		mySocket=new DatagramSocket(i);
 		
 		myRecBuffer=new ConcurrentCircularBuffer();
