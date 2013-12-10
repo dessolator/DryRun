@@ -47,12 +47,7 @@ public class ConnectThread extends Thread {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		try {
-			sleep(3000);
-		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+	
 		String str = null;
 		try { 
 			try {
