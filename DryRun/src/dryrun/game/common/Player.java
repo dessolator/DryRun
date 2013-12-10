@@ -4,6 +4,8 @@ import static dryrun.game.engine.LoadTex.playerTex;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import org.jbox2d.common.Vec2;
 import org.lwjgl.input.Keyboard;
 import dryrun.game.objects.*;
@@ -11,14 +13,16 @@ import dryrun.game.engine.DrawObject;
 import dryrun.game.engine.Movable;
 import dryrun.game.engine.Tex;
 import dryrun.game.objects.GameObject;
+import dryrun.game.objects.bonus.Bonus;
 import dryrun.game.objects.bonus.Timer;
 
 public class Player extends GameObject implements Movable {
 	//player related
 	private PlayerValues myStats;
 	private ArrayList<Timer> myTimers;
+
+	protected List<GameObject> myObjects=Collections.synchronizedList(new ArrayList<GameObject>());
 	private String name;
-	private String carType;
 	private Vec2 velocity;
 	private static double speed=0;//implementirati kasnije
 	private double rangle = (double)(Math.PI/180);
@@ -42,16 +46,17 @@ public class Player extends GameObject implements Movable {
 	private double inertivebreaks = 0.08;
 
 
-	
+	//constructor
 	public Player(String n, String carType, float x, float y, float dimx, float dimy){
 		super(x, y, dimx, dimy);
-		this.carType=carType;
 		name=n;	
 		myStats=new PlayerValues();
 		direction = new Vec2(1,0);
 		velocity = new Vec2(4, 0);
 		holder=new TextureHolder(playerTex,new Tex(0f,0f,1f,1f));
 	}
+	
+	//getters and setters
 	public String getName() {
 		return name;
 	}
@@ -68,16 +73,11 @@ public class Player extends GameObject implements Movable {
 		this.myStats = myStats;
 	}
 
-	public ArrayList<Timer> getMytimers() {
-		return myTimers;
-	}
-
-	public void setMyTimers(ArrayList<Timer> mytimers) {
-		this.myTimers = mytimers;
-	}
-
+	
+	//player update input should be here
 	public void update() {
 	}
+	
 	
 	//direction logic
 	public void setDirectionR(){
@@ -95,7 +95,8 @@ public class Player extends GameObject implements Movable {
 			direction.y =(float)( oldx*Math.sin(rangle) + oldy*Math.cos(rangle)); 
 			}
 	
-	//speedLogic
+	
+	//speed calculation Logic	
 	public void calcSpeedUp(){
 		if(speed < 0) {
 			speed-=breaks;
@@ -139,7 +140,7 @@ public class Player extends GameObject implements Movable {
 	
 
 	
-	
+	//very complicated move method
 	@Override
 	public void move(int i) {
 		switch(i){
@@ -173,7 +174,7 @@ public class Player extends GameObject implements Movable {
 				calcSpeedUp();
 				
 				//glPushMatrix();
-				//glTranslatef(-myValues.getCoordX(), -myValues.getCoordY(), 0);
+				glTranslatef(-velocity.x, velocity.y, 0);
 				//glPopMatrix();
 				break;
 			
@@ -210,9 +211,9 @@ public class Player extends GameObject implements Movable {
 			//speed calcuation
 			calcSpeedDown();
 			
-			//glPushMatrix();
-			//glTranslatef(myValues.getCoordX(), myValues.getCoordY(), 0);
-			//glPopMatrix();
+//			glPushMatrix();
+			glTranslatef(-velocity.x, velocity.y, 0);
+//			glPopMatrix();
 			break;
 			}
 		}
@@ -231,6 +232,15 @@ public class Player extends GameObject implements Movable {
 		myStats=(PlayerValues) stats;
 	}
 	
+	//timer methods
+	public ArrayList<Timer> getMytimers() {
+		return myTimers;
+	}
+
+	public void setMyTimers(ArrayList<Timer> mytimers) {
+		this.myTimers = mytimers;
+	}
+	
 	public void addTimer(Timer t){
 		myTimers.add(t);
 	}
@@ -246,10 +256,11 @@ public class Player extends GameObject implements Movable {
 	
 	
 		
-//		pokusaj kretanja objekata
 
+	// player keyboard input used to render movement
+	
 	public void playerInput(){//all movement keys pressed
-			
+		//all movement keys pressed	
 		if(	(Keyboard.isKeyDown(Keyboard.KEY_A)||Keyboard.isKeyDown(Keyboard.KEY_LEFT))&&
 					(Keyboard.isKeyDown(Keyboard.KEY_S) ||Keyboard.isKeyDown(Keyboard.KEY_DOWN))
 					&& ((Keyboard.isKeyDown(Keyboard.KEY_W) ||Keyboard.isKeyDown(Keyboard.KEY_UP))&&
@@ -257,7 +268,8 @@ public class Player extends GameObject implements Movable {
 				Player.something=true;
 				this.move(1);				
 			}
-		if(	(Keyboard.isKeyDown(Keyboard.KEY_S) ||Keyboard.isKeyDown(Keyboard.KEY_DOWN))
+		//W and S pressed at same time
+		if((Keyboard.isKeyDown(Keyboard.KEY_S) ||Keyboard.isKeyDown(Keyboard.KEY_DOWN))
 				&& ((Keyboard.isKeyDown(Keyboard.KEY_W) ||Keyboard.isKeyDown(Keyboard.KEY_UP)))){
 			Player.something=false;
 			this.move(1);				
@@ -306,6 +318,7 @@ public class Player extends GameObject implements Movable {
 					velocity.y =(float)speed*direction.y;				
 					myValues.setCoordX((myValues.getCoordX()+velocity.x));
 					myValues.setCoordY((myValues.getCoordY()+velocity.y));	
+					glTranslatef(-velocity.x, velocity.y, 0);
 				}				
 				returnToStatic();
 			}				
@@ -314,6 +327,12 @@ public class Player extends GameObject implements Movable {
 	@Override
 	public void collided(Player b) {
 		// TODO Auto-generated method stub
+		
+	}
+	public List<GameObject> getMyObjects(){return myObjects;}
+	
+	
+	public void applyBonus(Bonus bonus) {
 		
 	}
 }

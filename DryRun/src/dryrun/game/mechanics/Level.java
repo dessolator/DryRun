@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -21,7 +22,8 @@ import dryrun.game.engine.Updateable;
 import dryrun.game.objects.TextureHolder;
 import dryrun.game.objects.bonus.Bonus;
 
-public class Level implements Drawable,Updateable {
+
+public class Level implements Drawable, Serializable,Updateable {
 	public TextureHolder th;
 	public ArrayList<Player> players;
 	public ArrayList<Wall> walls;
@@ -29,6 +31,8 @@ public class Level implements Drawable,Updateable {
 	public ArrayList<Checkpoint> checkpoints;
 	public static final World world = new World(new Vec2(0, -9.8f));
     public static final Set<Body> bodies = new HashSet<Body>();
+	
+	public static final int MAX_BONUSES = 30;
 	
 
 	
