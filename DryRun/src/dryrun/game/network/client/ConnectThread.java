@@ -92,7 +92,7 @@ public class ConnectThread extends Thread {
 		}*/
 		
 		try {
-			sleep(1000);
+			sleep(15000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -103,10 +103,12 @@ public class ConnectThread extends Thread {
 			e.printStackTrace();
 		}
 		
-		GameStatePacket firstGamePositions = GameStatePacket.read(b);
-		GameObjectValues [] gov = firstGamePositions.objects();
-		System.out.println(((StringObject)gov[0]).message);
-		
-		
+		GameStatePacket p = new GameStatePacket();
+		p = GameStatePacket.read(b);
+		GameObjectValues [] gov = p.get();
+		System.out.println(gov[0].getCoordX());
+		System.out.println(gov[0].getCoordY());
+		System.out.println(gov[0].getDimX());
+		System.out.println(gov[0].getDimY());
 	}
 }
