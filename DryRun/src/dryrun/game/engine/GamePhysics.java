@@ -11,9 +11,7 @@ import dryrun.game.objects.GameObject;
 
 public class GamePhysics {
 	//JBox2D
-	 private static final World world = new World(new Vec2(0f,-9.8f));
-	 private static final Set<Body> bodies = new HashSet<Body>();
-	//ovo je inicijalna kolizija koja ce da radi .. reimplementirati ako se nadje bolji nacin
+
 	
 	public static boolean hit(GameObject a, GameObject b){
 		GameObject left=(a.getX()<b.getX())?a:b;

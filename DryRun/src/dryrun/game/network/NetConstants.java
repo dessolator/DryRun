@@ -10,7 +10,7 @@ public class NetConstants {
 	public static final String CONNECT_ACC = "connect_req_accept";
 	public static final String CONNECT_REF = "connect_req_refuse";
 	public static final int MAX_PLAYERS=4;
-	public static final float P2M = (float)1/60;
-	public static final float M2P = 60;
+	public static final float P2M = (float)1/50;
+	public static final float M2P = 50;
 	public static final int SIZE_OF_BUFFER = 50;
 }

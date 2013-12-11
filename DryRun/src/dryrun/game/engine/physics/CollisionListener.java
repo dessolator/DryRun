@@ -16,9 +16,10 @@ public class CollisionListener implements ContactListener {
 		Object b=arg0.getFixtureB().getBody().getUserData();//second object involved in this shitstorm
 		
 		Class<?>[] array=a.getClass().getInterfaces();//Interface array for the first object
+		System.out.println("collided");
 		for(int i=0;i<array.length;i++){
 			try {
-				if(array[i].equals(Class.forName("Collidable"))&& b.getClass().equals(Class.forName("Player"))){//if the first object implements collidable and the second object is a player
+				if(array[i].equals(Class.forName("dryrun.game.engine.Collidable"))&& b.getClass().equals(Class.forName("dryrun.game.common.Player"))){//if the first object implements collidable and the second object is a player
 					((Collidable)a).collided((Player)b);//call collision
 				}
 			} catch (ClassNotFoundException e) {
@@ -28,7 +29,7 @@ public class CollisionListener implements ContactListener {
 		array=b.getClass().getInterfaces();//Interface array for the second object
 		for(int i=0;i<array.length;i++){
 			try {
-				if(array[i].equals(Class.forName("Collidable"))&& a.getClass().equals(Class.forName("Player"))){//if the second object implements collidable and the first object is a player
+				if(array[i].equals(Class.forName("dryrun.game.engine.Collidable"))&& a.getClass().equals(Class.forName("dryrun.game.common.Player"))){//if the second object implements collidable and the first object is a player
 					((Collidable)b).collided((Player)a);//call collision
 				}
 			} catch (ClassNotFoundException e) {
@@ -41,7 +42,7 @@ public class CollisionListener implements ContactListener {
 
 	@Override
 	public void endContact(Contact arg0) {
-		// TODO Auto-generated method stub
+		System.out.println("ended contact");
 
 	}
 
@@ -53,7 +54,7 @@ public class CollisionListener implements ContactListener {
 
 	@Override
 	public void preSolve(Contact arg0, Manifold arg1) {
-		// TODO Auto-generated method stub
+//		arg0.setEnabled(false);
 
 	}
 

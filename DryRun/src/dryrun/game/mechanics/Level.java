@@ -2,16 +2,19 @@ package dryrun.game.mechanics;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.World;
 import org.lwjgl.opengl.Display;
 import org.newdawn.slick.opengl.Texture;
+
 import static dryrun.game.engine.LoadTex.levelBackground;
 import dryrun.game.common.Player;
 import dryrun.game.engine.DrawObject;
 import dryrun.game.engine.Drawable;
 import dryrun.game.engine.Tex;
 import dryrun.game.engine.Updateable;
+import dryrun.game.engine.physics.CollisionListener;
 import dryrun.game.objects.TextureHolder;
 import dryrun.game.objects.bonus.Bonus;
 
@@ -25,10 +28,12 @@ public class Level implements Drawable, Serializable,Updateable {
 	public ArrayList<Checkpoint> checkpoints;//arrayList of all the Checkpoints
 	public static final World world = new World(new Vec2(0, 0));//world for box2d purposes	
 	public static final int MAX_BONUSES = 30;//Maximum number of bonuses constant
+	private static CollisionListener myListener =new CollisionListener();
 	
 
 	
 	public Level(){
+		world.setContactListener(myListener);
 			th=new TextureHolder(levelBackground,new Tex(0,1,0,1));//load the texture
 	}
 	

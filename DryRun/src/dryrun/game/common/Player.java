@@ -1,307 +1,141 @@
 package dryrun.game.common;
 
-import static dryrun.game.engine.LoadTex.playerTex;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import org.jbox2d.collision.shapes.PolygonShape;
 import org.jbox2d.common.Vec2;
+import org.jbox2d.dynamics.Body;
+import org.jbox2d.dynamics.BodyDef;
+import org.jbox2d.dynamics.BodyType;
+import org.jbox2d.dynamics.FixtureDef;
 import org.lwjgl.input.Keyboard;
+import org.newdawn.slick.opengl.Texture;
+
+import dryrun.game.mechanics.Level;
 import dryrun.game.objects.TextureHolder;
+import dryrun.game.common.cars.CarModel;
+import dryrun.game.engine.Collidable;
 import dryrun.game.engine.DrawObject;
 import dryrun.game.engine.Movable;
 import dryrun.game.engine.Tex;
 import dryrun.game.objects.GameObject;
 import dryrun.game.objects.bonus.Bonus;
 import dryrun.game.objects.bonus.Timer;
+import static dryrun.game.network.NetConstants.P2M;
 import static org.lwjgl.opengl.GL11.glTranslatef;
 
-public class Player extends GameObject implements Movable {
+public class Player extends GameObject implements Collidable {
 	//player related
-	private PlayerValues myStats;
-	private ArrayList<Timer> myTimers;
-
+//	private ArrayList<Timer> myTimers;
+	private CarModel myModel;
 	protected List<GameObject> myObjects=Collections.synchronizedList(new ArrayList<GameObject>());
 	private String name;
-	private Vec2 velocity;
-	private static double speed=0;//implementirati kasnije
-	private double rangle = (double)(Math.PI/180);
-	private double angle = 0;
-	public Vec2 direction;
-	
-	//is w or s clicked
-	private static boolean something=false;
-	
-	//speed related constants
-	private static final float maxSpeed=8;
-	private static final double maxThrottle= 0.5; 
-	private static final double maxrthrottle = -0.2;
-	private static final float maxReverse = -3;
-	
-	
-	//speed related changes d
-	private static double throttle = 0.00;
-	private double dthrottle = 0.025;	
-	private double breaks = -0.15;
-	private double inertivebreaks = 0.08;
 
 	//bonus related 
 	//if a player picks up certain bonus the count increased 
 	//for a certain amount ...
+    static float mainPlayerX;
+    static float mainPlayerOldX;
+    static float mainPlayerY;
+    static float mainPlayerOldY;
 	public static int ammo = 0; 
 	public static int minescount = 0;
 	public static double nitro = 0.0;
 	public static int rockets = 0;
 
 	//constructor
-	public Player(String n, String carType, float x, float y, float dimx, float dimy){
-		super(x, y, dimx, dimy);
-		name=n;	
-		myStats=new PlayerValues();
-		direction = new Vec2(1,0);
-		velocity = new Vec2(4, 0);
-		holder=new TextureHolder(playerTex,new Tex(0f,0f,1f,1f));
+	public Player(String n, CarModel carModel, float x, float y){
+		super(x,y,0,0);
+		myModel=carModel;
+		BodyDef boxDef = new BodyDef();//make new jbox2d body definition
+        boxDef.position.set(x*P2M,y*P2M);//set the position in meters
+        boxDef.type = BodyType.DYNAMIC;//almost all game objects are dynamic
+        PolygonShape boxShape = new PolygonShape();//define shape as a polygon
+        boxShape.setAsBox(myModel.dimX/2, myModel.dimY/2);//namely as a box
+        Body box = Level.world.createBody(boxDef);//create a body base on the body definition
+        FixtureDef boxFixture = new FixtureDef();//create a fixture definition
+        boxFixture.density = 222.222f;//adjust density
+        boxFixture.shape = boxShape;//set the fixture shape to the previously created polygon
+        box.createFixture(boxFixture);//attach the fixture to the body(or rather vice verca)
+//     	Level.bodies.add(box);//TODO add to the Level list of boddies
+        this.myBody=box;//attach the body to the game object
+        box.setUserData(this);//set the body userData to it's parent object
+		myValues = new GameObjectValues();
+		myValues.setCoordX(x);
+		myValues.setCoordY(y);
+		myValues.setDimX(myModel.dimX);
+		myValues.setDimY(myModel.dimY);	
+		name=n;
+		mainPlayerX=this.myBody.getWorldCenter().x;
+		mainPlayerY=this.myBody.getWorldCenter().y;
 	}
 	
 	
 	//player update input should be here
 	public void update() {
+		readInput();
 	}
-	
-	
-	//direction logic
-	public void setDirectionR(){
-		float	oldx = direction.x;
-		float	oldy = direction.y;
-			direction.x=(float) ( oldx * Math.cos(-rangle) - oldy*Math.sin(-rangle));			
-			direction.y =(float)( oldx*Math.sin(-rangle) + oldy*Math.cos(-rangle));				
-	}
-	
-	
-	public void setDirectionL(){
-		float	oldx = direction.x;
-		float	oldy = direction.y;
-			direction.x=(float) ( oldx * Math.cos(rangle) - oldy*Math.sin(rangle));			
-			direction.y =(float)( oldx*Math.sin(rangle) + oldy*Math.cos(rangle)); 
-			}
-	
-	
-	//speed calculation Logic	
-	public void calcSpeedUp(){
-		if(speed < 0) {
-			speed-=breaks;
-			if(speed > 0) speed =0; 
-		}
-		if(speed == 0) throttle = 0;
-		if(speed < maxSpeed || speed >= 0 ){			
-			if(throttle < maxThrottle) throttle+=dthrottle;
-			speed += throttle;
-			if(speed > maxSpeed) speed = maxSpeed;
-			if(throttle > maxThrottle) throttle = maxThrottle;
-		}		
-	}
-	
-	
-	public void calcSpeedDown(){
-		if(speed > 0 && speed <= maxSpeed){
-			speed += breaks; 
-			if(speed < 0) speed = 0;
-		}
-		if(speed == 0) throttle = 0;
-		if(speed <= 0 && speed >= maxReverse){
-			if(throttle >  maxrthrottle) throttle-=dthrottle;
-			speed += throttle;			
-			if(speed < maxReverse) speed = maxReverse;
-			if(throttle < maxrthrottle) throttle = maxrthrottle;
-		}
-	}
-	
-	public void returnToStatic(){
-		if(speed > 0){ 
-			speed-=inertivebreaks;
-			if(speed < 0) speed = 0;
-		}
-		else if(speed < 0) {
-			speed += inertivebreaks;
-			if (speed > 0) speed = 0;
-		}
-		throttle =0;
-	}
-	
 
 	
-	//very complicated move method
-	@Override
-	public void move(int i) {
-		switch(i){
-		
-		case 1:{ //blocking when all buttons pressed			
-			break;
+	private void readInput() {
+		//TODO if fwd
+		//apply force along axis from axialPoint
+		//if back
+		//apply force opposing axis from axialPoint
+		//if left
+		//setTransformation
+		//if right
+		//setTransform
+		mainPlayerOldX=mainPlayerX;
+		mainPlayerOldY=mainPlayerY;		
+		if(Keyboard.isKeyDown(Keyboard.KEY_UP)){
+			if((this.myBody.getLinearVelocity().x*Math.cos(this.myBody.getAngle()))>=0){
+				this.myBody.applyForce(new Vec2((float)(this.myModel.accelForce*Math.cos(this.getAngle())),(float)(this.myModel.accelForce*Math.sin(this.getAngle()))),	new Vec2((this.myBody.getWorldCenter().x-(float) (Math.cos(this.myBody.getAngle())*this.myModel.axialPointOffset)),(this.myBody.getWorldCenter().y-(float) (Math.sin(this.myBody.getAngle())*this.myModel.axialPointOffset))));
+//				System.out.println(this.myBody.getLinearVelocity().x+":"+this.myBody.getLinearVelocity().y);
 			}
-		
-		case 2:{ //stisnuto napred ili strelica napred	
-			
-			
-				if(Keyboard.isKeyDown(Keyboard.KEY_A)||Keyboard.isKeyDown(Keyboard.KEY_LEFT)){				
-					setDirectionL();
-					angle -= rangle;
-				}
+			else{
+				this.myBody.applyForce(new Vec2((float)(this.myModel.brakeForce*Math.cos(this.getAngle())),(float)(this.myModel.brakeForce*Math.sin(this.getAngle()))),	new Vec2((this.myBody.getWorldCenter().x-(float) (Math.cos(this.myBody.getAngle())*this.myModel.axialPointOffset)),(this.myBody.getWorldCenter().y-(float) (Math.sin(this.myBody.getAngle())*this.myModel.axialPointOffset))));
 				
-				if(Keyboard.isKeyDown(Keyboard.KEY_D)||Keyboard.isKeyDown(Keyboard.KEY_RIGHT)){					
-					setDirectionR();
-					angle += rangle;			
-				}		
-				velocity.x =(float) speed*direction.x;
-				velocity.y =(float) speed*direction.y;
-				
-				
-				
-				// setting player coords
-				myValues.setCoordX((myValues.getCoordX()+velocity.x));
-				myValues.setCoordY((myValues.getCoordY()+velocity.y));
-				//speed calculation
-				calcSpeedUp();
-				//screen movement
-				glTranslatef(-velocity.x, velocity.y, 0);			
-				break;
-			
-		}
-		
-		case -2:{ //stisnuto nazad ili s
-			if( speed<=0 ){
-				if(Keyboard.isKeyDown(Keyboard.KEY_A)||Keyboard.isKeyDown(Keyboard.KEY_LEFT)){				
-					setDirectionR();
-					angle+= rangle;			
-				}
-				
-				if(Keyboard.isKeyDown(Keyboard.KEY_D)||Keyboard.isKeyDown(Keyboard.KEY_RIGHT)){				
-					setDirectionL();
-					angle -= rangle;
-				}			
-			}
-			if( speed>0){
-				if(Keyboard.isKeyDown(Keyboard.KEY_A)||Keyboard.isKeyDown(Keyboard.KEY_LEFT)){				
-					setDirectionL();
-					angle -= rangle;
-				}
-				
-				if(Keyboard.isKeyDown(Keyboard.KEY_D)||Keyboard.isKeyDown(Keyboard.KEY_RIGHT)){					
-					setDirectionR();
-					angle += rangle;			
-				}	
-			}
-			
-			velocity.x =(float) speed*direction.x;
-			velocity.y =(float) speed*direction.y;			
-			myValues.setCoordX((myValues.getCoordX()+velocity.x));
-			myValues.setCoordY((myValues.getCoordY()+velocity.y));
-			//speed calcuation
-			calcSpeedDown();
-			
-			//screen movement
-			glTranslatef(-velocity.x, velocity.y, 0);
-			break;
 			}
 		}
+	
+		if(Keyboard.isKeyDown(Keyboard.KEY_DOWN)){
+//			float moo=(float)(this.myBody.getLinearVelocity().x*Math.cos(this.myBody.getAngle()));
+//			double moo=(this.myBody.getLinearVelocity().x*Math.cos(this.myBody.getAngle()));
+//			double foo=0.0d;
+			if(false){
+				this.myBody.applyForce(new Vec2((float)(-this.myModel.reverseForce*Math.cos(this.getAngle())),(float)(-this.myModel.reverseForce*Math.sin(this.getAngle()))),new Vec2((this.myBody.getWorldCenter().x-(float) (Math.cos(this.myBody.getAngle())*this.myModel.axialPointOffset)),(this.myBody.getWorldCenter().y-(float) (Math.sin(this.myBody.getAngle())*this.myModel.axialPointOffset))));
+			}
+			else{
+				this.myBody.applyForce(new Vec2((float)(this.myModel.brakeForce*Math.cos(this.getAngle())),(float)(this.myModel.brakeForce*Math.sin(this.getAngle()))),	new Vec2((this.myBody.getWorldCenter().x-(float) (Math.cos(this.myBody.getAngle())*this.myModel.axialPointOffset)),(this.myBody.getWorldCenter().y-(float) (Math.sin(this.myBody.getAngle())*this.myModel.axialPointOffset))));
+				
+			}
+//			System.out.println(this.myBody.getLinearVelocity().x+":"+this.myBody.getLinearVelocity().y);
+			
+		}
+		mainPlayerX=this.myBody.getWorldCenter().x;
+		mainPlayerY=this.myBody.getWorldCenter().y;
+//		System.out.println("something");
+		glTranslatef(-(mainPlayerX-mainPlayerOldX)/P2M, -(mainPlayerY-mainPlayerOldY)/P2M, 0);
+		
+		
+//			this.myBody.applyForce(direction, point);
+//			this.myBody.applyTorque(torque);
+		
 	}
 
 	@Override
 	public void render() {
+		
 		DrawObject.draw(this);
 	}
 	
 
-	//timer methods
-	public ArrayList<Timer> getMytimers() {
-		return myTimers;
-	}
-
-	public void setMyTimers(ArrayList<Timer> mytimers) {
-		this.myTimers = mytimers;
-	}
 	
-	public void addTimer(Timer t){
-		myTimers.add(t);
-	}
-	
-	public void checkTimers(){
-		for(int i=0; i<myTimers.size(); i++){
-			if(myTimers.get(i).isPassed()) {
-			 myTimers.get(i).getMyBonus().undo();
-			 myTimers.remove(i--);
-			}		
-		}	
-	}	
-	
-	
-		
-
-	// player keyboard input used to render movement
-	
-	public void playerInput(){//all movement keys pressed
-		//all movement keys pressed	
-		if(	(Keyboard.isKeyDown(Keyboard.KEY_A)||Keyboard.isKeyDown(Keyboard.KEY_LEFT))&&
-					(Keyboard.isKeyDown(Keyboard.KEY_S) ||Keyboard.isKeyDown(Keyboard.KEY_DOWN))
-					&& ((Keyboard.isKeyDown(Keyboard.KEY_W) ||Keyboard.isKeyDown(Keyboard.KEY_UP))&&
-							(Keyboard.isKeyDown(Keyboard.KEY_D) ||Keyboard.isKeyDown(Keyboard.KEY_RIGHT)))){
-				Player.something=true;
-				this.move(1);
-				}
-		//W and S pressed at same time
-		if((Keyboard.isKeyDown(Keyboard.KEY_S) ||Keyboard.isKeyDown(Keyboard.KEY_DOWN))
-				&& ((Keyboard.isKeyDown(Keyboard.KEY_W) ||Keyboard.isKeyDown(Keyboard.KEY_UP)))){
-			Player.something=false;
-			this.move(1);
-			}
-		else{			
-			if(Keyboard.isKeyDown(Keyboard.KEY_W) ||Keyboard.isKeyDown(Keyboard.KEY_UP)){//if UP was pressed
-				Player.something=true;				
-				this.move(2);	
-				}			
-			if(Keyboard.isKeyDown(Keyboard.KEY_S) ||Keyboard.isKeyDown(Keyboard.KEY_DOWN)){//if DOWN was pressed 
-				Player.something=true;					
-				this.move(-2);	
-				}
-		}
-			
-			
-			//nista nije pritisnuto
-			if(Player.something == false) {			
-				if(speed != 0){
-					if(speed > 0){
-						if(Keyboard.isKeyDown(Keyboard.KEY_A)||Keyboard.isKeyDown(Keyboard.KEY_LEFT)){				
-							setDirectionL();
-							angle-=rangle;							
-						}				
-						if(Keyboard.isKeyDown(Keyboard.KEY_D)||Keyboard.isKeyDown(Keyboard.KEY_RIGHT)){					
-							setDirectionR();
-							angle+=rangle;			
-						}
-					}
-					if(speed < 0){
-						if(Keyboard.isKeyDown(Keyboard.KEY_A)||Keyboard.isKeyDown(Keyboard.KEY_LEFT)){				
-							setDirectionR();
-							angle+=rangle;
-							
-						}				
-						if(Keyboard.isKeyDown(Keyboard.KEY_D)||Keyboard.isKeyDown(Keyboard.KEY_RIGHT)){					
-							setDirectionL();
-							angle-=rangle;			
-						}
-					}
-									
-					velocity.x =(float) speed*direction.x;
-					velocity.y =(float)speed*direction.y;				
-					myValues.setCoordX((myValues.getCoordX()+velocity.x));
-					myValues.setCoordY((myValues.getCoordY()+velocity.y));	
-					glTranslatef(-velocity.x, velocity.y, 0);
-				}				
-				returnToStatic();
-			}				
-			else Player.something=false;
-	}
 	@Override
 	public void collided(Player b) {
-		// TODO Auto-generated method stub
 		
 	}	
 	
@@ -322,21 +156,47 @@ public class Player extends GameObject implements Movable {
 		this.name = name;
 	}
 
-	public PlayerValues getMyStats() {
-		return myStats;
-	}
-
-	public void setMyStats(PlayerValues myStats) {
-		this.myStats = myStats;
-	}
 
 	public double getAngle() {
-		return angle;
+		return Math.toDegrees(this.myBody.getAngle());
 	}
 	
-	public void setMyStats(GameObjectValues stats) {
-		myStats=(PlayerValues) stats;
-	}
+
 	
-	public List<GameObject> getMyObjects(){return myObjects;}
+	public List<GameObject> getMyObjects(){
+		return myObjects;
+		}
+
+
+	@Override
+	public Texture getTexture() {
+		return this.myModel.myTex.getMyTexture();
+	}
+
+
+	@Override
+	public float getTexX1() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public float getTexX2() {
+		return 1;
+	}
+
+
+	@Override
+	public float getTexY1() {
+		return 0;
+	}
+
+
+	@Override
+	public float getTexY2() {
+		return 1;
+	}
+
+
 }

@@ -2,12 +2,15 @@ package dryrun.game.mechanics;
 
 import org.jbox2d.dynamics.BodyType;
 import org.lwjgl.opengl.Display;
+
 import static org.lwjgl.opengl.GL11.*;
 import dryrun.game.common.GameState;
 import dryrun.game.common.Player;
+import dryrun.game.common.cars.bmwM5;
 import dryrun.game.engine.Drawable;
 import dryrun.game.engine.Tex;
 import dryrun.game.engine.Updateable;
+import dryrun.game.engine.physics.CollisionListener;
 import dryrun.game.gui.menus.GameMenu;
 import dryrun.game.gui.menus.HostMenu;
 import dryrun.game.gui.menus.JoinMenu;
@@ -16,10 +19,11 @@ import dryrun.game.network.GameStatePacket;
 import dryrun.game.network.client.Client;
 import dryrun.game.network.server.Server;
 import dryrun.game.objects.TextureHolder;
-
 import static dryrun.game.engine.LoadTex.tex;
 import static dryrun.game.engine.LoadTex.loading1;
 import static dryrun.game.engine.LoadTex.ls;
+
+
 
 
 import java.util.*;
@@ -32,7 +36,7 @@ public class Game {
 	private static HostMenu myHostMenu;//my host menu
 	private static JoinMenu myLobbyMenu;//my join menu
 	private static boolean terminate=false;	//window kill flag
-	private static GameState currentGameState=GameState.MainMenu;//current game state
+	private static GameState currentGameState=GameState.Game;//current game state
 	private static List<InetAddress> serverAddresses;//list of known server addresses
 	private static GameStatePacket firstPlayersPositions;//TODO someone else added this I do not understand it @Ivan
 	private static Level myLvl;//myLevel
@@ -45,29 +49,28 @@ static{
 	public static void startGame(){
 
 		Player p = new Player("Kesler",
-				"Lamburghini",
+				new bmwM5(),
 				Display.getWidth()/2,
-				Display.getHeight()/2,
-				Display.getWidth()/6, 
-				Display.getHeight()/10);//@Vuk Test
+				Display.getHeight()/2);//@Vuk Test
 		
-		Player d = new Player("Ksler", 
-				"Lamburghini",
-				Display.getWidth()/2,
-				Display.getHeight()/2-300,
-				Display.getWidth()/6,
-				Display.getHeight()/10);//@Vuk Test
-		
+//		Player d = new Player("Ksler", 
+//				new bmwM5(),
+//				Display.getWidth()/2,
+//				Display.getHeight()/2-1600);//@Vuk Test
+//		
 //		d.myBody.m_type=BodyType.STATIC;//@Vuk Test
 		while((!Display.isCloseRequested())&& !terminate) {
 			glClear(GL_COLOR_BUFFER_BIT);//clear the screen
 			getCurrentUpdate().update();//update what needs to be updated
 			getCurrentDraw().render();//render what needs to be rendered
 			//gameloop yet to be done 
-
+			p.update();
+//			d.update();
 			p.render();//@Vuk Test
-			d.render();//@Vuk Test
-			p.playerInput();//@Vuk Test
+//			d.render();//@Vuk Test
+//			p.playerInput();//@Vuk Test
+		//	System.out.println("P is at:"+ p.getX()+","+p.getY());
+		//	System.out.println("D is at:"+ d.getX()+","+d.getY());
 			
 
 			Display.sync(60);//limit fps to 60
@@ -220,7 +223,6 @@ static{
 
 	public static void initGame() {
 		//myLevel=new Level(currentLevel);
-		
 				serverAddresses = Collections.synchronizedList(new ArrayList<InetAddress>());
 				tex=new TextureHolder(loading1,new Tex(1/8f,0f,2/8f,1f));
 				ls.render();
