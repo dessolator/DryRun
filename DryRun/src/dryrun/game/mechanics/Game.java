@@ -79,7 +79,7 @@ static{
 			p.render();//@Vuk Test
 			d.render();//@Vuk Test
 			p.playerInput();//@Vuk Test
-			SEngine.getSoundSystem().setListenerPosition( p.getX(), p.getY(), -100 ); //@Nikola Sound Test
+//			SEngine.getSoundSystem().setListenerPosition( p.getX(), p.getY(), -100 ); //@Nikola Sound Test
 			Display.sync(60);//limit fps to 60
 			Display.update();//draw the GLContext
 		}		

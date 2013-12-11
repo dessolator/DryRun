@@ -114,7 +114,9 @@ public abstract class Button implements Drawable, Updateable{
 		return myTexture.getMyCoords().getY2();
 	}
 	
-	public void pressed(){SEngine.getSoundSystem().play("buttonclick");}
+	public void pressed(){
+		//SEngine.getSoundSystem().play("buttonclick");
+		}
 	
 	@Override
 	public void update() {
