@@ -8,7 +8,8 @@ public class GameObjectValues implements Serializable{
 	private float coordY;
 	private float dimX;
 	private float dimY;
-	
+
+	//!!!dzoni and goksi review pls!!! 
 /*	public byte[] write(){ //SERIALIZING
 		byte[] x = null;
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -38,6 +39,7 @@ public class GameObjectValues implements Serializable{
 		return (GameObjectValues) ois.readObject();
 	}
 */
+	//getters and setters
 	public float getCoordX() {
 		return coordX;
 	}
@@ -61,9 +63,5 @@ public class GameObjectValues implements Serializable{
 	}
 	public void setDimY(float dimY) {
 		this.dimY = dimY;
-	}
-	
-	
-	
-	
+	}	
 }

@@ -11,6 +11,5 @@ public enum GameState {
 						JoinGame,
 						WaitServerReply,
 						Game;
-
 }
 

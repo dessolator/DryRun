@@ -17,7 +17,6 @@ import static org.lwjgl.opengl.GL11.glTranslatef;
 
 public class Player extends GameObject implements Movable {
 	//player related
-	private PlayerValues myStats;
 	private ArrayList<Timer> myTimers;
 
 	protected List<GameObject> myObjects=Collections.synchronizedList(new ArrayList<GameObject>());
@@ -64,8 +63,7 @@ public class Player extends GameObject implements Movable {
 	//constructor
 	public Player(String n, String carType, float x, float y, float dimx, float dimy){
 		super(x, y, dimx, dimy);
-		name=n;	
-		myStats=new PlayerValues();
+		name=n;		
 		direction = new Vec2(1,0);
 		velocity = new Vec2(4, 0);
 		holder=new TextureHolder(playerTex,new Tex(0f,0f,1f,1f));
@@ -331,20 +329,9 @@ public class Player extends GameObject implements Movable {
 		this.name = name;
 	}
 
-	public PlayerValues getMyStats() {
-		return myStats;
-	}
-
-	public void setMyStats(PlayerValues myStats) {
-		this.myStats = myStats;
-	}
 
 	public double getAngle() {
 		return angle;
-	}
-	
-	public void setMyStats(GameObjectValues stats) {
-		myStats=(PlayerValues) stats;
 	}
 	
 	public List<GameObject> getMyObjects(){return myObjects;}	
