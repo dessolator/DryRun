@@ -8,7 +8,7 @@ import static dryrun.game.engine.LoadTex.tex;
 
 
 
-
+//class used to represent the loading screen
 public class LoadingScreen implements Drawable {
 	
 	public LoadingScreen(){	}	
