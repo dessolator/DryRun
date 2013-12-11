@@ -11,12 +11,10 @@ public class shotLine extends GameObject {
 	private float sourceY;
 	
 	public shotLine(Player p){
-		super(p.getX()+(p.getDirectionX()*5*p.getDimX()/2),p.getY()+(p.getDirectionY()*25000*p.getDimY()/2), 10, 50000);
-		sourceX=p.getX()+p.getDirectionX()*p.getDimX()/2;
-		sourceY=p.getY()+p.getDirectionY()*p.getDimY()/2;
-				
-		direction = p.direction;
-		
+		super(p.getX()+(p.getDirection().x*5*p.getDimX()/2),p.getY()+(p.getDirection().y*25000*p.getDimY()/2), 10, 50000);
+		sourceX=p.getX()+p.getDirection().x*p.getDimX()/2;
+		sourceY=p.getY()+p.getDirection().x*p.getDimY()/2;				
+		direction = p.getDirection();		
 	}
 
 	@Override
