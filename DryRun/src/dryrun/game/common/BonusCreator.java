@@ -1,24 +1,17 @@
 package dryrun.game.common;
 
-
-
-
-
 import org.jbox2d.common.Vec2;
 import org.lwjgl.opengl.Display;
-
 
 import dryrun.game.mechanics.Level;
 import dryrun.game.objects.bonus.*;
 
-
-
 public class BonusCreator extends Player {
 	//zaduzen da inicira bonuse, i respawn
 	private static BonusCreator b=null;
-	
-	
+	//vreme od kada je pokupljen bonus
 	public static long timeSincePickedUp[];
+	
 	//vracanje singleton bonus creatora
 	public static BonusCreator getBonusCreator(){
 		if(BonusCreator.b==null) return new BonusCreator();
@@ -39,15 +32,7 @@ public class BonusCreator extends Player {
 		}
 	}
 	
-	
-	public static void loadBonusLoc(int ind){
-		for(int i=0; i< Level.MAX_BONUSES; i++){
-				
-			}
-		}
-
-	
-	public synchronized Bonus spawnBonuses(float locX, float locY,int ind){
+	public  static synchronized Bonus spawnBonuses(float locX, float locY,int ind){
 			double factor=Math.random();
 			
 			if(factor>0.75){ 
@@ -69,18 +54,28 @@ public class BonusCreator extends Player {
 			else return null;
 	}
 	
-	public synchronized void reSpawnBonuses(int ind){
-		double factor=Math.random();
+	public static synchronized void reSpawnBonus(int ind){
+		float locX = getBonusCreator().myObjects.get(ind).getX();
+		float locY = getBonusCreator().myObjects.get(ind).getY();
 		
-		if(factor>0.75){}
+		double factor=Math.random();		
+		if(factor>0.75){ 
+			getBonusCreator().myObjects.add(ind, new MachineGunBonus(locX, locY, Display.getWidth()/10, Display.getHeight()/10 ,ind,  new Vec2(locX, locY)));
+			}
 			
-		else if(factor>0.5  && factor <= 0.75){}
+		else if(factor>0.5  && factor <= 0.75){
+			getBonusCreator().myObjects.add(ind, new NitroBonus(locX, locY, Display.getWidth()/10, Display.getHeight()/10 ,ind,  new Vec2(locX, locY)));
+		}
 			
-		else if(factor>0.25 && factor <= 0.5){}
+		else if(factor>0.25 && factor <= 0.5){
+			getBonusCreator().myObjects.add(ind, new Mines(locX, locY, Display.getWidth()/10, Display.getHeight()/10 ,ind,  new Vec2(locX, locY)));
 			
-		else if(factor>0.15  && factor <= 0.25){}
+		}
 			
-		else if(factor>0  && factor <= 0.15){}			
+		else if(factor>=0.00  && factor <= 0.25){
+			getBonusCreator().myObjects.add(ind, new Heal(locX, locY, Display.getWidth()/10, Display.getHeight()/10 ,ind,  new Vec2(locX, locY)));
+		}
+		
 
 }
 
@@ -88,7 +83,7 @@ public class BonusCreator extends Player {
 	public synchronized void check() {
 		for(int i=0; i<Level.MAX_BONUSES;i++){			
 			if(!((Bonus)(this.getMyObjects().get(i))).isAmIspawned() && (timeSincePickedUp[i]-System.nanoTime()>15000)){
-			//	respawnBonuses(i);
+			reSpawnBonus(i);
 			}
 		}
 		
