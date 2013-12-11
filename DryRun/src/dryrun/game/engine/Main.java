@@ -10,14 +10,13 @@ public class Main {
 	public static int i=0;
 
 	public static void main(String[] args) {
-		SEngine Sound = new SEngine();
-		Sound.init();
-		//Sound.getSoundSystem().backgroundMusic("src", "b.ogg", false);
+		SEngine.init();
+		//SEngine.getSoundSystem().backgroundMusic("src", "b.ogg", false);
 		Engine.init();
 		LoadTex.init();
 		Game.initGame();
 		Game.startGame();
-		Sound.getSoundSystem().cleanup();
+		SEngine.getSoundSystem().cleanup();
 		Engine.kill();
 	}
 

@@ -16,14 +16,14 @@ import paulscode.sound.SoundSystemException;
 
 
 public class SEngine {
-	private SoundSystem s=null;
+	private static SoundSystem s=null;
 	
-	public SoundSystem getSoundSystem(){
+	public static SoundSystem getSoundSystem(){
 		if (s==null) {init();}
 		return s;
 	}
 	
-	public void init(){
+	public static void init(){
 		try
 		{
 		SoundSystemConfig.addLibrary( LibraryLWJGLOpenAL.class );
@@ -41,11 +41,13 @@ public class SEngine {
 		}catch( SoundSystemException e ){System.err.println("error linking with the CodecWav plug-in" );} 
 		
 		if(s==null)	s=new SoundSystem();
+		
+		s.setListenerOrientation( 0, 0, -1, 0, -1, 0 ); 
 	}
 	
 	
 	
-	public void dispose(){s.cleanup();}
+	public static void dispose(){s.cleanup();}
 	
 	
 	

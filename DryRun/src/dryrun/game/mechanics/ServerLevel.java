@@ -22,9 +22,9 @@ public class ServerLevel extends Level {
                 for(Wall w: walls){
                         w.update();
                 }
-                for(Bonus b:bonuses){
-                        b.update();
-                }
+               // for(Bonus b:bonuses){
+               //         b.update();
+               // }
                 for(Checkpoint c:checkpoints){
                         c.update();
                 }

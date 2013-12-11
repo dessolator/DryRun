@@ -2,6 +2,8 @@ package dryrun.game.mechanics;
 
 import org.jbox2d.dynamics.BodyType;
 import org.lwjgl.opengl.Display;
+
+import paulscode.sound.SoundSystemConfig;
 import static org.lwjgl.opengl.GL11.*;
 import dryrun.game.common.GameState;
 import dryrun.game.common.Player;
@@ -26,6 +28,9 @@ import java.util.*;
 import java.io.IOException;
 import java.net.*;
 import dryrun.game.gui.menus.*;
+
+import dryrun.game.sounds.*;
+
 public class Game {
 	private static MainMenu myMainMenu;//my main menu
 	private static GameMenu myGameMenu;//my game menu
@@ -52,25 +57,29 @@ static{
 				Display.getWidth()/6, 
 				Display.getHeight()/10);//@Vuk Test
 		
+		
+		
 		Player d = new Player("Ksler", 
 				"Lamburghini",
 				Display.getWidth()/2,
 				Display.getHeight()/2-300,
 				Display.getWidth()/6,
 				Display.getHeight()/10);//@Vuk Test
+		System.out.println("quickplay");
 		
-//		d.myBody.m_type=BodyType.STATIC;//@Vuk Test
+		SEngine.getSoundSystem().quickStream(false, "b.ogg", false, p.getX(), p.getY(), 0, SoundSystemConfig.ATTENUATION_LINEAR, 1000f);
+				
+		//d.myBody.m_type=BodyType.STATIC;//@Vuk Test
 		while((!Display.isCloseRequested())&& !terminate) {
 			glClear(GL_COLOR_BUFFER_BIT);//clear the screen
 			getCurrentUpdate().update();//update what needs to be updated
 			getCurrentDraw().render();//render what needs to be rendered
 			//gameloop yet to be done 
 
-		//	p.render();//@Vuk Test
-		//	d.render();//@Vuk Test
-		//	p.playerInput();//@Vuk Test
-			
-
+			p.render();//@Vuk Test
+			d.render();//@Vuk Test
+			p.playerInput();//@Vuk Test
+			SEngine.getSoundSystem().setListenerPosition( p.getX(), p.getY(), -100 ); //@Nikola Sound Test
 			Display.sync(60);//limit fps to 60
 			Display.update();//draw the GLContext
 		}		

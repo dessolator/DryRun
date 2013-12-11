@@ -73,7 +73,7 @@ public class Player extends GameObject implements Movable {
 	
 	
 	//player update input should be here
-	public void update() {
+	public void update() {		
 	}
 	
 	
