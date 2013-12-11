@@ -42,7 +42,13 @@ public class SEngine {
 		
 		if(s==null)	s=new SoundSystem();
 		
-		s.setListenerOrientation( 0, 0, -1, 0, -1, 0 ); 
+		s.setListenerOrientation( 0, 0, -1, 0, -1, 0 );
+		loadSounds();
+	}
+	
+	public static void loadSounds(){
+		s.newSource(false, "buttonclick", "buttonclick.ogg", false, 0, 0, 0, 0, 0);
+		
 	}
 	
 	

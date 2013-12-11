@@ -9,6 +9,7 @@ public class ExitGameButton extends Button {
 
 	@Override
 	public void pressed() {
+		super.pressed();
 		Game.setTerminate(true);
 	}
 

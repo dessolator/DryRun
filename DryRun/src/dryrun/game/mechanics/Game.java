@@ -67,7 +67,7 @@ static{
 				Display.getHeight()/10);//@Vuk Test
 		System.out.println("quickplay");
 		
-		SEngine.getSoundSystem().quickStream(false, "b.ogg", false, p.getX(), p.getY(), 0, SoundSystemConfig.ATTENUATION_LINEAR, 1000f);
+		//SEngine.getSoundSystem().quickStream(false, "b.ogg", false, p.getX(), p.getY(), 0, SoundSystemConfig.ATTENUATION_LINEAR, 1000f);
 				
 		//d.myBody.m_type=BodyType.STATIC;//@Vuk Test
 		while((!Display.isCloseRequested())&& !terminate) {

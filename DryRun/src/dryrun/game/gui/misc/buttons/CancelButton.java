@@ -11,6 +11,7 @@ public class CancelButton extends Button {
 
 	@Override
 	public void pressed() {
+		super.pressed();
 	//	RaceGame.setCurrentGameState(GameState.MainMenu);
 
 	}
