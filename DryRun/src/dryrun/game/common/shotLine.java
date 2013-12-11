@@ -5,11 +5,13 @@ import org.jbox2d.common.Vec2;
 import dryrun.game.engine.DrawObject;
 import dryrun.game.objects.GameObject;
 
+//class used to represent a shotline for machinegun
 public class shotLine extends GameObject {
 	private Vec2 direction;
 	private float sourceX;
 	private float sourceY;
 	
+	//constructor takes a player that has a machinegun and inits shotline 
 	public shotLine(Player p){
 		super(p.getX()+(p.getDirection().x*5*p.getDimX()/2),p.getY()+(p.getDirection().y*25000*p.getDimY()/2), 10, 50000);
 		sourceX=p.getX()+p.getDirection().x*p.getDimX()/2;
