@@ -2,6 +2,7 @@ package dryrun.game.engine;
 
 import org.newdawn.slick.opengl.Texture;
 
+//used to implement draw related functions where needed
 public interface Drawable {
 	
 	public Texture getTexture();
