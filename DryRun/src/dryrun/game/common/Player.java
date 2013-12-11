@@ -91,6 +91,7 @@ public class Player extends GameObject implements Collidable {
 		mainPlayerOldX=mainPlayerX;
 		mainPlayerOldY=mainPlayerY;		
 		if(Keyboard.isKeyDown(Keyboard.KEY_UP)){
+			System.out.println(this.myBody.getLinearVelocity().x+":"+this.myBody.getLinearVelocity().y);
 			if((this.myBody.getLinearVelocity().x*Math.cos(this.myBody.getAngle()))>=0){
 				this.myBody.applyForce(new Vec2((float)(this.myModel.accelForce*Math.cos(this.getAngle())),(float)(this.myModel.accelForce*Math.sin(this.getAngle()))),	new Vec2((this.myBody.getWorldCenter().x-(float) (Math.cos(this.myBody.getAngle())*this.myModel.axialPointOffset)),(this.myBody.getWorldCenter().y-(float) (Math.sin(this.myBody.getAngle())*this.myModel.axialPointOffset))));
 //				System.out.println(this.myBody.getLinearVelocity().x+":"+this.myBody.getLinearVelocity().y);
@@ -102,22 +103,23 @@ public class Player extends GameObject implements Collidable {
 		}
 	
 		if(Keyboard.isKeyDown(Keyboard.KEY_DOWN)){
-//			float moo=(float)(this.myBody.getLinearVelocity().x*Math.cos(this.myBody.getAngle()));
-//			double moo=(this.myBody.getLinearVelocity().x*Math.cos(this.myBody.getAngle()));
-//			double foo=0.0d;
-			if(false){
+			float moo=(float)(this.myBody.getLinearVelocity().x*Math.cos(this.myBody.getAngle()));
+			System.out.println(this.myBody.getLinearVelocity().x+":"+this.myBody.getLinearVelocity().y);
+			//double moo=(this.myBody.getLinearVelocity().x*Math.cos(this.myBody.getAngle()));
+			//double foo=0.0d;
+			if(moo <= 0.0d){
 				this.myBody.applyForce(new Vec2((float)(-this.myModel.reverseForce*Math.cos(this.getAngle())),(float)(-this.myModel.reverseForce*Math.sin(this.getAngle()))),new Vec2((this.myBody.getWorldCenter().x-(float) (Math.cos(this.myBody.getAngle())*this.myModel.axialPointOffset)),(this.myBody.getWorldCenter().y-(float) (Math.sin(this.myBody.getAngle())*this.myModel.axialPointOffset))));
 			}
 			else{
-				this.myBody.applyForce(new Vec2((float)(this.myModel.brakeForce*Math.cos(this.getAngle())),(float)(this.myModel.brakeForce*Math.sin(this.getAngle()))),	new Vec2((this.myBody.getWorldCenter().x-(float) (Math.cos(this.myBody.getAngle())*this.myModel.axialPointOffset)),(this.myBody.getWorldCenter().y-(float) (Math.sin(this.myBody.getAngle())*this.myModel.axialPointOffset))));
+				this.myBody.applyForce(new Vec2((float)(-this.myModel.brakeForce*Math.cos(this.getAngle())),(float)(this.myModel.brakeForce*Math.sin(this.getAngle()))),	new Vec2((this.myBody.getWorldCenter().x-(float) (Math.cos(this.myBody.getAngle())*this.myModel.axialPointOffset)),(this.myBody.getWorldCenter().y-(float) (Math.sin(this.myBody.getAngle())*this.myModel.axialPointOffset))));
 				
 			}
-//			System.out.println(this.myBody.getLinearVelocity().x+":"+this.myBody.getLinearVelocity().y);
+			
 			
 		}
 		mainPlayerX=this.myBody.getWorldCenter().x;
 		mainPlayerY=this.myBody.getWorldCenter().y;
-//		System.out.println("something");
+
 		glTranslatef(-(mainPlayerX-mainPlayerOldX)/P2M, -(mainPlayerY-mainPlayerOldY)/P2M, 0);
 		
 		

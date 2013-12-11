@@ -30,6 +30,7 @@ import java.util.*;
 import java.io.IOException;
 import java.net.*;
 
+//here all the magic happens :) 
 public class Game {
 	private static MainMenu myMainMenu;//my main menu
 	private static GameMenu myGameMenu;//my game menu
@@ -41,11 +42,7 @@ public class Game {
 	private static GameStatePacket firstPlayersPositions;//TODO someone else added this I do not understand it @Ivan
 	private static Level myLvl;//myLevel
 	
-static{		
-		
-	}
-	
-
+	//main game loop
 	public static void startGame(){
 
 		Player p = new Player("Kesler",
@@ -78,7 +75,7 @@ static{
 		}		
 	}
 	
-	
+	//get current gemeState ... 	
 	private static Updateable getCurrentUpdate() {
 		switch(currentGameState){
 			case MainMenu:
@@ -101,6 +98,8 @@ static{
 				return null;
 		}
 	}
+	
+	//return to previous game state
 	public static void goBack(){
 		switch(currentGameState){
 			case MainMenu:
@@ -222,7 +221,7 @@ static{
 
 
 	public static void initGame() {
-		//myLevel=new Level(currentLevel);
+				//myLevel=new Level(currentLevel);
 				serverAddresses = Collections.synchronizedList(new ArrayList<InetAddress>());
 				tex=new TextureHolder(loading1,new Tex(1/8f,0f,2/8f,1f));
 				ls.render();
@@ -240,9 +239,7 @@ static{
 				ls.render();
 				//mySettingsMenu=new SettingsMenu();
 				myLvl = new Level();
-				ls.render();
-		// TODO Auto-generated method stub
-		
+				ls.render();		
 	}
 
 }

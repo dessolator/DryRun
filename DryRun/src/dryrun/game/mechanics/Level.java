@@ -47,10 +47,7 @@ public class Level implements Drawable, Serializable,Updateable {
 	public void update() {
 		world.step(1 / 60f, 8, 3);
 		
-	}
-	
-	
-	
+	}	
 	/*
 	 * Getters and Setters
 	 */
@@ -103,9 +100,4 @@ public class Level implements Drawable, Serializable,Updateable {
 	public double getAngle() {
 		return 0;
 	}
-
-
-	
-
-
 }
