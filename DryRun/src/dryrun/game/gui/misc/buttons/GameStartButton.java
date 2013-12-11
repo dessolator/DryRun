@@ -18,7 +18,6 @@ public class GameStartButton extends Button {
 			GameStatePacket p = new GameStatePacket();
 			p.put(s);
 			Server.getServer().startGame(p);
-			
 		}
 		
 	}
