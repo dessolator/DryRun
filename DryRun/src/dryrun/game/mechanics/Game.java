@@ -35,7 +35,7 @@ public class Game {
 	private static JoinMenu myLobbyMenu;//my join menu
 	private static WaitServerMenu waitServerReply;
 	private static boolean terminate=false;	//window kill flag
-	private static GameState currentGameState=GameState.Game;//current game state
+	private static GameState currentGameState=GameState.MainMenu;//current game state
 	private static List<InetAddress> serverAddresses;//list of known server addresses
 	private static GameStatePacket firstPlayersPositions;//TODO someone else added this I do not understand it @Ivan
 	private static Level myLvl;//myLevel
@@ -217,9 +217,8 @@ public class Game {
 	}
 
 
-	public static Player createPlayer(String string, String string2) {
-		// TODO Auto-generated method stub
-		return null;
+	public static void createPlayer(String name) {
+		myLvl.players.add(new Player(name, new bmwM5(), Display.getWidth()/2,Display.getHeight()/2));
 	}
 
 

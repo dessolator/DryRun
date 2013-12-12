@@ -39,7 +39,7 @@ public class ServerThread  { //Client instance on the server
 		myRecBuffer=new ConcurrentCircularBuffer();
 		mySendBuffer=new ConcurrentCircularBuffer();
 		myTcpSocket = s;
-		myPlayer=Game.createPlayer(split[1],split[2]);
+		Game.createPlayer(split[1]);
 		
 		sender = new ServerSender(this);
 		receiver = new ServerReceiver(this);

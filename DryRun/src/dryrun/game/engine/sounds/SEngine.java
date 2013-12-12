@@ -7,16 +7,27 @@ import paulscode.sound.SoundSystemConfig;
 import paulscode.sound.SoundSystemException; 
 
 
+/**
+ * @author Nikola Djukic
+ *
+ */
 public class SEngine {
-	private static SoundSystem s=null;
+	private static SoundSystem s=null;//Static field keeping track of if the SoundSystem was initialized.
 	
+	/**
+	 * Singleton getter function for SoundSystem.
+	 * @return The SoundSystem of the given system.
+	 */
 	public static SoundSystem getSoundSystem(){
 		if (s==null) {
-			init();//TODO da li getSoundSystem mora svaki put da vezuje lib???
+			init();//allocate new SoundSystem if one is not present and link the neccessary libs.
 			}
 		return s;
 	}
 	
+	/**
+	 * Singleton initializer function for SoundSystem.
+	 */
 	public static void init(){
 		try
 		{
