@@ -13,6 +13,7 @@ public class JoinButton extends Button {
 
 	@Override
 	public void pressed() {
+		super.pressed();
 		// TODO Auto-generated method stub
 		Game.setCurrentGameState(GameState.LobbyScreen);
 		Client.getClient();

@@ -100,17 +100,46 @@ public class Server implements NetFramework {
 			
 	}
 	
-
 	
-	public void startGame(){
-		
+	public void CreateClThread(int currentUdp, String split[], InetAddress ip,ObjectInputStream tcpin, ObjectOutputStream tcpout, Socket s) throws SocketException{
+		System.out.println("Creating Client Thread.");
+		myThreads.add(new ServerThread(currentUdp, split, ip,buffer,tcpin,tcpout, s));
+	} //Creation of a new ClientThread, this method is executed in the ConnectAcceptorThread.
+	
+	ConcurrentCircularBuffer getBuffer(){return buffer;} //returns the buffer.
+	
+	
+	@Override
+	public void send(GameObjectValues[] p) {
+		for(int i=0; i<myThreads.size();i++) myThreads.get(i).send(p); //queues a packet for broadcasting to clients
+	}
+
+	@Override
+	public GameObjectValues[] receive() { //returns a single clients gameObjectValues[]
+		try {
+			return buffer.pop();
+		} catch (InterruptedException e) {e.printStackTrace();}
+		return null;
+	}
+
+	public ArrayList<ServerThread> getMyThreads() {
+		return myThreads;
+	}
+
+	public void setMyThreads(ArrayList<ServerThread> myThreads) {
+		this.myThreads = myThreads;
+	}
+
+	@Override
+	public void startGame(GameObjectValues[] p) {
+		// TODO Auto-generated method stub
 		/*
 		 * prodji kroz sve playere u ServerLevel-u, uzmi njihove GameObjectValues
 		 * stavi ih u paket
 		 */
 		GameStatePacket packet = new GameStatePacket();
-		for(Player p : myServerLevel.players) {
-			packet.put(p.getMyValues());
+		for(Player p1 : myServerLevel.players) {
+			packet.put(p1.getMyValues());
 		}
 		
 		/*
@@ -145,43 +174,6 @@ public class Server implements NetFramework {
 		rrt.obavesti();
 		cat=null;
 		rrt=null;
-		}
-	
-
-	
-	
-	public void CreateClThread(int currentUdp, String split[], InetAddress ip,ObjectInputStream tcpin, ObjectOutputStream tcpout, Socket s) throws SocketException{
-		System.out.println("Creating Client Thread.");
-		myThreads.add(new ServerThread(currentUdp, split, ip,buffer,tcpin,tcpout, s));
-	} //Creation of a new ClientThread, this method is executed in the ConnectAcceptorThread.
-	
-	ConcurrentCircularBuffer getBuffer(){return buffer;} //returns the buffer.
-	
-	
-	@Override
-	public void send(GameObjectValues[] p) {
-		for(int i=0; i<myThreads.size();i++) myThreads.get(i).send(p); //queues a packet for broadcasting to clients
-	}
-
-	@Override
-	public GameObjectValues[] receive() { //returns a single clients gameObjectValues[]
-		try {
-			return buffer.pop();
-		} catch (InterruptedException e) {e.printStackTrace();}
-		return null;
-	}
-
-	public ArrayList<ServerThread> getMyThreads() {
-		return myThreads;
-	}
-
-	public void setMyThreads(ArrayList<ServerThread> myThreads) {
-		this.myThreads = myThreads;
-	}
-
-	@Override
-	public void startGame(GameObjectValues[] p) {
-		// TODO Auto-generated method stub
 		
 	}
 

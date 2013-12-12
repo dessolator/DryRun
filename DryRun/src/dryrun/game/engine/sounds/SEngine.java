@@ -3,6 +3,7 @@ package dryrun.game.engine.sounds;
 import paulscode.sound.SoundSystem;
 import paulscode.sound.libraries.LibraryLWJGLOpenAL;
 import paulscode.sound.codecs.CodecJOgg;
+import paulscode.sound.codecs.CodecJOrbis;
 import paulscode.sound.SoundSystemConfig;
 import paulscode.sound.SoundSystemException; 
 
@@ -29,7 +30,7 @@ public class SEngine {
 		
 		try
 		{
-			SoundSystemConfig.setCodec("ogg", CodecJOgg.class);//select OGG decoder
+			SoundSystemConfig.setCodec("ogg", CodecJOrbis.class);//select OGG decoder
 		}catch( SoundSystemException e ){
 			System.err.println("error linking with the CodecWav plug-in" );
 		} 
@@ -43,7 +44,7 @@ public class SEngine {
 	public static void loadSounds(){
 		s.newSource(false, "buttonclick", "splashsound.ogg", false, 0, 0, 0, 0, 0);//TODO nigga got issues!!!(issue: misformated files)
 		//add a new source to the sound system for buttonClicks
-		
+		SEngine.getSoundSystem().loadSound("buttonclick.ogg");
 	}
 	
 	

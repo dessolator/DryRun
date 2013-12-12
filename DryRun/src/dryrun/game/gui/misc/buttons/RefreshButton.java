@@ -13,6 +13,7 @@ public class RefreshButton extends Button {
 
 	@Override
 	public void pressed() {
+		super.pressed();
 		Game.getMyLobbyMenu().deleteServerButtons();
 		Game.getMyLobbyMenu().getButtonsToAdd().clear();
 		Game.getPossibleServers().clear();

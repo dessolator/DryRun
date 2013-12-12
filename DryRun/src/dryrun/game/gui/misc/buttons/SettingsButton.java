@@ -10,6 +10,7 @@ public class SettingsButton extends Button {
 	}
 	@Override
 	public void pressed() {
+		super.pressed();
 	//	RaceGame.setCurrentGameState(GameState.SettingsScreen);
 		
 	}
