@@ -35,7 +35,7 @@ public class Game {
 	private static JoinMenu myLobbyMenu;//my join menu
 	private static WaitServerMenu waitServerReply;
 	private static boolean terminate=false;	//window kill flag
-	private static GameState currentGameState=GameState.Game;//current game state
+	private static GameState currentGameState=GameState.MainMenu;//current game state
 	private static List<InetAddress> serverAddresses;//list of known server addresses
 	private static GameStatePacket firstPlayersPositions;//TODO someone else added this I do not understand it @Ivan
 	private static Level myLvl;//myLevel
@@ -74,10 +74,10 @@ public class Game {
 			getCurrentUpdate().update();//update what needs to be updated
 			getCurrentDraw().render();//render what needs to be rendered
 			//gameloop yet to be done 
-			p.update();
+//			p.update();
 //			d.update();
-			p.render();//@Vuk Test
-			d.render();//@Vuk Test
+//			p.render();//@Vuk Test
+//			d.render();//@Vuk Test
 //			p.playerInput();//@Vuk Test
 		//	System.out.println("P is at:"+ p.getX()+","+p.getY());
 		//	System.out.println("D is at:"+ d.getX()+","+d.getY());

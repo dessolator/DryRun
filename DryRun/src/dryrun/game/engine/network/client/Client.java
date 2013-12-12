@@ -78,6 +78,7 @@ public class Client implements NetFramework {
 		try {
 			tcpSocket = new Socket(servAddr,TCPPORT);
 		} catch (IOException e) {
+			System.out.println("upao ovde");
 			e.printStackTrace();
 		}
 		
