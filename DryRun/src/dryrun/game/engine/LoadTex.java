@@ -22,6 +22,7 @@ public class LoadTex {
 	public static LoadingScreen ls;
 	public static Texture levelBackground;
 	public static Texture machineGun;
+	public static Texture mine;
 	
 	//used to load textures, some texstures for loading are inside ... :) 
 	public static void init(){
@@ -72,6 +73,9 @@ public class LoadTex {
 			
 			tex=new TextureHolder(loading1,new Tex(7/8f,0f,8/8f,1f));
 			ls.render();
+			
+			mine = TextureLoader.getTexture("PNG", new FileInputStream(new File("res/minigun.png")));
+			
 			tex=new TextureHolder(loading1,new Tex(0/8f,0f,1/8f,1f));
 			ls.render();
 			

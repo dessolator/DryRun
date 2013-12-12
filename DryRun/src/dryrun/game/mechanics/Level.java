@@ -2,16 +2,20 @@ package dryrun.game.mechanics;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.World;
 import org.lwjgl.opengl.Display;
 import org.newdawn.slick.opengl.Texture;
+
 import static dryrun.game.engine.LoadTex.levelBackground;
+import dryrun.game.common.BonusThread;
 import dryrun.game.common.Player;
 import dryrun.game.engine.DrawObject;
 import dryrun.game.engine.Drawable;
 import dryrun.game.engine.Tex;
 import dryrun.game.engine.Updateable;
+import dryrun.game.network.server.Server;
 import dryrun.game.objects.TextureHolder;
 
 
@@ -27,7 +31,18 @@ public class Level implements Drawable, Serializable,Updateable {
 	public static int positionsX[] ={};//predefined postiions
 	public static int positionsY[] ={};// FILL IT UP KESLEEEERRRRRR
 	public static final int MAX_BONUSES = 30;//max bonuses
+	public static BonusThread bonusGenerator=null;
+
+	public static Vec2 pos1 = new Vec2(5, 5);
+	public static Vec2 pos2 = new Vec2(5, 15);
+	public static Vec2 pos3 = new Vec2(15, 5);
+	public static Vec2 pos4 = new Vec2(15, 15);
+	//player related
+	private static Player myPlayer;
+	private static int maxPlayers = 4;
+	private int numOfPlayers = 0;
 	
+
 	
 	public ArrayList<Checkpoint> checkpoints;//arrayList of all the Checkpoints
 	public static final World world = new World(new Vec2(0, 0));//world for box2d purposes	
@@ -35,8 +50,13 @@ public class Level implements Drawable, Serializable,Updateable {
 	
 
 	
-	public Level(){
-			th=new TextureHolder(levelBackground,new Tex(0,1,0,1));//load the texture
+	public Level(Player p){
+			th=new TextureHolder(levelBackground,new Tex(0f,1f,0f,1f));//load the texture			
+			if(Server.getServer()!=null) {
+				bonusGenerator = new BonusThread();				
+				players.add(new Player("ime","bmw",positionsX[numOfPlayers] ,positionsY[numOfPlayers] , 200, 100));
+				numOfPlayers++;
+			}
 	}
 	
 	@Override

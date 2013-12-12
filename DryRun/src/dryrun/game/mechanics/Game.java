@@ -253,7 +253,7 @@ static{
 				ls.render();
 				
 				//mySettingsMenu=new SettingsMenu();
-				myLvl = new Level();
+				//myLvl = new Level();
 				ls.render();
 		// TODO Auto-generated method stub
 		
