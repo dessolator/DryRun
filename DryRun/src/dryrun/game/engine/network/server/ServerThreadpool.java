@@ -9,7 +9,7 @@ import dryrun.game.engine.network.GameStatePacket;
 import dryrun.game.mechanics.Game;
 import dryrun.game.objects.Player;
 
-public class ServerThread  { //Client instance on the server
+public class ServerThreadpool  { //Client instance on the server
 	private DatagramSocket mySocket; //I send my UDP data to the client here
 	private Player myPlayer;		//this is my clients player info (will be used by TCP?)
 	private InetAddress clientAddr; //My clients address
@@ -24,7 +24,7 @@ public class ServerThread  { //Client instance on the server
 	
 
 
-	public ServerThread(int i,
+	public ServerThreadpool(int i,
 						String[] split,
 						InetAddress cladr,
 						ConcurrentCircularBuffer srvB,
@@ -47,18 +47,14 @@ public class ServerThread  { //Client instance on the server
 	//public ConcurrentCircularBuffer getBuffer(){return myBuffer;}
 	
 	public void startGame(GameStatePacket p){
-		byte b[]=GameStatePacket.write(p);
-		try {
-			tos.write(b);
-		} catch (IOException e) {e.printStackTrace();}
-		
-		
+		tcp.setGameStatePacket(p);
+		tcp.getGameStatePacket().notify();
 	}
 		
 	public void start(){sender.start();receiver.start(); ldr.start();} //Starting all threads
 	
 	
-	public void close() throws IOException{tis.close();tos.close();} //Close TCP
+	public void closeTCP() throws IOException{tcp.close();} //Close TCP
 	
 	public void terminate() throws IOException{
 		mySocket.close();

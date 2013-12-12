@@ -8,20 +8,16 @@ import dryrun.game.common.GameObjectValues;
 import dryrun.game.engine.network.GameStatePacket;
 
 public class ServerSender extends Thread {
-	private ServerThread myOwner; //remembering who's my daddy
+	private ServerThreadpool myOwner; //remembering who's my daddy
 	
-	public ServerSender(ServerThread myOwn){myOwner=myOwn;}
+	public ServerSender(ServerThreadpool myOwn){myOwner=myOwn;}
 	
 	public void run() {
 		while(!interrupted()) { //while im not requested to end
 			GameStatePacket gsp=new GameStatePacket();
 			GameObjectValues[] temp = null;
 			
-			try {
-				temp = myOwner.getSendBuffer().pop(); //get the shit im supposed to send
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+			temp = myOwner.getSendBuffer().pop(); //get the shit im supposed to send
 			for(GameObjectValues v : temp)
 				gsp.put(v); //build a gameStatePacket
 			byte [] sendPacket = GameStatePacket.write(gsp); //turn it into a byteArray 

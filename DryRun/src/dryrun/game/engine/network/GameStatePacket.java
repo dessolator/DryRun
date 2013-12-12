@@ -24,6 +24,10 @@ public class GameStatePacket implements Serializable  {
 		myObjects = new GameObjectValues[5];
 	}
 	
+	public GameStatePacket(GameObjectValues[] p) {
+		myObjects=p;
+	}
+
 	public void put(GameObjectValues gov){
 		if (i<MAX_PLAYERS-1) myObjects[i++] = gov;
 	}

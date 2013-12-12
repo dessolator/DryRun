@@ -9,10 +9,10 @@ import dryrun.game.engine.network.GameStatePacket;
 ;
 
 public class ServerReceiver extends Thread {
-	private ServerThread myOwner; //remembering who's my daddy
+	private ServerThreadpool myOwner; //remembering who's my daddy
 
 	
-	public ServerReceiver(ServerThread myOwn) {
+	public ServerReceiver(ServerThreadpool myOwn) {
 		myOwner = myOwn;
 	}
 	

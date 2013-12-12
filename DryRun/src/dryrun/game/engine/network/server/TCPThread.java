@@ -11,12 +11,16 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.SocketException;
 
+import dryrun.game.engine.network.GameStatePacket;
+
 public class TCPThread extends Thread {
 	private Server myServer;
 	private Socket s;
 	private ObjectInputStream dis; 
 	private ObjectOutputStream dos;
 	private int udpPort;
+	private GameStatePacket gsp=null;
+	
 
 	public TCPThread(Server server,Socket s, int udp) {
 		myServer=server;
@@ -31,6 +35,24 @@ public class TCPThread extends Thread {
 	}
 	
 	public void run(){
+		
+		connect();
+		
+			while(gsp==null)
+				try {
+					gsp.wait();
+				} catch (InterruptedException e) {e.printStackTrace();}
+	
+		
+		try {
+			dos.writeObject(gsp);
+		} catch (IOException e) {e.printStackTrace();}
+		
+		
+		
+	}
+	
+	public void connect(){
 		
 		//reading TCP packet.
 		String str=null;
@@ -70,9 +92,16 @@ public class TCPThread extends Thread {
 		}
 		
 		
-
-
-
 	}
+	
+	public void close(){
+		try {
+			s.close();
+		} catch (IOException e) {e.printStackTrace();}
+		
+	}
+	
+	public void setGameStatePacket(GameStatePacket gsp){this.gsp=gsp;}
+	public GameStatePacket getGameStatePacket(){return gsp;}
 
 }
