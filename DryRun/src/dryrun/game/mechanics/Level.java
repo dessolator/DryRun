@@ -79,9 +79,10 @@ public class Level implements Drawable, Serializable,Updateable {
 	protected void parseAndUpdate(GameObjectValues[] receive) {
 		for(int i=0;i<5;i++){
 			for(Player p :players){
-				if(p.getName().equals(receive[i].getName())){
-					p.myBody.setTransform(new Vec2(receive[i].getCoordX(),receive[i].getCoordY()), 0);
-					
+				if(receive[i]!=null){
+					if(p.getName().equals(receive[i].getName())){
+						p.myBody.setTransform(new Vec2(receive[i].getCoordX(),receive[i].getCoordY()), 0);
+					}
 				}
 			}
 		}
