@@ -89,9 +89,10 @@ public class Client implements NetFramework {
 		serverPort = p;
 	}
 	
-	public void setUDPSocket() {
+	public void setUDPSocket(int srvPort) {
+		serverPort = srvPort;
 		try {
-			udpSocket = new DatagramSocket(UDPPORT);
+			udpSocket = new DatagramSocket(serverPort);
 		} catch (SocketException e) {
 			e.printStackTrace();
 		}
