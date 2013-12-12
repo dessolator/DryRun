@@ -2,10 +2,8 @@ package dryrun.game.mechanics;
 
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.World;
-import dryrun.game.common.*;
 import dryrun.game.common.GameObjectValues;
 import dryrun.game.engine.network.NetFramework;
-import dryrun.game.engine.network.server.Server;
 import dryrun.game.objects.Checkpoint;
 import dryrun.game.objects.Wall;
 
@@ -45,5 +43,5 @@ public class ServerLevel extends Level {
                 p[i]=players.get(i).getMyValues();
         }
 //TODO                 net.send(p);
-        }
+    }
 }
