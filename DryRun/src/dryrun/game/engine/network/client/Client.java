@@ -146,6 +146,11 @@ public class Client implements NetFramework {
 	public void startGame(GameObjectValues[] p){
 		
 	}
+
+	@Override
+	public GameObjectValues[] startGame() {
+		
+	}
 	
 	
 	
