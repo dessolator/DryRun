@@ -42,7 +42,7 @@ public class Level implements Drawable, Serializable,Updateable {
 	public static final World world = new World(new Vec2(0, 0));//world for box2d purposes	
 
 	private static CollisionListener myListener =new CollisionListener();
-	private static Player myPlayer;
+	protected static Player myPlayer;
 	protected static NetFramework net;
 	
 	public Level(NetFramework nf){
@@ -75,7 +75,7 @@ public class Level implements Drawable, Serializable,Updateable {
 //        net.send(p);
 		world.step(1/60f, 8, 3);
 }	
-	private void parseAndUpdate(GameObjectValues[] receive) {
+	protected void parseAndUpdate(GameObjectValues[] receive) {
 		for(int i=0;i<5;i++){
 			for(Player p :players){
 				if(p.getName().equals(receive[i].getName())){
@@ -149,7 +149,7 @@ public class Level implements Drawable, Serializable,Updateable {
 	}
 
 	public void initialState() {
-		GameObjectValues
-		
+		GameObjectValues[] p=net.startGame();
+		parseAndUpdate(p);		
 	}
 }
