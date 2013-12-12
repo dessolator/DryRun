@@ -6,6 +6,7 @@ import dryrun.game.common.GameObjectValues;
 
 
 import dryrun.game.engine.network.*;
+import dryrun.game.mechanics.Game;
 
 
 import java.io.IOException;
@@ -36,6 +37,7 @@ public class ConnectThread extends Thread {
 			dis = new ObjectInputStream(client.getTCPSocket().getInputStream());
 		} catch (IOException e) {
 			e.printStackTrace();
+			System.out.println("connect thread");
 		}
 		
 		System.out.println("Streams created");
@@ -87,5 +89,6 @@ public class ConnectThread extends Thread {
 		
 		GameObjectValues [] gov = p.get();
 		client.initBuffer().push(gov);
+		
 	}
 }

@@ -74,10 +74,10 @@ public class Game {
 			getCurrentUpdate().update();//update what needs to be updated
 			getCurrentDraw().render();//render what needs to be rendered
 			//gameloop yet to be done 
-			p.update();
+//			p.update();
 //			d.update();
-			p.render();//@Vuk Test
-			d.render();//@Vuk Test
+//			p.render();//@Vuk Test
+//			d.render();//@Vuk Test
 //			p.playerInput();//@Vuk Test
 		//	System.out.println("P is at:"+ p.getX()+","+p.getY());
 		//	System.out.println("D is at:"+ d.getX()+","+d.getY());
