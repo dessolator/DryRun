@@ -89,6 +89,7 @@ public class ConnectThread extends Thread {
 		
 		GameObjectValues [] gov = p.get();
 		client.initBuffer().push(gov);
+		System.out.println("primio paket");
 		
 	}
 }

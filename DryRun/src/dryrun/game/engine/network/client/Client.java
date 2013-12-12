@@ -87,6 +87,7 @@ public class Client implements NetFramework {
 		cThread.start();
 		myBuffer = new ConcurrentCircularBuffer();
 		receiveBuffer = new ConcurrentCircularBuffer();
+		myInitBuffer = new ConcurrentCircularBuffer();
 	}
 	
 	
