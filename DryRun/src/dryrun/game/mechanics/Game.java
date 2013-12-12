@@ -35,7 +35,7 @@ public class Game {
 	private static JoinMenu myLobbyMenu;//my join menu
 	private static WaitServerMenu waitServerReply;
 	private static boolean terminate=false;	//window kill flag
-	private static GameState currentGameState=GameState.MainMenu;//current game state
+	private static GameState currentGameState=GameState.Game;//current game state
 	private static List<InetAddress> serverAddresses;//list of known server addresses
 	private static GameStatePacket firstPlayersPositions;//TODO someone else added this I do not understand it @Ivan
 	private static Level myLvl;//myLevel
