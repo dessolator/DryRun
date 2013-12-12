@@ -2,12 +2,10 @@ package dryrun.game.mechanics;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.World;
 import org.lwjgl.opengl.Display;
 import org.newdawn.slick.opengl.Texture;
-
 import static dryrun.game.engine.LoadTex.levelBackground;
 import dryrun.game.common.GameObjectValues;
 import dryrun.game.engine.DrawObject;
@@ -18,6 +16,7 @@ import dryrun.game.engine.interfaces.Updateable;
 import dryrun.game.engine.network.NetFramework;
 import dryrun.game.engine.network.client.Client;
 import dryrun.game.engine.physics.CollisionListener;
+import dryrun.game.objects.BonusThread;
 import dryrun.game.objects.Player;
 import dryrun.game.objects.Wall;
 import dryrun.game.objects.Checkpoint;
@@ -36,7 +35,18 @@ public class Level implements Drawable, Serializable,Updateable {
 	public static int positionsX[] ={};//predefined postiions
 	public static int positionsY[] ={};// FILL IT UP KESLEEEERRRRRR
 	public static final int MAX_BONUSES = 30;//max bonuses
+	public static BonusThread bonusGenerator=null;
+
+	public static Vec2 pos1 = new Vec2(5, 5);
+	public static Vec2 pos2 = new Vec2(5, 15);
+	public static Vec2 pos3 = new Vec2(15, 5);
+	public static Vec2 pos4 = new Vec2(15, 15);
+	//player related
+//	private static Player myPlayer;
+	private static int maxPlayers = 4;
+	private int numOfPlayers = 0;
 	
+
 	
 	public ArrayList<Checkpoint> checkpoints;//arrayList of all the Checkpoints
 	public static final World world = new World(new Vec2(0, 0));//world for box2d purposes	
@@ -44,7 +54,7 @@ public class Level implements Drawable, Serializable,Updateable {
 	private static CollisionListener myListener =new CollisionListener();
 	protected static Player myPlayer;
 	protected static NetFramework net;
-	
+		
 	public Level(NetFramework nf){
 		net=nf;
 		world.setContactListener(myListener);
