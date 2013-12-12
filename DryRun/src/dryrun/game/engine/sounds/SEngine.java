@@ -52,7 +52,7 @@ public class SEngine {
 	}
 	
 	public static void loadSounds(){
-		s.newSource(false, "buttonclick", "splashsound.ogg", false, 0, 0, 0, 0, 0);//TODO nigga got issues!!!(issue: misformated files)
+		s.newSource(false, "buttonclick", "buttonclick.ogg", false, 0, 0, 0, 0, 0);//TODO nigga got issues!!!(issue: misformated files)
 		//add a new source to the sound system for buttonClicks
 		SEngine.getSoundSystem().loadSound("buttonclick.ogg");
 	}
