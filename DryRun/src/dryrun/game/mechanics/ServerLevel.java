@@ -7,8 +7,8 @@ import dryrun.game.common.GameObjectValues;
 import dryrun.game.engine.network.NetFramework;
 import dryrun.game.engine.network.server.Server;
 import dryrun.game.objects.bonus.Bonus;
-import dryrun.game.objects.bonus.Checkpoint;
-import dryrun.game.objects.bonus.Wall;
+import dryrun.game.objects.Checkpoint;
+import dryrun.game.objects.Wall;
 
 @SuppressWarnings("serial")
 public class ServerLevel extends Level {

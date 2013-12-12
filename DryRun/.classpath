@@ -34,44 +34,6 @@
 	<classpathentry kind="lib" path="lib/SoundSystem.jar"/>
 	<classpathentry kind="lib" path="lib/SoundSystemJPCT.jar"/>
 	<classpathentry kind="lib" path="lib/SoundSystemUtils.jar"/>
-	<classpathentry kind="output" path="bin"/>
-</classpath>
-<?xml version="1.0" encoding="UTF-8"?>
-<classpath>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
-	<classpathentry kind="lib" path="lib/lwjgl_util.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Users/Vuk/Desktop/LWJGL/lwjgl-2.9.0/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="lib/lwjgl.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Users/Vuk/Desktop/LWJGL/lwjgl-2.9.0/javadoc/"/>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="DryRun/lib/windows"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="lib/slick-util.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Users/Vuk/Desktop/LWJGL/lwjgl-2.9.0/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="lib/jbox2d-library-2.2.1.1.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/home/dessolator/git/DryRun/DryRun/lib/jbox2d-library-2.2.1.1-javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="lib/jbox2d-serialization-1.1.0-jar-with-dependencies.jar"/>
-	<classpathentry kind="lib" path="lib/jbox2d-serialization-1.1.0.jar"/>
-	<classpathentry kind="lib" path="lib/CodecJOgg.jar"/>
-	<classpathentry kind="lib" path="lib/LibraryLWJGLOpenAL.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Users/Vuk/Desktop/LWJGL/lwjgl-2.9.0/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="lib/SoundSystem.jar"/>
-	<classpathentry kind="lib" path="lib/SoundSystemJPCT.jar"/>
-	<classpathentry kind="lib" path="lib/SoundSystemUtils.jar"/>
 	<classpathentry kind="lib" path="lib/CodecJOrbis.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
