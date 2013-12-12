@@ -1,6 +1,6 @@
 package dryrun.game.gui.misc.buttons;
 
-import dryrun.game.common.StringObject;
+
 
 
 import dryrun.game.common.GameState;
