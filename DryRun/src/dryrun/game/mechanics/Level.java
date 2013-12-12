@@ -2,26 +2,21 @@ package dryrun.game.mechanics;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.World;
 import org.lwjgl.opengl.Display;
 import org.newdawn.slick.opengl.Texture;
-
 import static dryrun.game.engine.LoadTex.levelBackground;
-import dryrun.game.common.BonusThread;
 import dryrun.game.common.GameObjectValues;
 import dryrun.game.engine.DrawObject;
 import dryrun.game.engine.Tex;
-import dryrun.game.engine.Updateable;
-import dryrun.game.network.server.Server;
-import dryrun.game.objects.TextureHolder;
 import dryrun.game.engine.TextureHolder;
 import dryrun.game.engine.interfaces.Drawable;
 import dryrun.game.engine.interfaces.Updateable;
 import dryrun.game.engine.network.NetFramework;
 import dryrun.game.engine.network.client.Client;
 import dryrun.game.engine.physics.CollisionListener;
+import dryrun.game.objects.BonusThread;
 import dryrun.game.objects.Player;
 import dryrun.game.objects.Wall;
 import dryrun.game.objects.Checkpoint;
@@ -47,7 +42,7 @@ public class Level implements Drawable, Serializable,Updateable {
 	public static Vec2 pos3 = new Vec2(15, 5);
 	public static Vec2 pos4 = new Vec2(15, 15);
 	//player related
-	private static Player myPlayer;
+//	private static Player myPlayer;
 	private static int maxPlayers = 4;
 	private int numOfPlayers = 0;
 	

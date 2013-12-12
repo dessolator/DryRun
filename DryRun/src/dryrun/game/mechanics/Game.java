@@ -52,19 +52,19 @@ public class Game {
 	
 	//main game loop
 	public static void startGame(){
-		Player p = new Player("Kesler",
-				new bmwM5(),
-				Display.getWidth()/2,
-				Display.getHeight()/2);//@Vuk Test
-		myLvl.setMyPlayer(p);
-		
-		
-		
-		Player d = new Player("Ksler", 
-				new bmwM5(),
-				Display.getWidth()/2,
-				Display.getHeight()/2-150);//@Vuk Test
-		System.out.println("quickplay");
+//		Player p = new Player("Kesler",
+//				new bmwM5(),
+//				Display.getWidth()/2,
+//				Display.getHeight()/2);//@Vuk Test
+//		myLvl.setMyPlayer(p);
+//		
+//		
+//		
+//		Player d = new Player("Ksler", 
+//				new bmwM5(),
+//				Display.getWidth()/2,
+//				Display.getHeight()/2-150);//@Vuk Test
+//		System.out.println("quickplay");
 		
 		//SEngine.getSoundSystem().quickStream(false, "b.ogg", false, p.getX(), p.getY(), 0, SoundSystemConfig.ATTENUATION_LINEAR, 1000f);
 				
@@ -255,7 +255,7 @@ public class Game {
 
 				ls.render();
 				//mySettingsMenu=new SettingsMenu();
-				//myLvl = new Level();
+//				myLvl = new Level();
 				ls.render();
 		// TODO Auto-generated method stub
 		
