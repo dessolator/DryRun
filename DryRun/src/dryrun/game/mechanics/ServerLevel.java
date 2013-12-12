@@ -2,17 +2,16 @@ package dryrun.game.mechanics;
 
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.World;
-
+import dryrun.game.common.*;
 import dryrun.game.common.GameObjectValues;
 import dryrun.game.engine.network.NetFramework;
 import dryrun.game.engine.network.server.Server;
-import dryrun.game.objects.bonus.Bonus;
 import dryrun.game.objects.Checkpoint;
 import dryrun.game.objects.Wall;
 
 @SuppressWarnings("serial")
 public class ServerLevel extends Level {
-    World w=new World(new Vec2(0, 0));
+        World w=new World(new Vec2(0, 0));
 
     public ServerLevel(NetFramework nf) {
             super(nf);
@@ -24,10 +23,9 @@ public class ServerLevel extends Level {
 //            p[1]=players.get(i).getMyValues();
 ////        }
             net.startGame(p);
-    }
-    		
-    	
+    }    	
 
+       
     @Override
     public void update() {
         parseAndUpdate(net.receive());
@@ -47,5 +45,5 @@ public class ServerLevel extends Level {
                 p[i]=players.get(i).getMyValues();
         }
 //TODO                 net.send(p);
-    }
+        }
 }
