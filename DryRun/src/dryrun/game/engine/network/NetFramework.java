@@ -12,5 +12,7 @@ public interface NetFramework {
 	public GameObjectValues[] receive();
 
 	public void startGame(GameObjectValues[] p);
+	
+	public GameObjectValues[] startGame();
 
 }
