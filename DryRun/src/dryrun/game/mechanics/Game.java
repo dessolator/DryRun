@@ -260,5 +260,11 @@ public class Game {
 		// TODO Auto-generated method stub
 		
 	}
+	public static void startServer(){
+		myLvl=new ServerLevel(Server.getServer());
+	}
+	public static void startClient(){
+		myLvl=new Level(Client.getClient());
+	}
 
 }
