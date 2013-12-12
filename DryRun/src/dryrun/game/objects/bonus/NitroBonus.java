@@ -1,6 +1,7 @@
 package dryrun.game.objects.bonus;
 
 import org.jbox2d.common.Vec2;
+import org.newdawn.slick.opengl.Texture;
 
 import dryrun.game.objects.Player;
 
@@ -32,6 +33,36 @@ public class NitroBonus extends Bonus{
 	@Override
 	public void applyBonus(Player p) {
 		p.setNitro(3000);		
+	}
+
+	@Override
+	public Texture getTexture() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public float getTexX1() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float getTexX2() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float getTexY1() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float getTexY2() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }
