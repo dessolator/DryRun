@@ -42,8 +42,10 @@ public class Game {
 	
 	
 	public static void initState(){
-		myLvl.sendInitialState();
+		myLvl.initialState();
+		currentGameState=GameState.Game;
 	}
+	
 	
 	
 	

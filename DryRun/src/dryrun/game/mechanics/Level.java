@@ -45,8 +45,6 @@ public class Level implements Drawable, Serializable,Updateable {
 	private static Player myPlayer;
 	protected static NetFramework net;
 	
-
-	
 	public Level(NetFramework nf){
 		net=nf;
 		world.setContactListener(myListener);
@@ -150,8 +148,8 @@ public class Level implements Drawable, Serializable,Updateable {
 		Level.myPlayer=myPlayer;
 	}
 
-	public void sendInitialState() {
-		// TODO Auto-generated method stub
+	public void initialState() {
+		GameObjectValues
 		
 	}
 }
