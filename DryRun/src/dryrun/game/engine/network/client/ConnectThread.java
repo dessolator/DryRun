@@ -6,6 +6,7 @@ import dryrun.game.common.GameObjectValues;
 
 
 import dryrun.game.engine.network.*;
+import dryrun.game.mechanics.Game;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -106,9 +107,6 @@ public class ConnectThread extends Thread {
 
 		
 		GameObjectValues [] gov = p.get();
-		System.out.println(gov[0].getCoordX());
-		System.out.println(gov[0].getCoordY());
-//		System.out.println(gov[0].getDimX());
-//		System.out.println(gov[0].getDimY());
+		Game.initState(gov);
 	}
 }

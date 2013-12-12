@@ -19,6 +19,9 @@ public class Client implements NetFramework {
 	private InetAddress serverAddress;
 	private ConcurrentCircularBuffer myBuffer;
 	private ConcurrentCircularBuffer receiveBuffer;
+	
+	private ConcurrentCircularBuffer myInitBuffer;
+	
 	private static Client client = null;
 	
 	
@@ -30,7 +33,7 @@ public class Client implements NetFramework {
 		}
 		
 	}
-	
+ 	
  	public static void disposeClient() {
  		System.out.println("dispose");
  		if (getClient()!=null) {
@@ -141,6 +144,11 @@ public class Client implements NetFramework {
 
 	@Override
 	public void startGame(GameObjectValues[] p){
+		
+	}
+
+	@Override
+	public GameObjectValues[] startGame() {
 		
 	}
 	
