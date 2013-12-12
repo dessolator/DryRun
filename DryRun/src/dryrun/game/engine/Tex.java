@@ -1,6 +1,7 @@
 
 package dryrun.game.engine;
 
+//class used to hold texture coordinates ... will be needed with sprites
 public class Tex {
 	//koordinate jednog sprite unutar texture
 	private float x1;

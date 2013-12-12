@@ -16,6 +16,7 @@ public class ApplyButton extends Button {
 	@Override
 	public void pressed() {
 		try {
+			super.pressed();
 			FileWriter fstreamWrite;
 			fstreamWrite = new FileWriter("Settings.ini");
 			BufferedWriter out = new BufferedWriter(fstreamWrite);

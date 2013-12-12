@@ -18,7 +18,7 @@ public class GameMenu extends Menu {
 		myFrame = new BasicFrame(Display.getWidth()/2,
 				Display.getHeight()/2,
 				Display.getWidth()/3,
-				Display.getHeight()/3);
+				Display.getHeight()/2);
 		myButtons.add(new HostButton(Display.getWidth()/2,
 				Display.getHeight()/2 + Display.getHeight()/10 + Display.getHeight()/30));
 	

@@ -10,6 +10,8 @@ import dryrun.game.engine.Updateable;
 import dryrun.game.gui.menus.misc.text.Text;
 import dryrun.game.gui.menus.misc.text.TimesNewRomanText;
 import dryrun.game.objects.TextureHolder;
+import dryrun.game.sounds.SEngine;
+
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.opengl.Texture;
 
@@ -112,7 +114,9 @@ public abstract class Button implements Drawable, Updateable{
 		return myTexture.getMyCoords().getY2();
 	}
 	
-	public abstract void pressed();
+	public void pressed(){
+		//SEngine.getSoundSystem().play("buttonclick");
+		}
 	
 	@Override
 	public void update() {

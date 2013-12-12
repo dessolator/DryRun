@@ -1,8 +1,6 @@
 package dryrun.game.mechanics;
 
-import org.jbox2d.dynamics.BodyType;
 import org.lwjgl.opengl.Display;
-
 import static org.lwjgl.opengl.GL11.*;
 import dryrun.game.common.GameState;
 import dryrun.game.common.Player;
@@ -10,7 +8,6 @@ import dryrun.game.common.cars.bmwM5;
 import dryrun.game.engine.Drawable;
 import dryrun.game.engine.Tex;
 import dryrun.game.engine.Updateable;
-import dryrun.game.engine.physics.CollisionListener;
 import dryrun.game.gui.menus.GameMenu;
 import dryrun.game.gui.menus.HostMenu;
 import dryrun.game.gui.menus.JoinMenu;
@@ -22,13 +19,10 @@ import dryrun.game.objects.TextureHolder;
 import static dryrun.game.engine.LoadTex.tex;
 import static dryrun.game.engine.LoadTex.loading1;
 import static dryrun.game.engine.LoadTex.ls;
-
-
-
-
 import java.util.*;
 import java.io.IOException;
 import java.net.*;
+import dryrun.game.gui.menus.*;
 
 //here all the magic happens :) 
 public class Game {
@@ -36,6 +30,7 @@ public class Game {
 	private static GameMenu myGameMenu;//my game menu
 	private static HostMenu myHostMenu;//my host menu
 	private static JoinMenu myLobbyMenu;//my join menu
+	private static WaitServerMenu waitServerReply;
 	private static boolean terminate=false;	//window kill flag
 	private static GameState currentGameState=GameState.Game;//current game state
 	private static List<InetAddress> serverAddresses;//list of known server addresses
@@ -51,12 +46,17 @@ public class Game {
 				Display.getHeight()/2);//@Vuk Test
 		myLvl.setMyPlayer(p);
 		
+		
+		
 		Player d = new Player("Ksler", 
 				new bmwM5(),
 				Display.getWidth()/2,
 				Display.getHeight()/2-1600);//@Vuk Test
+		System.out.println("quickplay");
 		
-//		d.myBody.m_type=BodyType.STATIC;//@Vuk Test
+		//SEngine.getSoundSystem().quickStream(false, "b.ogg", false, p.getX(), p.getY(), 0, SoundSystemConfig.ATTENUATION_LINEAR, 1000f);
+				
+		//d.myBody.m_type=BodyType.STATIC;//@Vuk Test
 		while((!Display.isCloseRequested())&& !terminate) {
 			glClear(GL_COLOR_BUFFER_BIT);//clear the screen
 			getCurrentUpdate().update();//update what needs to be updated
@@ -69,8 +69,7 @@ public class Game {
 //			p.playerInput();//@Vuk Test
 		//	System.out.println("P is at:"+ p.getX()+","+p.getY());
 		//	System.out.println("D is at:"+ d.getX()+","+d.getY());
-			
-
+//			SEngine.getSoundSystem().setListenerPosition( p.getX(), p.getY(), -100 ); //@Nikola Sound Test
 			Display.sync(60);//limit fps to 60
 			Display.update();//draw the GLContext
 		}		
@@ -91,6 +90,8 @@ public class Game {
 				return null;
 			case LobbyScreen:
 				return myLobbyMenu;
+			case WaitServerReply:
+				return waitServerReply;
 			case PlayMenu:
 				return myGameMenu ;
 			case SplashScreen:
@@ -160,6 +161,8 @@ public class Game {
 			return myGameMenu;
 		case SplashScreen:
 			return null;
+		case WaitServerReply:
+			return waitServerReply;
 		default:
 			return null;
 	}
@@ -230,6 +233,7 @@ public class Game {
 				tex=new TextureHolder(loading1,new Tex(2/8f,0f,3/8f,1f));
 				ls.render();
 				myGameMenu = new GameMenu();
+				waitServerReply = new WaitServerMenu();
 				tex=new TextureHolder(loading1,new Tex(3/8f,0f,4/8f,1f));
 				ls.render();
 				myHostMenu = new HostMenu();
@@ -239,8 +243,13 @@ public class Game {
 				tex=new TextureHolder(loading1,new Tex(5/8f,0f,6/8f,1f));
 				ls.render();
 				//mySettingsMenu=new SettingsMenu();
-				myLvl = new Level();
 				ls.render();		
+	}
+	public void startServer(){
+		myLvl=new ServerLevel(Server.getServer());
+	}
+	public void startClient(){
+		myLvl=new Level(Client.getClient());
 	}
 
 }

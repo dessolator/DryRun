@@ -1,18 +1,17 @@
 package dryrun.game.network.client;
 
 import static dryrun.game.network.NetConstants.*;
-import dryrun.game.common.StringObject;
+
 import dryrun.game.network.*;
 import dryrun.game.common.GameObjectValues;
-import dryrun.game.mechanics.*;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+
+
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.InetAddress;
-import java.net.Socket;
-import java.net.DatagramSocket;
-import java.net.SocketException;
+
 
 public class ConnectThread extends Thread {
 	private InetAddress serverAddress;
@@ -29,36 +28,37 @@ public class ConnectThread extends Thread {
 	
 	public void run() {
 		
-		DataInputStream dis = null;
-		DataOutputStream dos = null;
+		ObjectInputStream dis = null;
+		ObjectOutputStream dos = null;
 	
 		try {
-			dis = new DataInputStream(client.getTCPSocket().getInputStream());
-			dos = new DataOutputStream(client.getTCPSocket().getOutputStream());
+			dos = new ObjectOutputStream(client.getTCPSocket().getOutputStream());
+			dos.flush();
+			dis = new ObjectInputStream(client.getTCPSocket().getInputStream());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
+		System.out.println("Streams created");
 		String s = new String(CONNECT_REQ + "#" + playerName + "#" + typeOfAutomobile);
 		try {
-			dos.writeBytes(s);
+			dos.writeObject(s);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	
+		String str = null;
+		
 		try {
-			sleep(3000);
-		} catch (InterruptedException e1) {
+			str = (String) dis.readObject();
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		byte[] b = null;
-		try { 
-			dis.readFully(b=new byte[dis.available()]);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		String str = new String(b);
+
 		System.out.println(str);
 		String []split = str.split("#");
 		if (split[0].equals(CONNECT_ACC)) {
@@ -90,23 +90,23 @@ public class ConnectThread extends Thread {
 				e.printStackTrace();
 			}
 		}*/
-		
+		GameStatePacket p = null;
+
 		try {
-			sleep(1000);
-		} catch (InterruptedException e) {
+			p = (GameStatePacket) dis.readObject();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
-		try {
-			dis.read(b = new byte[dis.available()]);
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 		
-		GameStatePacket firstGamePositions = GameStatePacket.read(b);
-		GameObjectValues [] gov = firstGamePositions.objects();
-		System.out.println(((StringObject)gov[0]).message);
-		
-		
+		GameObjectValues [] gov = p.get();
+		System.out.println(gov[0].getCoordX());
+		System.out.println(gov[0].getCoordY());
+//		System.out.println(gov[0].getDimX());
+//		System.out.println(gov[0].getDimY());
 	}
 }

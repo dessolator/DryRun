@@ -6,13 +6,10 @@ import static dryrun.game.network.NetConstants.CONNECT_REQ;
 import static dryrun.game.network.NetConstants.MAX_PLAYERS;
 import static dryrun.game.network.NetConstants.TCPPORT;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.*;
-
-import dryrun.game.common.Player;
-import dryrun.game.mechanics.Game;
 
 public class ConnectAcceptorThread extends Thread {
 	private Server myServer;  //myDaddy
@@ -26,21 +23,30 @@ public class ConnectAcceptorThread extends Thread {
 	public void run(){
 		while(!interrupted()){
 			try {
-				byte[] b=null;
 				Socket s;
 
 				if(myServer.numOfPlayers>=MAX_PLAYERS)continue; //if I reached maxplayers im gonna be stuck in an infinite loop
-				
+				System.out.println("blocking until connect");
 				s=SrvSocket.accept(); //I block on this line if there's no connectReq
+				System.out.println("past block");
 				//TCP init
-				DataInputStream dis= new DataInputStream(s.getInputStream()); 
-				DataOutputStream dos= new DataOutputStream(s.getOutputStream());
-				try {
-					sleep(1000);
-				} catch (InterruptedException e) {e.printStackTrace();}
+				
+				ObjectInputStream dis= new ObjectInputStream(s.getInputStream()); 
+				ObjectOutputStream dos= new ObjectOutputStream(s.getOutputStream());
+				
+				
+				dos.flush();
+				System.out.println("created streams.");
 				//reading TCP packet.
-				dis.readFully(b=new byte[dis.available()]);										
-				String str=new String(b); //splitting packet
+				String str=null;
+				try {
+					System.out.println("about to read str:");
+					str = (String)dis.readObject();
+					System.out.println(str);
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}										
 				System.out.println(str);
 				String split[]=str.split("#+"); //NAME MUST NOT BE #
 				
@@ -51,7 +57,7 @@ public class ConnectAcceptorThread extends Thread {
 					
 					System.out.println("accepting connection");
 					str = new String(CONNECT_ACC+"#"+currentUdp);
-					dos.writeBytes(str);//notify the client that it's request is accepted
+					dos.writeObject(str);//notify the client that it's request is accepted
 					myServer.CreateClThread(currentUdp++, split, s.getInetAddress(),dis,dos,s); //create a serverside thread which serves this client
 				}
 				else{

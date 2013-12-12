@@ -17,28 +17,38 @@ import dryrun.game.engine.Tex;
 import dryrun.game.engine.Updateable;
 import dryrun.game.engine.physics.CollisionListener;
 import dryrun.game.network.NetFramework;
+import dryrun.game.network.client.Client;
 import dryrun.game.objects.TextureHolder;
-import dryrun.game.objects.bonus.Bonus;
+
 
 
 @SuppressWarnings("serial")
 public class Level implements Drawable, Serializable,Updateable {
+	
 	public TextureHolder th;//Level Background texture
 	public ArrayList<Player> players;//arrayList of all the Players
 	public ArrayList<Wall> walls;//arrayList of all the walls
 //	public ArrayList<Bonus> bonuses;//arrayList of all the bonuses
+	
+	//bonus related	
+	public static int positionsX[] ={};//predefined postiions
+	public static int positionsY[] ={};// FILL IT UP KESLEEEERRRRRR
+	public static final int MAX_BONUSES = 30;//max bonuses
+	
+	
 	public ArrayList<Checkpoint> checkpoints;//arrayList of all the Checkpoints
 	public static final World world = new World(new Vec2(0, 0));//world for box2d purposes	
-	public static final int MAX_BONUSES = 30;//Maximum number of bonuses constant
+
 	private static CollisionListener myListener =new CollisionListener();
 	private static Player myPlayer;
 	protected static NetFramework net;
 	
 
 	
-	public Level(){
+	public Level(NetFramework nf){
+		net=nf;
 		world.setContactListener(myListener);
-			th=new TextureHolder(levelBackground,new Tex(0,1,0,1));//load the texture
+		th=new TextureHolder(levelBackground,new Tex(0,1,0,1));//load the texture
 	}
 	
 	@Override
@@ -49,20 +59,21 @@ public class Level implements Drawable, Serializable,Updateable {
 	
 	@Override
 	public void update() {
-        parseAndUpdate(net.receive());
-        myPlayer.update();
-        for(Wall w: walls){
-                w.update();
-        }
+//        parseAndUpdate(net.receive());
+//        myPlayer.update();
+//        for(Wall w: walls){
+//                w.update();
+//        }
 //        for(Bonus b:bonuses){
 //                b.update();
 //        }
-        for(Checkpoint c:checkpoints){
-                c.update();
-        }
-        GameObjectValues p[]=new GameObjectValues[5];
-        p[0]=myPlayer.getMyValues();
-        net.send(p);
+//        for(Checkpoint c:checkpoints){
+//                c.update();
+//        }
+//        GameObjectValues p[]=new GameObjectValues[5];
+//        p[0]=myPlayer.getMyValues();
+//        net.send(p);
+		world.step(1/60f, 8, 3);
 }	
 	private void parseAndUpdate(GameObjectValues[] receive) {
 		for(int i=0;i<5;i++){
@@ -74,7 +85,7 @@ public class Level implements Drawable, Serializable,Updateable {
 			}
 		}
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	/*

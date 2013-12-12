@@ -2,6 +2,8 @@ package dryrun.game.gui.misc.buttons;
 
 import java.net.InetAddress;
 
+import dryrun.game.common.GameState;
+import dryrun.game.mechanics.Game;
 import dryrun.game.network.client.Client;
 
 public class ServerButton extends Button {
@@ -17,6 +19,7 @@ public class ServerButton extends Button {
 	public void pressed() {
 		// TODO Auto-generated method stub
 		Client.getClient().connectToServer(serverAddress, "goksiii", 1);
+		Game.setCurrentGameState(GameState.WaitServerReply);
 
 	}
 

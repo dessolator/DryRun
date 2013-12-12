@@ -1,10 +1,10 @@
 package dryrun.game.engine;
 
-import dryrun.game.common.*;
+import dryrun.game.common.Player;
 
-
-
+//used to impplemets collision function where needed
 public interface Collidable {
-	//desila se kolizija
+	
 	public void collided(Player b);
+	
 }

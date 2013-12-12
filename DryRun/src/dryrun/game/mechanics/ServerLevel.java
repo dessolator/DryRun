@@ -4,14 +4,16 @@ import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.World;
 
 import dryrun.game.common.GameObjectValues;
+import dryrun.game.network.NetFramework;
+import dryrun.game.network.server.Server;
 import dryrun.game.objects.bonus.Bonus;
 
 @SuppressWarnings("serial")
 public class ServerLevel extends Level {
         World w=new World(new Vec2(0, 0));
 
-        public ServerLevel() {
-                super();
+        public ServerLevel(NetFramework nf) {
+                super(nf);
                 // TODO Auto-generated constructor stub
         }
 
@@ -22,9 +24,9 @@ public class ServerLevel extends Level {
                 for(Wall w: walls){
                         w.update();
                 }
-                for(Bonus b:bonuses){
-                        b.update();
-                }
+               // for(Bonus b:bonuses){
+               //         b.update();
+               // }
                 for(Checkpoint c:checkpoints){
                         c.update();
                 }

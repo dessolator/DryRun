@@ -9,7 +9,8 @@ public class GameObjectValues implements Serializable{
 	private float coordY;
 	private float angle;
 	private String name;
-	
+
+	//!!!dzoni and goksi review pls!!! 
 
 	public float getCoordX() {
 		return coordX;
@@ -29,9 +30,5 @@ public class GameObjectValues implements Serializable{
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
-	
-	
-	
-	
+	}	
 }

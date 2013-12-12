@@ -9,6 +9,7 @@ import org.newdawn.slick.opengl.TextureLoader;
 
 import dryrun.game.objects.TextureHolder;
 
+//class used to load textures
 public class LoadTex {
 	public static Texture bmwM5;
 	public static Texture mainMenuBackground;
@@ -16,11 +17,13 @@ public class LoadTex {
 	public static Texture buttonTextures;
 	public static Texture pushedButtonTextures;
 	public static Texture loading1;
+	public static Texture waitFrame;
 	public static TextureHolder tex;
 	public static LoadingScreen ls;
 	public static Texture levelBackground;
+	public static Texture machineGun;
 	
-	
+	//used to load textures, some texstures for loading are inside ... :) 
 	public static void init(){
 		try {
 			ls=new LoadingScreen();
@@ -54,9 +57,18 @@ public class LoadTex {
 			
 			tex=new TextureHolder(loading1,new Tex(5/8f,0f,6/8f,1f));
 			ls.render();
+			
 			levelBackground=TextureLoader.getTexture("JPG", new FileInputStream(new File("res/debug.jpg")));
 			tex=new TextureHolder(loading1,new Tex(6/8f,0f,7/8f,1f));
 			ls.render();
+			
+			waitFrame = TextureLoader.getTexture("PNG" ,new FileInputStream(new File("res/waitFrame.png")));
+			
+			tex=new TextureHolder(loading1,new Tex(6/8f,0f,7/8f,1f));
+			ls.render();
+			
+			machineGun = TextureLoader.getTexture("PNG" ,new FileInputStream(new File("res/minigun.png")));
+			
 			tex=new TextureHolder(loading1,new Tex(7/8f,0f,8/8f,1f));
 			ls.render();
 			tex=new TextureHolder(loading1,new Tex(0/8f,0f,1/8f,1f));

@@ -3,8 +3,9 @@ package dryrun.game.common;
 public class BonusThread extends Thread {
 	private BonusCreator myBonusCreator;
 	
-	
-	public BonusThread(){myBonusCreator=new BonusCreator();}
+	public BonusThread(){
+		myBonusCreator=BonusCreator.getBonusCreator();
+		}
 	
 	public void run(){
 		while(!interrupted()){

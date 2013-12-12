@@ -29,7 +29,6 @@ import static org.lwjgl.opengl.GL11.glTranslatef;
 
 public class Player extends GameObject implements Collidable {
 	//player related
-//	private ArrayList<Timer> myTimers;
 	private CarModel myModel;
 	protected List<GameObject> myObjects=Collections.synchronizedList(new ArrayList<GameObject>());
 	private String name;
@@ -90,10 +89,7 @@ public class Player extends GameObject implements Collidable {
 	Vec2 multiply(Vec2 a,float b){
 		return new Vec2(a.x*b,a.y*b);
 	}
-	Vec2 getLateralVelocity() {
-	      Vec2 currentRightNormal = new Vec2((float)Math.sin(myBody.getAngle()),(float)Math.cos(myBody.getAngle()));
-	      return multiply(currentRightNormal,Vec2.dot( currentRightNormal, myBody.getLinearVelocity())) ;
-	}
+	
 	private void readInput() {
 		//TODO rearange
 		Vec2 position= myBody.getWorldCenter();//body position
@@ -118,8 +114,9 @@ public class Player extends GameObject implements Collidable {
 		myBody.applyLinearImpulse(impulse,position);
 		mainPlayerOldX=mainPlayerX;
 		mainPlayerOldY=mainPlayerY;		
+		System.out.println(myBody.getLinearVelocity().length());
 		if(Keyboard.isKeyDown(Keyboard.KEY_UP)){
-			System.out.println(Math.toDegrees(myBody.getAngle()));
+			
 			if((this.myBody.getLinearVelocity().x*Math.cos(this.myBody.getAngle()))>=0){
 				this.myBody.applyForce(accelForce,axialPoint);
 			}
@@ -160,7 +157,6 @@ public class Player extends GameObject implements Collidable {
 
 	@Override
 	public void render() {
-		
 		DrawObject.draw(this);
 	}
 	
@@ -228,6 +224,12 @@ public class Player extends GameObject implements Collidable {
 	@Override
 	public float getTexY2() {
 		return 1;
+	}
+	public float getDimX(){
+		return myModel.dimX/P2M;
+	}
+	public float getDimY(){
+		return myModel.dimY/P2M;
 	}
 
 

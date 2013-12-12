@@ -12,6 +12,7 @@ public class BackButton extends Button {
 
 	@Override
 	public void pressed() {
+		super.pressed();
 		Game.goBack();
 	}
 
