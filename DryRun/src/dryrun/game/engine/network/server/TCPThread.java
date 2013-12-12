@@ -12,6 +12,7 @@ import java.net.Socket;
 import java.net.SocketException;
 
 import dryrun.game.engine.network.GameStatePacket;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class TCPThread extends Thread {
 	private Server myServer;
@@ -20,12 +21,13 @@ public class TCPThread extends Thread {
 	private ObjectOutputStream dos;
 	private int udpPort;
 	private GameStatePacket gsp=null;
-	
+	private AtomicBoolean flag;
 
 	public TCPThread(Server server,Socket s, int udp) {
 		myServer=server;
 		this.s=s;
 		udpPort=udp;
+		flag = new AtomicBoolean(false);
 		try{
 			dis = new ObjectInputStream(s.getInputStream());
 			dos = new ObjectOutputStream(s.getOutputStream());
@@ -39,7 +41,7 @@ public class TCPThread extends Thread {
 		
 		connect();
 		
-			while(gsp==null);
+		while(flag.get()!=true);
 			//TODO I'm sure there's a better way to do this
 //				try {
 //					gsp.wait();
@@ -105,5 +107,8 @@ public class TCPThread extends Thread {
 	
 	public void setGameStatePacket(GameStatePacket gsp){this.gsp=gsp;}
 	public GameStatePacket getGameStatePacket(){return gsp;}
+	
+	public void setFlag(Boolean bool){flag.set(bool);}
+	public Boolean getFlag(){return flag.get();}
 
 }
