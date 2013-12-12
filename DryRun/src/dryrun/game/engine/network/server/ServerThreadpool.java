@@ -36,6 +36,8 @@ public class ServerThreadpool  { //Client instance on the server
 		mySendBuffer=new ConcurrentCircularBuffer();
 		Game.createPlayer(split[1]);
 		
+		clientAddr=cladr;
+		
 		sender = new ServerSender(this);
 		receiver = new ServerReceiver(this);
 		ldr = new ServerLoader(srvB,myRecBuffer);
