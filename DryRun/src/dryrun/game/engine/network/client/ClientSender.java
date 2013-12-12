@@ -4,7 +4,7 @@ import java.net.*;
 
 import dryrun.game.common.GameObjectValues;
 import dryrun.game.engine.network.GameStatePacket;
-import dryrun.game.engine.network.client.*;
+
 
 public class ClientSender extends Thread {
 	

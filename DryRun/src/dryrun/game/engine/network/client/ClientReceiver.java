@@ -8,11 +8,10 @@ import dryrun.game.engine.network.*;
 
 public class ClientReceiver extends Thread {
 	private Client myOwner;
-	private boolean connected = false;
+
 	
 	public ClientReceiver(Client myOwn) {
 		myOwner = myOwn;
-		connected = true;
 	}
 	
 	public void run() {

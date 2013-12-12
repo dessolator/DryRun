@@ -7,11 +7,13 @@ import java.net.*;
 import java.util.ArrayList;
 
 import dryrun.game.common.GameObjectValues;
+import dryrun.game.objects.Player;
+import dryrun.game.mechanics.Game;
 import dryrun.game.engine.network.ConcurrentCircularBuffer;
 import dryrun.game.engine.network.GameStatePacket;
 import dryrun.game.engine.network.NetFramework;
 import static dryrun.game.engine.network.NetConstants.*;
-
+import dryrun.game.mechanics.*;
 
 public class Server implements NetFramework {
 	private DatagramSocket myUdpSocket;
@@ -19,6 +21,8 @@ public class Server implements NetFramework {
 	private RefreshReplyThread rrt=null;
 	private ConnectAcceptorThread cat=null;
 	private ConcurrentCircularBuffer buffer;
+	
+	private ServerLevel myServerLevel;
 	
 	public int numOfPlayers=1;
 	
@@ -98,15 +102,32 @@ public class Server implements NetFramework {
 	
 
 	
-	public void startGame(GameObjectValues[] p){
-		GameStatePacket packet=new GameStatePacket();
-		for(int i=0;i<5;i++){
-			packet.put(p[i]);
+	public void startGame(){
+		
+		/*
+		 * prodji kroz sve playere u ServerLevel-u, uzmi njihove GameObjectValues
+		 * stavi ih u paket
+		 */
+		GameStatePacket packet = new GameStatePacket();
+		for(Player p : myServerLevel.players) {
+			packet.put(p.getMyValues());
 		}
+		
+		/*
+		 * i posalji...
+		 */
 		
 		for(int i=0; i<myThreads.size();i++)myThreads.get(i).startGame(packet);
 		//may need some sleep
+		
+		/*
+		 * i pokreni niti vezane za te playere...
+		 */
 		for(int i=0; i<myThreads.size();i++)myThreads.get(i).start();
+		
+		/*
+		 * ubijanje niti koje osluskuju zahteve.
+		 */
 		killListenerThreads();
 	
 	
@@ -156,6 +177,12 @@ public class Server implements NetFramework {
 
 	public void setMyThreads(ArrayList<ServerThread> myThreads) {
 		this.myThreads = myThreads;
+	}
+
+	@Override
+	public void startGame(GameObjectValues[] p) {
+		// TODO Auto-generated method stub
+		
 	}
 
 

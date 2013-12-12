@@ -1,15 +1,13 @@
 package dryrun.game.engine.network.client;
 
 import java.net.*;
-import java.util.*;
+
 import java.io.*;
 
 import dryrun.game.common.GameObjectValues;
 import dryrun.game.mechanics.Game;
-import dryrun.game.objects.Player;
 import static dryrun.game.engine.network.NetConstants.*;
 import dryrun.game.engine.network.ConcurrentCircularBuffer;
-import dryrun.game.engine.network.GameStatePacket;
 import dryrun.game.engine.network.NetFramework;
 
 
@@ -21,7 +19,6 @@ public class Client implements NetFramework {
 	private InetAddress serverAddress;
 	private ConcurrentCircularBuffer myBuffer;
 	private ConcurrentCircularBuffer receiveBuffer;
-	private Player player;
 	private static Client client = null;
 	
 	

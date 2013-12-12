@@ -7,12 +7,12 @@ import java.net.*;
 import java.util.ArrayList;
 
 import dryrun.game.common.GameObjectValues;
-import dryrun.game.common.Player;
+import dryrun.game.objects.Player;
 import dryrun.game.mechanics.Game;
-import dryrun.game.network.ConcurrentCircularBuffer;
-import dryrun.game.network.GameStatePacket;
-import dryrun.game.network.NetFramework;
-import static dryrun.game.network.NetConstants.*;
+import dryrun.game.engine.network.ConcurrentCircularBuffer;
+import dryrun.game.engine.network.GameStatePacket;
+import dryrun.game.engine.network.NetFramework;
+import static dryrun.game.engine.network.NetConstants.*;
 import dryrun.game.mechanics.*;
 
 public class Server implements NetFramework {
