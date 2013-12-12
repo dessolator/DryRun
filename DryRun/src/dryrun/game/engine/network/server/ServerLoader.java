@@ -15,9 +15,7 @@ public class ServerLoader extends Thread { //Loader class for bridging 3 buffer 
 	
 	public void run(){
 		GameObjectValues arr[]=null;
-		try {
-			arr=recBuffer.pop();
-		} catch (InterruptedException e) {e.printStackTrace();}
+		arr=recBuffer.pop();
 		
 		srvBuffer.push(arr);
 		

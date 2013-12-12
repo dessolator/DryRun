@@ -6,7 +6,7 @@ import dryrun.game.common.GameObjectValues;
 
 
 import dryrun.game.engine.network.*;
-import dryrun.game.mechanics.Game;
+
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -17,14 +17,12 @@ import java.net.InetAddress;
 public class ConnectThread extends Thread {
 	private InetAddress serverAddress;
 	private String playerName;
-	private int typeOfAutomobile;
 	private Client client;
 	
-	public ConnectThread(Client cli, InetAddress servAddr, String playName, int typeOfAuto) {
+	public ConnectThread(Client cli, InetAddress servAddr, String playName) {
 		client = cli;
 		serverAddress = servAddr;
 		playerName = playName;
-		typeOfAutomobile = typeOfAuto;
 	}
 	
 	public void run() {
@@ -41,7 +39,7 @@ public class ConnectThread extends Thread {
 		}
 		
 		System.out.println("Streams created");
-		String s = new String(CONNECT_REQ + "#" + playerName + "#" + typeOfAutomobile);
+		String s = new String(CONNECT_REQ + "#" + playerName);
 		try {
 			dos.writeObject(s);
 		} catch (IOException e) {
@@ -73,26 +71,7 @@ public class ConnectThread extends Thread {
 			System.out.println("ConnectThread CONNECT_REF");
 			return;
 		}
-		
-		/*int sizeOfArray = 0;
-		while(sizeOfArray<10000) {
-			try {
-				sizeOfArray = dis.available();
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		}
-		
-		
-		
-		while(sizeOfArray<10000)  { // OVO PROVERITI PRILIKOM SLANJA PRVOG GAME STATE PAKETA
-			try {
-				dis.readFully(b=new byte[sizeOfArray = dis.available()]);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}*/
+
 		GameStatePacket p = null;
 
 		try {
@@ -107,6 +86,6 @@ public class ConnectThread extends Thread {
 
 		
 		GameObjectValues [] gov = p.get();
-		Game.initState(gov);
+		client.initBuffer().push(gov);
 	}
 }

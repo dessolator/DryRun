@@ -1,14 +1,10 @@
 package dryrun.game.engine.network.server;
 
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.*;
 import java.util.ArrayList;
 
 import dryrun.game.common.GameObjectValues;
-import dryrun.game.objects.Player;
-import dryrun.game.mechanics.Game;
 import dryrun.game.engine.network.ConcurrentCircularBuffer;
 import dryrun.game.engine.network.GameStatePacket;
 import dryrun.game.engine.network.NetFramework;
@@ -17,7 +13,7 @@ import dryrun.game.mechanics.*;
 
 public class Server implements NetFramework {
 	private DatagramSocket myUdpSocket;
-	private ArrayList<ServerThread> myThreads;
+	private ArrayList<ServerThreadpool> myThreads;
 	private RefreshReplyThread rrt=null;
 	private ConnectAcceptorThread cat=null;
 	private ConcurrentCircularBuffer buffer;
@@ -58,7 +54,7 @@ public class Server implements NetFramework {
 
 			buffer=new ConcurrentCircularBuffer();
 			myUdpSocket= new DatagramSocket(UDPPORT);  	//Port for receiving and replying refresh requests
-			myThreads = new ArrayList<ServerThread>();	//array of objects which contain all info for communicating with a single connected client
+			myThreads = new ArrayList<ServerThreadpool>();	//array of objects which contain all info for communicating with a single connected client
 			
 		} catch (IOException e) {e.printStackTrace();}  
 		
@@ -87,7 +83,7 @@ public class Server implements NetFramework {
 		}else{System.out.print("ConnectAcceptorThread.");}
 	}
 
-	public ArrayList<ServerThread> getServerThreads() {
+	public ArrayList<ServerThreadpool> getServerThreads() {
 		return myThreads;
 	}
 	
@@ -101,9 +97,9 @@ public class Server implements NetFramework {
 	}
 	
 	
-	public void CreateClThread(int currentUdp, String split[], InetAddress ip,ObjectInputStream tcpin, ObjectOutputStream tcpout, Socket s) throws SocketException{
+	public void CreateClThread(int currentUdp, String split[], InetAddress ip, TCPThread tcp) throws SocketException{
 		System.out.println("Creating Client Thread.");
-		myThreads.add(new ServerThread(currentUdp, split, ip,buffer,tcpin,tcpout, s));
+		myThreads.add(new ServerThreadpool(currentUdp, split, ip,buffer,tcp));
 	} //Creation of a new ClientThread, this method is executed in the ConnectAcceptorThread.
 	
 	ConcurrentCircularBuffer getBuffer(){return buffer;} //returns the buffer.
@@ -116,17 +112,14 @@ public class Server implements NetFramework {
 
 	@Override
 	public GameObjectValues[] receive() { //returns a single clients gameObjectValues[]
-		try {
-			return buffer.pop();
-		} catch (InterruptedException e) {e.printStackTrace();}
-		return null;
+		return buffer.pop();
 	}
 
-	public ArrayList<ServerThread> getMyThreads() {
+	public ArrayList<ServerThreadpool> getMyThreads() {
 		return myThreads;
 	}
 
-	public void setMyThreads(ArrayList<ServerThread> myThreads) {
+	public void setMyThreads(ArrayList<ServerThreadpool> myThreads) {
 		this.myThreads = myThreads;
 	}
 
@@ -137,10 +130,8 @@ public class Server implements NetFramework {
 		 * prodji kroz sve playere u ServerLevel-u, uzmi njihove GameObjectValues
 		 * stavi ih u paket
 		 */
-		GameStatePacket packet = new GameStatePacket();
-		for(Player p1 : myServerLevel.players) {
-			packet.put(p1.getMyValues());
-		}
+		GameStatePacket packet = new GameStatePacket(p);
+		
 		
 		/*
 		 * i posalji...
@@ -176,6 +167,14 @@ public class Server implements NetFramework {
 		rrt=null;
 		
 	}
+
+	@Override
+	public GameObjectValues[] startGame() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
 
 
 
