@@ -1,28 +1,31 @@
 package dryrun.game.mechanics;
 
 import org.lwjgl.opengl.Display;
+
 import static org.lwjgl.opengl.GL11.*;
 import dryrun.game.common.GameState;
-import dryrun.game.common.Player;
 import dryrun.game.common.cars.bmwM5;
-import dryrun.game.engine.Drawable;
 import dryrun.game.engine.Tex;
-import dryrun.game.engine.Updateable;
+import dryrun.game.engine.TextureHolder;
+import dryrun.game.engine.interfaces.Drawable;
+import dryrun.game.engine.interfaces.Updateable;
+import dryrun.game.engine.network.GameStatePacket;
+import dryrun.game.engine.network.client.Client;
+import dryrun.game.engine.network.server.Server;
 import dryrun.game.gui.menus.GameMenu;
 import dryrun.game.gui.menus.HostMenu;
 import dryrun.game.gui.menus.JoinMenu;
 import dryrun.game.gui.menus.MainMenu;
-import dryrun.game.network.GameStatePacket;
-import dryrun.game.network.client.Client;
-import dryrun.game.network.server.Server;
-import dryrun.game.objects.TextureHolder;
 import static dryrun.game.engine.LoadTex.tex;
 import static dryrun.game.engine.LoadTex.loading1;
 import static dryrun.game.engine.LoadTex.ls;
+
 import java.util.*;
 import java.io.IOException;
 import java.net.*;
+
 import dryrun.game.gui.menus.*;
+import dryrun.game.objects.Player;
 
 //here all the magic happens :) 
 public class Game {
@@ -37,9 +40,16 @@ public class Game {
 	private static GameStatePacket firstPlayersPositions;//TODO someone else added this I do not understand it @Ivan
 	private static Level myLvl;//myLevel
 	
+	
+	public static void initState(){
+		myLvl.sendInitialState();
+	}
+	
+	
+	
+	
 	//main game loop
 	public static void startGame(){
-
 		Player p = new Player("Kesler",
 				new bmwM5(),
 				Display.getWidth()/2,
@@ -51,7 +61,7 @@ public class Game {
 		Player d = new Player("Ksler", 
 				new bmwM5(),
 				Display.getWidth()/2,
-				Display.getHeight()/2-1600);//@Vuk Test
+				Display.getHeight()/2-150);//@Vuk Test
 		System.out.println("quickplay");
 		
 		//SEngine.getSoundSystem().quickStream(false, "b.ogg", false, p.getX(), p.getY(), 0, SoundSystemConfig.ATTENUATION_LINEAR, 1000f);
@@ -243,7 +253,7 @@ public class Game {
 				tex=new TextureHolder(loading1,new Tex(5/8f,0f,6/8f,1f));
 				ls.render();
 				//mySettingsMenu=new SettingsMenu();
-				myLvl = new Level(Client.getClient());
+				myLvl=new Level(Client.getClient());
 				ls.render();		
 	}
 	public void startServer(){

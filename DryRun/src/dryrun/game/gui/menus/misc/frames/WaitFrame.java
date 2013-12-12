@@ -2,11 +2,11 @@ package dryrun.game.gui.menus.misc.frames;
 
 import org.lwjgl.opengl.Display;
 
-import dryrun.game.objects.TextureHolder;
 import dryrun.game.gui.menus.misc.text.TimesNewRomanText;
 import static dryrun.game.engine.LoadTex.waitFrame;
 import dryrun.game.engine.DrawObject;
 import dryrun.game.engine.Tex;
+import dryrun.game.engine.TextureHolder;
 
 public class WaitFrame extends Frame {
 	

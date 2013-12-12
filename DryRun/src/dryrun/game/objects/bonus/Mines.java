@@ -2,7 +2,7 @@ package dryrun.game.objects.bonus;
 
 import org.jbox2d.common.Vec2;
 
-import dryrun.game.common.Player;
+import dryrun.game.objects.Player;
 
 public class Mines extends Bonus {
 

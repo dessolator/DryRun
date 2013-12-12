@@ -10,15 +10,17 @@ import org.newdawn.slick.opengl.Texture;
 
 import static dryrun.game.engine.LoadTex.levelBackground;
 import dryrun.game.common.GameObjectValues;
-import dryrun.game.common.Player;
 import dryrun.game.engine.DrawObject;
-import dryrun.game.engine.Drawable;
 import dryrun.game.engine.Tex;
-import dryrun.game.engine.Updateable;
+import dryrun.game.engine.TextureHolder;
+import dryrun.game.engine.interfaces.Drawable;
+import dryrun.game.engine.interfaces.Updateable;
+import dryrun.game.engine.network.NetFramework;
+import dryrun.game.engine.network.client.Client;
 import dryrun.game.engine.physics.CollisionListener;
-import dryrun.game.network.NetFramework;
-import dryrun.game.network.client.Client;
-import dryrun.game.objects.TextureHolder;
+import dryrun.game.objects.Player;
+import dryrun.game.objects.Wall;
+import dryrun.game.objects.Checkpoint;
 
 
 
@@ -146,5 +148,10 @@ public class Level implements Drawable, Serializable,Updateable {
 	}
 	public void setMyPlayer(Player myPlayer) {
 		Level.myPlayer=myPlayer;
+	}
+
+	public void sendInitialState() {
+		// TODO Auto-generated method stub
+		
 	}
 }

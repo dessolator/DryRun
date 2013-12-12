@@ -2,7 +2,7 @@ package dryrun.game.common.cars;
 
 import static dryrun.game.engine.LoadTex.bmwM5;
 import dryrun.game.engine.Tex;
-import dryrun.game.objects.TextureHolder;
+import dryrun.game.engine.TextureHolder;
 
 public class bmwM5 extends CarModel{
 	
