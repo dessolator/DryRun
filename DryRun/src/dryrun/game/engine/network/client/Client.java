@@ -12,6 +12,9 @@ import dryrun.game.engine.network.NetFramework;
 
 
 public class Client implements NetFramework {
+	private ClientSender clientSender;
+	private ClientReceiver clientReceiver;
+	
 	private DatagramSocket udpSocket;
 	private Socket tcpSocket;
 	private volatile boolean connected;
@@ -20,9 +23,9 @@ public class Client implements NetFramework {
 	private ConcurrentCircularBuffer myBuffer;
 	private ConcurrentCircularBuffer receiveBuffer;
 	
-	private ConcurrentCircularBuffer myInitBuffer;
+	private ConcurrentCircularBuffer myInitBuffer; // first init buffer
 	
-	private static Client client = null;
+	private static Client client = null; // singleton
 	
 	
  	protected Client() {
@@ -150,6 +153,13 @@ public class Client implements NetFramework {
 		return myInitBuffer.pop();
 	}
 	
+	public ClientSender getClientSender() {
+		return clientSender;
+	}
+	
+	public ClientReceiver getClientReceiver() {
+		return clientReceiver;
+	}
 	
 	
 	

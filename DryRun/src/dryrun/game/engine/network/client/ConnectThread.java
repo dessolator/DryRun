@@ -2,6 +2,7 @@ package dryrun.game.engine.network.client;
 
 import static dryrun.game.engine.network.NetConstants.*;
 import dryrun.game.common.GameObjectValues;
+import dryrun.game.common.GameState;
 
 
 
@@ -75,7 +76,13 @@ public class ConnectThread extends Thread {
 		}
 
 		GameStatePacket p = null;
-
+		
+		try {
+			sleep(2000);
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
+		
 		try {
 			p = (GameStatePacket) dis.readObject();
 		} catch (ClassNotFoundException e) {
@@ -91,5 +98,14 @@ public class ConnectThread extends Thread {
 		client.initBuffer().push(gov);
 		System.out.println("primio paket");
 		
+		ClientReceiver cliRec = client.getClientReceiver();
+		cliRec = new ClientReceiver(client);
+		cliRec.start();
+		
+		ClientSender cliSen = client.getClientSender();
+		cliSen= new ClientSender(client);
+		cliSen.start();
+		
+		Game.setCurrentGameState(GameState.Game);
 	}
 }
