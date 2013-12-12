@@ -148,7 +148,7 @@ public class Server implements NetFramework {
 		/*
 		 * ubijanje niti koje osluskuju zahteve.
 		 */
-		killListenerThreads();
+		//killListenerThreads();
 	
 	
 	} 
