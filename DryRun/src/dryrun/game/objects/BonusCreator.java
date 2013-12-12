@@ -23,7 +23,7 @@ public class BonusCreator extends Player {
 	}
 
 	private BonusCreator(){
-		super("generator","bonusa",0,0,0,0);
+		super("generator", null, 0, 0);
 		for(int i=0; i<Level.MAX_BONUSES; i++) {
 			timeSincePickedUp[i]=0;
 			float locX = Level.positionsX[i];

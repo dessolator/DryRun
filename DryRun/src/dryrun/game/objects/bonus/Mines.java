@@ -2,16 +2,17 @@ package dryrun.game.objects.bonus;
 
 import org.jbox2d.common.Vec2;
 
-<<<<<<< HEAD
+
 import org.newdawn.slick.opengl.Texture;
 
-import dryrun.game.common.Player;
+
+
+
 import dryrun.game.engine.Tex;
-import dryrun.game.objects.TextureHolder;
-import static dryrun.game.engine.LoadTex.mine;
-=======
+import dryrun.game.engine.TextureHolder;
 import dryrun.game.objects.Player;
->>>>>>> refs/remotes/origin/master
+import static dryrun.game.engine.LoadTex.mine;
+
 
 public class Mines extends Bonus {
 
@@ -74,5 +75,7 @@ public class Mines extends Bonus {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+
 
 }

@@ -35,11 +35,14 @@ public class Player extends GameObject implements Collidable {
     static float mainPlayerOldX;
     static float mainPlayerY;
     static float mainPlayerOldY;
+    public static int health = 400;
 	public static int ammo = 0; 
 	public static int minescount = 0;
 	public static double nitro = 0.0;
 	public static int rockets = 0;
 	private boolean first;
+	
+	public static final int MAX_HEALTH=400;
 
 	//constructor
 	public Player(String n, CarModel carModel, float x, float y){
@@ -222,6 +225,34 @@ public class Player extends GameObject implements Collidable {
 	public float getDimY(){
 		return myModel.dimY/P2M;
 	}
+
+	//bonus related methods
+	
+	public int getMinescount() {
+		return minescount;
+	}
+
+
+	public void setMinescount(int i) {
+		minescount+=1;		
+	}
+
+
+	public void setNitro(int i) {
+		nitro = i;
+		
+	}
+
+
+	public void addHealth(int i) {
+		health +=i;
+		if(health>=MAX_HEALTH){
+			health = MAX_HEALTH;
+		}
+		
+	}
+	
+	
 
 
 }

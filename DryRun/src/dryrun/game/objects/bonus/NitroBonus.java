@@ -11,7 +11,12 @@ public class NitroBonus extends Bonus{
 			Vec2 position) {
 		super(x, y, dimx, dimy, myInd, position);	
 	}
-
+	//neimplementirane metode nisu trenutno potrebne
+	@Override
+	public void applyBonus(Player p) {
+		p.setNitro(3000);		
+	}
+	
 	@Override
 	public double getAngle() {
 		// TODO Auto-generated method stub
@@ -30,10 +35,7 @@ public class NitroBonus extends Bonus{
 		
 	}
 
-	@Override
-	public void applyBonus(Player p) {
-		p.setNitro(3000);		
-	}
+	
 
 	@Override
 	public Texture getTexture() {

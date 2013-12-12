@@ -74,7 +74,7 @@ public class LoadTex {
 
 			ls.render();
 			
-			mine = TextureLoader.getTexture("PNG", new FileInputStream(new File("res/minigun.png")));
+			mine = TextureLoader.getTexture("PNG", new FileInputStream(new File("res/landmine.png")));
 			
 			
 
