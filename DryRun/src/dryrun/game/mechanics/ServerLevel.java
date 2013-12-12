@@ -20,9 +20,9 @@ public class ServerLevel extends Level {
     }
     public void initialState() {
 		GameObjectValues p[]=new GameObjectValues[5];
-        for(int i=0;i<5;i++){
-            p[i]=players.get(i).getMyValues();
-        }
+////        for(int i=0;i<5;i++){
+//            p[1]=players.get(i).getMyValues();
+////        }
             net.startGame(p);
     }
     		
