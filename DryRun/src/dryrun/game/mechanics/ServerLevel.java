@@ -16,6 +16,15 @@ public class ServerLevel extends Level {
                 super(nf);
                 // TODO Auto-generated constructor stub
         }
+        public void sendInitialState() {
+    		GameObjectValues p[]=new GameObjectValues[5];
+            for(int i=0;i<5;i++){
+                p[i]=players.get(i).getMyValues();
+            }
+                net.startGame(p);
+        }
+    		
+    	}
 
         @Override
         public void update() {

@@ -141,6 +141,11 @@ public class Client implements NetFramework {
 	public ConcurrentCircularBuffer getReceiveBuffer() {
 		return receiveBuffer;
 	}
+
+	@Override
+	public void startGame(GameObjectValues[] p){
+		
+	}
 	
 	
 	

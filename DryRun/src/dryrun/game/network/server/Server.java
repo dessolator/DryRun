@@ -98,10 +98,13 @@ public class Server implements NetFramework {
 	
 
 	
-	public void startGame(GameStatePacket p){
+	public void startGame(GameObjectValues[] p){
+		GameStatePacket packet=new GameStatePacket();
+		for(int i=0;i<5;i++){
+			packet.put(p[i]);
+		}
 		
-		
-		for(int i=0; i<myThreads.size();i++)myThreads.get(i).startGame(p);
+		for(int i=0; i<myThreads.size();i++)myThreads.get(i).startGame(packet);
 		//may need some sleep
 		for(int i=0; i<myThreads.size();i++)myThreads.get(i).start();
 		killListenerThreads();

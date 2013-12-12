@@ -147,4 +147,9 @@ public class Level implements Drawable, Serializable,Updateable {
 	public void setMyPlayer(Player myPlayer) {
 		Level.myPlayer=myPlayer;
 	}
+
+	public void sendInitialState() {
+		// TODO Auto-generated method stub
+		
+	}
 }

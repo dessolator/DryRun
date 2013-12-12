@@ -19,7 +19,7 @@ public class GameStatePacket implements Serializable  {
 	
 	public GameStatePacket(){
 		//myObjects = new GameObjectValues[MAX_PLAYERS-1];
-		myObjects = new GameObjectValues[1];
+		myObjects = new GameObjectValues[5];
 	}
 	
 	public void put(GameObjectValues gov){
