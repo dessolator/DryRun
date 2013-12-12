@@ -18,8 +18,7 @@ public class GameStartButton extends Button {
 		super.pressed();
 		System.out.println("Stisnut start game");
 		if (Server.getServer().getMyThreads().size()!=0) {
-//			Server.getServer().startGame();
-			Game.setCurrentGameState(GameState.Game);
+			Game.initState();
 		}
 		
 	}
