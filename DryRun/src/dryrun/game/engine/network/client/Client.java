@@ -34,6 +34,10 @@ public class Client implements NetFramework {
 		
 	}
  	
+ 	public ConcurrentCircularBuffer initBuffer() {
+ 		return myInitBuffer;
+ 	}
+ 	
  	public static void disposeClient() {
  		System.out.println("dispose");
  		if (getClient()!=null) {
@@ -78,15 +82,12 @@ public class Client implements NetFramework {
 		}
 		
 		serverAddress = servAddr;
-		ConnectThread cThread = new ConnectThread(this,serverAddress,playerName,typeOfAutomobile);
+		ConnectThread cThread = new ConnectThread(this,serverAddress,playerName);
 		cThread.start();
 		myBuffer = new ConcurrentCircularBuffer();
 		receiveBuffer = new ConcurrentCircularBuffer();
 	}
 	
-	public void sync () {
-		
-	}
 	
 	public void setServerPort(int p) {
 		serverPort = p;
@@ -126,12 +127,7 @@ public class Client implements NetFramework {
 	}
 	
 	public GameObjectValues[] receive() {
-		try {
-			return receiveBuffer.pop();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		return null;
+		return receiveBuffer.pop();
 	}
 
 	public ConcurrentCircularBuffer getSenderBuffer() {
@@ -149,7 +145,7 @@ public class Client implements NetFramework {
 
 	@Override
 	public GameObjectValues[] startGame() {
-		
+		return myInitBuffer.pop();
 	}
 	
 	

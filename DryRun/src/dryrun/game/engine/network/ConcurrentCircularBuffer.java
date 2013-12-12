@@ -1,6 +1,6 @@
 package dryrun.game.engine.network;
 
-import java.util.ArrayList;
+
 import java.util.concurrent.*;
 import java.util.concurrent.locks.*;
 
@@ -30,8 +30,12 @@ public class ConcurrentCircularBuffer {
 		
 	}
 	
-	public GameObjectValues[] pop() throws InterruptedException {
-		bufferEmpty.acquire();
+	public GameObjectValues[] pop() {
+		try {
+			bufferEmpty.acquire();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		mutex.lock();
 		GameObjectValues [] gov = data[(currentTail++)%SIZE_OF_BUFFER];
 		mutex.unlock();

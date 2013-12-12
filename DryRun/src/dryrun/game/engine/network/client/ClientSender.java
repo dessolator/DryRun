@@ -20,11 +20,9 @@ public class ClientSender extends Thread {
 			GameStatePacket gsp=new GameStatePacket();
 			GameObjectValues[] temp = null;
 			
-			try {
-				temp = myOwner.getSenderBuffer().pop();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+			
+			temp = myOwner.getSenderBuffer().pop();
+			
 			for(GameObjectValues v : temp)
 				gsp.put(v);
 			byte [] sendPacket = GameStatePacket.write(gsp);
