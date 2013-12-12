@@ -1,10 +1,12 @@
 package dryrun.game.gui.menus;
 
-import dryrun.game.common.ServerButtonProto;
 import dryrun.game.engine.DrawObject;
 import dryrun.game.gui.menus.misc.frames.BasicFrame;
 import dryrun.game.gui.misc.buttons.*;
+import dryrun.game.gui.misc.buttons.serverButton.ServerButton;
+import dryrun.game.gui.misc.buttons.serverButton.ServerButtonProto;
 import static dryrun.game.engine.LoadTex.mainMenuBackground;
+
 import java.util.*;
 
 import org.lwjgl.input.Mouse;

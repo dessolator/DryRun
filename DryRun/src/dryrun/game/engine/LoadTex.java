@@ -7,10 +7,9 @@ import java.io.IOException;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 
-import dryrun.game.objects.TextureHolder;
-
+//class used to load textures
 public class LoadTex {
-	public static Texture playerTex;
+	public static Texture bmwM5;
 	public static Texture mainMenuBackground;
 	public static Texture basicFrame;
 	public static Texture buttonTextures;
@@ -22,7 +21,7 @@ public class LoadTex {
 	public static Texture levelBackground;
 	public static Texture machineGun;
 	
-	
+	//used to load textures, some texstures for loading are inside ... :) 
 	public static void init(){
 		try {
 			ls=new LoadingScreen();
@@ -32,7 +31,7 @@ public class LoadTex {
 			tex=new TextureHolder(loading1,new Tex(0f,0f,1/8f,1f));//TODO for the love of god make this logic a method
 			ls.render();
 			
-			playerTex=TextureLoader.getTexture("PNG", new FileInputStream(new File("res/player.png")));
+			bmwM5=TextureLoader.getTexture("PNG", new FileInputStream(new File("res/player.png")));
 			
 			tex=new TextureHolder(loading1,new Tex(1/8f,0f,2/8f,1f));
 			ls.render();
@@ -57,8 +56,7 @@ public class LoadTex {
 			tex=new TextureHolder(loading1,new Tex(5/8f,0f,6/8f,1f));
 			ls.render();
 			
-			levelBackground=TextureLoader.getTexture("PNG", new FileInputStream(new File("res/raceTrack.png")));
-			
+			levelBackground=TextureLoader.getTexture("JPG", new FileInputStream(new File("res/debug.jpg")));
 			tex=new TextureHolder(loading1,new Tex(6/8f,0f,7/8f,1f));
 			ls.render();
 			

@@ -2,15 +2,14 @@ package dryrun.game.gui.misc.buttons;
 
 
 import static dryrun.game.engine.LoadTex.*;
-
 import dryrun.game.engine.DrawObject;
-import dryrun.game.engine.Drawable;
 import dryrun.game.engine.Tex;
-import dryrun.game.engine.Updateable;
+import dryrun.game.engine.TextureHolder;
+import dryrun.game.engine.interfaces.Drawable;
+import dryrun.game.engine.interfaces.Updateable;
+import dryrun.game.engine.sounds.SEngine;
 import dryrun.game.gui.menus.misc.text.Text;
 import dryrun.game.gui.menus.misc.text.TimesNewRomanText;
-import dryrun.game.objects.TextureHolder;
-import dryrun.game.sounds.SEngine;
 
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.opengl.Texture;
@@ -114,7 +113,9 @@ public abstract class Button implements Drawable, Updateable{
 		return myTexture.getMyCoords().getY2();
 	}
 	
-	public void pressed(){SEngine.getSoundSystem().play("buttonclick");}
+	public void pressed(){
+		//SEngine.getSoundSystem().play("buttonclick");
+		}
 	
 	@Override
 	public void update() {

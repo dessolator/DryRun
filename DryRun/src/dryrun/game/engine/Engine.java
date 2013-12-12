@@ -9,14 +9,16 @@ import org.lwjgl.opengl.DisplayMode;
 import static org.lwjgl.opengl.GL11.*;
 
 public class Engine {
-	public static int WIDTH = 800;
-	public static int HEIGHT = 600;
+	//displaye related variables
+	public static int WIDTH = 1280;
+	public static int HEIGHT = 720;
 	public static boolean fullscreen=false;
 	public static boolean vsync = true;
 	
 	
 	public static void init(){		
 		try {
+			//creating the Display and initializing the mouse and keyboard
 			Display.setDisplayMode(new DisplayMode(WIDTH, HEIGHT));
 			Display.setFullscreen(fullscreen);//fullscreen? 
 			Display.create();//create Display
@@ -44,7 +46,7 @@ public class Engine {
 			e.printStackTrace();
 		}		
 	}
-	
+	//destroy all upon exit
 	public static void kill(){
 		Display.destroy();
 		Mouse.destroy();

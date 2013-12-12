@@ -4,11 +4,13 @@ package dryrun.game.engine;
 
 import org.lwjgl.opengl.Display;
 import org.newdawn.slick.opengl.Texture;
+
+import dryrun.game.engine.interfaces.Drawable;
 import static dryrun.game.engine.LoadTex.tex;
 
 
 
-
+//class used to represent the loading screen
 public class LoadingScreen implements Drawable {
 	
 	public LoadingScreen(){	}	
