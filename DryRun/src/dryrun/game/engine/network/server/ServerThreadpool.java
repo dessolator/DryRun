@@ -11,7 +11,6 @@ import dryrun.game.objects.Player;
 
 public class ServerThreadpool  { //Client instance on the server
 	private DatagramSocket mySocket; //I send my UDP data to the client here
-	private Player myPlayer;		//this is my clients player info (will be used by TCP?)
 	private InetAddress clientAddr; //My clients address
 	private Socket myTcpSocket;
 	
@@ -35,7 +34,7 @@ public class ServerThreadpool  { //Client instance on the server
 		
 		myRecBuffer=new ConcurrentCircularBuffer();
 		mySendBuffer=new ConcurrentCircularBuffer();
-		myPlayer=Game.createPlayer(split[1],split[2]);
+		Game.createPlayer(split[1],split[2]);
 		
 		sender = new ServerSender(this);
 		receiver = new ServerReceiver(this);
