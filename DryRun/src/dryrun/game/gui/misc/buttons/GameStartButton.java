@@ -1,11 +1,10 @@
 package dryrun.game.gui.misc.buttons;
 
-import dryrun.game.common.StringObject;
+
 
 
 import dryrun.game.common.GameState;
 import dryrun.game.mechanics.Game;
-import dryrun.game.engine.network.GameStatePacket;
 import dryrun.game.engine.network.server.Server;
 
 public class GameStartButton extends Button {
