@@ -25,6 +25,7 @@ public class TCPThread extends Thread {
 	public TCPThread(Server server,Socket s, int udp) {
 		myServer=server;
 		this.s=s;
+		udpPort=udp;
 		try{
 			dis = new ObjectInputStream(s.getInputStream());
 			dos = new ObjectOutputStream(s.getOutputStream());
