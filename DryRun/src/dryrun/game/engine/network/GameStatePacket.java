@@ -9,8 +9,9 @@ import java.io.Serializable;
 
 
 
+
 import dryrun.game.common.GameObjectValues;
-import dryrun.game.common.Player;
+import dryrun.game.objects.Player;
 import static dryrun.game.engine.network.NetConstants.*;
 
 public class GameStatePacket implements Serializable  {

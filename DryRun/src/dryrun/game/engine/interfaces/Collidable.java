@@ -1,6 +1,6 @@
 package dryrun.game.engine.interfaces;
 
-import dryrun.game.common.Player;
+import dryrun.game.objects.Player;
 
 //used to impplemets collision function where needed
 public interface Collidable {

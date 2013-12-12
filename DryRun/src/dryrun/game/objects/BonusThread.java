@@ -1,4 +1,4 @@
-package dryrun.game.common;
+package dryrun.game.objects;
 
 public class BonusThread extends Thread {
 	private BonusCreator myBonusCreator;

@@ -1,4 +1,4 @@
-package dryrun.game.common;
+package dryrun.game.gui.misc.buttons.serverButton;
 
 import java.net.*;
 

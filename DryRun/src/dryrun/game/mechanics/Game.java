@@ -4,7 +4,6 @@ import org.lwjgl.opengl.Display;
 
 import static org.lwjgl.opengl.GL11.*;
 import dryrun.game.common.GameState;
-import dryrun.game.common.Player;
 import dryrun.game.common.cars.bmwM5;
 import dryrun.game.engine.Tex;
 import dryrun.game.engine.TextureHolder;
@@ -26,6 +25,7 @@ import java.io.IOException;
 import java.net.*;
 
 import dryrun.game.gui.menus.*;
+import dryrun.game.objects.Player;
 
 //here all the magic happens :) 
 public class Game {

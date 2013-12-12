@@ -1,4 +1,4 @@
-package dryrun.game.common;
+package dryrun.game.objects;
 
 import org.jbox2d.common.Vec2;
 import org.lwjgl.opengl.Display;

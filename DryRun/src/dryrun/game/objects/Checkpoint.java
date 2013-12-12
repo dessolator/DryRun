@@ -1,4 +1,4 @@
-package dryrun.game.objects.bonus;
+package dryrun.game.objects;
 import org.lwjgl.opengl.Display;
 
 import dryrun.game.engine.DrawObject;

@@ -10,7 +10,6 @@ import org.newdawn.slick.opengl.Texture;
 
 import static dryrun.game.engine.LoadTex.levelBackground;
 import dryrun.game.common.GameObjectValues;
-import dryrun.game.common.Player;
 import dryrun.game.engine.DrawObject;
 import dryrun.game.engine.Tex;
 import dryrun.game.engine.TextureHolder;
@@ -19,8 +18,9 @@ import dryrun.game.engine.interfaces.Updateable;
 import dryrun.game.engine.network.NetFramework;
 import dryrun.game.engine.network.client.Client;
 import dryrun.game.engine.physics.CollisionListener;
-import dryrun.game.objects.bonus.Checkpoint;
-import dryrun.game.objects.bonus.Wall;
+import dryrun.game.objects.Player;
+import dryrun.game.objects.Wall;
+import dryrun.game.objects.Checkpoint;
 
 
 

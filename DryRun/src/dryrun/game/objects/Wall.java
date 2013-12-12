@@ -1,6 +1,5 @@
-package dryrun.game.objects.bonus;
+package dryrun.game.objects;
 
-import dryrun.game.common.Player;
 import dryrun.game.engine.DrawObject;
 import dryrun.game.engine.GameObject;
 import dryrun.game.engine.interfaces.Collidable;

@@ -3,12 +3,12 @@ package dryrun.game.objects.bonus;
 
 import org.jbox2d.common.Vec2;
 
-import dryrun.game.common.BonusCreator;
-import dryrun.game.common.Player;
 import dryrun.game.engine.DrawObject;
 import dryrun.game.engine.GameObject;
 import dryrun.game.engine.interfaces.Collidable;
 import dryrun.game.engine.interfaces.Drawable;
+import dryrun.game.objects.BonusCreator;
+import dryrun.game.objects.Player;
 
 
 public abstract class Bonus extends GameObject implements Collidable, Drawable {

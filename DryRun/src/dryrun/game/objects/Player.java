@@ -1,4 +1,4 @@
-package dryrun.game.common;
+package dryrun.game.objects;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,6 +15,7 @@ import org.newdawn.slick.opengl.Texture;
 
 import dryrun.game.mechanics.Game;
 import dryrun.game.mechanics.Level;
+import dryrun.game.common.GameObjectValues;
 import dryrun.game.common.cars.CarModel;
 import dryrun.game.engine.DrawObject;
 import dryrun.game.engine.GameObject;

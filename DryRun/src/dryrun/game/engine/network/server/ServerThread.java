@@ -4,10 +4,10 @@ import java.io.*;
 import java.net.*;
 
 import dryrun.game.common.GameObjectValues;
-import dryrun.game.common.Player;
 import dryrun.game.engine.network.ConcurrentCircularBuffer;
 import dryrun.game.engine.network.GameStatePacket;
 import dryrun.game.mechanics.Game;
+import dryrun.game.objects.Player;
 
 public class ServerThread  { //Client instance on the server
 	private DatagramSocket mySocket; //I send my UDP data to the client here
