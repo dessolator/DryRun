@@ -35,7 +35,7 @@ public class Game {
 	private static JoinMenu myLobbyMenu;//my join menu
 	private static WaitServerMenu waitServerReply;
 	private static boolean terminate=false;	//window kill flag
-	private static GameState currentGameState=GameState.Game;//current game state
+	private static GameState currentGameState=GameState.MainMenu;//current game state
 	private static List<InetAddress> serverAddresses;//list of known server addresses
 	private static GameStatePacket firstPlayersPositions;//TODO someone else added this I do not understand it @Ivan
 	private static Level myLvl;//myLevel
@@ -237,20 +237,21 @@ public class Game {
 	public static void initGame() {
 				//myLevel=new Level(currentLevel);
 				serverAddresses = Collections.synchronizedList(new ArrayList<InetAddress>());
-				tex=new TextureHolder(loading1,new Tex(1/8f,0f,2/8f,1f));
+				tex=new TextureHolder(loading1,new Tex(0f,0f,0f,0f));
 				ls.render();
 				myMainMenu = new MainMenu();
-				tex=new TextureHolder(loading1,new Tex(2/8f,0f,3/8f,1f));
+
 				ls.render();
 				myGameMenu = new GameMenu();
+				ls.render();
 				waitServerReply = new WaitServerMenu();
-				tex=new TextureHolder(loading1,new Tex(3/8f,0f,4/8f,1f));
+
 				ls.render();
 				myHostMenu = new HostMenu();
-				tex=new TextureHolder(loading1,new Tex(4/8f,0f,5/8f,1f));
+
 				ls.render();
 				myLobbyMenu = new JoinMenu();
-				tex=new TextureHolder(loading1,new Tex(5/8f,0f,6/8f,1f));
+
 				ls.render();
 				//mySettingsMenu=new SettingsMenu();
 				myLvl=new Level(Client.getClient());

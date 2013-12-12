@@ -12,73 +12,77 @@ import static dryrun.game.engine.LoadTex.tex;
 
 //class used to represent the loading screen
 public class LoadingScreen implements Drawable {
-	
-	public LoadingScreen(){	}	
+	private static float x1=0;
+	private static float x2=1/8;
+	private static float y1=0;
+	private static float y2=1;
+	private static int i=0;
+	public LoadingScreen(){}	
 	
 		//	@Override
 	public Texture getTexture() {
-		// TODO Auto-generated method stub
 		return tex.getMyTexture();
-		}
+	}
 	
 	@Override
 	public void render() {
+		tex.getMyCoords().setX1(x1);
+		tex.getMyCoords().setY1(y1);
+		tex.getMyCoords().setX2(x2);
+		tex.getMyCoords().setY2(y2);
 		DrawObject.draw(this);
 		Display.update();
-		}
+		x1=((float)i/8);
+		x2=((float)(i+1)/8);
+		i++;
+		if(i==7)
+			i=0;
+		
+	}
 
 	@Override
 	public float getX() {
-		// TODO Auto-generated method stub
 		return (float)Display.getWidth()/2;
-		}
+	}
 
 	@Override
 	public float getY() {
-		// TODO Auto-generated method stub
 		return (float)Display.getHeight()/2;
-		}
+	}
 
 	@Override
 	public float getDimX() {
-		// TODO Auto-generated method stub
 		return (float)Display.getWidth()/20;
-		}
+	}
 
 	@Override
 	public float getDimY() {
-		// TODO Auto-generated method stub
 		return (float)Display.getHeight()/8;
-		}
+	}
 
 	@Override
 	public float getTexX1() {
-		// TODO Auto-generated method stub
 		return tex.getMyCoords().getX1();
-		}
+	}
 
 	@Override
 	public float getTexX2() {
-		// TODO Auto-generated method stub
 		 	return tex.getMyCoords().getX2();
-		}
+	}
 
 	@Override
 	public float getTexY1() {
-		// TODO Auto-generated method stub
 		return tex.getMyCoords().getY1();
-		}
+	}
 
 	@Override
 	public float getTexY2() {
-		// TODO Auto-generated method stub
 		return tex.getMyCoords().getY2();
-		}
+	}
 
 	@Override
 	public double getAngle() {
-		// TODO Auto-generated method stub
 		return 0;
-		}
+	}
 
 }

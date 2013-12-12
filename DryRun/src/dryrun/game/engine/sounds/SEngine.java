@@ -1,16 +1,8 @@
 package dryrun.game.engine.sounds;
 
-import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
-
 import paulscode.sound.SoundSystem;
-import paulscode.sound.libraries.LibraryJavaSound;
 import paulscode.sound.libraries.LibraryLWJGLOpenAL;
-import paulscode.sound.libraries.ChannelLWJGLOpenAL;
-import paulscode.sound.libraries.SourceLWJGLOpenAL;
 import paulscode.sound.codecs.CodecJOgg;
-import paulscode.sound.Library;
 import paulscode.sound.SoundSystemConfig;
 import paulscode.sound.SoundSystemException; 
 
@@ -19,41 +11,46 @@ public class SEngine {
 	private static SoundSystem s=null;
 	
 	public static SoundSystem getSoundSystem(){
-		if (s==null) {init();}
+		if (s==null) {
+			init();//TODO da li getSoundSystem mora svaki put da vezuje lib???
+			}
 		return s;
 	}
 	
 	public static void init(){
 		try
 		{
-		SoundSystemConfig.addLibrary( LibraryLWJGLOpenAL.class );
+			SoundSystemConfig.addLibrary( LibraryLWJGLOpenAL.class );//dynamically load OpenAL lib
 		}
 		catch( SoundSystemException e )
 		{
-		System.err.println( "error linking with lib" );
+			System.err.println( "error linking with lib" );
 		}
 		
 		try
 		{
-		SoundSystemConfig.setCodec("ogg", CodecJOgg.class);
+			SoundSystemConfig.setCodec("ogg", CodecJOgg.class);//select OGG decoder
+		}catch( SoundSystemException e ){
+			System.err.println("error linking with the CodecWav plug-in" );
+		} 
 		
-			
-		}catch( SoundSystemException e ){System.err.println("error linking with the CodecWav plug-in" );} 
-		
-		if(s==null)	s=new SoundSystem();
-		
-		s.setListenerOrientation( 0, 0, -1, 0, -1, 0 );
-		loadSounds();
+		if(s==null)
+			s=new SoundSystem();//if not sound system was present make a new one
+		s.setListenerOrientation( 0, 0, -1, 0, -1, 0 );//set orientation to look at the screen
+		loadSounds();//TODO maybe make a new class? similar to LoadTex? (expensive operation)
 	}
 	
 	public static void loadSounds(){
-		s.newSource(false, "buttonclick", "buttonclick.ogg", false, 0, 0, 0, 0, 0);
+		s.newSource(false, "buttonclick", "splashsound.ogg", false, 0, 0, 0, 0, 0);//TODO nigga got issues!!!(issue: misformated files)
+		//add a new source to the sound system for buttonClicks
 		
 	}
 	
 	
 	
-	public static void dispose(){s.cleanup();}
+	public static void dispose(){
+		s.cleanup();//clean up the sonud system
+		}
 	
 	
 	

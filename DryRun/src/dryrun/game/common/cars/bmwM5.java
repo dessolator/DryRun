@@ -14,7 +14,7 @@ public class bmwM5 extends CarModel{
 		maxTireGrip=600f;//in meter kilograms /second
 		accelForce=20626;//in newtons
 		brakeForce=40262;//in newtons
-		reverseForce=10313;//in newtons
+		reverseForce=-10313;//in newtons
 		turnAngle=0.00276f;//in radians/second
 		dimX=4.8f;//in meters
 		dimY=1.89f;//in meters

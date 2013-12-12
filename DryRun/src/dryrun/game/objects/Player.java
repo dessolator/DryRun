@@ -3,7 +3,6 @@ package dryrun.game.objects;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import org.jbox2d.collision.shapes.PolygonShape;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
@@ -12,19 +11,14 @@ import org.jbox2d.dynamics.BodyType;
 import org.jbox2d.dynamics.FixtureDef;
 import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.opengl.Texture;
-
 import dryrun.game.mechanics.Game;
 import dryrun.game.mechanics.Level;
 import dryrun.game.common.GameObjectValues;
 import dryrun.game.common.cars.CarModel;
 import dryrun.game.engine.DrawObject;
 import dryrun.game.engine.GameObject;
-import dryrun.game.engine.Tex;
-import dryrun.game.engine.TextureHolder;
 import dryrun.game.engine.interfaces.Collidable;
-import dryrun.game.engine.interfaces.Movable;
 import dryrun.game.objects.bonus.Bonus;
-import dryrun.game.objects.bonus.Timer;
 import static dryrun.game.engine.network.NetConstants.P2M;
 import static org.lwjgl.opengl.GL11.glTranslatef;
 
@@ -98,24 +92,20 @@ public class Player extends GameObject implements Collidable {
 		Vec2 axialPoint = new Vec2 (position.x-direction.x*myModel.axialPointOffset,position.y-direction.y*myModel.axialPointOffset);//position - axial offset
 		Vec2 accelForce = multiply(direction,myModel.accelForce);//Facc *dir
 		Vec2 brakeForce = multiply(direction,myModel.brakeForce);//Fbra * dir
-		Vec2 revBrakeForce=multiply(brakeForce,-1);
-		Vec2 reverseForce = multiply(direction, -myModel.reverseForce);//Frev *dir
+		Vec2 revBrakeForce=multiply(brakeForce,-1);//-Fbra *dir
+		Vec2 reverseForce = multiply(direction, myModel.reverseForce);//Frev *dir
 		Vec2 currentVelocity=myBody.getLinearVelocity();//V
 		Vec2 desiredVelocity=multiply(direction,Vec2.dot(direction, currentVelocity));// dir * (dir dot V)
 		Vec2 velocityDifference=new Vec2(desiredVelocity.x-currentVelocity.x,desiredVelocity.y-currentVelocity.y);//Vdes - Vcurr
 		Vec2 impulse = multiply(velocityDifference,myBody.getMass()); //Vdes*M
-		//existing code
-		  if ( impulse.length() > myModel.maxTireGrip )
-		      impulse =multiply(impulse, (myModel.maxTireGrip / impulse.length()));
-		  
-		//if left
-		//setTransformation
-		//if right
-		//setTransform
+		
+		if ( impulse.length() > (myModel.maxTireGrip*currentVelocity.length()))
+			impulse =multiply(impulse, ((myModel.maxTireGrip*currentVelocity.length()) / impulse.length()));
+		
 		myBody.applyLinearImpulse(impulse,position);
 		mainPlayerOldX=mainPlayerX;
 		mainPlayerOldY=mainPlayerY;		
-		System.out.println(myBody.getLinearVelocity().length());
+//		System.out.println(myBody.getLinearVelocity().length());
 		if(Keyboard.isKeyDown(Keyboard.KEY_UP)){
 			
 			if((this.myBody.getLinearVelocity().x*Math.cos(this.myBody.getAngle()))>=0){
