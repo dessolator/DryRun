@@ -2,8 +2,8 @@ package dryrun.game.gui.menus.misc.frames;
 
 
 import dryrun.game.engine.DrawObject;
-import dryrun.game.engine.Drawable;
-import dryrun.game.objects.TextureHolder;
+import dryrun.game.engine.TextureHolder;
+import dryrun.game.engine.interfaces.Drawable;
 
 import org.newdawn.slick.opengl.Texture;
 

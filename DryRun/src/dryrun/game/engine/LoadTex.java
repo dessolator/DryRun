@@ -7,8 +7,6 @@ import java.io.IOException;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 
-import dryrun.game.objects.TextureHolder;
-
 //class used to load textures
 public class LoadTex {
 	public static Texture bmwM5;

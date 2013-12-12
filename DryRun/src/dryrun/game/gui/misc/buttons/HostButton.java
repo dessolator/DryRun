@@ -1,8 +1,8 @@
 package dryrun.game.gui.misc.buttons;
 
 import dryrun.game.mechanics.Game;
-import dryrun.game.network.server.Server;
 import dryrun.game.common.*;
+import dryrun.game.engine.network.server.Server;
 public class HostButton extends Button {
 
 	public HostButton(float coordX, float coordY) {

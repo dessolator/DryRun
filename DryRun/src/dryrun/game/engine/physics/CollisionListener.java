@@ -6,7 +6,7 @@ import org.jbox2d.collision.Manifold;
 import org.jbox2d.dynamics.contacts.Contact;
 
 import dryrun.game.common.Player;
-import dryrun.game.engine.Collidable;
+import dryrun.game.engine.interfaces.Collidable;
 
 public class CollisionListener implements ContactListener {
 

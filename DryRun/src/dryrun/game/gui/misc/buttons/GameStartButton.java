@@ -1,8 +1,8 @@
 package dryrun.game.gui.misc.buttons;
 
 
-import dryrun.game.network.GameStatePacket;
-import dryrun.game.network.server.Server;
+import dryrun.game.engine.network.GameStatePacket;
+import dryrun.game.engine.network.server.Server;
 
 public class GameStartButton extends Button {
 

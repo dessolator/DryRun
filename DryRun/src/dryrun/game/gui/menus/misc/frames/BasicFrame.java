@@ -3,7 +3,7 @@ package dryrun.game.gui.menus.misc.frames;
 
 import static dryrun.game.engine.LoadTex.basicFrame;
 import dryrun.game.engine.Tex;
-import dryrun.game.objects.TextureHolder;
+import dryrun.game.engine.TextureHolder;
 
 
 public class BasicFrame extends Frame {

@@ -4,9 +4,11 @@ import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.World;
 
 import dryrun.game.common.GameObjectValues;
-import dryrun.game.network.NetFramework;
-import dryrun.game.network.server.Server;
+import dryrun.game.engine.network.NetFramework;
+import dryrun.game.engine.network.server.Server;
 import dryrun.game.objects.bonus.Bonus;
+import dryrun.game.objects.bonus.Checkpoint;
+import dryrun.game.objects.bonus.Wall;
 
 @SuppressWarnings("serial")
 public class ServerLevel extends Level {
@@ -24,7 +26,7 @@ public class ServerLevel extends Level {
                 net.startGame(p);
         }
     		
-    	}
+    	
 
         @Override
         public void update() {

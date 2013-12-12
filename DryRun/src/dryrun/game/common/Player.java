@@ -15,16 +15,16 @@ import org.newdawn.slick.opengl.Texture;
 
 import dryrun.game.mechanics.Game;
 import dryrun.game.mechanics.Level;
-import dryrun.game.objects.TextureHolder;
 import dryrun.game.common.cars.CarModel;
-import dryrun.game.engine.Collidable;
 import dryrun.game.engine.DrawObject;
-import dryrun.game.engine.Movable;
+import dryrun.game.engine.GameObject;
 import dryrun.game.engine.Tex;
-import dryrun.game.objects.GameObject;
+import dryrun.game.engine.TextureHolder;
+import dryrun.game.engine.interfaces.Collidable;
+import dryrun.game.engine.interfaces.Movable;
 import dryrun.game.objects.bonus.Bonus;
 import dryrun.game.objects.bonus.Timer;
-import static dryrun.game.network.NetConstants.P2M;
+import static dryrun.game.engine.network.NetConstants.P2M;
 import static org.lwjgl.opengl.GL11.glTranslatef;
 
 public class Player extends GameObject implements Collidable {

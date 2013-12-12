@@ -6,6 +6,7 @@ import static org.lwjgl.opengl.GL11.*;
 import org.lwjgl.opengl.Display;
 
 import dryrun.game.common.Player;
+import dryrun.game.engine.interfaces.Drawable;
 //class that
 public class DrawObject {
 		// GL based drawing without the rotation

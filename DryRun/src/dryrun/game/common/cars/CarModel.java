@@ -1,7 +1,7 @@
 package dryrun.game.common.cars;
 
 
-import dryrun.game.objects.TextureHolder;
+import dryrun.game.engine.TextureHolder;
 
 public abstract class CarModel{
 	public TextureHolder myTex;

@@ -3,8 +3,8 @@ package dryrun.game.gui.misc.buttons;
 import java.net.InetAddress;
 
 import dryrun.game.common.GameState;
+import dryrun.game.engine.network.client.Client;
 import dryrun.game.mechanics.Game;
-import dryrun.game.network.client.Client;
 
 public class ServerButton extends Button {
 	private InetAddress serverAddress;
