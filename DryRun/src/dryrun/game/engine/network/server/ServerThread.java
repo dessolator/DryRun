@@ -20,8 +20,7 @@ public class ServerThread  { //Client instance on the server
 	private ConcurrentCircularBuffer myRecBuffer;//buffer self-fucking-explanatory
 	private ConcurrentCircularBuffer mySendBuffer;//buffer self-fucking-explanatory
 	private ServerLoader ldr; //A loader which takes data from the recBuffer and puts it in the ServerBuffer
-	ObjectInputStream tis; //TCP In-Stream
-	ObjectOutputStream tos;//TCP Out-Stream
+	private TCPThread tcp;
 	
 
 
@@ -29,24 +28,20 @@ public class ServerThread  { //Client instance on the server
 						String[] split,
 						InetAddress cladr,
 						ConcurrentCircularBuffer srvB,
-						ObjectInputStream tcpin,
-						ObjectOutputStream tcpout,
-						Socket s) throws SocketException {
+						TCPThread tcp) throws SocketException {
 		
 		
 		mySocket=new DatagramSocket(i);
 		
 		myRecBuffer=new ConcurrentCircularBuffer();
 		mySendBuffer=new ConcurrentCircularBuffer();
-		myTcpSocket = s;
 		myPlayer=Game.createPlayer(split[1],split[2]);
 		
 		sender = new ServerSender(this);
 		receiver = new ServerReceiver(this);
 		ldr = new ServerLoader(srvB,myRecBuffer);
 		
-		tos=tcpout;
-		tis=tcpin;
+		this.tcp = tcp;
 	}
 	
 	//public ConcurrentCircularBuffer getBuffer(){return myBuffer;}
@@ -75,6 +70,10 @@ public class ServerThread  { //Client instance on the server
 	
 	public void send(GameObjectValues[] p) { //Queue data to be sent
 		mySendBuffer.push(p);
+	}
+	
+	public void initGame(){
+		
 	}
 
 	/*public GameObjectValues[] receive() {
