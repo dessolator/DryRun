@@ -4,7 +4,6 @@ import static dryrun.game.engine.network.NetConstants.CONNECT_ACC;
 import static dryrun.game.engine.network.NetConstants.CONNECT_REF;
 import static dryrun.game.engine.network.NetConstants.CONNECT_REQ;
 import static dryrun.game.engine.network.NetConstants.MAX_PLAYERS;
-
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -29,9 +28,10 @@ public class TCPThread extends Thread {
 		udpPort=udp;
 		flag = new AtomicBoolean(false);
 		try{
-			dis = new ObjectInputStream(s.getInputStream());
+
 			dos = new ObjectOutputStream(s.getOutputStream());
 			dos.flush();
+			dis = new ObjectInputStream(s.getInputStream());
 		}catch(IOException e){e.printStackTrace();}
 		
 		System.out.println("created tcp streams and its thread.");
@@ -41,6 +41,7 @@ public class TCPThread extends Thread {
 		
 		connect();
 		
+		//	while(gsp==null);
 		while(flag.get()!=true);
 			//TODO I'm sure there's a better way to do this
 //				try {
@@ -49,7 +50,7 @@ public class TCPThread extends Thread {
 	
 		
 		try {
-			dos.writeObject(gsp);
+		dos.writeObject(gsp);
 		} catch (IOException e) {e.printStackTrace();}
 		
 		
