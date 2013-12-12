@@ -16,6 +16,7 @@ public class ConnectAcceptorThread extends Thread {
 	}
 	
 	public void run(){
+		TCPThread t=null;
 		while(!interrupted()){
 
 				Socket s=null;
@@ -30,7 +31,8 @@ public class ConnectAcceptorThread extends Thread {
 				System.out.println("past block");
 				//TCP init
 				
-				new TCPThread(myServer,s,currentUdp++).start();
+				t=new TCPThread(myServer,s,currentUdp++);
+				t.start();
 				
 				
 		
