@@ -114,7 +114,7 @@ public abstract class Button implements Drawable, Updateable{
 	}
 	
 	public void pressed(){
-		//SEngine.getSoundSystem().play("buttonclick");
+		SEngine.getSoundSystem().play("buttonclick");
 		}
 	
 	@Override
