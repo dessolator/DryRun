@@ -20,22 +20,23 @@ public class ConnectThread extends Thread {
 	private InetAddress serverAddress;
 	private String playerName;
 	private Client client;
+	private ObjectInputStream ois;
+	private ObjectOutputStream oos;
 	
-	public ConnectThread(Client cli, InetAddress servAddr, String playName) {
+	public ConnectThread(Client cli, InetAddress servAddr, String playName, ObjectOutputStream oos, ObjectInputStream ois) {
 		client = cli;
 		serverAddress = servAddr;
 		playerName = playName;
+		this.oos = oos;
+		this.ois = ois;
 	}
 	
 	public void run() {
-		
-		ObjectInputStream dis = null;
-		ObjectOutputStream dos = null;
 	
 		try {
-			dos = new ObjectOutputStream(client.getTCPSocket().getOutputStream());
-			dos.flush();
-			dis = new ObjectInputStream(client.getTCPSocket().getInputStream());
+			oos = new ObjectOutputStream(client.getTCPSocket().getOutputStream());
+			oos.flush();
+			ois = new ObjectInputStream(client.getTCPSocket().getInputStream());
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.out.println("connect thread");
@@ -44,7 +45,7 @@ public class ConnectThread extends Thread {
 		System.out.println("Streams created");
 		String s = new String(CONNECT_REQ + "#" + playerName);
 		try {
-			dos.writeObject(s);
+			oos.writeObject(s);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -52,7 +53,7 @@ public class ConnectThread extends Thread {
 		String str = null;
 		
 		try {
-			str = (String) dis.readObject();
+			str = (String) ois.readObject();
 		} catch (ClassNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -77,14 +78,14 @@ public class ConnectThread extends Thread {
 
 		GameStatePacket p = null;
 		
-		try {
-			sleep(2000);
-		} catch (InterruptedException e1) {
-			e1.printStackTrace();
-		}
+//		try {
+//			sleep(10000);
+//		} catch (InterruptedException e1) {
+//			e1.printStackTrace();
+//		}
 		
 		try {
-			p = (GameStatePacket) dis.readObject();
+			p = (GameStatePacket) ois.readObject();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

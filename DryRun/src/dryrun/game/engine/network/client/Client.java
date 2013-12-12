@@ -15,6 +15,9 @@ public class Client implements NetFramework {
 	private ClientSender clientSender;
 	private ClientReceiver clientReceiver;
 	
+	private ObjectInputStream ois = null;
+	private ObjectOutputStream oos = null;
+	
 	private DatagramSocket udpSocket;
 	private Socket tcpSocket;
 	private volatile boolean connected;
@@ -86,7 +89,7 @@ public class Client implements NetFramework {
 		}
 		
 		serverAddress = servAddr;
-		ConnectThread cThread = new ConnectThread(this,serverAddress,playerName);
+		ConnectThread cThread = new ConnectThread(this,serverAddress,playerName,oos,ois);
 		cThread.start();
 		myBuffer = new ConcurrentCircularBuffer();
 		receiveBuffer = new ConcurrentCircularBuffer();
