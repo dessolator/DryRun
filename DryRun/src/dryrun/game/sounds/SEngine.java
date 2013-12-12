@@ -10,6 +10,7 @@ import paulscode.sound.libraries.LibraryLWJGLOpenAL;
 import paulscode.sound.libraries.ChannelLWJGLOpenAL;
 import paulscode.sound.libraries.SourceLWJGLOpenAL;
 import paulscode.sound.codecs.CodecJOgg;
+import paulscode.sound.codecs.CodecJOrbis;
 import paulscode.sound.Library;
 import paulscode.sound.SoundSystemConfig;
 import paulscode.sound.SoundSystemException; 
@@ -35,7 +36,7 @@ public class SEngine {
 		
 		try
 		{
-		SoundSystemConfig.setCodec("ogg", CodecJOgg.class);
+		SoundSystemConfig.setCodec("ogg", CodecJOrbis.class);
 		
 			
 		}catch( SoundSystemException e ){System.err.println("error linking with the CodecWav plug-in" );} 
@@ -43,12 +44,13 @@ public class SEngine {
 		if(s==null)	s=new SoundSystem();
 		
 		s.setListenerOrientation( 0, 0, -1, 0, -1, 0 );
+		
 		loadSounds();
 	}
 	
 	public static void loadSounds(){
-		s.newSource(false, "buttonclick", "buttonclick.ogg", false, 0, 0, 0, 0, 0);
-		
+		SEngine.getSoundSystem().newSource(false, "buttonclick", "buttonclick.ogg", false, 0, 0, 0, 0, 0);
+		SEngine.getSoundSystem().loadSound("buttonclick.ogg");
 	}
 	
 	

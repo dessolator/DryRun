@@ -12,6 +12,7 @@ public class GameStartButton extends Button {
 
 	@Override
 	public void pressed() {
+		super.pressed();
 		System.out.println("stisut start game");
 		if (Server.getServer().getMyThreads().size()!=0) {
 			StringObject s = new StringObject();  

@@ -17,6 +17,7 @@ public class ServerButton extends Button {
 
 	@Override
 	public void pressed() {
+		super.pressed();
 		// TODO Auto-generated method stub
 		Client.getClient().connectToServer(serverAddress, "goksiii", 1);
 		Game.setCurrentGameState(GameState.WaitServerReply);

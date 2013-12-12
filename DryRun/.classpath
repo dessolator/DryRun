@@ -34,5 +34,6 @@
 	<classpathentry kind="lib" path="lib/SoundSystem.jar"/>
 	<classpathentry kind="lib" path="lib/SoundSystemJPCT.jar"/>
 	<classpathentry kind="lib" path="lib/SoundSystemUtils.jar"/>
+	<classpathentry kind="lib" path="lib/CodecJOrbis.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

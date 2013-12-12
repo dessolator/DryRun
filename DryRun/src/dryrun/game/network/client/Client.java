@@ -12,7 +12,6 @@ import dryrun.game.network.NetFramework;
 import static dryrun.game.network.NetConstants.*;
 
 import dryrun.game.common.Player;
-import dryrun.game.common.PlayerValues;
 
 public class Client implements NetFramework {
 	private DatagramSocket udpSocket;
