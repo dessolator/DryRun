@@ -9,12 +9,14 @@ import org.lwjgl.opengl.Display;
 import org.newdawn.slick.opengl.Texture;
 
 import static dryrun.game.engine.LoadTex.levelBackground;
+import dryrun.game.common.GameObjectValues;
 import dryrun.game.common.Player;
 import dryrun.game.engine.DrawObject;
 import dryrun.game.engine.Drawable;
 import dryrun.game.engine.Tex;
 import dryrun.game.engine.Updateable;
 import dryrun.game.engine.physics.CollisionListener;
+import dryrun.game.network.NetFramework;
 import dryrun.game.objects.TextureHolder;
 import dryrun.game.objects.bonus.Bonus;
 
@@ -24,11 +26,13 @@ public class Level implements Drawable, Serializable,Updateable {
 	public TextureHolder th;//Level Background texture
 	public ArrayList<Player> players;//arrayList of all the Players
 	public ArrayList<Wall> walls;//arrayList of all the walls
-	public ArrayList<Bonus> bonuses;//arrayList of all the bonuses
+//	public ArrayList<Bonus> bonuses;//arrayList of all the bonuses
 	public ArrayList<Checkpoint> checkpoints;//arrayList of all the Checkpoints
 	public static final World world = new World(new Vec2(0, 0));//world for box2d purposes	
 	public static final int MAX_BONUSES = 30;//Maximum number of bonuses constant
 	private static CollisionListener myListener =new CollisionListener();
+	private static Player myPlayer;
+	protected static NetFramework net;
 	
 
 	
@@ -45,9 +49,34 @@ public class Level implements Drawable, Serializable,Updateable {
 	
 	@Override
 	public void update() {
-		world.step(1 / 60f, 8, 3);
+        parseAndUpdate(net.receive());
+        myPlayer.update();
+        for(Wall w: walls){
+                w.update();
+        }
+//        for(Bonus b:bonuses){
+//                b.update();
+//        }
+        for(Checkpoint c:checkpoints){
+                c.update();
+        }
+        GameObjectValues p[]=new GameObjectValues[5];
+        p[0]=myPlayer.getMyValues();
+        net.send(p);
+}	
+	private void parseAndUpdate(GameObjectValues[] receive) {
+		for(int i=0;i<5;i++){
+			for(Player p :players){
+				if(p.getName().equals(receive[i].getName())){
+					p.myBody.setTransform(new Vec2(receive[i].getCoordX(),receive[i].getCoordY()), 0);
+					
+				}
+			}
+		}
+		// TODO Auto-generated method stub
 		
-	}	
+	}
+
 	/*
 	 * Getters and Setters
 	 */
@@ -68,12 +97,12 @@ public class Level implements Drawable, Serializable,Updateable {
 
 	@Override
 	public float getDimX() {
-		return Display.getWidth()*10;//TODO map stretch factor
+		return Display.getWidth()*15;//TODO map stretch factor
 	}
 
 	@Override
 	public float getDimY() {
-		return Display.getHeight()*10;//TODO map stretch factor
+		return Display.getHeight()*15;//TODO map stretch factor
 	}
 
 	@Override
@@ -99,5 +128,12 @@ public class Level implements Drawable, Serializable,Updateable {
 	@Override
 	public double getAngle() {
 		return 0;
+	}
+
+	public Player getMyPlayer() {
+		return myPlayer;
+	}
+	public void setMyPlayer(Player myPlayer) {
+		Level.myPlayer=myPlayer;
 	}
 }

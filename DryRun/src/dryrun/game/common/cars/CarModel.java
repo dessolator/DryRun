@@ -6,6 +6,7 @@ import dryrun.game.objects.TextureHolder;
 public abstract class CarModel{
 	public TextureHolder myTex;
 	public float axialPointOffset;//in meters
+	public float maxTireGrip;
 	public float accelForce;//in newtons
 	public float brakeForce;//in newtons
 	public float reverseForce;//in newtons

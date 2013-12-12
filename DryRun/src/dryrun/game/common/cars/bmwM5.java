@@ -11,10 +11,11 @@ public class bmwM5 extends CarModel{
 	public bmwM5(){
 		myTex=new TextureHolder(bmwM5,new Tex(0,0,1,1));
 		axialPointOffset=2;//in meters
-		accelForce=12626;//in newtons
-		brakeForce=26262;//in newtons
-		reverseForce=6313;//in newtons
-		turnAngle=0.276f;//in radians
+		maxTireGrip=600f;//in meter kilograms /second
+		accelForce=20626;//in newtons
+		brakeForce=40262;//in newtons
+		reverseForce=10313;//in newtons
+		turnAngle=0.00276f;//in radians/second
 		dimX=4.8f;//in meters
 		dimY=1.89f;//in meters
 		mass=2000;//in kilograms

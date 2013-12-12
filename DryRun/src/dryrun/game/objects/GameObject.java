@@ -42,8 +42,8 @@ public abstract class GameObject implements Drawable,Updateable,Collidable{
 		myValues = new GameObjectValues();
 		myValues.setCoordX(x);
 		myValues.setCoordY(y);
-		myValues.setDimX(dimx);
-		myValues.setDimY(dimy);		
+//		myValues.setDimX(dimx);
+//		myValues.setDimY(dimy);		
 	}
 
 	public GameObjectValues getMyValues() {
@@ -63,12 +63,12 @@ public abstract class GameObject implements Drawable,Updateable,Collidable{
 	}
 
 	
-	public float getDimX() {		
-		return myValues.getDimX()/P2M;
+	public float getDimX() {		return 0;
+//		return myValues.getDimX()/P2M;
 	}
 
-	public float getDimY() {		
-		return myValues.getDimY()/P2M;
+	public float getDimY() {	return 0;	
+//		return myValues.getDimY()/P2M;
 	}
 
 	
@@ -83,12 +83,12 @@ public abstract class GameObject implements Drawable,Updateable,Collidable{
 
 	
 	public void setDimX(float dimx) {		
-		myValues.setDimX(dimx);
+//		myValues.setDimX(dimx);
 	}
 
 
 	public void setDimY(float dimy) {		
-		myValues.setDimY(dimy);
+//		myValues.setDimY(dimy);
 	}
 	
 

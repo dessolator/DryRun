@@ -9,8 +9,8 @@ import org.lwjgl.opengl.DisplayMode;
 import static org.lwjgl.opengl.GL11.*;
 
 public class Engine {
-	public static int WIDTH = 800;
-	public static int HEIGHT = 600;
+	public static int WIDTH = 1280;
+	public static int HEIGHT = 720;
 	public static boolean fullscreen=false;
 	public static boolean vsync = true;
 	

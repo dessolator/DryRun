@@ -49,12 +49,13 @@ public class Game {
 				new bmwM5(),
 				Display.getWidth()/2,
 				Display.getHeight()/2);//@Vuk Test
+		myLvl.setMyPlayer(p);
 		
-//		Player d = new Player("Ksler", 
-//				new bmwM5(),
-//				Display.getWidth()/2,
-//				Display.getHeight()/2-1600);//@Vuk Test
-//		
+		Player d = new Player("Ksler", 
+				new bmwM5(),
+				Display.getWidth()/2,
+				Display.getHeight()/2-1600);//@Vuk Test
+		
 //		d.myBody.m_type=BodyType.STATIC;//@Vuk Test
 		while((!Display.isCloseRequested())&& !terminate) {
 			glClear(GL_COLOR_BUFFER_BIT);//clear the screen
@@ -64,7 +65,7 @@ public class Game {
 			p.update();
 //			d.update();
 			p.render();//@Vuk Test
-//			d.render();//@Vuk Test
+			d.render();//@Vuk Test
 //			p.playerInput();//@Vuk Test
 		//	System.out.println("P is at:"+ p.getX()+","+p.getY());
 		//	System.out.println("D is at:"+ d.getX()+","+d.getY());

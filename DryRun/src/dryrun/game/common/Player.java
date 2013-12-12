@@ -13,6 +13,7 @@ import org.jbox2d.dynamics.FixtureDef;
 import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.opengl.Texture;
 
+import dryrun.game.mechanics.Game;
 import dryrun.game.mechanics.Level;
 import dryrun.game.objects.TextureHolder;
 import dryrun.game.common.cars.CarModel;
@@ -44,6 +45,7 @@ public class Player extends GameObject implements Collidable {
 	public static int minescount = 0;
 	public static double nitro = 0.0;
 	public static int rockets = 0;
+	private boolean first;
 
 	//constructor
 	public Player(String n, CarModel carModel, float x, float y){
@@ -51,6 +53,8 @@ public class Player extends GameObject implements Collidable {
 		myModel=carModel;
 		BodyDef boxDef = new BodyDef();//make new jbox2d body definition
         boxDef.position.set(x*P2M,y*P2M);//set the position in meters
+        boxDef.linearDamping=0.5f;
+        boxDef.angularDamping=0.7f;
         boxDef.type = BodyType.DYNAMIC;//almost all game objects are dynamic
         PolygonShape boxShape = new PolygonShape();//define shape as a polygon
         boxShape.setAsBox(myModel.dimX/2, myModel.dimY/2);//namely as a box
@@ -65,67 +69,93 @@ public class Player extends GameObject implements Collidable {
 		myValues = new GameObjectValues();
 		myValues.setCoordX(x);
 		myValues.setCoordY(y);
-		myValues.setDimX(myModel.dimX);
-		myValues.setDimY(myModel.dimY);	
+//		myValues.setDimX(myModel.dimX);
+//		myValues.setDimY(myModel.dimY);	
 		name=n;
-		mainPlayerX=this.myBody.getWorldCenter().x;
-		mainPlayerY=this.myBody.getWorldCenter().y;
+		first=true;
+		
 	}
 	
 	
 	//player update input should be here
 	public void update() {
+		if(first){
+			mainPlayerX=Game.getMyLevel().getMyPlayer().myBody.getWorldCenter().x;
+			mainPlayerY=Game.getMyLevel().getMyPlayer().myBody.getWorldCenter().y;
+		first=!first;
+		}
 		readInput();
 	}
 
-	
+	Vec2 multiply(Vec2 a,float b){
+		return new Vec2(a.x*b,a.y*b);
+	}
+	Vec2 getLateralVelocity() {
+	      Vec2 currentRightNormal = new Vec2((float)Math.sin(myBody.getAngle()),(float)Math.cos(myBody.getAngle()));
+	      return multiply(currentRightNormal,Vec2.dot( currentRightNormal, myBody.getLinearVelocity())) ;
+	}
 	private void readInput() {
-		//TODO if fwd
-		//apply force along axis from axialPoint
-		//if back
-		//apply force opposing axis from axialPoint
+		//TODO rearange
+		Vec2 position= myBody.getWorldCenter();//body position
+		Vec2 direction=new Vec2((float)Math.cos(myBody.getAngle()),(float)Math.sin(myBody.getAngle()));//(cos(a),sin(a))
+		Vec2 axialPoint = new Vec2 (position.x-direction.x*myModel.axialPointOffset,position.y-direction.y*myModel.axialPointOffset);//position - axial offset
+		Vec2 accelForce = multiply(direction,myModel.accelForce);//Facc *dir
+		Vec2 brakeForce = multiply(direction,myModel.brakeForce);//Fbra * dir
+		Vec2 revBrakeForce=multiply(brakeForce,-1);
+		Vec2 reverseForce = multiply(direction, -myModel.reverseForce);//Frev *dir
+		Vec2 currentVelocity=myBody.getLinearVelocity();//V
+		Vec2 desiredVelocity=multiply(direction,Vec2.dot(direction, currentVelocity));// dir * (dir dot V)
+		Vec2 velocityDifference=new Vec2(desiredVelocity.x-currentVelocity.x,desiredVelocity.y-currentVelocity.y);//Vdes - Vcurr
+		Vec2 impulse = multiply(velocityDifference,myBody.getMass()); //Vdes*M
+		//existing code
+		  if ( impulse.length() > myModel.maxTireGrip )
+		      impulse =multiply(impulse, (myModel.maxTireGrip / impulse.length()));
+		  
 		//if left
 		//setTransformation
 		//if right
 		//setTransform
+		myBody.applyLinearImpulse(impulse,position);
 		mainPlayerOldX=mainPlayerX;
 		mainPlayerOldY=mainPlayerY;		
 		if(Keyboard.isKeyDown(Keyboard.KEY_UP)){
-			System.out.println(this.myBody.getLinearVelocity().x+":"+this.myBody.getLinearVelocity().y);
+			System.out.println(Math.toDegrees(myBody.getAngle()));
 			if((this.myBody.getLinearVelocity().x*Math.cos(this.myBody.getAngle()))>=0){
-				this.myBody.applyForce(new Vec2((float)(this.myModel.accelForce*Math.cos(this.getAngle())),(float)(this.myModel.accelForce*Math.sin(this.getAngle()))),	new Vec2((this.myBody.getWorldCenter().x-(float) (Math.cos(this.myBody.getAngle())*this.myModel.axialPointOffset)),(this.myBody.getWorldCenter().y-(float) (Math.sin(this.myBody.getAngle())*this.myModel.axialPointOffset))));
-//				System.out.println(this.myBody.getLinearVelocity().x+":"+this.myBody.getLinearVelocity().y);
+				this.myBody.applyForce(accelForce,axialPoint);
 			}
 			else{
-				this.myBody.applyForce(new Vec2((float)(this.myModel.brakeForce*Math.cos(this.getAngle())),(float)(this.myModel.brakeForce*Math.sin(this.getAngle()))),	new Vec2((this.myBody.getWorldCenter().x-(float) (Math.cos(this.myBody.getAngle())*this.myModel.axialPointOffset)),(this.myBody.getWorldCenter().y-(float) (Math.sin(this.myBody.getAngle())*this.myModel.axialPointOffset))));
+				this.myBody.applyForce(brakeForce,	axialPoint);
 				
 			}
 		}
 	
-		if(Keyboard.isKeyDown(Keyboard.KEY_DOWN)){
-			float moo=(float)(this.myBody.getLinearVelocity().x*Math.cos(this.myBody.getAngle()));
-			System.out.println(this.myBody.getLinearVelocity().x+":"+this.myBody.getLinearVelocity().y);
-			//double moo=(this.myBody.getLinearVelocity().x*Math.cos(this.myBody.getAngle()));
-			//double foo=0.0d;
-			if(moo <= 0.0d){
-				this.myBody.applyForce(new Vec2((float)(-this.myModel.reverseForce*Math.cos(this.getAngle())),(float)(-this.myModel.reverseForce*Math.sin(this.getAngle()))),new Vec2((this.myBody.getWorldCenter().x-(float) (Math.cos(this.myBody.getAngle())*this.myModel.axialPointOffset)),(this.myBody.getWorldCenter().y-(float) (Math.sin(this.myBody.getAngle())*this.myModel.axialPointOffset))));
+		if(Keyboard.isKeyDown(Keyboard.KEY_DOWN)){			
+			if((float)(this.myBody.getLinearVelocity().x*Math.cos(this.myBody.getAngle())) <= 0){
+				this.myBody.applyForce(reverseForce,axialPoint);
 			}
 			else{
-				this.myBody.applyForce(new Vec2((float)(-this.myModel.brakeForce*Math.cos(this.getAngle())),(float)(this.myModel.brakeForce*Math.sin(this.getAngle()))),	new Vec2((this.myBody.getWorldCenter().x-(float) (Math.cos(this.myBody.getAngle())*this.myModel.axialPointOffset)),(this.myBody.getWorldCenter().y-(float) (Math.sin(this.myBody.getAngle())*this.myModel.axialPointOffset))));
+				this.myBody.applyForce(revBrakeForce,	axialPoint);
 				
 			}
 			
 			
 		}
+		if(Keyboard.isKeyDown(Keyboard.KEY_LEFT)){
+			if((this.myBody.getLinearVelocity().x*Math.cos(this.myBody.getAngle()))>=0)
+				this.myBody.setTransform(this.myBody.getWorldCenter(), this.myBody.getAngle()+(this.myModel.turnAngle*(((myBody.getLinearVelocity().length())>10)?10:myBody.getLinearVelocity().length())));
+			else
+				this.myBody.setTransform(this.myBody.getWorldCenter(), this.myBody.getAngle()-(this.myModel.turnAngle*(((myBody.getLinearVelocity().length())>10)?10:myBody.getLinearVelocity().length())));
+		}
+		if(Keyboard.isKeyDown(Keyboard.KEY_RIGHT)){
+			if((this.myBody.getLinearVelocity().x*Math.cos(this.myBody.getAngle()))>=0)
+				this.myBody.setTransform(this.myBody.getWorldCenter(), this.myBody.getAngle()-(this.myModel.turnAngle*(((myBody.getLinearVelocity().length())>10)?10:myBody.getLinearVelocity().length())));
+			else
+				this.myBody.setTransform(this.myBody.getWorldCenter(), this.myBody.getAngle()+(this.myModel.turnAngle*(((myBody.getLinearVelocity().length())>10)?10:myBody.getLinearVelocity().length())));
+		}
 		mainPlayerX=this.myBody.getWorldCenter().x;
 		mainPlayerY=this.myBody.getWorldCenter().y;
 
-		glTranslatef(-(mainPlayerX-mainPlayerOldX)/P2M, -(mainPlayerY-mainPlayerOldY)/P2M, 0);
-		
-		
-//			this.myBody.applyForce(direction, point);
-//			this.myBody.applyTorque(torque);
-		
+		glTranslatef(-(mainPlayerX-mainPlayerOldX)/P2M, (mainPlayerY-mainPlayerOldY)/P2M, 0);		
 	}
 
 	@Override
@@ -160,7 +190,7 @@ public class Player extends GameObject implements Collidable {
 
 
 	public double getAngle() {
-		return Math.toDegrees(this.myBody.getAngle());
+		return -this.myBody.getAngle();
 	}
 	
 

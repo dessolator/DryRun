@@ -54,7 +54,7 @@ public class LoadTex {
 			
 			tex=new TextureHolder(loading1,new Tex(5/8f,0f,6/8f,1f));
 			ls.render();
-			levelBackground=TextureLoader.getTexture("PNG", new FileInputStream(new File("res/raceTrack.png")));
+			levelBackground=TextureLoader.getTexture("JPG", new FileInputStream(new File("res/debug.jpg")));
 			tex=new TextureHolder(loading1,new Tex(6/8f,0f,7/8f,1f));
 			ls.render();
 			tex=new TextureHolder(loading1,new Tex(7/8f,0f,8/8f,1f));
