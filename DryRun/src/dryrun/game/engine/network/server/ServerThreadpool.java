@@ -49,6 +49,7 @@ public class ServerThreadpool  { //Client instance on the server
 	
 	public void startGame(GameStatePacket p){
 		tcp.setGameStatePacket(p);
+		tcp.setFlag(true);
 //		tcp.getGameStatePacket().notify();
 	}
 		

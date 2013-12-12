@@ -32,8 +32,7 @@ public class Heal extends Bonus {
 
 	@Override
 	public void applyBonus(Player p) {
-		// TODO Auto-generated method stub
-		
+		p.addHealth(200);		
 	}
 
 	@Override
