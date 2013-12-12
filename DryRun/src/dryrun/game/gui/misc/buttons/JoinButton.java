@@ -16,7 +16,7 @@ public class JoinButton extends Button {
 		super.pressed();
 		// TODO Auto-generated method stub
 		Game.setCurrentGameState(GameState.LobbyScreen);
-		Client.getClient();
+		Game.startClient();
 	}
 
 }

@@ -258,10 +258,10 @@ public class Game {
 				myLvl=new Level(Client.getClient());
 				ls.render();		
 	}
-	public void startServer(){
+	public static void startServer(){
 		myLvl=new ServerLevel(Server.getServer());
 	}
-	public void startClient(){
+	public static void startClient(){
 		myLvl=new Level(Client.getClient());
 	}
 

@@ -17,6 +17,7 @@ public class HostButton extends Button {
 		Game.setCurrentGameState(GameState.HostGameScreen);
 		Server.getServer();
 		Server.getServer().host();
+		Game.startServer();
 	}
 
 }
