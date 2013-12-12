@@ -4,7 +4,7 @@ import java.net.InetAddress;
 
 import dryrun.game.common.GameState;
 import dryrun.game.mechanics.Game;
-import dryrun.game.network.client.Client;
+import dryrun.game.engine.network.client.*;
 
 public class ServerButton extends Button {
 	private InetAddress serverAddress;
@@ -17,6 +17,7 @@ public class ServerButton extends Button {
 
 	@Override
 	public void pressed() {
+		super.pressed();
 		// TODO Auto-generated method stub
 		Client.getClient().connectToServer(serverAddress, "goksiii", 1);
 		Game.setCurrentGameState(GameState.WaitServerReply);

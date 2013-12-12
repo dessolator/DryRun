@@ -2,8 +2,8 @@
 package dryrun.game.gui.menus;
 
 import dryrun.game.engine.DrawObject;
-import dryrun.game.engine.Drawable;
-import dryrun.game.engine.Updateable;
+import dryrun.game.engine.interfaces.Drawable;
+import dryrun.game.engine.interfaces.Updateable;
 import dryrun.game.gui.menus.misc.frames.Frame;
 import dryrun.game.gui.misc.buttons.Button;
 

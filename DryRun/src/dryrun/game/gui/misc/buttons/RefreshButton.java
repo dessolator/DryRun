@@ -1,7 +1,7 @@
 package dryrun.game.gui.misc.buttons;
 
+import dryrun.game.engine.network.client.Client;
 import dryrun.game.mechanics.Game;
-import dryrun.game.network.client.Client;
 
 public class RefreshButton extends Button {
 
@@ -13,6 +13,7 @@ public class RefreshButton extends Button {
 
 	@Override
 	public void pressed() {
+		super.pressed();
 		Game.getMyLobbyMenu().deleteServerButtons();
 		Game.getMyLobbyMenu().getButtonsToAdd().clear();
 		Game.getPossibleServers().clear();

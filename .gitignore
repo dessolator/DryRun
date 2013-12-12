@@ -13,6 +13,7 @@
 !jbox2d-serialization-1.1.0-jar-with-dependencies.jar
 !jbox2d-serialization-1.1.0.jar
 !CodecJOgg.jar
+!CodecJOrbis.jar
 !LibraryLWJGLOpenAL.jar
 !SoundSystem.jar
 !SoundSystemJPCT.jar

@@ -1,8 +1,11 @@
 package dryrun.game.gui.misc.buttons;
 
 
-import dryrun.game.network.GameStatePacket;
-import dryrun.game.network.server.Server;
+
+
+import dryrun.game.common.GameState;
+import dryrun.game.mechanics.Game;
+import dryrun.game.engine.network.server.Server;
 
 public class GameStartButton extends Button {
 
@@ -12,8 +15,10 @@ public class GameStartButton extends Button {
 
 	@Override
 	public void pressed() {
-		System.out.println("stisut start game");
+		super.pressed();
+		System.out.println("Stisnut start game");
 		if (Server.getServer().getMyThreads().size()!=0) {
+			Game.initState();
 		}
 		
 	}

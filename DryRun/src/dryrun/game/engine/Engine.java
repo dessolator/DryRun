@@ -9,9 +9,9 @@ import org.lwjgl.opengl.DisplayMode;
 import static org.lwjgl.opengl.GL11.*;
 
 public class Engine {
-	//displaye related variables
-	public static int WIDTH = 800;
-	public static int HEIGHT = 600;
+	//display related variables
+	public static int WIDTH = 1280;
+	public static int HEIGHT = 720;
 	public static boolean fullscreen=false;
 	public static boolean vsync = true;
 	
@@ -22,9 +22,9 @@ public class Engine {
 			Display.setDisplayMode(new DisplayMode(WIDTH, HEIGHT));
 			Display.setFullscreen(fullscreen);//fullscreen? 
 			Display.create();//create Display
-			Mouse.create();			
-			Keyboard.create();
-			Display.setVSyncEnabled(vsync);//vsync ukljucen
+			Mouse.create();//create Mouse		
+			Keyboard.create();//create Keyboard
+			Display.setVSyncEnabled(vsync);//vsync enabled
 			
 			
 			//inicijalzacija gl
@@ -35,22 +35,21 @@ public class Engine {
 			glClearColor(0, 0, 0, 1);
 			glDisable(GL_DEPTH_TEST);
 			glClear(GL_COLOR_BUFFER_BIT);
-			glColor3f(1, 0, 0);
+//			glColor3f(1, 0, 0);//TODO Why? @Vuk
 			glLoadIdentity();
 			glEnable(GL_TEXTURE_2D);			
 			
 			
 			
 		} catch (LWJGLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
 	}
 	//destroy all upon exit
 	public static void kill(){
-		Display.destroy();
-		Mouse.destroy();
-		Keyboard.destroy();
+		Display.destroy();//create Display
+		Mouse.destroy();//create Mouse
+		Keyboard.destroy();//create Keyboard
 	}
 
 }

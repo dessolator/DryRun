@@ -2,10 +2,14 @@ package dryrun.game.objects.bonus;
 
 import org.jbox2d.common.Vec2;
 
+<<<<<<< HEAD
 import dryrun.game.common.Player;
 import dryrun.game.engine.Tex;
 import dryrun.game.objects.TextureHolder;
 import static dryrun.game.engine.LoadTex.mine;
+=======
+import dryrun.game.objects.Player;
+>>>>>>> refs/remotes/origin/master
 
 public class Mines extends Bonus {
 
