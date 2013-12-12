@@ -5,6 +5,7 @@ import org.jbox2d.common.Vec2;
 
 import dryrun.game.engine.DrawObject;
 import dryrun.game.engine.GameObject;
+import dryrun.game.engine.TextureHolder;
 import dryrun.game.engine.interfaces.Collidable;
 import dryrun.game.engine.interfaces.Drawable;
 import dryrun.game.objects.BonusCreator;
@@ -15,10 +16,10 @@ public abstract class Bonus extends GameObject implements Collidable, Drawable {
 	//bonus ima index, dodeljen pri kreiranju
 	//ima flag da li je sada spawnovan
 	//ima poizciju x,y
-	private int myInd;
-	private boolean amIspawned = false;
-	private Vec2 position;		
-	
+	protected int myInd;
+	protected boolean amIspawned = false;
+	protected Vec2 position;		
+	protected TextureHolder holder;
 	//konstruktor
 	public Bonus(float x, float y, float dimx, float dimy, int myInd,
 			Vec2 position) {
