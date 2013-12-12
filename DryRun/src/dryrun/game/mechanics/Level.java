@@ -49,6 +49,7 @@ public class Level implements Drawable, Serializable,Updateable {
 		net=nf;
 		world.setContactListener(myListener);
 		th=new TextureHolder(levelBackground,new Tex(0,1,0,1));//load the texture
+		players=new ArrayList<Player>();
 	}
 	
 	@Override

@@ -39,10 +39,11 @@ public class TCPThread extends Thread {
 		
 		connect();
 		
-			while(gsp==null)
-				try {
-					gsp.wait();
-				} catch (InterruptedException e) {e.printStackTrace();}
+			while(gsp==null);
+			//TODO I'm sure there's a better way to do this
+//				try {
+//					gsp.wait();
+//				} catch (InterruptedException e) {e.printStackTrace();}
 	
 		
 		try {

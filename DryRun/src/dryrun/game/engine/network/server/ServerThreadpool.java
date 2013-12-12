@@ -47,7 +47,7 @@ public class ServerThreadpool  { //Client instance on the server
 	
 	public void startGame(GameStatePacket p){
 		tcp.setGameStatePacket(p);
-		tcp.getGameStatePacket().notify();
+//		tcp.getGameStatePacket().notify();
 	}
 		
 	public void start(){sender.start();receiver.start(); ldr.start();} //Starting all threads
