@@ -243,6 +243,7 @@ public class Game {
 				tex=new TextureHolder(loading1,new Tex(5/8f,0f,6/8f,1f));
 				ls.render();
 				//mySettingsMenu=new SettingsMenu();
+				myLvl = new Level(Client.getClient());
 				ls.render();		
 	}
 	public void startServer(){
