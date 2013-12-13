@@ -12,5 +12,5 @@ public class NetConstants {
 	public static final int MAX_PLAYERS=4;
 	public static final float P2M = (float)1/50;
 	public static final float M2P = 50;
-	public static final int SIZE_OF_BUFFER = 50;
+	public static final int SIZE_OF_BUFFER = 2048;
 }
