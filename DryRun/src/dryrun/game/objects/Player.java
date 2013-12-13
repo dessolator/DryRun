@@ -112,7 +112,7 @@ public class Player extends GameObject implements Collidable {
 		mainPlayerOldY=mainPlayerY;		
 //		System.out.println(myBody.getLinearVelocity().length());
 		if(Keyboard.isKeyDown(Keyboard.KEY_UP)){
-			
+			System.out.println(myBody.getLinearVelocity().length());
 			if((this.myBody.getLinearVelocity().x*Math.cos(this.myBody.getAngle()))>=0){
 				this.myBody.applyForce(accelForce,axialPoint);
 			}

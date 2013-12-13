@@ -67,12 +67,16 @@ public class Level implements Drawable, Serializable,Updateable {
 	
 	public void initialState() {
 		GameObjectValues[] temp=net.startGame();
+		for(int i=0; i<temp.length;i++)if(temp[i]!=null)System.out.println("not null - "+temp[i].getName());else{System.out.println("null");}
 		initialParse(temp);		
 	}
 	private void initialParse(GameObjectValues[] receive){
 		for(GameObjectValues v:receive){
 			if(v!=null){
 				Player temp=new Player(v.getName(),new bmwM5(),v.getCoordX(),v.getCoordY());
+				System.out.println(v.getName());
+				System.out.println(v.getCoordX());
+				System.out.println(v.getCoordY());
 				if(v.getName().equals(playerName))
 					myPlayer=temp;
 				players.add(temp);
@@ -107,6 +111,8 @@ public class Level implements Drawable, Serializable,Updateable {
 		if(temp!=null)
 			parseAndUpdate(temp);
         myPlayer.update();
+        world.step(1f/60f, 8, 3);
+        p=new GameObjectValues[3];
         p[0]=myPlayer.getMyValues();
         net.send(p);
 }	

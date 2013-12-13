@@ -25,6 +25,7 @@ public class ClientReceiver extends Thread {
 			}
 			try {
 				myOwner.getUDPSocket().receive(receivePacket);
+				System.out.println("primio");
 			} catch (IOException e) {
 				e.printStackTrace();
 				continue;

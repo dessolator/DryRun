@@ -107,13 +107,15 @@ public class Client implements NetFramework {
 			System.out.println("upao ovde");
 			e.printStackTrace();
 		}
+		myInitBuffer = new ConcurrentCircularBuffer();
+		myBuffer = new ConcurrentCircularBuffer();
+		receiveBuffer = new ConcurrentCircularBuffer();
 		
 		serverAddress = servAddr;
 		ConnectThread cThread = new ConnectThread(this,serverAddress,playerName,oos,ois);
 		cThread.start();
-		myBuffer = new ConcurrentCircularBuffer();
-		receiveBuffer = new ConcurrentCircularBuffer();
-		myInitBuffer = new ConcurrentCircularBuffer();
+		
+		
 	}
 	
 	
