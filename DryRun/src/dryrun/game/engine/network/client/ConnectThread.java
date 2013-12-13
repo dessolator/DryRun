@@ -106,5 +106,6 @@ public class ConnectThread extends Thread {
 		cliSen.start();
 		
 		Game.setCurrentGameState(GameState.Game);
+		Game.initState();
 	}
 }
