@@ -47,11 +47,11 @@ public class GameStatePacket implements Serializable  {
 	public static byte[] write(GameStatePacket p){ //SERIALIZING
 		byte[] x = null;
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		BufferedOutputStream bos = new BufferedOutputStream(baos,8096);//optimization maybe?
+		//BufferedOutputStream bos = new BufferedOutputStream(baos,8096);//optimization maybe?
 		ObjectOutputStream oos;
 
 		try {
-			oos = new ObjectOutputStream(bos);	
+			oos = new ObjectOutputStream(baos);	
 			oos.writeObject(p);
 			x=baos.toByteArray();
 			oos.close();
@@ -63,9 +63,9 @@ public class GameStatePacket implements Serializable  {
 		GameStatePacket p=null;
 		try {
 			ByteArrayInputStream bais = new ByteArrayInputStream(x);
-			BufferedInputStream bis=new BufferedInputStream(bais,8096);//optimization maybe?
+			//BufferedInputStream bis=new BufferedInputStream(bais,8096);//optimization maybe?
 			ObjectInputStream ois;
-			ois = new ObjectInputStream(bis);
+			ois = new ObjectInputStream(bais);
 			p = (GameStatePacket) ois.readObject();
 		} catch (IOException e) {e.printStackTrace();} catch (ClassNotFoundException e){e.printStackTrace();}
 		return p;
