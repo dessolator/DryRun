@@ -49,6 +49,7 @@ public class GameStatePacket implements Serializable  {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		BufferedOutputStream bos = new BufferedOutputStream(baos,8096);//optimization maybe?
 		ObjectOutputStream oos;
+
 		try {
 			oos = new ObjectOutputStream(bos);	
 			oos.writeObject(p);
