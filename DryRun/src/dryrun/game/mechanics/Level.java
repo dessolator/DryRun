@@ -107,6 +107,10 @@ public class Level implements Drawable, Serializable,Updateable {
 	@Override
 	public void update() {
 		GameObjectValues []temp=net.receive();
+		if(Player.printClientState.get()){
+			System.out.println(""+temp[0].getName()+" : "+temp[0].getCoordX()+" : "+temp[0].getCoordY());
+			System.out.println(""+temp[1].getName()+" : "+temp[1].getCoordX()+" : "+temp[1].getCoordY());
+		}
 		if(temp!=null)
 			parseAndUpdate(temp);
 //      myPlayer.update();

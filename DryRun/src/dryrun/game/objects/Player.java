@@ -3,6 +3,8 @@ package dryrun.game.objects;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import org.jbox2d.collision.shapes.PolygonShape;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
@@ -28,6 +30,20 @@ public class Player extends GameObject implements Collidable {
 	protected List<GameObject> myObjects=Collections.synchronizedList(new ArrayList<GameObject>());
 	private String name;
 
+	/*
+	 * DEBUG FLAGS
+	 */
+	public static AtomicBoolean printUDP=new AtomicBoolean(false);
+	public static AtomicBoolean printServerReceive=new AtomicBoolean(false);
+	public static AtomicBoolean printServerState=new AtomicBoolean(false);
+	public static AtomicBoolean printClientReceive=new AtomicBoolean(false);
+	public static AtomicBoolean printClientState=new AtomicBoolean(false);
+	long trigger;
+	/*
+	 * DEBUG FLAGS
+	 */
+	
+	
 	//bonus related 
 	//if a player picks up certain bonus the count increased 
 	//for a certain amount ...
@@ -113,6 +129,17 @@ public class Player extends GameObject implements Collidable {
 		mainPlayerOldX=mainPlayerX;
 		mainPlayerOldY=mainPlayerY;		
 //		System.out.println(myBody.getLinearVelocity().length());
+		if (Keyboard.isKeyDown(Keyboard.KEY_U)&& System.nanoTime()-trigger>100000000){
+			trigger=System.nanoTime();
+			printServerReceive.set(!printServerReceive.get());
+			printClientReceive.set(!printClientReceive.get());
+			printUDP.set(!printUDP.get());
+		}
+		if (Keyboard.isKeyDown(Keyboard.KEY_T)&& System.nanoTime()-trigger>100000000){
+			trigger=System.nanoTime();
+			printServerState.set(!printServerState.get());
+			printClientState.set(!printClientState.get());
+		}
 		if(Keyboard.isKeyDown(Keyboard.KEY_UP)){
 //			System.out.println(myBody.getLinearVelocity().length());
 			//System.out.println(myBody.getLinearVelocity().length());

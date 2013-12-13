@@ -5,6 +5,7 @@ import java.net.*;
 
 import dryrun.game.common.*;
 import dryrun.game.engine.network.*;
+import dryrun.game.objects.Player;
 
 public class ClientReceiver extends Thread {
 	private Client myOwner;
@@ -26,7 +27,9 @@ public class ClientReceiver extends Thread {
 			try {
 				System.out.println("trying to receive on "+myOwner.getUDPSocket().getPort());
 				myOwner.getUDPSocket().receive(receivePacket);
-			 	System.out.println("received");
+				if(Player.printUDP.get())
+					System.out.println("received");
+				
 			} catch (IOException e) {
 				e.printStackTrace();
 				continue;
@@ -37,6 +40,10 @@ public class ClientReceiver extends Thread {
 			GameStatePacket gsp = GameStatePacket.read(receiveByteArray);
 	
 			GameObjectValues [] temp = gsp.get();
+			if(Player.printClientReceive.get()){
+				System.out.println(""+temp[0].getName()+" : "+temp[0].getCoordX()+" : "+temp[0].getCoordY());
+				System.out.println(""+temp[1].getName()+" : "+temp[1].getCoordX()+" : "+temp[1].getCoordY());
+			}
 			for(int i=0; i<temp.length;i++)
 				if(temp[i]!=null)System.out.print("name:"+temp[i].getName()+"x:"+temp[i].getCoordX()+"y:"+temp[i].getCoordY());
 			myOwner.getReceiveBuffer().push(temp);
