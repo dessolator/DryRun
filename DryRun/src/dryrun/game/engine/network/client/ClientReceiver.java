@@ -25,7 +25,7 @@ public class ClientReceiver extends Thread {
 				e1.printStackTrace();
 			}
 			try {
-				System.out.println("trying to receive on "+myOwner.getUDPSocket().getPort());
+	//			System.out.println("trying to receive on "+myOwner.getUDPSocket().getPort());
 				myOwner.getUDPSocket().receive(receivePacket);
 				if(Player.printUDP.get())
 					System.out.println("received");
@@ -40,7 +40,7 @@ public class ClientReceiver extends Thread {
 			GameStatePacket gsp = GameStatePacket.read(receiveByteArray);
 	
 			GameObjectValues [] temp = gsp.get();
-			if(Player.printClientReceive.get()){
+			if(Player.printClientReceive.get()&&temp[0]!=null&&temp[1]!=null){
 				System.out.println(""+temp[0].getName()+" : "+temp[0].getCoordX()+" : "+temp[0].getCoordY());
 				System.out.println(""+temp[1].getName()+" : "+temp[1].getCoordX()+" : "+temp[1].getCoordY());
 			}

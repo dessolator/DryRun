@@ -48,7 +48,7 @@ public class ServerLevel extends Level {
 		}
 		if(temp!=null)
 			parseAndUpdate(temp);
-//      myPlayer.update();//update player state
+      myPlayer.update();//update player state
         world.step(1f/60f, 8, 3);//step the world
         //TODO might need to load GOV
         /*
