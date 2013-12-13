@@ -109,7 +109,7 @@ public class Level implements Drawable, Serializable,Updateable {
 		GameObjectValues []temp=net.receive();
 		if(temp!=null)
 			parseAndUpdate(temp);
-        myPlayer.update();
+//      myPlayer.update();
         world.step(1f/60f, 8, 3);
         p=new GameObjectValues[3];
         p[0]=myPlayer.getMyValues();
