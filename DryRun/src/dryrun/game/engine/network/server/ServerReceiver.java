@@ -36,6 +36,7 @@ public class ServerReceiver extends Thread {
 			GameStatePacket gsp = GameStatePacket.read(receiveByteArray); //convert bytes to a Packet
 			
 			GameObjectValues [] temp = gsp.get(); //get data from it
+			System.out.println("Received a packet");
 			myOwner.getReceiveBuffer().push(temp); //push the data to the receiveBuffer
 			
 		}
