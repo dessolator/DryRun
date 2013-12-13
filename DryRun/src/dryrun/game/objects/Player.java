@@ -63,7 +63,7 @@ public class Player extends GameObject implements Collidable {
 //     	Level.bodies.add(box);//TODO add to the Level list of boddies
         this.myBody=box;//attach the body to the game object
         box.setUserData(this);//set the body userData to it's parent object
-		myValues = new GameObjectValues();
+		myValues = new GameObjectValues(myBody.getWorldCenter().x, myBody.getWorldCenter().y, myBody.getAngle(), name);
 		myValues.setCoordX(x);
 		myValues.setCoordY(y);
 //		myValues.setDimX(myModel.dimX);
@@ -72,7 +72,9 @@ public class Player extends GameObject implements Collidable {
 		first=true;
 		
 	}
-	
+	public GameObjectValues getMyValues(){
+		return new GameObjectValues(myBody.getWorldCenter().x, myBody.getWorldCenter().y, myBody.getAngle(), name);
+	}
 	
 	//player update input should be here
 	public void update() {

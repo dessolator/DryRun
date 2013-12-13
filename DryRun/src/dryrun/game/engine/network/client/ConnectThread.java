@@ -105,7 +105,8 @@ public class ConnectThread extends Thread {
 		cliSen= new ClientSender(client);
 		cliSen.start();
 		
-		Game.setCurrentGameState(GameState.Game);
 		Game.initState();
+		Game.setCurrentGameState(GameState.Game);
+		
 	}
 }
