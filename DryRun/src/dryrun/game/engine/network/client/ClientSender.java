@@ -31,7 +31,8 @@ public class ClientSender extends Thread {
 			
 			try {
 				myOwner.getUDPSocket().send(packet);
-			//	System.out.println("poslao");
+			
+				System.out.println("sentsentsent fuck youuuuu");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
