@@ -36,11 +36,11 @@ public class ServerSender extends Thread {
 				e.printStackTrace();
 			}
 			
-//			try {
-//				sleep(200); //sleep for a bit so I don't poison the network
-//			} catch (InterruptedException e) {
-//				e.printStackTrace();
-//			}
+			try {
+				sleep(10); //sleep for a bit so I don't poison the network
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 			for (int i=0; i<sendPacket.length; i++) {
 				sendPacket[i] = 0;  //reset byte[]
 			}
