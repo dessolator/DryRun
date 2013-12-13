@@ -37,7 +37,7 @@ public class ServerSender extends Thread {
 			}
 			
 			try {
-				sleep(20); //sleep for a bit so I don't poison the network
+				sleep(50); //sleep for a bit so I don't poison the network
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
