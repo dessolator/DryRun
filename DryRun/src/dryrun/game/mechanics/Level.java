@@ -101,13 +101,9 @@ public class Level implements Drawable, Serializable,Updateable {
 	
 	@Override
 	public void render() {
-<<<<<<< HEAD
 		for(Player p:players){
 			p.render();
 		}
-=======
-		for(Player p: players){p.render();}
->>>>>>> branch 'master' of https://github.com/gameDevPrep/DryRun.git
 		DrawObject.draw(this);
 
 	}
