@@ -18,7 +18,7 @@ public class ServerSender extends Thread {
 			GameObjectValues[] temp = null;
 		
 			temp = myOwner.getSendBuffer().pop(); //get the shit im supposed to send
-			for(int i=0; i<temp.length; i++)
+//			for(int i=0; i<temp.length; i++)
 			
 			if (temp!=null) {
 				for(GameObjectValues v : temp)
@@ -30,7 +30,7 @@ public class ServerSender extends Thread {
 			try {
 				
 				myOwner.getUDPSocket().send(packet); //Send the packet
-//				System.out.println("sent a packet to :"+UDP_GSCL_PORT);
+				System.out.println("sent a packet");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
