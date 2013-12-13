@@ -34,7 +34,8 @@ public class ServerThreadpool  { //Client instance on the server
 		
 		myRecBuffer=new ConcurrentCircularBuffer();
 		mySendBuffer=new ConcurrentCircularBuffer();
-		Game.createPlayer(split[1]);
+	//	Game.createPlayer(split[1]);
+		Game.createPlayer("Mudomir");
 		
 		clientAddr=cladr;
 		

@@ -12,6 +12,9 @@ public abstract class Frame implements Drawable {
 	private float coordX;
 	private float coordY;
 	private float dimX;
+	private float dimY;
+	
+	
 	public Frame(float coordX, float coordY, float dimX, float dimY) {
 		this.coordX = coordX;
 		this.coordY = coordY;
@@ -19,7 +22,7 @@ public abstract class Frame implements Drawable {
 		this.dimY = dimY;
 	}
 
-	private float dimY;
+	
 	@Override
 	public void render() {
 		DrawObject.draw(this);

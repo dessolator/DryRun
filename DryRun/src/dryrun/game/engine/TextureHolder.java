@@ -3,9 +3,8 @@ package dryrun.game.engine;
 import org.newdawn.slick.opengl.Texture;
 
 
-public class TextureHolder {
-	private Texture myTexture; //moja tekstura
-	
+public class TextureHolder {	
+	private Texture myTexture; //moja tekstura	
 	private Tex myCoords; //moje koordinate
 	
 	public TextureHolder(Texture t, Tex coords){

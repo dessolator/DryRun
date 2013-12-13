@@ -2,19 +2,21 @@ package dryrun.game.mechanics;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.World;
 import org.lwjgl.opengl.Display;
 import org.newdawn.slick.opengl.Texture;
+
 import static dryrun.game.engine.LoadTex.levelBackground;
 import dryrun.game.common.GameObjectValues;
+import dryrun.game.common.cars.bmwM5;
 import dryrun.game.engine.DrawObject;
 import dryrun.game.engine.Tex;
 import dryrun.game.engine.TextureHolder;
 import dryrun.game.engine.interfaces.Drawable;
 import dryrun.game.engine.interfaces.Updateable;
 import dryrun.game.engine.network.NetFramework;
-import dryrun.game.engine.network.client.Client;
 import dryrun.game.engine.physics.CollisionListener;
 import dryrun.game.objects.BonusThread;
 import dryrun.game.objects.Player;
@@ -28,8 +30,7 @@ public class Level implements Drawable, Serializable,Updateable {
 	
 	public TextureHolder th;//Level Background texture
 	public ArrayList<Player> players;//arrayList of all the Players
-	public ArrayList<Wall> walls;//arrayList of all the walls
-//	public ArrayList<Bonus> bonuses;//arrayList of all the bonuses
+//	public ArrayList<Wall> walls;//arrayList of all the walls
 	
 	//bonus related	
 	public static int positionsX[] ={};//predefined postiions
@@ -37,29 +38,61 @@ public class Level implements Drawable, Serializable,Updateable {
 	public static final int MAX_BONUSES = 30;//max bonuses
 	public static BonusThread bonusGenerator=null;
 
-	public static Vec2 pos1 = new Vec2(5, 5);
-	public static Vec2 pos2 = new Vec2(5, 15);
-	public static Vec2 pos3 = new Vec2(15, 5);
-	public static Vec2 pos4 = new Vec2(15, 15);
+//	public static final Vec2 pos1 = new Vec2(5, 5);
+//	public static final Vec2 pos2 = new Vec2(5, 15);
+//	public static final Vec2 pos3 = new Vec2(15, 5);
+//	public static final Vec2 pos4 = new Vec2(15, 15);
 	//player related
 //	private static Player myPlayer;
-	private static int maxPlayers = 4;
-	private int numOfPlayers = 0;
+//	private static int maxPlayers = 4;
+//	private int numOfPlayers = 0;
 	
 
 	
-	public ArrayList<Checkpoint> checkpoints;//arrayList of all the Checkpoints
-	public static final World world = new World(new Vec2(0, 0));//world for box2d purposes	
-
-	private static CollisionListener myListener =new CollisionListener();
+//	public ArrayList<Checkpoint> checkpoints;//arrayList of all the Checkpoints
 	protected static Player myPlayer;
 	protected static NetFramework net;
+	private static String playerName;
+	protected GameObjectValues p[];
+	public World world;
 		
-	public Level(NetFramework nf){
+	public Level(NetFramework nf,String name){
+		world=new World(new Vec2(0, 0));
+		Level.playerName=name;
 		net=nf;
-		world.setContactListener(myListener);
 		th=new TextureHolder(levelBackground,new Tex(0,1,0,1));//load the texture
 		players=new ArrayList<Player>();
+		p=new GameObjectValues[5];
+	}
+	
+	public void initialState() {
+		GameObjectValues[] temp=net.startGame();
+		initialParse(temp);		
+	}
+	private void initialParse(GameObjectValues[] receive){
+		for(GameObjectValues v:receive){
+			if(v!=null){
+				Player temp=new Player(v.getName(),new bmwM5(),v.getCoordX(),v.getCoordY());
+				if(v.getName().equals(playerName))
+					myPlayer=temp;
+				players.add(temp);
+			}
+		}
+	}
+	
+	protected void parseAndUpdate(GameObjectValues[] receive) {
+		for(GameObjectValues v:receive){
+			if(v!=null){
+				for(Player p: players){
+					if(p!=null){
+						if(p.getName().equals(v.getName())){
+							p.myBody.setTransform(new Vec2(v.getCoordX(),v.getCoordY()), v.getAngle());
+							
+						}						
+					}
+				}
+			}
+		}
 	}
 	
 	@Override
@@ -70,35 +103,14 @@ public class Level implements Drawable, Serializable,Updateable {
 	
 	@Override
 	public void update() {
-//        parseAndUpdate(net.receive());
-//        myPlayer.update();
-//        for(Wall w: walls){
-//                w.update();
-//        }
-//        for(Bonus b:bonuses){
-//                b.update();
-//        }
-//        for(Checkpoint c:checkpoints){
-//                c.update();
-//        }
-//        GameObjectValues p[]=new GameObjectValues[5];
-//        p[0]=myPlayer.getMyValues();
-//        net.send(p);
-		world.step(1/60f, 8, 3);
+		GameObjectValues []temp=net.receive();
+		if(temp!=null)
+			parseAndUpdate(temp);
+        myPlayer.update();
+        p[0]=myPlayer.getMyValues();
+        net.send(p);
 }	
-	protected void parseAndUpdate(GameObjectValues[] receive) {
-		for(int i=0;i<5;i++){
-			for(Player p :players){
-				if(receive[i]!=null){
-					if(p.getName().equals(receive[i].getName())){
-						p.myBody.setTransform(new Vec2(receive[i].getCoordX(),receive[i].getCoordY()), 0);
-					}
-				}
-			}
-		}
-		// TODO Auto-generated method stub
-
-	}
+	
 
 	/*
 	 * Getters and Setters
@@ -156,12 +168,15 @@ public class Level implements Drawable, Serializable,Updateable {
 	public Player getMyPlayer() {
 		return myPlayer;
 	}
-	public void setMyPlayer(Player myPlayer) {
-		Level.myPlayer=myPlayer;
+//	public void setMyPlayer(Player myPlayer) {
+//		Level.myPlayer=myPlayer;
+//	}
+
+	public void addPlayer(String name) {}
+
+	public void addPrimaryPlayer(String string) {
+		
 	}
 
-	public void initialState() {
-		GameObjectValues[] p=net.startGame();
-		parseAndUpdate(p);		
-	}
+	
 }

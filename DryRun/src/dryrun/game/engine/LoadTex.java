@@ -21,6 +21,8 @@ public class LoadTex {
 	public static Texture levelBackground;
 	public static Texture machineGun;
 	public static Texture mine;
+	public static Texture nitro;
+	public static Texture heal;
 	 
 	/**
 	 * used to load textures, some texstures for loading are inside ... :)
@@ -75,8 +77,8 @@ public class LoadTex {
 			ls.render();
 			
 			mine = TextureLoader.getTexture("PNG", new FileInputStream(new File("res/landmine.png")));
-			
-			
+			nitro = TextureLoader.getTexture("PNG", new FileInputStream(new File("res/nitro.png")));
+			heal = TextureLoader.getTexture("PNG", new FileInputStream(new File("res/heal.png")));
 
 			ls.render();
 			

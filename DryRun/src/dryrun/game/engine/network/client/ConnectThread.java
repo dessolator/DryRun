@@ -87,10 +87,8 @@ public class ConnectThread extends Thread {
 		try {
 			p = (GameStatePacket) ois.readObject();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -107,6 +105,8 @@ public class ConnectThread extends Thread {
 		cliSen= new ClientSender(client);
 		cliSen.start();
 		
+		Game.initState();
 		Game.setCurrentGameState(GameState.Game);
+		
 	}
 }

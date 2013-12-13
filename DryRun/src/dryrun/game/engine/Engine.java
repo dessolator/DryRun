@@ -28,13 +28,13 @@ public class Engine {
 			
 			
 			//inicijalzacija gl
-			glMatrixMode(GL_PROJECTION);
-			glLoadIdentity();
-			glOrtho(0, Display.getWidth(), Display.getHeight(), 0, 1, -1);
-			glMatrixMode(GL_MODELVIEW);
-			glClearColor(0, 0, 0, 1);
-			glDisable(GL_DEPTH_TEST);
-			glClear(GL_COLOR_BUFFER_BIT);
+			glMatrixMode(GL_PROJECTION);//set projection mode 
+			glLoadIdentity();//load identity matrix
+			glOrtho(0, Display.getWidth(), Display.getHeight(), 0, 1, -1);//set the ortho left,right,bottom top....
+			glMatrixMode(GL_MODELVIEW);//set the modelview
+			glClearColor(0, 0, 0, 1);//set the color to black, and transparency not enabled
+			glDisable(GL_DEPTH_TEST);//remove the artefacts
+			glClear(GL_COLOR_BUFFER_BIT);//clear color buffer
 //			glColor3f(1, 0, 0);//TODO Why? @Vuk
 			glLoadIdentity();
 			glEnable(GL_TEXTURE_2D);			

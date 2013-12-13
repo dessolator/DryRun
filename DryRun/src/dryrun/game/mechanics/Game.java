@@ -39,6 +39,7 @@ public class Game {
 	private static List<InetAddress> serverAddresses;//list of known server addresses
 	private static GameStatePacket firstPlayersPositions;//TODO someone else added this I do not understand it @Ivan
 	private static Level myLvl;//myLevel
+	private static boolean firstTimeGame=true;
 	
 	
 	public static void initState(){
@@ -192,6 +193,10 @@ public class Game {
 	}
 
 	public static void setCurrentGameState(GameState currentGameState) {
+		if(currentGameState==GameState.Game && firstTimeGame){
+			myLvl.parseAndUpdate(Client.getClient().initBuffer().pop());
+			firstTimeGame=false;
+		}
 		Game.currentGameState = currentGameState;
 	}
 
@@ -218,7 +223,7 @@ public class Game {
 
 
 	public static void createPlayer(String name) {
-		myLvl.players.add(new Player(name, new bmwM5(), Display.getWidth()/2,Display.getHeight()/2));
+		myLvl.addPlayer(name);
 	}
 
 
@@ -262,9 +267,10 @@ public class Game {
 	}
 	public static void startServer(){
 		myLvl=new ServerLevel(Server.getServer());
+		myLvl.addPrimaryPlayer("Drekavac");
 	}
 	public static void startClient(){
-		myLvl=new Level(Client.getClient());
+		myLvl=new Level(Client.getClient(),"Mudomir");
 	}
 
 }

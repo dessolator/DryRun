@@ -55,7 +55,7 @@ public class Player extends GameObject implements Collidable {
         boxDef.type = BodyType.DYNAMIC;//almost all game objects are dynamic
         PolygonShape boxShape = new PolygonShape();//define shape as a polygon
         boxShape.setAsBox(myModel.dimX/2, myModel.dimY/2);//namely as a box
-        Body box = Level.world.createBody(boxDef);//create a body base on the body definition
+        Body box = Game.getMyLevel().world.createBody(boxDef);//create a body base on the body definition
         FixtureDef boxFixture = new FixtureDef();//create a fixture definition
         boxFixture.density = 222.222f;//adjust density
         boxFixture.shape = boxShape;//set the fixture shape to the previously created polygon
@@ -63,7 +63,7 @@ public class Player extends GameObject implements Collidable {
 //     	Level.bodies.add(box);//TODO add to the Level list of boddies
         this.myBody=box;//attach the body to the game object
         box.setUserData(this);//set the body userData to it's parent object
-		myValues = new GameObjectValues();
+		myValues = new GameObjectValues(myBody.getWorldCenter().x, myBody.getWorldCenter().y, myBody.getAngle(), name);
 		myValues.setCoordX(x);
 		myValues.setCoordY(y);
 //		myValues.setDimX(myModel.dimX);
@@ -72,7 +72,9 @@ public class Player extends GameObject implements Collidable {
 		first=true;
 		
 	}
-	
+	public GameObjectValues getMyValues(){
+		return new GameObjectValues(myBody.getWorldCenter().x, myBody.getWorldCenter().y, myBody.getAngle(), name);
+	}
 	
 	//player update input should be here
 	public void update() {
@@ -219,9 +221,11 @@ public class Player extends GameObject implements Collidable {
 	public float getTexY2() {
 		return 1;
 	}
+	
 	public float getDimX(){
 		return myModel.dimX/P2M;
 	}
+	
 	public float getDimY(){
 		return myModel.dimY/P2M;
 	}
@@ -248,11 +252,6 @@ public class Player extends GameObject implements Collidable {
 		health +=i;
 		if(health>=MAX_HEALTH){
 			health = MAX_HEALTH;
+			}
 		}
-		
 	}
-	
-	
-
-
-}
