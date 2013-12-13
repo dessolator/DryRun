@@ -55,7 +55,7 @@ public class Player extends GameObject implements Collidable {
         boxDef.type = BodyType.DYNAMIC;//almost all game objects are dynamic
         PolygonShape boxShape = new PolygonShape();//define shape as a polygon
         boxShape.setAsBox(myModel.dimX/2, myModel.dimY/2);//namely as a box
-        Body box = Level.world.createBody(boxDef);//create a body base on the body definition
+        Body box = Game.getMyLevel().world.createBody(boxDef);//create a body base on the body definition
         FixtureDef boxFixture = new FixtureDef();//create a fixture definition
         boxFixture.density = 222.222f;//adjust density
         boxFixture.shape = boxShape;//set the fixture shape to the previously created polygon

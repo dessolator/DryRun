@@ -7,23 +7,20 @@ import dryrun.game.common.GameObjectValues;
 import dryrun.game.common.cars.bmwM5;
 import dryrun.game.engine.network.NetFramework;
 import dryrun.game.engine.physics.CollisionListener;
-import dryrun.game.objects.Checkpoint;
 import dryrun.game.objects.Player;
-import dryrun.game.objects.Wall;
 
 @SuppressWarnings("serial")
 public class ServerLevel extends Level {
-        World world=new World(new Vec2(0, 0));
 		private float[] playerPositionX={1,1,2,2};//TODO take another look
 		private float[] playerPositionY={1,2,1,2};
 		private int playerIndex=0;
         private static CollisionListener myListener =new CollisionListener();
 
     public ServerLevel(NetFramework nf, String name) {
-            super(nf,name);
-            world.setContactListener(myListener);
-            myPlayer=new Player(name,new bmwM5(),playerPositionX[playerIndex],playerPositionY[playerIndex++]);
-            players.add(myPlayer);
+    	super(nf,name);
+        world.setContactListener(myListener);
+        myPlayer=new Player(name,new bmwM5(),playerPositionX[playerIndex],playerPositionY[playerIndex++]);
+        players.add(myPlayer);
     }
     public void initialState() {
     	//TODO might need to load GOV

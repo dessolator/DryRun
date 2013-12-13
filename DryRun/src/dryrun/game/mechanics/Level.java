@@ -54,8 +54,10 @@ public class Level implements Drawable, Serializable,Updateable {
 	protected static NetFramework net;
 	private static String playerName;
 	protected GameObjectValues p[];
+	public World world;
 		
 	public Level(NetFramework nf,String name){
+		world=new World(new Vec2(0, 0));
 		Level.playerName=name;
 		net=nf;
 		th=new TextureHolder(levelBackground,new Tex(0,1,0,1));//load the texture
