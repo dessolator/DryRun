@@ -16,10 +16,12 @@ public class ServerLevel extends Level {
 		private int playerIndex=0;
         private static CollisionListener myListener =new CollisionListener();
 
-    public ServerLevel(NetFramework nf, String name) {
-    	super(nf,name);
+    public ServerLevel(NetFramework nf ) {
+    	super(nf,"");
         world.setContactListener(myListener);
-        myPlayer=new Player(name,new bmwM5(),playerPositionX[playerIndex],playerPositionY[playerIndex++]);
+    }
+    public void addPrimaryPlayer(String name){
+    	myPlayer=new Player(name,new bmwM5(),playerPositionX[playerIndex],playerPositionY[playerIndex++]);
         players.add(myPlayer);
     }
     public void initialState() {
