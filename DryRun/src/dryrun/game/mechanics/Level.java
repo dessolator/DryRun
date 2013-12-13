@@ -84,8 +84,8 @@ public class Level implements Drawable, Serializable,Updateable {
 			if(v!=null){
 				for(Player p: players){
 					if(p!=null){
-						System.out.println(p.getName()+" : "+v.getCoordX()+" : "+v.getCoordY());
-						if(p.getName().equals(v.getName())){
+//						System.out.println(p.getName()+" : "+v.getCoordX()+" : "+v.getCoordY());
+						if(p.getName().equals(v.getName())&&!p.getName().equals(playerName)){
 							p.myBody.setTransform(new Vec2(v.getCoordX(),v.getCoordY()), v.getAngle());
 							
 						}						
