@@ -78,7 +78,7 @@ public class LoadTex {
 			
 			mine = TextureLoader.getTexture("PNG", new FileInputStream(new File("res/landmine.png")));
 			nitro = TextureLoader.getTexture("PNG", new FileInputStream(new File("res/nitro.png")));
-			heal = TextureLoader.getTexture("PNG", new FileInputStream(new File("/res/heal.png")));
+			heal = TextureLoader.getTexture("PNG", new FileInputStream(new File("res/heal.png")));
 
 			ls.render();
 			
