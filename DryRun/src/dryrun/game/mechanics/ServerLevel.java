@@ -66,6 +66,12 @@ public class ServerLevel extends Level {
             p[i++]=player.getMyValues();
             if(i>=5)break;
         }
+        if(Player.printServerState.get()){
+	        if(p!=null){
+				if(p[0]!=null)System.out.println(""+p[0].getName()+" : "+p[0].getCoordX()+" : "+p[0].getCoordY());
+				if(p[1]!=null)System.out.println(""+p[1].getName()+" : "+p[1].getCoordX()+" : "+p[1].getCoordY());
+			}
+        }
         net.send(p);//send game state
     }
     public void addPlayer(String name) {
