@@ -30,7 +30,7 @@ public class ServerSender extends Thread {
 			try {
 				
 				myOwner.getUDPSocket().send(packet); //Send the packet
-				System.out.println("poslao");
+//				System.out.println("poslao");
 			//	System.out.println("sent a packet");
 			} catch (IOException e) {
 				e.printStackTrace();
