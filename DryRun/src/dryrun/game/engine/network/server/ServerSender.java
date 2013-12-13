@@ -16,8 +16,10 @@ public class ServerSender extends Thread {
 		while(!interrupted()) { //while im not requested to end
 			GameStatePacket gsp=new GameStatePacket();
 			GameObjectValues[] temp = null;
-			
+		
 			temp = myOwner.getSendBuffer().pop(); //get the shit im supposed to send
+			for(int i=0; i<temp.length; i++)
+			
 			if (temp!=null) {
 				for(GameObjectValues v : temp)
 					gsp.put(v); //build a gameStatePacket
@@ -26,7 +28,7 @@ public class ServerSender extends Thread {
 			DatagramPacket packet = new DatagramPacket(sendPacket,sendPacket.length,myOwner.clientAddress(),UDP_GSCL_PORT);
 			//Assemble a datagramPacket from it 
 			try {
-				System.out.println("Sent a packet");
+				
 				myOwner.getUDPSocket().send(packet); //Send the packet
 			} catch (IOException e) {
 				e.printStackTrace();
