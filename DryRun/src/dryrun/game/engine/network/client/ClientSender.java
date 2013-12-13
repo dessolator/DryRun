@@ -37,11 +37,11 @@ public class ClientSender extends Thread {
 				e.printStackTrace();
 			}
 			
-			try {
-				sleep(200);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+//			try {
+//				sleep(200);
+//			} catch (InterruptedException e) {
+//				e.printStackTrace();
+//			}
 			for (int i=0; i<sendPacket.length; i++) {
 				sendPacket[i] = 0;
 			}
