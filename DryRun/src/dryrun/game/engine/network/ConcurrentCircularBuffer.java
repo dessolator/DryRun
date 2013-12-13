@@ -24,7 +24,7 @@ public class ConcurrentCircularBuffer {
 	
 	public void push(GameObjectValues[] gov) {
 		mutex.lock();
-		data[(currentHead++)%SIZE_OF_BUFFER] = gov;
+		data[(++currentHead)%SIZE_OF_BUFFER] = gov;
 		currentHead%=SIZE_OF_BUFFER;
 		mutex.unlock();
 //		bufferEmpty.release();
