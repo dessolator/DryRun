@@ -209,25 +209,25 @@ public class Player extends GameObject implements Collidable {
 
 	@Override
 	public float getTexX1() {
-		return myModel.myTex.getMyCoords().getX1();
+		return 0;
 	}
 
 
 	@Override
 	public float getTexX2() {
-		return myModel.myTex.getMyCoords().getX2();
+		return 1;
 	}
 
 
 	@Override
 	public float getTexY1() {
-		return myModel.myTex.getMyCoords().getY1();
+		return 0;
 	}
 
 
 	@Override
 	public float getTexY2() {
-		return myModel.myTex.getMyCoords().getY2();
+		return 1;
 	}
 	
 	public float getDimX(){
