@@ -26,6 +26,7 @@ public class ServerSender extends Thread {
 			DatagramPacket packet = new DatagramPacket(sendPacket,sendPacket.length,myOwner.clientAddress(),UDP_GSCL_PORT);
 			//Assemble a datagramPacket from it 
 			try {
+				System.out.println("Sent a packet");
 				myOwner.getUDPSocket().send(packet); //Send the packet
 			} catch (IOException e) {
 				e.printStackTrace();

@@ -10,6 +10,7 @@ import dryrun.game.engine.network.*;
 import dryrun.game.mechanics.Game;
 
 
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -94,8 +95,14 @@ public class ConnectThread extends Thread {
 
 		
 		GameObjectValues [] gov = p.get();
-		client.initBuffer().push(gov);
+		System.out.println(gov[0].getName() + gov[0].getCoordX() + gov[0].getCoordY());
+		
+		Client.getClient().initBuffer().push(gov);
+		
+		
+		
 		System.out.println("primio paket");
+		System.out.println(gov[0].getName() + gov[0].getCoordX() + gov[0].getCoordY());
 		
 		ClientReceiver cliRec = client.getClientReceiver();
 		cliRec = new ClientReceiver(client);

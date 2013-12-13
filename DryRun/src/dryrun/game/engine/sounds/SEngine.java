@@ -55,6 +55,7 @@ public class SEngine {
 		s.newSource(false, "buttonclick", "buttonclick.ogg", false, 0, 0, 0, 0, 0);//TODO nigga got issues!!!(issue: misformated files)
 		//add a new source to the sound system for buttonClicks
 		SEngine.getSoundSystem().loadSound("buttonclick.ogg");
+		SEngine.getSoundSystem().loadSound("engineidleloop.ogg");
 	}
 	
 	
