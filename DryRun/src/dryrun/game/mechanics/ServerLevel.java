@@ -11,8 +11,9 @@ import dryrun.game.objects.Player;
 
 @SuppressWarnings("serial")
 public class ServerLevel extends Level {
-		private float[] playerPositionX={10,100,200,300};//TODO take another look
-		private float[] playerPositionY={10,200,100,200};
+		private float[] playerPositionX={640,1,2,2};//TODO take another look
+		private float[] playerPositionY={360,300,1,2};
+
 		private int playerIndex=0;
         private static CollisionListener myListener =new CollisionListener();
 
