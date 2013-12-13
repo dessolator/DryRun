@@ -80,14 +80,14 @@ public abstract class GameObject implements Drawable,Updateable,Collidable{
 	}
 
 	
-	public void setDimX(float dimx) {		
-//		myValues.setDimX(dimx);
-	}
-
-
-	public void setDimY(float dimy) {		
-//		myValues.setDimY(dimy);
-	}
+//	public void setDimX(float dimx) {		
+////		myValues.setDimX(dimx);
+//	}
+//
+//
+//	public void setDimY(float dimy) {		
+////		myValues.setDimY(dimy);
+//	}
 	
 
 //	public float getTexX1() {

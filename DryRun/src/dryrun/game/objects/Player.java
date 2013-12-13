@@ -92,6 +92,8 @@ public class Player extends GameObject implements Collidable {
 		return new GameObjectValues(myBody.getWorldCenter().x, myBody.getWorldCenter().y, myBody.getAngle(), name);
 	}
 	
+	public void setValues(GameObjectValues gov){myValues=gov;}
+	
 	//player update input should be here
 	public void update() {
 		if(first){

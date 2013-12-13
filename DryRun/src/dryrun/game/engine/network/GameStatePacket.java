@@ -28,6 +28,7 @@ public class GameStatePacket implements Serializable  {
 	
 	public GameStatePacket(GameObjectValues[] p) {
 		myObjects=p;
+		i=myObjects.length;
 	}
 
 	public void put(GameObjectValues gov){

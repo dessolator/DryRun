@@ -87,8 +87,10 @@ public class Level implements Drawable, Serializable,Updateable {
 					if(p!=null){
 //						System.out.println(p.getName()+" : "+v.getCoordX()+" : "+v.getCoordY());
 						if(p.getName().equals(v.getName())){
+						
 							p.myBody.setTransform(new Vec2(v.getCoordX(),v.getCoordY()), v.getAngle());
-							
+							p.setX(v.getCoordX()); p.setY(v.getCoordY());
+							p.setValues(v); //NEW LINE GameObjectValues never seem to be set
 						}						
 					}
 				}
