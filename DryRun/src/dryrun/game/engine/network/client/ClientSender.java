@@ -38,7 +38,7 @@ public class ClientSender extends Thread {
 			}
 			
 			try {
-				sleep(18);
+				sleep(16);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
