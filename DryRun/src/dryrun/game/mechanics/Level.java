@@ -101,6 +101,9 @@ public class Level implements Drawable, Serializable,Updateable {
 	
 	@Override
 	public void render() {
+		for(Player p:players){
+			p.render();
+		}
 		DrawObject.draw(this);
 
 	}
