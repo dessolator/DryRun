@@ -26,12 +26,12 @@ public class ClientReceiver extends Thread {
 			}
 			try {
 	//			System.out.println("trying to receive on "+myOwner.getUDPSocket().getPort());
-//				try {
-//					sleep(17);
-//				} catch (InterruptedException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
+				try {
+					sleep(18);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				myOwner.getUDPSocket().receive(receivePacket);
 				if(Player.printUDP.get())
 					System.out.println("received");
