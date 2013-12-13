@@ -30,5 +30,11 @@ public class GameObjectValues implements Serializable{
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public float getAngle() {
+		return angle;
+	}
+	public void setAngle(float angle) {
+		this.angle = angle;
 	}	
 }

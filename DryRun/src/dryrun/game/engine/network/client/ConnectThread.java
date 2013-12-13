@@ -87,10 +87,8 @@ public class ConnectThread extends Thread {
 		try {
 			p = (GameStatePacket) ois.readObject();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
