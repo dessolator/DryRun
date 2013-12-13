@@ -135,7 +135,7 @@ public class Player extends GameObject implements Collidable {
 			printClientReceive.set(!printClientReceive.get());
 			printUDP.set(!printUDP.get());
 		}
-		if (Keyboard.isKeyDown(Keyboard.KEY_U)&& System.nanoTime()-trigger>100000000){
+		if (Keyboard.isKeyDown(Keyboard.KEY_T)&& System.nanoTime()-trigger>100000000){
 			trigger=System.nanoTime();
 			printServerState.set(!printServerState.get());
 			printClientState.set(!printClientState.get());
