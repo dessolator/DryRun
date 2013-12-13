@@ -27,6 +27,7 @@ public class ClientReceiver extends Thread {
 				myOwner.getUDPSocket().receive(receivePacket);
 			} catch (IOException e) {
 				e.printStackTrace();
+				continue;
 			}
 			
 			receiveByteArray = receivePacket.getData();

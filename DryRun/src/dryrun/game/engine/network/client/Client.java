@@ -12,25 +12,27 @@ import dryrun.game.engine.network.NetFramework;
 
 
 public class Client implements NetFramework {
-	private ClientSender clientSender;
-	private ClientReceiver clientReceiver;
+	private ClientSender clientSender;		// clientSender nit - udp konekcija
+	private ClientReceiver clientReceiver;  // clientReceiver nit - udp konekcija
 	
-	private ObjectInputStream ois = null;
-	private ObjectOutputStream oos = null;
+	private ObjectInputStream ois = null; //streams for tcp
+	private ObjectOutputStream oos = null;//communication
 	
-	private DatagramSocket udpSocket;
-	private Socket tcpSocket;
-	private volatile boolean connected;
-	private volatile int serverPort;
-	private InetAddress serverAddress;
-	private ConcurrentCircularBuffer myBuffer;
-	private ConcurrentCircularBuffer receiveBuffer;
+	private DatagramSocket udpSocket;	// udpSocket za komunikaciju sa serverom ( server vraca port )
+	private Socket tcpSocket;			// tcpSocket za komunikaciju sa serverom ( TCPPORT - static )
+	private volatile boolean connected; // provericu kasnije
+	private volatile int serverPort;	// port koji vraca server
+	private InetAddress serverAddress;	// adresa servera
+	private ConcurrentCircularBuffer myBuffer;	// buffer za clientSender nit
+	private ConcurrentCircularBuffer receiveBuffer; // bufer za clientReceiver nit
 	
 	private ConcurrentCircularBuffer myInitBuffer; // first init buffer
+												   // sluzi samo za pocetne koordinate ostalih player-a
 	
 	private static Client client = null; // singleton
 	
 	
+
  	protected Client() {
 		try {
 			udpSocket = new DatagramSocket();
@@ -40,20 +42,33 @@ public class Client implements NetFramework {
 		
 	}
  	
- 	public ConcurrentCircularBuffer initBuffer() {
- 		return myInitBuffer;
- 	}
- 	
+ 	// unistava tj zatvara sokete, unistava niti za komunikaciju
+ 	// i postavlja client = null
  	public static void disposeClient() {
  		System.out.println("dispose");
- 		if (getClient()!=null) {
+ 		if (clientExist()) {
  			System.out.println("dispose client");
  			getClient().closeSockets();
+ 			getClient().killThreads();
  			client = null;
  		}
+ 		
 
  	}
  	
+ 	// ispitivanje postojanja klijenta
+ 	public static boolean clientExist() {
+ 		if (client!=null) return true;
+ 		return false;
+ 	}
+ 	
+ 	// ubijanje komunikacionih niti
+ 	private void killThreads() {
+ 		if (clientReceiver!=null) clientReceiver.obavesti();
+ 		if (clientSender!=null)   clientSender.obavesti();
+ 	}
+ 	
+ 	// zatvaranje socketa
  	private void closeSockets() {
  		udpSocket.close();
  		try {
@@ -64,6 +79,9 @@ public class Client implements NetFramework {
  		System.out.println("Sockets close");
  	}
  	
+ 	
+ 	// singleton - ako klijent postoji vraca ga
+ 	// ako ne postoji vraca false
  	public static Client getClient() {
  		if(client==null) {
  			client = new Client();
@@ -72,6 +90,7 @@ public class Client implements NetFramework {
  		return client;
  	}
  	
+ 	// refresh - salje broadcast - traze se dostupni serveri
 	public void findServers() {
 		GetServers gServ = new GetServers(this,Game.getPossibleServers());
 		gServ.start();
@@ -80,6 +99,7 @@ public class Client implements NetFramework {
 		destroy.start();
 	}
 	
+	// vezivanje na zadati server
 	public void connectToServer(InetAddress servAddr, String playerName, int typeOfAutomobile) {
 		try {
 			tcpSocket = new Socket(servAddr,TCPPORT);
@@ -97,6 +117,11 @@ public class Client implements NetFramework {
 	}
 	
 	
+	
+	public void setConnectedFlag(boolean flag) {
+		connected = flag;
+	}
+	
 	public void setServerPort(int p) {
 		serverPort = p;
 	}
@@ -110,12 +135,12 @@ public class Client implements NetFramework {
 		}
 	}
 	
-	public void setConnectedFlag(boolean flag) {
-		connected = flag;
-	}
-	
 	public Socket getTCPSocket() {
 		return tcpSocket;
+	}
+	
+	public DatagramSocket getUDPSocket() {
+		return udpSocket;
 	}
 	
 	public int serverPort() {
@@ -126,10 +151,7 @@ public class Client implements NetFramework {
 		return serverAddress;
 	}
 	
-	public DatagramSocket getUDPSocket() {
-		return udpSocket;
-	}
-
+	// implementirane metode interfejsa NetFramework
 	public void send(GameObjectValues [] p) { 
 		myBuffer.push(p);
 	}
@@ -138,6 +160,11 @@ public class Client implements NetFramework {
 		return receiveBuffer.pop();
 	}
 
+	// dohvatanje buffer-a za komunikaciju
+ 	public ConcurrentCircularBuffer initBuffer() {
+ 		return myInitBuffer;
+ 	}
+ 	
 	public ConcurrentCircularBuffer getSenderBuffer() {
 		return myBuffer;
 	}
@@ -146,6 +173,7 @@ public class Client implements NetFramework {
 		return receiveBuffer;
 	}
 
+	// implementirane metode iz NetFramework-a
 	@Override
 	public void startGame(GameObjectValues[] p){
 		
@@ -156,6 +184,7 @@ public class Client implements NetFramework {
 		return myInitBuffer.pop();
 	}
 	
+	// dohvatanje sender i receiver niti
 	public ClientSender getClientSender() {
 		return clientSender;
 	}
@@ -163,7 +192,4 @@ public class Client implements NetFramework {
 	public ClientReceiver getClientReceiver() {
 		return clientReceiver;
 	}
-	
-	
-	
 }
