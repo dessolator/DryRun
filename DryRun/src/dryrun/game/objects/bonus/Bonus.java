@@ -62,6 +62,6 @@ public abstract class Bonus extends GameObject implements Collidable, Drawable {
 		this.position = position;
 	}
 
-	public abstract void undo();
+
 	
 }

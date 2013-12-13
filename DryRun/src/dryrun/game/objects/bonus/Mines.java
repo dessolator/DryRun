@@ -22,6 +22,12 @@ public class Mines extends Bonus {
 	}
 
 	@Override
+	public void applyBonus(Player p) {
+		p.setMinescount(p.getMinescount()+1);
+	}
+
+
+	@Override
 	public double getAngle() {
 		// TODO Auto-generated method stub
 		return 0;
@@ -31,20 +37,7 @@ public class Mines extends Bonus {
 	public void update() {
 		// TODO Auto-generated method stub
 		
-	}
-	
-	
-
-	@Override
-	public void undo() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void applyBonus(Player p) {
-		p.setMinescount(p.getMinescount()+1);
-	}
+	}	
 
 	@Override
 	public Texture getTexture() {
@@ -75,7 +68,5 @@ public class Mines extends Bonus {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
-
 
 }

@@ -221,9 +221,11 @@ public class Player extends GameObject implements Collidable {
 	public float getTexY2() {
 		return 1;
 	}
+	
 	public float getDimX(){
 		return myModel.dimX/P2M;
 	}
+	
 	public float getDimY(){
 		return myModel.dimY/P2M;
 	}
@@ -250,11 +252,6 @@ public class Player extends GameObject implements Collidable {
 		health +=i;
 		if(health>=MAX_HEALTH){
 			health = MAX_HEALTH;
+			}
 		}
-		
 	}
-	
-	
-
-
-}
