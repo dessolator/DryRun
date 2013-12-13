@@ -43,12 +43,16 @@ public class ServerLevel extends Level {
     public void update() {
     	GameObjectValues []temp=net.receive();
     	if(Player.printServerState.get()){
-			System.out.println(""+temp[0].getName()+" : "+temp[0].getCoordX()+" : "+temp[0].getCoordY());
-			System.out.println(""+temp[1].getName()+" : "+temp[1].getCoordX()+" : "+temp[1].getCoordY());
-		}
+    		if(temp!=null){
+				if(temp[0]!=null)System.out.println(""+temp[0].getName()+" : "+temp[0].getCoordX()+" : "+temp[0].getCoordY());
+				if(temp[1]!=null)System.out.println(""+temp[1].getName()+" : "+temp[1].getCoordX()+" : "+temp[1].getCoordY());
+    		}
+    	}
 		if(temp!=null)
 			parseAndUpdate(temp);
-      myPlayer.update();//update player state
+		
+		myPlayer.update();//update player state
+
         world.step(1f/60f, 8, 3);//step the world
         //TODO might need to load GOV
         /*

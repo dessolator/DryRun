@@ -40,8 +40,8 @@ public class ServerReceiver extends Thread {
 			
 			GameObjectValues [] temp = gsp.get(); //get data from it
 			if(Player.printServerReceive.get()){
-				System.out.println(""+temp[0].getName()+" : "+temp[0].getCoordX()+" : "+temp[0].getCoordY());
-				System.out.println(""+temp[1].getName()+" : "+temp[1].getCoordX()+" : "+temp[1].getCoordY());
+				if(temp[0]!=null)System.out.println(""+temp[0].getName()+" : "+temp[0].getCoordX()+" : "+temp[0].getCoordY());
+				if(temp[1]!=null)System.out.println(""+temp[1].getName()+" : "+temp[1].getCoordX()+" : "+temp[1].getCoordY());
 			}
 			
 //			if(temp[0]!=null)
