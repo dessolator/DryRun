@@ -13,6 +13,7 @@ import dryrun.game.objects.Player;
 public class ServerLevel extends Level {
 		private float[] playerPositionX={640,1,2,2};//TODO take another look
 		private float[] playerPositionY={360,300,1,2};
+
 		private int playerIndex=0;
         private static CollisionListener myListener =new CollisionListener();
 

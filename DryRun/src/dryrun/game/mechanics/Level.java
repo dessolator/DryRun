@@ -28,8 +28,8 @@ public class Level implements Drawable, Serializable,Updateable {
 //	public ArrayList<Wall> walls;//arrayList of all the walls
 	
 	//bonus related	
-	public static int positionsX[] ={};//predefined postiions
-	public static int positionsY[] ={};// FILL IT UP KESLEEEERRRRRR
+	public static int positionsX[] ={ 20, 270};//predefined postiions
+	public static int positionsY[] ={ 20, 270};// FILL IT UP KESLEEEERRRRRR
 	public static final int MAX_BONUSES = 30;//max bonuses
 	public static BonusThread bonusGenerator=null;
 
