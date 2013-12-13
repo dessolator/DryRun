@@ -49,6 +49,9 @@ public class ServerReceiver extends Thread {
 //			else
 //				System.out.println("moo");
 			myOwner.getReceiveBuffer().push(temp); //push the data to the receiveBuffer
+			if(Player.printServerState.get()){
+				System.out.println("pushed to buffer");
+				}
 			
 		}
 	}
