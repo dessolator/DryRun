@@ -267,7 +267,7 @@ public class Game {
 	}
 	public static void startServer(){
 		myLvl=new ServerLevel(Server.getServer());
-		myLvl.addPlayer("Drekavac");
+		myLvl.addPrimaryPlayer("Drekavac");
 	}
 	public static void startClient(){
 		myLvl=new Level(Client.getClient(),"Mudomir");

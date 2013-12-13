@@ -38,7 +38,9 @@ public class ServerLevel extends Level {
        
     @Override
     public void update() {
-        parseAndUpdate(net.receive());//read and set other player states
+    	GameObjectValues []temp=net.receive();
+		if(temp!=null)
+			parseAndUpdate(temp);
         myPlayer.update();//update player state
         world.step(1f/60f, 8, 3);//step the world
         //TODO might need to load GOV

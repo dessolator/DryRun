@@ -174,5 +174,9 @@ public class Level implements Drawable, Serializable,Updateable {
 
 	public void addPlayer(String name) {}
 
+	public void addPrimaryPlayer(String string) {
+		
+	}
+
 	
 }

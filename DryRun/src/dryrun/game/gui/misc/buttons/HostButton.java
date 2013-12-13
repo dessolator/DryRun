@@ -13,7 +13,6 @@ public class HostButton extends Button {
 	@Override
 	public void pressed() {
 		super.pressed();
-		// TODO Auto-generated method stub
 		Game.setCurrentGameState(GameState.HostGameScreen);
 		Server.getServer();
 		Server.getServer().host();
