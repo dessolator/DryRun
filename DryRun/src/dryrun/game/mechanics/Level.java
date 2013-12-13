@@ -103,7 +103,9 @@ public class Level implements Drawable, Serializable,Updateable {
 	
 	@Override
 	public void update() {
-        parseAndUpdate(net.receive());
+		GameObjectValues []temp=net.receive();
+		if(temp!=null)
+			parseAndUpdate(temp);
         myPlayer.update();
         p[0]=myPlayer.getMyValues();
         net.send(p);
