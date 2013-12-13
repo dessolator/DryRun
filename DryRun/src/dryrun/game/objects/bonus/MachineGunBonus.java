@@ -31,9 +31,6 @@ public class MachineGunBonus extends Bonus {
 		
 	}
 
-	public void undo(){}
-
-
 	@Override
 	public double getAngle() {
 		// TODO Auto-generated method stub

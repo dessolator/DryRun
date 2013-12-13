@@ -17,6 +17,11 @@ public class Heal extends Bonus {
 	}
 
 	@Override
+	public void applyBonus(Player p) {
+		p.addHealth(200);		
+	}
+	
+	@Override
 	public double getAngle() {
 		// TODO Auto-generated method stub
 		return 0;
@@ -26,17 +31,6 @@ public class Heal extends Bonus {
 	public void update() {
 		// TODO Auto-generated method stub
 		
-	}
-
-	@Override
-	public void undo() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void applyBonus(Player p) {
-		p.addHealth(200);		
 	}
 
 	@Override
