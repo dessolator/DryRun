@@ -174,6 +174,12 @@ public class Player extends GameObject implements Collidable {
 		}
 	
 	
+	public CarModel getMyModel() {
+		return myModel;
+	}
+	public void setMyModel(CarModel myModel) {
+		this.myModel = myModel;
+	}
 	//getters and setters
 	public String getName() {
 		return name;
@@ -203,26 +209,25 @@ public class Player extends GameObject implements Collidable {
 
 	@Override
 	public float getTexX1() {
-		// TODO Auto-generated method stub
-		return 0;
+		return myModel.myTex.getMyCoords().getX1();
 	}
 
 
 	@Override
 	public float getTexX2() {
-		return 1;
+		return myModel.myTex.getMyCoords().getX2();
 	}
 
 
 	@Override
 	public float getTexY1() {
-		return 0;
+		return myModel.myTex.getMyCoords().getY1();
 	}
 
 
 	@Override
 	public float getTexY2() {
-		return 1;
+		return myModel.myTex.getMyCoords().getY2();
 	}
 	
 	public float getDimX(){
