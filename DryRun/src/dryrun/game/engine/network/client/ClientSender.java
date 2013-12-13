@@ -27,11 +27,11 @@ public class ClientSender extends Thread {
 					gsp.put(v);
 			}
 			byte [] sendPacket = GameStatePacket.write(gsp);
-			DatagramPacket packet = new DatagramPacket(sendPacket,sendPacket.length,myOwner.serverAddress(),myOwner.serverPort());
+			DatagramPacket packet = new DatagramPacket(sendPacket,sendPacket.length,myOwner.serverAddress(),myOwner.getUdpServerPort());
 			
 			try {
 				myOwner.getUDPSocket().send(packet);
-				System.out.println("poslao");
+			//	System.out.println("poslao");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

@@ -69,9 +69,9 @@ public class Level implements Drawable, Serializable,Updateable {
 		for(GameObjectValues v:receive){
 			if(v!=null){
 				Player temp=new Player(v.getName(),new bmwM5(),v.getCoordX(),v.getCoordY());
-				System.out.println(v.getName());
-				System.out.println(v.getCoordX());
-				System.out.println(v.getCoordY());
+//				System.out.println(v.getName());
+//				System.out.println(v.getCoordX());
+//				System.out.println(v.getCoordY());
 				if(v.getName().equals(playerName))
 					myPlayer=temp;
 				players.add(temp);

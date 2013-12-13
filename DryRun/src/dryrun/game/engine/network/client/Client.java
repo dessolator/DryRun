@@ -35,7 +35,8 @@ public class Client implements NetFramework {
 
  	protected Client() {
 		try {
-			udpSocket = new DatagramSocket();
+			udpSocket = new DatagramSocket(UDP_GSCL_PORT);
+			
 		} catch (SocketException e) {
 			e.printStackTrace();
 		}
@@ -124,18 +125,21 @@ public class Client implements NetFramework {
 		connected = flag;
 	}
 	
-	public void setServerPort(int p) {
-		serverPort = p;
-	}
+//	public void setServerPort(int p) {
+//		serverPort = p;
+//	}
 	
-	public void setUDPSocket(int srvPort) {
-		serverPort = srvPort;
-		try {
-			udpSocket = new DatagramSocket(serverPort);
-		} catch (SocketException e) {
-			e.printStackTrace();
-		}
-	}
+//	public void setUDPSocket(int srvPort) {
+//		serverPort = srvPort;
+//		try {
+//			udpSocket = new DatagramSocket(serverPort);
+//		} catch (SocketException e) {
+//			e.printStackTrace();
+//		}
+//	}
+	
+	public void setUdpServerPort(int srvPort){serverPort=srvPort;}
+	public int getUdpServerPort(){return serverPort;}
 	
 	public Socket getTCPSocket() {
 		return tcpSocket;
@@ -145,9 +149,9 @@ public class Client implements NetFramework {
 		return udpSocket;
 	}
 	
-	public int serverPort() {
-		return serverPort;
-	}
+//	public int serverPort() {
+//		return serverPort;
+//	}
 	
 	public InetAddress serverAddress() {
 		return serverAddress;
