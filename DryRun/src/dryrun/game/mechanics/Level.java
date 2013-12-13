@@ -106,6 +106,8 @@ public class Level implements Drawable, Serializable,Updateable {
 	
 	@Override
 	public void update() {
+		if(Player.printClientState.get())
+    		System.out.println("going into state update");
 		GameObjectValues []temp=net.receive();
 		if(temp!=null){
 			if(Player.printClientState.get()&&temp[0]!=null&&temp[1]!=null){

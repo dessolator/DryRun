@@ -41,6 +41,8 @@ public class ServerLevel extends Level {
        
     @Override
     public void update() {
+    	if(Player.printServerState.get())
+    		System.out.println("going into state update");
     	GameObjectValues []temp=net.receive();
     	if(Player.printServerState.get()){
     		if(temp!=null){
