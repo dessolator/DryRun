@@ -5,6 +5,7 @@ import java.net.DatagramPacket;
 
 import dryrun.game.common.GameObjectValues;
 import dryrun.game.engine.network.GameStatePacket;
+import dryrun.game.objects.Player;
 
 ;
 
@@ -27,6 +28,8 @@ public class ServerReceiver extends Thread {
 			}
 			try {
 				myOwner.getUDPSocket().receive(receivePacket); //actually receive
+				if(Player.printUDP.get())
+					System.out.println("received");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -36,7 +39,11 @@ public class ServerReceiver extends Thread {
 			GameStatePacket gsp = GameStatePacket.read(receiveByteArray); //convert bytes to a Packet
 			
 			GameObjectValues [] temp = gsp.get(); //get data from it
-			System.out.println("Received a packet");
+			if(Player.printServerReceive.get()){
+				System.out.println(""+temp[0].getName()+" : "+temp[0].getCoordX()+" : "+temp[0].getCoordY());
+				System.out.println(""+temp[1].getName()+" : "+temp[1].getCoordX()+" : "+temp[1].getCoordY());
+			}
+			
 //			if(temp[0]!=null)
 //				System.out.println(temp[0].getName()+temp[0].getCoordX()+"  "+temp[0].getCoordY());
 //			else
