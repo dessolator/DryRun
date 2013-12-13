@@ -13,10 +13,12 @@ public class ConcurrentCircularBuffer {
 	private GameObjectValues[][] data ;
 	private int currentHead;
 	private int currentTail;
+	private GameObjectValues[] data1;
 	
 	public ConcurrentCircularBuffer() {
-		data = new GameObjectValues[SIZE_OF_BUFFER][MAX_PLAYERS-1];
+//		data = new GameObjectValues[SIZE_OF_BUFFER][MAX_PLAYERS-1];
 //		bufferEmpty = new Semaphore(0);
+		data1 = new GameObjectValues[5];
 		mutex = new ReentrantLock();
 		currentHead = 0;
 		currentTail = 0;
@@ -24,9 +26,9 @@ public class ConcurrentCircularBuffer {
 	
 	public void push(GameObjectValues[] gov) {
 		mutex.lock();
-		currentHead%=SIZE_OF_BUFFER;
-		data[++currentHead] = gov;
-		
+//		currentHead%=SIZE_OF_BUFFER;
+//		data[++currentHead] = gov;
+		data1=gov;
 		mutex.unlock();
 //		bufferEmpty.release();
 		
@@ -39,7 +41,8 @@ public class ConcurrentCircularBuffer {
 //			e.printStackTrace();
 //		}
 		mutex.lock();
-		GameObjectValues [] gov = data[currentHead];
+//		GameObjectValues [] gov = data[currentHead];
+		GameObjectValues [] gov = data1;
 		mutex.unlock();
 		return gov;
 	}
