@@ -91,7 +91,7 @@ public class Player extends GameObject implements Collidable {
 	}
 	
 	private void readInput() {
-		System.out.println("x: " + myBody.getWorldCenter().x + ", y:" + myBody.getWorldCenter().y);
+		//System.out.println("x: " + myBody.getWorldCenter().x + ", y:" + myBody.getWorldCenter().y);
 		//TODO rearange
 		Vec2 position= myBody.getWorldCenter();//body position
 		Vec2 direction=new Vec2((float)Math.cos(myBody.getAngle()),(float)Math.sin(myBody.getAngle()));//(cos(a),sin(a))
@@ -113,7 +113,7 @@ public class Player extends GameObject implements Collidable {
 		mainPlayerOldY=mainPlayerY;		
 //		System.out.println(myBody.getLinearVelocity().length());
 		if(Keyboard.isKeyDown(Keyboard.KEY_UP)){
-			System.out.println(myBody.getLinearVelocity().length());
+			//System.out.println(myBody.getLinearVelocity().length());
 			if((this.myBody.getLinearVelocity().x*Math.cos(this.myBody.getAngle()))>=0){
 				this.myBody.applyForce(accelForce,axialPoint);
 			}

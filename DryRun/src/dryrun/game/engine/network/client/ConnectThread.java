@@ -67,8 +67,9 @@ public class ConnectThread extends Thread {
 		String []split = str.split("#");
 		if (split[0].equals(CONNECT_ACC)) {
 			int srvPort = Integer.parseInt(split[1]);
-			System.out.println(srvPort);
-			client.setUDPSocket(srvPort);
+			client.setUdpServerPort(srvPort);
+//			System.out.println(srvPort);
+//			client.setUDPSocket(srvPort);
 			client.setConnectedFlag(true);
 		}
 		if (split[0].equals(CONNECT_REF)) {
