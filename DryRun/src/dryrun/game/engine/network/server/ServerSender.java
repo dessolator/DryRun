@@ -18,8 +18,10 @@ public class ServerSender extends Thread {
 			GameObjectValues[] temp = null;
 			
 			temp = myOwner.getSendBuffer().pop(); //get the shit im supposed to send
-			for(GameObjectValues v : temp)
-				gsp.put(v); //build a gameStatePacket
+			if (temp!=null) {
+				for(GameObjectValues v : temp)
+					gsp.put(v); //build a gameStatePacket
+			}
 			byte [] sendPacket = GameStatePacket.write(gsp); //turn it into a byteArray 
 			DatagramPacket packet = new DatagramPacket(sendPacket,sendPacket.length,myOwner.clientAddress(),UDP_GSCL_PORT);
 			//Assemble a datagramPacket from it 
