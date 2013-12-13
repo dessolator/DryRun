@@ -27,10 +27,14 @@ public class ServerReceiver extends Thread {
 				e1.printStackTrace();
 			}
 			try {
+				sleep(10);
 				myOwner.getUDPSocket().receive(receivePacket); //actually receive
 				if(Player.printUDP.get())
 					System.out.println("received");
 			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
