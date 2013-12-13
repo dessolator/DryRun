@@ -27,7 +27,7 @@ public class ClientReceiver extends Thread {
 			try {
 	//			System.out.println("trying to receive on "+myOwner.getUDPSocket().getPort());
 				try {
-					sleep(50);
+					sleep(20);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

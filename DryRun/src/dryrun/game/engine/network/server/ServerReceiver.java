@@ -27,7 +27,7 @@ public class ServerReceiver extends Thread {
 				e1.printStackTrace();
 			}
 			try {
-				sleep(50);
+				sleep(20);
 				myOwner.getUDPSocket().receive(receivePacket); //actually receive
 				if(Player.printUDP.get())
 					System.out.println("received");
