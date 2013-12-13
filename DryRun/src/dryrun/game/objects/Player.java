@@ -91,6 +91,7 @@ public class Player extends GameObject implements Collidable {
 	}
 	
 	private void readInput() {
+		System.out.println("x: " + myBody.getWorldCenter().x + ", y:" + myBody.getWorldCenter().y);
 		//TODO rearange
 		Vec2 position= myBody.getWorldCenter();//body position
 		Vec2 direction=new Vec2((float)Math.cos(myBody.getAngle()),(float)Math.sin(myBody.getAngle()));//(cos(a),sin(a))
