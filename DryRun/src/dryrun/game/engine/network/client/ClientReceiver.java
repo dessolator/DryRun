@@ -40,6 +40,7 @@ public class ClientReceiver extends Thread {
 			GameStatePacket gsp = GameStatePacket.read(receiveByteArray);
 	
 			GameObjectValues [] temp = gsp.get();
+			//if(temp[0]==null)System.out.println("null");
 			if(Player.printClientReceive.get()&&temp[0]!=null&&temp[1]!=null){
 				System.out.println(""+temp[0].getName()+" : "+temp[0].getCoordX()+" : "+temp[0].getCoordY());
 				System.out.println(""+temp[1].getName()+" : "+temp[1].getCoordX()+" : "+temp[1].getCoordY());
