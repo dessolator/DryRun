@@ -30,6 +30,8 @@ public class ServerLevel extends Level {
 		int i=0;
         for(Player player:players){
             p[i++]=player.getMyValues();
+            System.out.println("prvi paket srvr:");
+            System.out.println(player.getName()+" x:"+player.getX()+"y:"+player.getY());
             if(i>=5)break;
         }
             net.startGame(p);
