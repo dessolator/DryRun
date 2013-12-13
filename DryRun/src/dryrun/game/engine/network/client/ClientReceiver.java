@@ -45,8 +45,8 @@ public class ClientReceiver extends Thread {
 				System.out.println(""+temp[0].getName()+" : "+temp[0].getCoordX()+" : "+temp[0].getCoordY());
 				System.out.println(""+temp[1].getName()+" : "+temp[1].getCoordX()+" : "+temp[1].getCoordY());
 			}
-			for(int i=0; i<temp.length;i++)
-				if(temp[i]!=null)System.out.print("name:"+temp[i].getName()+"x:"+temp[i].getCoordX()+"y:"+temp[i].getCoordY());
+//			for(int i=0; i<temp.length;i++)
+//				if(temp[i]!=null)System.out.print("name:"+temp[i].getName()+"x:"+temp[i].getCoordX()+"y:"+temp[i].getCoordY());
 			myOwner.getReceiveBuffer().push(temp);
 			
 		}
