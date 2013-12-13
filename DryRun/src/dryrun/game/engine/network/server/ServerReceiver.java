@@ -37,6 +37,10 @@ public class ServerReceiver extends Thread {
 			
 			GameObjectValues [] temp = gsp.get(); //get data from it
 			System.out.println("Received a packet");
+			if(temp[0]!=null)
+				System.out.println(temp[0].getName()+temp[0].getCoordX()+"  "+temp[0].getCoordY());
+			else
+				System.out.println("moo");
 			myOwner.getReceiveBuffer().push(temp); //push the data to the receiveBuffer
 			
 		}

@@ -2,12 +2,10 @@ package dryrun.game.mechanics;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.World;
 import org.lwjgl.opengl.Display;
 import org.newdawn.slick.opengl.Texture;
-
 import static dryrun.game.engine.LoadTex.levelBackground;
 import dryrun.game.common.GameObjectValues;
 import dryrun.game.common.cars.bmwM5;
@@ -17,11 +15,8 @@ import dryrun.game.engine.TextureHolder;
 import dryrun.game.engine.interfaces.Drawable;
 import dryrun.game.engine.interfaces.Updateable;
 import dryrun.game.engine.network.NetFramework;
-import dryrun.game.engine.physics.CollisionListener;
 import dryrun.game.objects.BonusThread;
 import dryrun.game.objects.Player;
-import dryrun.game.objects.Wall;
-import dryrun.game.objects.Checkpoint;
 
 
 
@@ -89,6 +84,7 @@ public class Level implements Drawable, Serializable,Updateable {
 			if(v!=null){
 				for(Player p: players){
 					if(p!=null){
+						System.out.println(p.getName()+" : "+v.getCoordX()+" : "+v.getCoordY());
 						if(p.getName().equals(v.getName())){
 							p.myBody.setTransform(new Vec2(v.getCoordX(),v.getCoordY()), v.getAngle());
 							
@@ -101,11 +97,11 @@ public class Level implements Drawable, Serializable,Updateable {
 	
 	@Override
 	public void render() {
+		
+		DrawObject.draw(this);
 		for(Player p:players){
 			p.render();
 		}
-		DrawObject.draw(this);
-
 	}
 	
 	@Override

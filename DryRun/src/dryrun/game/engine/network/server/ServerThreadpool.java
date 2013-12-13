@@ -41,7 +41,7 @@ public class ServerThreadpool  { //Client instance on the server
 		
 		sender = new ServerSender(this);
 		receiver = new ServerReceiver(this);
-		ldr = new ServerLoader(srvB,myRecBuffer);
+		ldr = new ServerLoader(this);
 		
 		this.tcp = tcp;
 	}

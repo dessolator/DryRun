@@ -8,16 +8,18 @@ public class ServerLoader extends Thread { //Loader class for bridging 3 buffer 
 	private ConcurrentCircularBuffer recBuffer;
 	
 	
-	public ServerLoader(ConcurrentCircularBuffer srvB,ConcurrentCircularBuffer recB) {
-		srvBuffer=srvB; recBuffer=recB;
+	public ServerLoader(ServerThreadpool owner) {
+		srvBuffer=owner.getSendBuffer(); recBuffer=owner.getReceiveBuffer();
 	}
 
 	
 	public void run(){
-		GameObjectValues arr[]=null;
-		arr=recBuffer.pop();
-		
-		srvBuffer.push(arr);
+		while(!interrupted()){
+			GameObjectValues arr[]=null;
+			arr=recBuffer.pop();
+			
+			srvBuffer.push(arr);
+		}
 		
 	}
 	
