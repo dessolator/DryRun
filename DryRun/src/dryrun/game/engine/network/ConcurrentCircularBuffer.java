@@ -43,6 +43,7 @@ public class ConcurrentCircularBuffer {
 		mutex.lock();
 //		GameObjectValues [] gov = data[currentHead];
 		GameObjectValues [] gov = data1;
+		data1=null;
 		mutex.unlock();
 		return gov;
 	}
